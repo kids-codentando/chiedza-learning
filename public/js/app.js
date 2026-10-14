@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* ---------------- STATE ---------------- */
-const STORE_KEY = "kidsflix_state_v1";
+const STORE_KEY = "chiedza_state_v1";
 
 const defaultState = {
   profile: { name: "", avatar: "🦁" },
@@ -15,7 +15,8 @@ const defaultState = {
   streak: { count: 1, lastDate: new Date().toDateString() },
   levelsTried: {},        // levelId -> true
   gamesWon: 0,
-  quizzesPassed: 0
+  quizzesPassed: 0,
+  reportComment: ""       // parent/teacher comment for the report card
 };
 
 let state = loadState();
@@ -84,6 +85,24 @@ function progressForLevel(level) {
   return { done, total, pct: total ? Math.round((done / total) * 100) : 0 };
 }
 
+/* Stars (XP) — computed from progress, so it can never double-count */
+function computeStars() {
+  const lessons = Object.keys(state.completedLessons).length;
+  const quizPts = Object.values(state.quizScores).reduce((a, s) => a + (s && s.score ? s.score * 5 : 0), 0);
+  const courses = Object.values(state.coursesProgress).filter(c => c && c.passed).length;
+  const badges = Object.keys(state.badges).length;
+  return lessons * 10 + quizPts + courses * 100 + state.gamesWon * 15 + badges * 25;
+}
+function myCertificates() {
+  return COURSES.filter(c => state.coursesProgress[c.id] && state.coursesProgress[c.id].passed)
+    .map(c => {
+      const cp = state.coursesProgress[c.id];
+      return { courseId: c.id, title: c.title, emoji: c.emoji, color: c.color,
+        id: cp.certificateId, date: cp.certificateDate,
+        score: cp.assessmentScore, total: cp.assessmentTotal };
+    });
+}
+
 /* ---------------- ROUTER ---------------- */
 function go(hash) { window.location.hash = hash; }
 function parseHash() {
@@ -109,6 +128,9 @@ function render() {
   if (root === "certificate") return renderCertificate(app, a);
   if (root === "games") return renderGames(app);
   if (root === "game") return renderGame(app, a);
+  if (root === "leaderboard") return renderLeaderboard(app);
+  if (root === "report") return renderReport(app);
+  if (root === "verify") return renderVerify(app, a);
   if (root === "progress") return renderProgress(app);
   if (root === "about") return renderAbout(app);
   return renderHome(app);
@@ -119,8 +141,9 @@ function topbar(active) {
   const navItems = [
     ["home", "Home", "#/"],
     ["levels", "Levels", "#/level/ecd"],
-    ["courses", "Free Courses", "#/courses"],
+    ["courses", "Courses", "#/courses"],
     ["games", "Games", "#/games"],
+    ["leaderboard", "Leaderboard", "#/leaderboard"],
     ["progress", "My Progress", "#/progress"]
   ];
   const links = navItems.map(([id, label, href]) =>
@@ -129,8 +152,8 @@ function topbar(active) {
   return `
   <header class="topbar">
     <div class="logo" onclick="go('#/')">
-      <span class="bird">🦅</span>
-      <span>Kids<span class="flix">Flix</span></span>
+      <span class="bird">💡</span>
+      <span>Chiedza</span>
     </div>
     <nav class="topbar-nav">${links}</nav>
     <div class="topbar-right">
@@ -144,7 +167,7 @@ function footer() {
   return `
   <footer class="footer">
     <div class="flags">🇿🇼 🦅 🌿</div>
-    <div>Kids Flix — Learning for Zimbabwean children, ECD to O-Level.</div>
+    <div>Chiedza Learning — for Zimbabwean children, ECD to O-Level.</div>
     <div class="made-by">Created with ❤️ by <b>Ntandomods</b></div>
   </footer>`;
 }
@@ -174,7 +197,7 @@ function renderHome(app) {
   <section class="hero">
     <div class="hero-banner">
       <div class="hero-badge">🇿🇼 Made for Zimbabwe · ECD → O-Level</div>
-      <h1>Learn, play and grow with <span class="grad">Kids Flix</span></h1>
+      <h1>Learn, play and grow with <span class="grad">Chiedza</span></h1>
       <p>The fun learning home for every Zimbabwean child. Explore lessons, ace quizzes, take free courses and earn real certificates — all in one place.</p>
       <div class="hero-actions">
         <button class="btn btn-primary btn-lg" onclick="startLearning()">▶ Start Learning</button>
@@ -698,7 +721,7 @@ function finishAssess() {
 function generateCertId(courseId) {
   const rand = Math.random().toString(36).slice(2, 8).toUpperCase();
   const yr = new Date().getFullYear();
-  return `KF-${yr}-${rand}`;
+  return `CH-${yr}-${rand}`;
 }
 
 function submitAssessment(courseId, score, total, passed) {
@@ -718,6 +741,9 @@ function renderCertificate(app, courseId) {
   if (!c || !cp || !cp.passed) { go("#/courses"); return; }
   const name = state.profile.name || "Learner";
 
+  // make sure this certificate exists in the public registry (best-effort)
+  publishCertificate(c, cp, name);
+
   app.innerHTML = `
   ${topbar("courses")}
   <div class="quiz-wrap" style="max-width:900px">
@@ -725,14 +751,15 @@ function renderCertificate(app, courseId) {
       <button class="back-btn" onclick="go('#/course/${c.id}')">←</button>
       <div class="flex gap wrap">
         <button class="btn btn-ghost" onclick="openNameModal(true)">✏️ Change Name</button>
+        <button class="btn btn-ghost" onclick="shareCert('${cp.certificateId}')">🔗 Share</button>
         <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save PDF</button>
       </div>
     </div>
 
     <div id="certificate" class="cert">
       <div class="cert-inner">
-        <div class="cert-seal">🦅</div>
-        <div class="cert-brand">Kids<span>Flix</span></div>
+        <div class="cert-seal">💡</div>
+        <div class="cert-brand">Chiedza</div>
         <div class="cert-sub">Zimbabwe · Learning for Life</div>
         <div class="cert-title">Certificate of Completion</div>
         <div class="cert-text">This certificate is proudly presented to</div>
@@ -744,19 +771,49 @@ function renderCertificate(app, courseId) {
           <div><span>Date</span><strong>${cp.certificateDate}</strong></div>
           <div><span>Certificate ID</span><strong>${cp.certificateId}</strong></div>
         </div>
+        <div class="cert-verify-line">Verify online · <strong>#/verify/${cp.certificateId}</strong></div>
         <div class="cert-foot">
           <div class="cert-sign">
+            <div class="cert-sig-script">Ntandomods</div>
             <div class="sig-line"></div>
             <div>Ntandomods</div>
-            <div class="muted" style="font-size:12px">Founder, Kids Flix</div>
+            <div class="muted" style="font-size:12px">Founder &amp; CEO, Chiedza Learning</div>
           </div>
           <div class="cert-flag">🇿🇼</div>
         </div>
       </div>
     </div>
-    <p class="muted center mt-2">Verify this certificate with ID <strong>${cp.certificateId}</strong></p>
+    <div class="flex gap wrap center mt-2" style="justify-content:center">
+      <button class="btn btn-ghost" onclick="go('#/verify/${cp.certificateId}')">🔎 Verify this certificate</button>
+      <button class="btn btn-ghost" onclick="go('#/progress')">🎓 My Certificates</button>
+    </div>
   </div>
   ${footer()}`;
+}
+
+function publishCertificate(c, cp, name) {
+  try {
+    fetch("/api/certificates", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: cp.certificateId,
+        courseId: c.id,
+        name,
+        percent: Math.round((cp.assessmentScore / cp.assessmentTotal) * 100),
+        issuedAt: cp.certificateDate
+      })
+    }).catch(() => {});
+  } catch (e) {}
+}
+
+function shareCert(id) {
+  const url = location.origin + location.pathname + "#/verify/" + id;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => showToast("🔗 Verification link copied!")).catch(() => showToast(url));
+  } else {
+    showToast(url);
+  }
 }
 
 /* ---------------- GAMES ---------------- */
@@ -901,6 +958,237 @@ function answerMath(choice) {
   }, 900);
 }
 
+/* ---------------- LEADERBOARD (public) ---------------- */
+function renderLeaderboard(app) {
+  app.innerHTML = `
+  ${topbar("leaderboard")}
+  <div class="page-head">
+    <button class="back-btn" onclick="go('#/')">\u2190</button>
+    <div class="titles">
+      <h1>\ud83c\udfc6 Leaderboard</h1>
+      <p>Top learners across Chiedza Learning. Earn stars by finishing lessons, quizzes, courses and games!</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="lb-hero">
+      <div class="lb-me">
+        <div class="lb-me-avatar">${state.profile.avatar || "\ud83e\udd81"}</div>
+        <div>
+          <div class="muted" style="font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.08em">Your rank</div>
+          <div class="lb-me-rank" id="lbMyRank">\u2014</div>
+        </div>
+        <div class="lb-me-stars"><div class="num" id="lbMyStars">${computeStars()}</div><div class="lbl">\u2b50 Stars</div></div>
+      </div>
+    </div>
+    <div class="lb-list" id="lbList"><div class="muted center" style="padding:30px">Loading leaderboard\u2026</div></div>
+    <p class="muted center mt-2" style="font-size:13px">\u2b50 Stars are earned from lessons (10 each), quizzes (5 per point), completed courses (100) and games won (15).</p>
+  </section>
+  ${footer()}`;
+  drawLeaderboard();
+}
+
+function drawLeaderboard() {
+  const hasName = !!(state.profile.name && state.profile.name.trim());
+  const myStars = computeStars();
+  const myName = hasName ? state.profile.name : "";
+  const myAvatar = state.profile.avatar || "\ud83e\udd81";
+  const myLessons = Object.keys(state.completedLessons).length;
+  const myCerts = myCertificates().length;
+
+  const paint = (extra) => {
+    const all = LEADERBOARD_SEED.map(r => ({ ...r, me: false }));
+    if (hasName) all.push({ name: myName, avatar: myAvatar, stars: myStars, lessons: myLessons, certs: myCerts, me: true });
+    if (extra) extra.forEach(e => { if (e && e.name && String(e.name).toLowerCase() !== "you") all.push({ ...e, me: false }); });
+    // de-duplicate by name, keep the highest stars
+    const map = {};
+    all.forEach(r => { const k = String(r.name).toLowerCase(); if (!map[k] || (r.stars || 0) > (map[k].stars || 0)) map[k] = r; });
+    const rows = Object.values(map).sort((a, b) => (b.stars || 0) - (a.stars || 0));
+
+    const list = $("#lbList");
+    if (!list) return;
+    const myRank = rows.findIndex(r => r.me) + 1;
+    const mr = $("#lbMyRank"); if (mr) mr.textContent = "#" + myRank + " of " + rows.length;
+    list.innerHTML = rows.slice(0, 20).map((r, i) => {
+      const medal = i === 0 ? "\ud83e\udd47" : i === 1 ? "\ud83e\udd48" : i === 2 ? "\ud83e\udd49" : "#" + (i + 1);
+      return `<div class="lb-row ${r.me ? "me" : ""}">
+        <div class="lb-pos">${medal}</div>
+        <div class="lb-avatar">${r.avatar || "\ud83e\udd81"}</div>
+        <div class="lb-name">${esc(r.name)} ${r.me ? '<span class="lb-you">You</span>' : ""}
+          <div class="lb-sub">${r.lessons || 0} lessons \u00b7 ${r.certs || 0} certificates</div>
+        </div>
+        <div class="lb-stars">\u2b50 ${r.stars || 0}</div>
+      </div>`;
+    }).join("");
+  };
+
+  paint(null);
+  try {
+    fetch("/api/leaderboard").then(r => r.ok ? r.json() : null).then(d => {
+      if (d && Array.isArray(d.leaderboard)) paint(d.leaderboard);
+    }).catch(() => {});
+  } catch (e) {}
+  try {
+    fetch("/api/leaderboard", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: myName, avatar: myAvatar, stars: myStars, lessons: myLessons, certs: myCerts })
+    }).catch(() => {});
+  } catch (e) {}
+}
+
+/* ---------------- REPORT CARD (private, printable) ---------------- */
+function renderReport(app) {
+  const name = state.profile.name || "Learner";
+  const stars = computeStars();
+  const lessons = Object.keys(state.completedLessons).length;
+  const certs = myCertificates();
+  const badges = Object.keys(state.badges).length;
+  const today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+  const quizRows = [];
+  LEVELS.forEach(lv => lv.subjects.forEach(s => s.lessons.forEach((les, i) => {
+    const sc = state.quizScores[`${lv.id}/${s.id}/${i}`];
+    if (sc) quizRows.push({ level: lv.name, subject: s.name, lesson: les.title, score: sc.score, total: sc.total });
+  })));
+
+  app.innerHTML = `
+  ${topbar("progress")}
+  <div class="quiz-wrap" style="max-width:920px">
+    <div class="flex gap wrap" style="align-items:center;justify-content:space-between;margin-bottom:16px">
+      <button class="back-btn" onclick="go('#/progress')">\u2190</button>
+      <div class="flex gap wrap">
+        <button class="btn btn-ghost" onclick="openNameModal()">\u270f\ufe0f Edit Name</button>
+        <button class="btn btn-primary" onclick="window.print()">\ud83d\udda8\ufe0f Print / Save PDF</button>
+      </div>
+    </div>
+
+    <div class="report" id="report">
+      <div class="report-head">
+        <div class="report-brand"><span class="report-bird">\ud83d\udca1</span> Chiedza Learning</div>
+        <div class="report-title">Learner Progress Report</div>
+        <div class="report-sub">Zimbabwe \u00b7 ECD to O-Level</div>
+      </div>
+      <div class="report-student">
+        <div class="report-avatar">${state.profile.avatar || "\ud83e\udd81"}</div>
+        <div>
+          <div class="report-name">${esc(name)}</div>
+          <div class="muted">Report date: ${today}</div>
+        </div>
+      </div>
+      <div class="report-stats">
+        <div><span>\u2b50 Stars</span><strong>${stars}</strong></div>
+        <div><span>\ud83d\udcda Lessons</span><strong>${lessons}</strong></div>
+        <div><span>\ud83e\udde0 Quizzes</span><strong>${state.quizzesPassed}</strong></div>
+        <div><span>\ud83c\udf93 Certificates</span><strong>${certs.length}</strong></div>
+        <div><span>\ud83c\udfc5 Badges</span><strong>${badges}/${BADGES.length}</strong></div>
+        <div><span>\ud83d\udd25 Streak</span><strong>${state.streak.count} day(s)</strong></div>
+      </div>
+
+      <h3 class="report-h">Progress by Level</h3>
+      ${LEVELS.map(lv => { const p = progressForLevel(lv); return `
+        <div class="report-level">
+          <div class="flex" style="justify-content:space-between;font-weight:800"><span>${lv.emoji} ${lv.name}</span><span class="muted">${p.done}/${p.total} \u00b7 ${p.pct}%</span></div>
+          <div class="progress-bar" style="margin-top:6px"><span style="width:${p.pct}%"></span></div>
+        </div>`; }).join("")}
+
+      <h3 class="report-h">Quiz Results</h3>
+      ${quizRows.length ? `<table class="report-table">
+        <thead><tr><th>Level</th><th>Subject</th><th>Lesson</th><th>Score</th></tr></thead>
+        <tbody>${quizRows.map(r => `<tr><td>${esc(r.level)}</td><td>${esc(r.subject)}</td><td>${esc(r.lesson)}</td><td><b>${r.score}/${r.total}</b></td></tr>`).join("")}</tbody>
+      </table>` : `<p class="muted">No quizzes completed yet.</p>`}
+
+      <h3 class="report-h">Certificates Earned</h3>
+      ${certs.length ? `<ul class="report-certs">${certs.map(c => `<li>\ud83c\udf93 <b>${esc(c.title)}</b> \u2014 ID ${esc(c.id)} (${esc(c.date)})</li>`).join("")}</ul>` : `<p class="muted">No certificates yet.</p>`}
+
+      <h3 class="report-h">Parent / Teacher Comment</h3>
+      <textarea id="reportComment" class="report-comment" placeholder="Write a comment about this learner's progress\u2026" oninput="saveReportComment(this.value)">${esc(state.reportComment || "")}</textarea>
+
+      <div class="report-sign">
+        <div class="cert-sign">
+          <div class="cert-sig-script">Ntandomods</div>
+          <div class="sig-line"></div>
+          <div>Ntandomods</div>
+          <div class="muted" style="font-size:12px">Founder &amp; CEO, Chiedza Learning</div>
+        </div>
+        <div class="cert-flag">\ud83c\uddff\ud83c\uddfc</div>
+      </div>
+    </div>
+  </div>
+  ${footer()}`;
+}
+
+function saveReportComment(v) {
+  state.reportComment = String(v).slice(0, 600);
+  saveState();
+}
+
+/* ---------------- CERTIFICATE VERIFICATION (public) ---------------- */
+function renderVerify(app, id) {
+  app.innerHTML = `
+  ${topbar("")}
+  <div class="quiz-wrap" style="max-width:760px">
+    <div class="page-head" style="padding-left:0">
+      <button class="back-btn" onclick="go('#/')">\u2190</button>
+      <div class="titles"><h1>\ud83d\udd0e Verify a Certificate</h1><p>Enter a certificate ID to confirm it is genuine.</p></div>
+    </div>
+    <div class="verify-box">
+      <div class="flex gap wrap">
+        <input id="verifyInput" class="verify-input" type="text" placeholder="e.g. CH-2026-ABC123" value="${esc(id || "")}" />
+        <button class="btn btn-primary" onclick="doVerify()">Verify</button>
+      </div>
+      <div id="verifyResult" class="verify-result"></div>
+    </div>
+    <p class="muted center mt-2" style="font-size:13px">Every Chiedza Learning certificate carries a unique ID. Anyone \u2014 a parent, school or employer \u2014 can verify it here.</p>
+  </div>
+  ${footer()}`;
+  if (id) doVerify();
+}
+
+async function doVerify() {
+  const id = ($("#verifyInput").value || "").trim().toUpperCase();
+  const box = $("#verifyResult");
+  if (!id) { box.innerHTML = `<div class="verify-bad">Please enter a certificate ID.</div>`; return; }
+  box.innerHTML = `<div class="muted" style="padding:14px">Checking\u2026</div>`;
+
+  const local = myCertificates().find(c => (c.id || "").toUpperCase() === id);
+  if (local) { box.innerHTML = validCard(local, state.profile.name, "Verified on this device"); return; }
+
+  try {
+    const res = await fetch("/api/certificates/" + encodeURIComponent(id));
+    if (res.ok) {
+      const d = await res.json();
+      if (d && d.certificate) {
+        const c = COURSES.find(x => x.id === d.certificate.courseId);
+        const total = c ? c.assessment.length : 10;
+        box.innerHTML = validCard({
+          title: c ? c.title : d.certificate.courseId,
+          id: d.certificate.id,
+          date: new Date(d.certificate.issuedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }),
+          score: Math.round(((d.certificate.percent || 0) * total) / 100),
+          total
+        }, d.certificate.name, "Verified against the Chiedza Learning registry");
+        return;
+      }
+    }
+  } catch (e) {}
+
+  box.innerHTML = `<div class="verify-bad">\u274c No certificate found with ID <b>${esc(id)}</b>. Please check the ID and try again.</div>`;
+}
+
+function validCard(c, holder, note) {
+  return `<div class="verify-good">
+    <div class="vg-head">\u2705 Valid Certificate</div>
+    <div class="vg-grid">
+      <div><span>Certificate ID</span><strong>${esc(c.id)}</strong></div>
+      ${holder ? `<div><span>Holder</span><strong>${esc(holder)}</strong></div>` : ""}
+      <div><span>Course</span><strong>${esc(c.title)}</strong></div>
+      <div><span>Issued</span><strong>${esc(c.date || "\u2014")}</strong></div>
+      ${c.score != null ? `<div><span>Score</span><strong>${c.score}/${c.total}</strong></div>` : ""}
+    </div>
+    <div class="muted" style="font-size:12px;margin-top:10px">${note} \u00b7 Issued by Chiedza Learning (Ntandomods)</div>
+  </div>`;
+}
+
 /* ---------------- PROGRESS ---------------- */
 function renderProgress(app) {
   const totalLessons = LEVELS.reduce((a, l) => a + l.subjects.reduce((x, s) => x + s.lessons.length, 0), 0);
@@ -918,6 +1206,12 @@ function renderProgress(app) {
         <p>${state.profile.name ? "Keep up the great work!" : "Set your name to personalise your certificates."}</p>
       </div>
       <button class="btn btn-ghost" onclick="openNameModal()">✏️ Edit Profile</button>
+    </div>
+
+    <div class="flex gap wrap mb-2">
+      <button class="btn btn-primary" onclick="go('#/report')">📄 My Report Card</button>
+      <button class="btn btn-ghost" onclick="go('#/leaderboard')">🏆 Leaderboard</button>
+      <button class="btn btn-ghost" onclick="go('#/verify')">🔎 Verify a Certificate</button>
     </div>
 
     <div class="stat-grid">
@@ -953,7 +1247,8 @@ function renderProgress(app) {
         </div>`).join("") || `<p class="muted">No certificates yet. Complete a free course to earn one!</p>`}
     </div>
 
-    <div class="center mt-2">
+    <div class="center mt-2 flex gap wrap" style="justify-content:center">
+      <button class="btn btn-ghost" onclick="go('#/verify')">🔎 Verify a Certificate</button>
       <button class="btn btn-ghost" onclick="resetProgress()">🗑️ Reset My Progress</button>
     </div>
   </div>
@@ -976,14 +1271,14 @@ function renderAbout(app) {
   <div class="profile-wrap">
     <div class="page-head" style="padding-left:0">
       <button class="back-btn" onclick="go('#/')">←</button>
-      <div class="titles"><h1>About Kids Flix</h1></div>
+      <div class="titles"><h1>About Chiedza Learning</h1></div>
     </div>
     <div class="lesson-stage">
       <div class="lesson-content">
         <div class="kicker">🇿🇼 Our Mission</div>
         <h1>Learning made fun for every Zimbabwean child</h1>
         <div class="body-text">
-          <p>Kids Flix is a free learning platform built for Zimbabwean children from <strong>ECD (Early Childhood Development)</strong> all the way to <strong>O-Level</strong>. It brings lessons, quizzes, games, free courses and certificates together in one colourful, easy-to-use place.</p>
+          <p>Chiedza Learning is a free learning platform built for Zimbabwean children from <strong>ECD (Early Childhood Development)</strong> all the way to <strong>O-Level</strong>. It brings lessons, quizzes, games, free courses and certificates together in one colourful, easy-to-use place.</p>
           <h3>What's inside</h3>
           <ul>
             <li>4 learning levels: ECD, Infant, Junior and O-Level</li>
@@ -1009,7 +1304,7 @@ function openNameModal(fromCert) {
   overlay.className = "modal-overlay";
   overlay.innerHTML = `
     <div class="modal">
-      <h2>👋 Welcome to Kids Flix!</h2>
+      <h2>👋 Welcome to Chiedza Learning!</h2>
       <p class="muted" style="margin-bottom:16px">Tell us your name so we can personalise your certificates.</p>
       <label style="font-weight:800;display:block;margin-bottom:6px">Your name</label>
       <input id="nameInput" type="text" placeholder="e.g. Tendai Moyo" value="${esc(state.profile.name)}"

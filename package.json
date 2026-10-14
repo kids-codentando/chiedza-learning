@@ -1,7 +1,7 @@
 {
-  "name": "kidsflix",
+  "name": "chiedza-learning",
   "version": "1.0.0",
-  "description": "Kids Flix — a free learning platform for Zimbabwean children from ECD to O-Level. Created by Ntandomods.",
+  "description": "Chiedza Learning — a free learning platform for Zimbabwean children from ECD to O-Level. Created by Ntandomods.",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {

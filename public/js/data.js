@@ -796,8 +796,42 @@ const BADGES = [
   { id: "science-ace", name: "Science Ace", emoji: "🔬", desc: "Complete a Science lesson" }
 ];
 
+/* ============================================================
+   BRAND
+   ============================================================ */
+const BRAND = {
+  name: "Chiedza",
+  full: "Chiedza Learning",
+  tagline: "Lighting every child's future",
+  founder: "Ntandomods",
+  founderTitle: "Founder & CEO",
+  country: "Zimbabwe",
+  verifyRoute: "#/verify/"
+};
+
+/* ============================================================
+   LEADERBOARD SEED
+   Sample learners so the public board feels alive.
+   ============================================================ */
+const LEADERBOARD_SEED = [
+  { name: "Tendai M.", avatar: "\ud83e\udd81", stars: 1240, lessons: 28, certs: 3 },
+  { name: "Rudo C.", avatar: "\ud83c\udf1f", stars: 1120, lessons: 25, certs: 3 },
+  { name: "Tapiwa N.", avatar: "\ud83d\ude80", stars: 980, lessons: 22, certs: 2 },
+  { name: "Chipo M.", avatar: "\ud83d\udc18", stars: 870, lessons: 20, certs: 2 },
+  { name: "Farai K.", avatar: "\ud83d\udc06", stars: 760, lessons: 18, certs: 2 },
+  { name: "Nyasha D.", avatar: "\ud83d\udc12", stars: 690, lessons: 16, certs: 1 },
+  { name: "Kudzai S.", avatar: "\ud83e\udd8f", stars: 610, lessons: 15, certs: 1 },
+  { name: "Tatenda Z.", avatar: "\ud83d\udc13", stars: 540, lessons: 13, certs: 1 },
+  { name: "Rutendo B.", avatar: "\ud83d\udc03", stars: 470, lessons: 11, certs: 1 },
+  { name: "Simbarashe P.", avatar: "\ud83e\udd85", stars: 400, lessons: 10, certs: 0 },
+  { name: "Vimbai T.", avatar: "\ud83c\udf1f", stars: 330, lessons: 8, certs: 0 },
+  { name: "Munyaradzi G.", avatar: "\ud83d\ude80", stars: 260, lessons: 6, certs: 0 }
+];
+
 // Expose to window for non-module usage
 window.LEVELS = LEVELS;
 window.COURSES = COURSES;
 window.GAMES = GAMES;
 window.BADGES = BADGES;
+window.BRAND = BRAND;
+window.LEADERBOARD_SEED = LEADERBOARD_SEED;

@@ -1,9 +1,9 @@
-# 🦅 Kids Flix
+# 💡 Chiedza Learning
 
 **A free learning platform for Zimbabwean children — from ECD to O-Level.**
 Created with ❤️ by **Ntandomods**.
 
-Kids Flix brings lessons, interactive quizzes, fun games, free courses and printable certificates together in one colourful, kid-friendly app built around the Zimbabwean curriculum.
+Chiedza Learning brings lessons, interactive quizzes, fun games, free courses and printable certificates together in one colourful, kid-friendly app built around the Zimbabwean curriculum.
 
 ---
 
@@ -46,7 +46,7 @@ This project is ready to deploy on [Render](https://render.com) as a **Web Servi
 3. (Optional) Add env var `NODE_VERSION = 20.11.1`.
 4. Click **Create Web Service**.
 
-Render will provide a public URL such as `https://kidsflix.onrender.com`.
+Render will provide a public URL such as `https://chiedza-learning.onrender.com`.
 
 > **Note:** On the Render free tier the filesystem is ephemeral, so assessment
 > submissions/certificates are stored in a JSON file that resets on redeploy.
@@ -57,7 +57,7 @@ Render will provide a public URL such as `https://kidsflix.onrender.com`.
 ## 💻 Run Locally
 
 ```bash
-cd kidsflix
+cd chiedza-learning
 npm install
 npm start
 # open http://localhost:3000
@@ -84,7 +84,7 @@ The certificate generation and progress tracking work entirely in the browser.
 ## 📁 Project Structure
 
 ```
-kidsflix/
+chiedza-learning/
 ├── public/
 │   ├── index.html          # App shell
 │   ├── css/styles.css      # Design system (Zimbabwe-themed, dark UI)
