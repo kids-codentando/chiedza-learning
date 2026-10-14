@@ -34,10 +34,37 @@
     { k: "sign language deaf zsl zimbabwean sign hearing impaired", a: "🤟 <strong>Sign language</strong> is taught at every early level: <em>Hands That Talk</em> (ECD), <em>Meet ZSL</em> (Infant) and <em>Sign Language & Deaf Culture</em> (Junior), plus a free course with a certificate. We teach what ZSL is, fingerspelling, Deaf etiquette, interpreters and inclusion. <strong>Important:</strong> real signs differ by country and region, so learn the actual ZSL signs from a Deaf signer or ZSL teacher.", links: [["#/subject/ecd/ecd-sign", "ECD sign"], ["#/subject/infant/inf-sign", "Infant sign"], ["#/subject/junior/jun-sign", "Junior sign"], ["#/course/course-sign", "Sign course"]] },
     { k: "courses free course list modules", a: "Free courses include Digital Literacy, Coding Basics, Financial Literacy, Zimbabwe Heritage, Environmental Conservation, Health & Hygiene Heroes, Study Skills, Creative Arts and <strong>Sign Language & Deaf Awareness</strong>.", links: [["#/courses", "All courses"]] },
     { k: "deploy render host hosting server api developer github", a: "For developers: the app is a Node/Express server plus a static front end in <code>public/</code>. It is ready to deploy on <strong>Render</strong> using <code>render.yaml</code> (build <code>npm install</code>, start <code>npm start</code>, health check <code>/api/health</code>). The API has endpoints for health, assessments, certificates and open verification.", links: [] },
-    { k: "help what can you do features ask", a: "I can <strong>explain lessons</strong>, <strong>quiz you</strong>, find a subject or course, explain how certificates, badges and games work, and show your progress. Try: <em>\"Quiz me on Shona\"</em> or <em>\"Explain fingerspelling\"</em>.", links: [] }
+    { k: "help what can you do features ask", a: "I can <strong>explain lessons</strong>, <strong>quiz you</strong>, <strong>send pictures</strong> (try <em>\"show me a picture of hand washing\"</em>), find a subject or course, explain how certificates, badges and games work, and show your progress. Try: <em>\"Quiz me on Shona\"</em> or <em>\"Explain fingerspelling\"</em>.", links: [] }
   ];
 
   const DAY_FUN = ["Did you know? A giraffe's tongue is about 50 cm long!", "Fun fact: Great Zimbabwe means 'house of stone'.", "Fun fact: Victoria Falls is called Mosi-oa-Tunya, 'the smoke that thunders'.", "Fun fact: Zimbabwe's national bird is the Zimbabwe Bird, found carved at Great Zimbabwe.", "Fun fact: The mbira is played with the thumbs."];
+
+
+  /* ---------- Picture library (all carry the Chiedza Learning x Ntandomods logo band) ---------- */
+  const IMAGES = [
+    { src: "deaf-hands", cap: "Deaf people talk with their hands, faces and bodies. (Illustration - real ZSL signs must be learned from a Deaf signer.)", k: "sign language deaf hands talk zsl communicate signing", g: "sign" },
+    { src: "attention-wave", cap: "Get a Deaf friend's attention with a clear wave where they can see you.", k: "attention wave deaf friend get manners etiquette hello", g: "sign" },
+    { src: "attention-tap", cap: "A gentle tap on the shoulder is a kind way to get attention.", k: "attention tap shoulder deaf friend get manners etiquette touch", g: "sign" },
+    { src: "eye-contact", cap: "Face the person and keep eye contact when you talk with a Deaf friend.", k: "eye contact face deaf etiquette manners look talk", g: "sign" },
+    { src: "faces", cap: "Faces show feelings - happy, sad, surprised and sleepy. In sign language the face is part of the grammar.", k: "face faces feelings expression emotions happy sad surprised sleepy facial", g: "sign" },
+    { src: "interpreter", cap: "With an interpreter, speak to the Deaf person, not the interpreter.", k: "interpreter interpret translate deaf assembly speak", g: "sign" },
+    { src: "inclusive-class", cap: "An inclusive classroom: the teacher faces the class, there is good light and the Deaf pupil can see the interpreter.", k: "inclusive inclusion classroom school deaf include everyone interpreter", g: "sign" },
+    { src: "senses", cap: "The five senses: sight, hearing, smell, taste and touch.", k: "senses sense five sight hearing smell taste touch body", g: "learn" },
+    { src: "instruments", cap: "Traditional instruments: the hosho (rattles), the mbira (thumb piano) and the ngoma (drum).", k: "instruments instrument mbira hosho ngoma drum music rattle", g: "learn" },
+    { src: "handwash", cap: "Wash your hands with soap and clean water to stop germs.", k: "hand hands wash washing soap germs clean hygiene health", g: "learn" },
+    { src: "shapes", cap: "Basic shapes: circle, square, triangle, rectangle and star.", k: "shape shapes circle square triangle rectangle star rainbow colours colors", g: "learn" }
+  ];
+  IMAGES.forEach(i => { i.t = tokens(i.k); i.url = "assets/learn/" + i.src + ".jpg"; });
+  function pickImages(text, explicit, ctx) {
+    const qt = tokens(text), ct = tokens(ctx || "");
+    const scored = IMAGES.map(i => ({ i, s: i.t.filter(t => qt.includes(t)).length * 3 + i.t.filter(t => ct.includes(t)).length })).filter(x => x.s >= (explicit ? 1 : 4)).sort((a, b) => b.s - a.s);
+    if (!scored.length) return [];
+    const wantsAll = explicit && /\b(pictures|images|photos|all|more)\b/i.test(text);
+    if (!wantsAll) return [scored[0].i];
+    const grp = scored[0].i.g, out = scored.slice(0, 4).map(x => x.i);
+    IMAGES.filter(i => i.g === grp && !out.includes(i)).forEach(i => { if (out.length < 4) out.push(i); });
+    return out;
+  }
 
   /* ---------- Index all curriculum content ---------- */
   let DOCS = [], QA = [], DF = {}, built = false;
@@ -125,7 +152,7 @@
   }
   function linkHtml(links) { return links && links.length ? `<div class="cai-links">${links.map(l => `<a href="${l[0]}" class="cai-link">${esc(l[1])} →</a>`).join("")}</div>` : ""; }
 
-  function respond(input) {
+  function respondCore(input) {
     build(); lastInput = input.trim().toLowerCase();
     if (!lastInput) return { html: "Type a question and I will help! 😊" };
     if (activeQuiz) { activeQuiz = null; }
@@ -164,6 +191,22 @@
     return { html: "Hmm, I could not find that in Chiedza Learning yet. 🤔 Try asking about a subject (like <em>Shona greetings</em> or <em>fractions</em>), or say <em>\"Quiz me\"</em>.", chips: ["Quiz me", "What can you do?", "Teach me sign language"] };
   }
 
+
+  const PIC_RX = /\b(picture|pictures|image|images|photo|photos|draw|drawing|illustration|show me|see)\b/i;
+  function respond(input) {
+    const r = respondCore(input);
+    if (r.quiz || r.next) return r;
+    const explicit = PIC_RX.test(input);
+    const ctx = (r.links && r.links[0] ? r.links[0][1] : "") + " " + (r.html || "").replace(/<[^>]+>/g, " ").slice(0, 300);
+    const imgs = pickImages(input, explicit, ctx);
+    if (imgs.length) r.images = imgs;
+    else if (explicit && /\b(picture|image|photo|draw|illustration)/i.test(input)) r.html += "<br><br>🖼️ I do not have a picture for that yet. I have pictures for <em>sign language & Deaf etiquette, the five senses, instruments, handwashing and shapes</em>.";
+    return r;
+  }
+  function imgHtml(list) {
+    return (list || []).map(i => `<figure class="cai-fig"><a href="${i.url}" target="_blank" rel="noopener"><img src="${i.url}" alt="${esc(i.cap)}" loading="lazy"></a><figcaption>${esc(i.cap)} <a href="${i.url}" download="chiedza-${i.src}.jpg" class="cai-save">⬇ Save</a></figcaption></figure>`).join("");
+  }
+
   /* ---------- UI ---------- */
   function mount() {
     if (document.getElementById("caiRoot")) return;
@@ -187,7 +230,7 @@
     const chips = list => { $("caiChips").innerHTML = (list || []).map(c => `<button class="cai-chip">${esc(c)}</button>`).join(""); };
     const talk = html => { if (!speak || !window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(plain(html)); u.rate = 0.95; speechSynthesis.cancel(); speechSynthesis.speak(u); };
     const show = r => {
-      say(r.html + linkHtml(r.links), "bot"); talk(r.html);
+      say(r.html + imgHtml(r.images) + linkHtml(r.links), "bot"); talk(r.html);
       if (r.next) setTimeout(() => say(r.next.html, "bot"), 500);
       chips(r.chips || (r.quiz || r.next ? [] : ["Quiz me", "Fun fact"]));
     };
@@ -195,7 +238,7 @@
 
     function open() {
       panel.hidden = false; $("caiLauncher").classList.add("hide"); input.focus();
-      if (!msgs.children.length) show({ html: "Mhoro! 👋 I am <strong>Chiedza AI</strong>. I know all the lessons, courses, games, certificates and even sign language on this platform. What would you like to learn today?", chips: ["Quiz me", "Teach me sign language", "How do I get a certificate?", "Tell me a fun fact"] });
+      if (!msgs.children.length) show({ html: "Mhoro! 👋 I am <strong>Chiedza AI</strong>. I know all the lessons, courses, games, certificates and sign language on this platform, and I can <strong>send pictures</strong> too. What would you like to learn today?", chips: ["Quiz me", "Show me sign language pictures", "How do I get a certificate?", "Tell me a fun fact"] });
     }
     $("caiLauncher").onclick = open;
     $("caiClose").onclick = () => { panel.hidden = true; $("caiLauncher").classList.remove("hide"); if (window.speechSynthesis) speechSynthesis.cancel(); };

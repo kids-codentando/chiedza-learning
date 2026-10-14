@@ -166,3 +166,7 @@ The sign-language lessons teach what Zimbabwean Sign Language (ZSL) is, fingersp
 ## 💡 Chiedza AI
 
 `public/js/chiedza-ai.js` builds a search index from `LEVELS` and `COURSES` plus a platform FAQ, so **new lessons are picked up automatically**. It runs entirely in the browser (no API key, no cost). Language content (Shona/Ndebele) should be reviewed by a native-speaker teacher.
+
+## 🖼️ Pictures from Chiedza AI
+
+Chiedza AI can send pictures ("show me sign language pictures", "picture of hand washing"). Images live in `public/assets/learn/` and each carries the Chiedza Learning × Ntandomods logo band. To add one, drop a JPG in that folder and add an entry (file name, caption, keywords) to the `IMAGES` list in `public/js/chiedza-ai.js`. The sign-language images are general illustrations of Deaf etiquette, not ZSL handshape charts.
