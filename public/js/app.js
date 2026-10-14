@@ -402,6 +402,7 @@ function completeLesson(levelId, subjectId, idx) {
   // subject-specific badge
   if (subjectId.includes("shona")) awardBadge("shona-star");
   if (subjectId.includes("science")) awardBadge("science-ace");
+  if (subjectId.includes("sign")) awardBadge("sign-friend");
   saveState(); checkBadges();
   go(`#/quiz/${levelId}/${subjectId}/${idx}`);
 }

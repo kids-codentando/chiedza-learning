@@ -10,10 +10,12 @@ Chiedza Learning brings lessons, interactive quizzes, fun games, free courses an
 ## ✨ Features
 
 - **4 Learning Levels**
-  - 🧸 **ECD** (Ages 3–5) — colours, shapes, numbers, letters, animals, body
-  - 📗 **Infant** (Grades 1–2) — Maths, English, Shona, Ndebele
-  - 📘 **Junior** (Grades 3–7) — Maths, English, Science, Social Studies, Agriculture
+  - 🧸 **ECD** (Ages 3–5) — colours, shapes, numbers, letters, animals, body, fine motor & pre-writing, feelings & manners, sorting & patterns, five senses, Ndebele, sign language
+  - 📗 **Infant** (Grades 1–2) — Maths, English, Shona, Ndebele, phonics & reading, time/money/measuring, creative arts, values & safety, sign language
+  - 📘 **Junior** (Grades 3–7) — Maths, English, Science, Social Studies, Agriculture, Shona, Ndebele, creative & performing arts, reading & creative writing, sign language
   - 🎓 **O-Level** (Forms 1–4) — Maths, English, Combined Science, History, Geography
+- **🤟 Sign language** — *Hands That Talk* (ECD), *Meet ZSL* (Infant), *Sign Language & Deaf Culture* (Junior) and a free **Sign Language & Deaf Awareness** course with certificate
+- **💡 Chiedza AI** — a built-in learning helper (bottom-right) that answers from every lesson, quiz, course and platform fact, quizzes learners, and can read answers aloud
 - **Interactive quizzes** with instant feedback and scoring
 - **🎓 Free Courses** with module-based learning and **assessment forms**
 - **Printable certificates** (with unique certificate IDs) on passing
@@ -92,6 +94,8 @@ chiedza-learning/
 │   ├── css/styles.css      # Design system (Zimbabwe-themed, dark UI)
 │   └── js/
 │       ├── data.js         # Curriculum, courses, games, badges
+│       ├── extra-*.js      # Additional ECD / Infant / Junior subjects + sign-language course
+│       ├── chiedza-ai.js   # Chiedza AI helper (client-side, searches all lessons & FAQs)
 │       ├── qrcode.js       # QR generator (MIT) for certificate verification
 │       └── app.js          # Router, lessons, quizzes, courses, certificates
 ├── server.js               # Express server + API
@@ -152,3 +156,13 @@ The public portal is at `#/verify`. No account or login is ever required.
 MIT — free to use and adapt for education.
 
 **Created by Ntandomods** 🇿🇼
+
+---
+
+## 🤟 A note on sign language content
+
+The sign-language lessons teach what Zimbabwean Sign Language (ZSL) is, fingerspelling, Deaf etiquette, interpreters and inclusion. They deliberately **do not claim specific ZSL handshapes**, because signs vary by country and region. To add real signs, embed videos/images from a ZSL-fluent Deaf signer or the [King George VI Centre](https://www.kgvi.org/programs/sign-language/) inside a lesson `body`.
+
+## 💡 Chiedza AI
+
+`public/js/chiedza-ai.js` builds a search index from `LEVELS` and `COURSES` plus a platform FAQ, so **new lessons are picked up automatically**. It runs entirely in the browser (no API key, no cost). Language content (Shona/Ndebele) should be reviewed by a native-speaker teacher.
