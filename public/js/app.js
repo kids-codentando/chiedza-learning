@@ -766,8 +766,11 @@ function renderCertificate(app, courseId) {
         <div class="cert-name">${esc(name)}</div>
         <div class="cert-text">for successfully completing the course</div>
         <div class="cert-course">${esc(c.title)}</div>
+        ${certCompleted(c, cp)}
         <div class="cert-meta">
           <div><span>Score</span><strong>${cp.assessmentScore}/${cp.assessmentTotal} (${Math.round((cp.assessmentScore / cp.assessmentTotal) * 100)}%)</strong></div>
+          <div><span>Level</span><strong>${esc(c.level || "All ages")}</strong></div>
+          <div><span>Duration</span><strong>${esc(c.duration || "")}</strong></div>
           <div><span>Date</span><strong>${cp.certificateDate}</strong></div>
           <div><span>Certificate ID</span><strong>${cp.certificateId}</strong></div>
         </div>
@@ -789,6 +792,24 @@ function renderCertificate(app, courseId) {
     </div>
   </div>
   ${footer()}`;
+}
+
+function certCompleted(c, cp) {
+  const mods = Array.isArray(c.modules) ? c.modules : [];
+  if (!mods.length) return "";
+  const doneIdx = (cp.completedModules && cp.completedModules.length)
+    ? cp.completedModules.filter(i => mods[i])
+    : mods.map((_, i) => i);
+  const items = doneIdx.map(i => {
+    const m = mods[i];
+    return `<li><span class="cc-emoji">${m.emoji || "\u2705"}</span> ${esc(m.title)}</li>`;
+  }).join("");
+  return `
+        <div class="cert-completed">
+          <div class="cert-completed-h">\u2714 What was completed</div>
+          <ul class="cert-completed-list">${items}</ul>
+          <div class="cert-completed-note">${doneIdx.length} of ${mods.length} modules completed \u00b7 ${esc(c.duration || "")} \u00b7 ${esc(c.level || "")}</div>
+        </div>`;
 }
 
 function publishCertificate(c, cp, name) {

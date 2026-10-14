@@ -136,6 +136,97 @@ const LEVELS = [
             ]
           }
         ]
+      },
+      {
+        id: "ecd-shona", name: "Shona First Words", emoji: "🗣️", color: "#00A651",
+        desc: "Say your first words in Shona — greetings and family.",
+        lessons: [
+          {
+            title: "Mhoro! Shona Greetings", emoji: "👋", kicker: "Shona",
+            body: `<p>In Zimbabwe many people speak Shona. Let us learn to greet our friends and family.</p>
+              <ul><li><strong>Mhoro</strong> — Hello (to one person)</li><li><strong>Mhoroi</strong> — Hello (to many people)</li><li><strong>Mangwanani</strong> — Good morning</li><li><strong>Masikati</strong> — Good afternoon</li><li><strong>Manheru</strong> — Good evening</li><li><strong>Ndarara</strong> — Good night</li></ul>
+              <p>When you meet someone, smile and say <strong>Mhoro!</strong></p>`,
+            keyFact: "'Mhoro' means hello in Shona. Try greeting your family today!",
+            quiz: [
+              { q: "What does 'Mangwanani' mean?", options: ["Good morning", "Good night", "Goodbye", "Thank you"], answer: 0 },
+              { q: "How do you say hello to one person in Shona?", options: ["Mhoro", "Masikati", "Ndarara", "Mhoroi"], answer: 0 },
+              { q: "What does 'Manheru' mean?", options: ["Good evening", "Good morning", "Hello", "Sorry"], answer: 0 }
+            ]
+          },
+          {
+            title: "Mhuri Yangu — My Family", emoji: "👨‍👩‍👧‍👦", kicker: "Shona",
+            body: `<p>Family is very important in Zimbabwe. Let us learn the Shona words for our family.</p>
+              <ul><li><strong>Amai</strong> — Mother</li><li><strong>Baba</strong> — Father</li><li><strong>Mukoma</strong> — Older brother or sister</li><li><strong>Munin'ina</strong> — Younger sibling</li><li><strong>Mbuya</strong> — Grandmother</li><li><strong>Sekuru</strong> — Grandfather</li></ul>
+              <p>We say thank you as <strong>Ndatenda</strong>.</p>`,
+            keyFact: "'Amai' means mother and 'Baba' means father in Shona.",
+            quiz: [
+              { q: "What is 'Amai'?", options: ["Mother", "Father", "Sister", "Teacher"], answer: 0 },
+              { q: "What is 'Baba'?", options: ["Father", "Mother", "Uncle", "Brother"], answer: 0 },
+              { q: "How do you say thank you in Shona?", options: ["Ndatenda", "Mhoro", "Amai", "Baba"], answer: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "ecd-music", name: "Music, Rhymes & Movement", emoji: "🎵", color: "#7C4DFF",
+        desc: "Sing, clap and dance while you learn.",
+        lessons: [
+          {
+            title: "Songs & Rhymes", emoji: "🎶", kicker: "Music",
+            body: `<p>Music helps us learn and remember. Let us sing and clap together!</p>
+              <p>Clap along to the beat: <strong>clap, clap, clap!</strong></p>
+              <ul><li>Songs help us learn new words</li><li>Rhymes have words that end with the same sound, like <strong>cat</strong> and <strong>hat</strong></li><li>We can sing about numbers, colours and animals</li></ul>
+              <p>Try singing the alphabet song from A to Z!</p>`,
+            keyFact: "Words that rhyme end with the same sound, like 'sun' and 'fun'.",
+            quiz: [
+              { q: "Which two words rhyme?", options: ["Cat and hat", "Cat and dog", "Sun and moon", "Cup and plate"], answer: 0 },
+              { q: "What do we do to keep the beat?", options: ["Clap", "Sleep", "Run", "Whisper"], answer: 0 },
+              { q: "Songs help us learn new…", options: ["Words", "Shoes", "Rocks", "Doors"], answer: 0 }
+            ]
+          },
+          {
+            title: "Dance & Move", emoji: "💃", kicker: "Movement",
+            body: `<p>Our bodies love to move! Moving keeps us strong and happy.</p>
+              <ul><li><strong>Jump</strong> up and down</li><li><strong>Stretch</strong> your arms up high</li><li><strong>Hop</strong> on one leg</li><li><strong>Spin</strong> around slowly</li><li><strong>March</strong> like a soldier</li></ul>
+              <p>Zimbabwean dances like <strong>Muchongoyo</strong> use drums and lots of energy!</p>`,
+            keyFact: "Moving and dancing every day helps your body stay healthy and strong.",
+            quiz: [
+              { q: "What do we use to keep time in music?", options: ["Drums", "Spoons", "Books", "Hats"], answer: 0 },
+              { q: "Which is a Zimbabwean dance?", options: ["Muchongoyo", "Ballet", "Salsa", "Hip-hop"], answer: 0 },
+              { q: "Moving keeps our body…", options: ["Strong", "Weak", "Sleepy", "Cold"], answer: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "ecd-community", name: "My Community & Safety", emoji: "🏘️", color: "#FF8A00",
+        desc: "Meet the people who help us and learn how to stay safe.",
+        lessons: [
+          {
+            title: "People Who Help Us", emoji: "👮", kicker: "Community",
+            body: `<p>Many people work hard to keep our community safe and happy.</p>
+              <ul><li><strong>Teacher</strong> — helps us learn at school</li><li><strong>Nurse &amp; Doctor</strong> — help us when we are sick</li><li><strong>Police officer</strong> — keeps us safe</li><li><strong>Firefighter</strong> — puts out fires</li><li><strong>Farmer</strong> — grows our food</li><li><strong>Soldier</strong> — protects our country</li></ul>
+              <p>Say thank you to the people who help you every day!</p>`,
+            keyFact: "A nurse and a doctor help us when we are sick.",
+            quiz: [
+              { q: "Who helps us learn at school?", options: ["Teacher", "Farmer", "Driver", "Chef"], answer: 0 },
+              { q: "Who puts out fires?", options: ["Firefighter", "Teacher", "Nurse", "Farmer"], answer: 0 },
+              { q: "Who grows our food?", options: ["Farmer", "Police", "Doctor", "Pilot"], answer: 0 }
+            ]
+          },
+          {
+            title: "Staying Safe", emoji: "🚦", kicker: "Safety",
+            body: `<p>We must always keep ourselves safe. Here are some important rules.</p>
+              <ul><li>Look <strong>left and right</strong> before crossing the road</li><li>Hold a grown-up's hand near traffic</li><li>Never talk to strangers</li><li>Wash your hands before eating</li><li>Never play with fire or electricity</li></ul>
+              <p>If you ever feel unsafe, tell a trusted adult straight away.</p>`,
+            keyFact: "Always look left and right before crossing the road.",
+            quiz: [
+              { q: "Before crossing the road we should…", options: ["Look left and right", "Run fast", "Close our eyes", "Sing"], answer: 0 },
+              { q: "Should you talk to strangers?", options: ["No", "Yes", "Sometimes", "Always"], answer: 0 },
+              { q: "If you feel unsafe, tell…", options: ["A trusted adult", "Nobody", "A stranger", "A pet"], answer: 0 }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -263,6 +354,97 @@ const LEVELS = [
               { q: "What is 'kuhlanu'?", options: ["5", "4", "6", "3"], answer: 0 },
               { q: "How do you say '10' in Ndebele?", options: ["Ishumi", "Kuhlanu", "Kune", "Kuthathu"], answer: 0 },
               { q: "What is 'kubili'?", options: ["2", "1", "3", "4"], answer: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "inf-science", name: "Environmental Science", emoji: "🌱", color: "#00A651",
+        desc: "Discover plants, animals and the world around us.",
+        lessons: [
+          {
+            title: "Plants Around Us", emoji: "🌳", kicker: "Science",
+            body: `<p>Plants are living things. They grow in gardens, farms and forests all over Zimbabwe.</p>
+              <p>The main parts of a plant are:</p>
+              <ul><li><strong>Roots</strong> — hold the plant and take in water</li><li><strong>Stem</strong> — carries water up the plant</li><li><strong>Leaves</strong> — make food using sunlight</li><li><strong>Flower</strong> — makes seeds</li></ul>
+              <p>Plants need <strong>water</strong>, <strong>sunlight</strong>, <strong>air</strong> and <strong>soil</strong> to grow.</p>`,
+            keyFact: "Leaves make food for the plant using sunlight, water and air.",
+            quiz: [
+              { q: "Which part takes in water from the soil?", options: ["Roots", "Leaves", "Flower", "Stem"], answer: 0 },
+              { q: "What do plants need to make food?", options: ["Sunlight", "Darkness", "Plastic", "Noise"], answer: 0 },
+              { q: "Which part makes seeds?", options: ["Flower", "Roots", "Stem", "Soil"], answer: 0 }
+            ]
+          },
+          {
+            title: "Animals and Their Homes", emoji: "🐘", kicker: "Science",
+            body: `<p>Every animal has a home called a <strong>habitat</strong>.</p>
+              <ul><li><strong>Lion</strong> — lives in the savanna grassland</li><li><strong>Elephant</strong> — lives in the bush and national parks</li><li><strong>Fish</strong> — lives in rivers and dams</li><li><strong>Bird</strong> — lives in a nest in a tree</li><li><strong>Bee</strong> — lives in a hive</li></ul>
+              <p>Zimbabwe's biggest national park is <strong>Hwange</strong>, home to elephants and lions.</p>`,
+            keyFact: "A habitat is the natural home of an animal, like a river for a fish.",
+            quiz: [
+              { q: "Where does a fish live?", options: ["In water", "In a tree", "In a cave", "In sand"], answer: 0 },
+              { q: "What is an animal's home called?", options: ["Habitat", "Holiday", "Hotel", "Habit"], answer: 0 },
+              { q: "Zimbabwe's biggest national park is…", options: ["Hwange", "Kariba", "Mutare", "Gweru"], answer: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "inf-health", name: "Health & Hygiene", emoji: "🧼", color: "#2E9BFF",
+        desc: "Build healthy habits for a strong body.",
+        lessons: [
+          {
+            title: "Keeping Clean & Healthy", emoji: "🧼", kicker: "Health",
+            body: `<p>Good habits keep us clean and free from germs.</p>
+              <ul><li>Wash your hands with soap before eating and after the toilet</li><li>Brush your teeth twice a day</li><li>Bathe every day</li><li>Cut your nails and keep them clean</li><li>Cover your mouth when you cough or sneeze</li></ul>
+              <p>Germs are tiny living things that can make us sick. Soap and clean water wash germs away.</p>`,
+            keyFact: "Washing hands with soap is the best way to stop germs spreading.",
+            quiz: [
+              { q: "When should you wash your hands?", options: ["Before eating", "Never", "Only on Sunday", "After playing only"], answer: 0 },
+              { q: "How many times a day should you brush your teeth?", options: ["Twice", "Once a week", "Never", "Ten times"], answer: 0 },
+              { q: "What washes germs away?", options: ["Soap and water", "Dirt", "Oil", "Sand"], answer: 0 }
+            ]
+          },
+          {
+            title: "Healthy Food & Clean Water", emoji: "🍎", kicker: "Health",
+            body: `<p>Eating well gives us energy to learn and play.</p>
+              <ul><li><strong>Fruits</strong> — mangoes, bananas, oranges</li><li><strong>Vegetables</strong> — covo, spinach, tomatoes</li><li><strong>Grains</strong> — sadza, rice, bread</li><li><strong>Protein</strong> — beans, eggs, chicken, fish</li><li><strong>Water</strong> — drink clean water every day</li></ul>
+              <p>Always boil or treat water if you are not sure it is clean.</p>`,
+            keyFact: "Eating fruits and vegetables every day keeps you strong and healthy.",
+            quiz: [
+              { q: "Which of these is a fruit?", options: ["Mango", "Covo", "Sadza", "Beans"], answer: 0 },
+              { q: "Which drink is best for your body?", options: ["Clean water", "Fizzy drinks", "Coffee", "Nothing"], answer: 0 },
+              { q: "Sadza is made from…", options: ["Maize", "Milk", "Sugar", "Salt"], answer: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "inf-zim", name: "Zimbabwe Our Home", emoji: "🇿🇼", color: "#FFB300",
+        desc: "Learn about our beautiful country, its flag and famous places.",
+        lessons: [
+          {
+            title: "Our Country Zimbabwe", emoji: "🇿🇼", kicker: "Social Studies",
+            body: `<p>Zimbabwe is our beautiful home country in southern Africa.</p>
+              <ul><li><strong>Capital city</strong> — Harare</li><li><strong>Second city</strong> — Bulawayo</li><li><strong>Languages</strong> — Shona, Ndebele and English</li><li><strong>Currency</strong> — we buy and sell goods every day</li></ul>
+              <p>Our flag has four colours: <strong>green</strong>, <strong>yellow</strong>, <strong>red</strong> and <strong>black</strong>, with a bird and a white triangle.</p>`,
+            keyFact: "Harare is the capital city of Zimbabwe.",
+            quiz: [
+              { q: "What is the capital city of Zimbabwe?", options: ["Harare", "Bulawayo", "Mutare", "Gweru"], answer: 0 },
+              { q: "How many colours are on the Zimbabwe flag?", options: ["Four", "Two", "One", "Six"], answer: 0 },
+              { q: "Which language is NOT official in Zimbabwe?", options: ["French", "Shona", "Ndebele", "English"], answer: 0 }
+            ]
+          },
+          {
+            title: "Famous Places", emoji: "🏞️", kicker: "Social Studies",
+            body: `<p>Zimbabwe has amazing places that people travel from all over the world to see.</p>
+              <ul><li><strong>Victoria Falls</strong> — the biggest waterfall in the world, called <em>Mosi-oa-Tunya</em></li><li><strong>Great Zimbabwe</strong> — ancient stone city built long ago</li><li><strong>Hwange</strong> — our biggest national park</li><li><strong>Lake Kariba</strong> — a huge lake full of fish</li></ul>
+              <p>These wonders make us proud to be Zimbabwean!</p>`,
+            keyFact: "Victoria Falls is known as 'Mosi-oa-Tunya' — the smoke that thunders.",
+            quiz: [
+              { q: "What is the local name for Victoria Falls?", options: ["Mosi-oa-Tunya", "Kariba", "Hwange", "Harare"], answer: 0 },
+              { q: "Great Zimbabwe is made of…", options: ["Stone", "Wood", "Glass", "Ice"], answer: 0 },
+              { q: "Lake Kariba is famous for…", options: ["Fish", "Snow", "Deserts", "Volcanoes"], answer: 0 }
             ]
           }
         ]
@@ -414,6 +596,98 @@ const LEVELS = [
               { q: "Which crop is used to make sadza?", options: ["Maize", "Cotton", "Tobacco", "Tea"], answer: 0 },
               { q: "Which crop is a major export for Zimbabwe?", options: ["Tobacco", "Rice", "Wheat", "Grapes"], answer: 0 },
               { q: "What do plants need to grow well?", options: ["Water and sunlight", "Only rocks", "Plastic", "Darkness"], answer: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "jun-ict", name: "Information Technology", emoji: "💻", color: "#2E9BFF",
+        desc: "Learn how computers work and how to use the internet safely.",
+        lessons: [
+          {
+            title: "Introduction to Computers", emoji: "💻", kicker: "ICT",
+            body: `<p>Computers are everywhere — in schools, banks, shops and homes. A computer helps us work faster and learn more.</p>
+              <p>The main parts of a computer are:</p>
+              <ul><li><strong>Monitor</strong> — the screen we look at</li><li><strong>Keyboard</strong> — for typing</li><li><strong>Mouse</strong> — for pointing and clicking</li><li><strong>CPU</strong> — the 'brain' that does the thinking</li><li><strong>Hard drive</strong> — stores our files</li></ul>
+              <p><strong>Hardware</strong> is the parts you can touch. <strong>Software</strong> is the programs you use.</p>`,
+            keyFact: "The CPU is often called the 'brain' of the computer.",
+            quiz: [
+              { q: "Which part is the 'brain' of the computer?", options: ["CPU", "Mouse", "Monitor", "Keyboard"], answer: 0 },
+              { q: "Which of these is hardware?", options: ["Keyboard", "A game", "A website", "An email"], answer: 0 },
+              { q: "The monitor is used to…", options: ["See the screen", "Type", "Print", "Store files"], answer: 0 }
+            ]
+          },
+          {
+            title: "Using the Internet Safely", emoji: "🌐", kicker: "ICT",
+            body: `<p>The internet connects computers all over the world. It is great for learning, but we must stay safe.</p>
+              <ul><li>Never share your full name, address or passwords</li><li>Use strong passwords with letters, numbers and symbols</li><li>Do not talk to strangers online</li><li>Tell a trusted adult if something makes you uncomfortable</li><li>Always give credit to your sources when you research</li></ul>
+              <p>Think before you click, type or share anything online.</p>`,
+            keyFact: "A strong password uses letters, numbers and symbols, and is kept secret.",
+            quiz: [
+              { q: "Which is a safe online habit?", options: ["Keeping passwords secret", "Sharing your address", "Talking to strangers", "Using '1234'"], answer: 0 },
+              { q: "A strong password should have…", options: ["Letters, numbers and symbols", "Only your name", "Only numbers", "Nothing"], answer: 0 },
+              { q: "If something online upsets you, you should…", options: ["Tell a trusted adult", "Keep it secret", "Share it", "Ignore it forever"], answer: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "jun-health", name: "Health & Physical Education", emoji: "🏃", color: "#00A651",
+        desc: "Stay fit and healthy with good food and exercise.",
+        lessons: [
+          {
+            title: "Nutrition & Balanced Diet", emoji: "🥗", kicker: "Health",
+            body: `<p>A balanced diet gives our body all the nutrients it needs to grow and stay strong.</p>
+              <p>The main food groups are:</p>
+              <ul><li><strong>Carbohydrates</strong> — sadza, rice, bread (energy)</li><li><strong>Proteins</strong> — beans, eggs, meat, fish (growth and repair)</li><li><strong>Vitamins &amp; minerals</strong> — fruits and vegetables (health and protection)</li><li><strong>Fats</strong> — cooking oil, nuts (energy and warmth)</li><li><strong>Water</strong> — keeps the body working well</li></ul>
+              <p>Eating too much sugar and junk food can make us unhealthy.</p>`,
+            keyFact: "A balanced diet includes foods from all the main food groups.",
+            quiz: [
+              { q: "Which food group gives us energy?", options: ["Carbohydrates", "Water", "Vitamins", "Minerals"], answer: 0 },
+              { q: "Proteins help the body to…", options: ["Grow and repair", "Sleep", "Freeze", "Shrink"], answer: 0 },
+              { q: "Which is a healthy snack?", options: ["Fruit", "Sweets", "Crisps", "Fizzy drink"], answer: 0 }
+            ]
+          },
+          {
+            title: "Exercise & Fitness", emoji: "🏃", kicker: "Physical Education",
+            body: `<p>Exercise keeps our heart, muscles and mind healthy. Children should be active for at least one hour every day.</p>
+              <ul><li><strong>Running</strong> — builds a strong heart</li><li><strong>Jumping</strong> — strengthens bones and muscles</li><li><strong>Stretching</strong> — keeps us flexible</li><li><strong>Team sports</strong> — football, netball, athletics</li></ul>
+              <p>Warm up before exercise and drink water afterwards. Rest is important too!</p>`,
+            keyFact: "Exercise keeps your heart strong and your mind sharp.",
+            quiz: [
+              { q: "How long should children exercise each day?", options: ["At least 1 hour", "1 minute", "Never", "10 hours"], answer: 0 },
+              { q: "Running helps build a strong…", options: ["Heart", "Shoe", "Book", "Hat"], answer: 0 },
+              { q: "Before exercise you should…", options: ["Warm up", "Sleep", "Eat a lot", "Do nothing"], answer: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "jun-money", name: "Business & Money Skills", emoji: "💰", color: "#FFB300",
+        desc: "Learn to save, budget and understand money.",
+        lessons: [
+          {
+            title: "Saving & Budgeting", emoji: "🐷", kicker: "Business",
+            body: `<p>Saving money means keeping some aside for later instead of spending it all now.</p>
+              <ul><li><strong>Income</strong> — money you receive</li><li><strong>Expenses</strong> — money you spend</li><li><strong>Savings</strong> — money you keep for the future</li></ul>
+              <p>A <strong>budget</strong> is a plan for your money. If you get $10 pocket money, you could save $5 and spend $5. Saving a little every week adds up over time!</p>`,
+            keyFact: "A budget is a plan for how to save and spend your money.",
+            quiz: [
+              { q: "What is a budget?", options: ["A plan for money", "A type of food", "A game", "A song"], answer: 0 },
+              { q: "Money you keep for later is called…", options: ["Savings", "Expenses", "Income", "Debt"], answer: 0 },
+              { q: "If you save $5 every week, after 4 weeks you have…", options: ["$20", "$5", "$9", "$40"], answer: 0 }
+            ]
+          },
+          {
+            title: "Needs and Wants", emoji: "🛒", kicker: "Business",
+            body: `<p>Before we spend money, we must think: is it a <strong>need</strong> or a <strong>want</strong>?</p>
+              <ul><li><strong>Needs</strong> — things we must have to live: food, water, shelter, school fees, medicine</li><li><strong>Wants</strong> — things that are nice to have but not essential: sweets, toys, extra games</li></ul>
+              <p>Smart people buy their <strong>needs</strong> first, then save for their <strong>wants</strong>. Buying and selling goods is how markets work.</p>`,
+            keyFact: "Needs are essential for life; wants are nice to have but not essential.",
+            quiz: [
+              { q: "Which of these is a need?", options: ["Food", "Sweets", "Toys", "Games"], answer: 0 },
+              { q: "Which of these is a want?", options: ["Sweets", "Water", "Shelter", "Medicine"], answer: 0 },
+              { q: "We should buy our ___ first.", options: ["Needs", "Wants", "Toys", "Sweets"], answer: 0 }
             ]
           }
         ]

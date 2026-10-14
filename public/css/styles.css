@@ -657,6 +657,38 @@ ul { list-style: none; }
   border-bottom: 3px solid #FFD200; display: inline-block; padding: 0 22px 6px;
 }
 .cert-course { font-family:'Fredoka'; font-size: clamp(18px, 2.6vw, 26px); font-weight: 600; color: var(--brand); margin: 8px 0 24px; }
+.cert-completed {
+  text-align: left;
+  max-width: 620px;
+  margin: 0 auto 8px;
+  background: rgba(15,122,61,.06);
+  border: 1px solid rgba(15,122,61,.25);
+  border-radius: 14px;
+  padding: 16px 22px;
+}
+.cert-completed-h {
+  font-family:'Fredoka'; font-weight: 700; font-size: 15px;
+  color: #0b3d22; margin-bottom: 12px; text-align: center;
+  letter-spacing: .02em;
+}
+.cert-completed-list {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 7px 22px;
+}
+.cert-completed-list li {
+  font-size: 13.5px; font-weight: 700; color: #2c3d33;
+  display: flex; align-items: center; gap: 8px;
+}
+.cert-completed-list li::before {
+  content: "\2714"; color: #0f7a3d; font-weight: 900; font-size: 12px; flex: none;
+}
+.cc-emoji { font-size: 15px; }
+.cert-completed-note {
+  text-align: center; margin-top: 13px; font-size: 11px;
+  font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+  color: #6b7a70;
+}
+@media (max-width: 560px) { .cert-completed-list { grid-template-columns: 1fr; } }
 .cert-meta {
   display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
   margin: 22px 0; padding-top: 20px; border-top: 1px dashed rgba(15,122,61,.4);
