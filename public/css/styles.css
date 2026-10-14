@@ -838,3 +838,71 @@ ul { list-style: none; }
   .report, .cert { box-shadow: none; }
   .report-comment { border: 1px solid #999; }
 }
+
+/* ============ BRAND LOGO IMAGES ============ */
+.logo-img { width: 42px; height: 42px; object-fit: contain; display: block; filter: drop-shadow(0 4px 10px rgba(255,61,87,.28)); }
+.footer-logo { height: 54px; width: auto; margin: 0 auto 14px; display: block; opacity: .97; }
+.footer-links { margin-top: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; font-size: 13px; }
+.footer-links a { color: var(--brand-2); cursor: pointer; font-weight: 800; }
+.footer-links a:hover { text-decoration: underline; }
+.footer-links span { color: var(--text-3); }
+.footer-legal { margin: 14px auto 0; font-size: 11.5px; color: var(--text-3); max-width: 720px; line-height: 1.6; }
+
+/* ============ CERTIFICATE SEAL + TRUST + VERIFY ============ */
+.cert-seal-img { width: 118px; height: 118px; margin: 0 auto 6px; display: block; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(15,122,61,.28)); }
+.cert-trust {
+  max-width: 640px; margin: 22px auto 0; text-align: left;
+  background: linear-gradient(120deg, rgba(15,122,61,.07), rgba(255,210,0,.10));
+  border: 1px solid rgba(15,122,61,.28); border-radius: 14px; padding: 16px 22px;
+}
+.cert-trust-h { font-family: 'Fredoka'; font-weight: 700; font-size: 15px; color: #0b3d22; margin-bottom: 8px; }
+.cert-trust-p { font-size: 13px; line-height: 1.55; color: #3a4a41; font-weight: 600; margin: 0 0 12px; }
+.cert-trust-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.cert-trust-badges span { font-size: 11.5px; font-weight: 800; color: #0b3d22; background: rgba(255,255,255,.72); border: 1px solid rgba(15,122,61,.3); border-radius: 999px; padding: 4px 12px; }
+.cert-verify {
+  max-width: 640px; margin: 16px auto 0; display: flex; align-items: center; gap: 18px;
+  background: #fff; border: 1px dashed rgba(15,122,61,.45); border-radius: 14px; padding: 14px 20px; text-align: left;
+}
+.cert-verify-qr { flex: none; width: 108px; height: 108px; background: #fff; border-radius: 8px; padding: 4px; }
+.cert-verify-qr svg { width: 100%; height: 100%; display: block; }
+.cert-verify-info { flex: 1; min-width: 0; }
+.cert-verify-title { font-family: 'Fredoka'; font-weight: 700; font-size: 15px; color: #0b3d22; margin-bottom: 6px; }
+.cert-verify-row { font-size: 12.5px; color: #3a4a41; font-weight: 700; margin-bottom: 4px; word-break: break-word; }
+.cert-verify-row strong { color: #0f7a3d; }
+.cert-code { font-family: 'Fredoka'; letter-spacing: .12em; color: #0b3d22 !important; background: rgba(255,210,0,.38); padding: 1px 8px; border-radius: 6px; }
+.cert-verify-note { font-size: 11px; color: #6b7a70; font-weight: 700; margin-top: 6px; }
+
+.report-bird-img { width: 36px; height: 36px; object-fit: contain; display: block; }
+
+/* ============ VERIFY PORTAL EXTRAS ============ */
+.verify-fields { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.verify-fields .verify-input { flex: 1 1 240px; }
+.verify-code-input { flex: 0 1 220px; letter-spacing: .14em; }
+.verify-trust { margin-top: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+.verify-trust-h { font-family: 'Fredoka'; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.verify-trust p { color: var(--text-2); font-weight: 600; line-height: 1.6; }
+.verify-ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 14px; }
+.verify-way { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 5px; }
+.verify-way span { width: 26px; height: 26px; border-radius: 8px; background: var(--grad-brand); display: grid; place-items: center; font-weight: 800; font-size: 13px; }
+.verify-way b { font-family: 'Fredoka'; font-size: 15px; }
+.verify-way i { font-style: normal; font-size: 12.5px; color: var(--text-3); font-weight: 600; line-height: 1.5; }
+.vg-checks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.vg-checks span { font-size: 11.5px; font-weight: 800; border-radius: 999px; padding: 4px 12px; }
+.vg-ok { background: #22c55e22; color: #4ade80; border: 1px solid #22c55e55; }
+.vg-warn { background: #f59e0b22; color: #fbbf24; border: 1px solid #f59e0b55; }
+.about-cta { margin-top: 18px; }
+
+@media (max-width: 720px) { .logo-img { width: 34px; height: 34px; } }
+@media (max-width: 560px) {
+  .cert-verify { flex-direction: column; text-align: center; }
+  .cert-verify-qr { margin: 0 auto; }
+  .cert-seal-img { width: 96px; height: 96px; }
+  .footer-logo { height: 44px; }
+}
+
+/* keep colours when printing certificates & reports */
+@media print {
+  .cert, .cert-inner, .cert-trust, .cert-verify, .cert-verify-qr, .cert-seal-img,
+  .report, .report-stats > div { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cert-verify { border-style: solid; }
+}

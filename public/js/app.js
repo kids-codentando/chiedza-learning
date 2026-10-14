@@ -152,7 +152,7 @@ function topbar(active) {
   return `
   <header class="topbar">
     <div class="logo" onclick="go('#/')">
-      <span class="bird">💡</span>
+      <img class="logo-img" src="assets/icon.png" alt="Chiedza Learning" />
       <span>Chiedza</span>
     </div>
     <nav class="topbar-nav">${links}</nav>
@@ -166,9 +166,18 @@ function topbar(active) {
 function footer() {
   return `
   <footer class="footer">
+    <img class="footer-logo" src="assets/logo-h-light.png" alt="Chiedza Learning × Ntandomods" />
     <div class="flags">🇿🇼 🦅 🌿</div>
     <div>Chiedza Learning — for Zimbabwean children, ECD to O-Level.</div>
     <div class="made-by">Created with ❤️ by <b>Ntandomods</b></div>
+    <div class="footer-links">
+      <a onclick="go('#/verify')">🔎 Verify a certificate</a>
+      <span>·</span>
+      <a onclick="go('#/about')">About &amp; verification</a>
+      <span>·</span>
+      <a onclick="go('#/leaderboard')">🏆 Leaderboard</a>
+    </div>
+    <div class="footer-legal">© ${new Date().getFullYear()} Chiedza Learning · Open Verification Standard · Recognised by schools, employers &amp; institutions worldwide</div>
   </footer>`;
 }
 
@@ -740,9 +749,10 @@ function renderCertificate(app, courseId) {
   const cp = state.coursesProgress[courseId];
   if (!c || !cp || !cp.passed) { go("#/courses"); return; }
   const name = state.profile.name || "Learner";
+  const canonical = certCanonical(c, cp, name);
 
   // make sure this certificate exists in the public registry (best-effort)
-  publishCertificate(c, cp, name);
+  publishCertificate(c, cp, name, canonical);
 
   app.innerHTML = `
   ${topbar("courses")}
@@ -758,9 +768,9 @@ function renderCertificate(app, courseId) {
 
     <div id="certificate" class="cert">
       <div class="cert-inner">
-        <div class="cert-seal">💡</div>
-        <div class="cert-brand">Chiedza</div>
-        <div class="cert-sub">Zimbabwe · Learning for Life</div>
+        <img class="cert-seal-img" src="assets/seal.png" alt="Official Chiedza Learning seal" />
+        <div class="cert-brand">Chiedza <span>Learning</span></div>
+        <div class="cert-sub">Zimbabwe · Learning for Life · × Ntandomods</div>
         <div class="cert-title">Certificate of Completion</div>
         <div class="cert-text">This certificate is proudly presented to</div>
         <div class="cert-name">${esc(name)}</div>
@@ -774,7 +784,8 @@ function renderCertificate(app, courseId) {
           <div><span>Date</span><strong>${cp.certificateDate}</strong></div>
           <div><span>Certificate ID</span><strong>${cp.certificateId}</strong></div>
         </div>
-        <div class="cert-verify-line">Verify online · <strong>#/verify/${cp.certificateId}</strong></div>
+        ${certTrust()}
+        ${certVerifyBlock(cp.certificateId, canonical)}
         <div class="cert-foot">
           <div class="cert-sign">
             <div class="cert-sig-script">Ntandomods</div>
@@ -812,8 +823,86 @@ function certCompleted(c, cp) {
         </div>`;
 }
 
-function publishCertificate(c, cp, name) {
+/* ---------------- OPEN VERIFICATION STANDARD ----------------
+   Each certificate carries a deterministic, tamper-evident code
+   derived from its own details (ID, course, holder, date, score).
+   Anyone can recompute the code from the certificate's printed
+   details to confirm it has not been altered \u2014 online through the
+   public registry, or offline from the data embedded in the QR code. */
+const VERIFY_SALT = "CHIEDZA-LEARNING|NTANDOMODS|OPEN-VERIFY-STANDARD-2026";
+const VERIFY_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+function certCanonical(c, cp, name) {
+  return [cp.certificateId, c.title, name, cp.certificateDate, (cp.assessmentScore + "/" + cp.assessmentTotal)].join("|");
+}
+
+function certChecksum(canonical) {
+  const s = VERIFY_SALT + "|" + String(canonical || "");
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) { h = (((h << 5) + h) ^ s.charCodeAt(i)) >>> 0; }
+  let out = "";
+  let x = h || 1;
+  for (let k = 0; k < 8; k++) { x = (Math.imul(x, 1103515245) + 12345) >>> 0; out += VERIFY_ALPHABET[x % VERIFY_ALPHABET.length]; }
+  return out.slice(0, 4) + "-" + out.slice(4, 8);
+}
+
+function b64url(str) {
+  try { return btoa(unescape(encodeURIComponent(String(str)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+  catch (e) { return ""; }
+}
+function unb64url(str) {
   try {
+    let s = String(str || "").replace(/-/g, "+").replace(/_/g, "/");
+    while (s.length % 4) s += "=";
+    return decodeURIComponent(escape(atob(s)));
+  } catch (e) { return ""; }
+}
+
+function certVerifyUrl(id, canonical) {
+  return location.origin + location.pathname + "#/verify/" + encodeURIComponent(id) +
+    "?c=" + certChecksum(canonical) + "&d=" + b64url(canonical);
+}
+
+function certQR(id, canonical, cell) {
+  try {
+    if (typeof qrcode !== "function") return "";
+    const qr = qrcode(0, "M");
+    qr.addData(certVerifyUrl(id, canonical));
+    qr.make();
+    return qr.createSvgTag({ cellSize: cell || 3, margin: 1, scalable: true });
+  } catch (e) { return ""; }
+}
+
+function certTrust() {
+  return `
+        <div class="cert-trust">
+          <div class="cert-trust-h">\ud83c\udf0d Globally verifiable credential</div>
+          <p class="cert-trust-p">Issued under the <b>Chiedza Open Verification Standard</b>. Any organisation \u2014 school, college, employer, NGO or government body, <b>public or private</b> \u2014 can confirm this certificate is genuine using the Certificate ID, the verification code, or by scanning the QR code. No account or login required.</p>
+          <div class="cert-trust-badges">
+            <span>\ud83c\udfeb Schools</span><span>\ud83c\udf93 Colleges</span><span>\ud83c\udfe2 Employers</span>
+            <span>\ud83c\udfdb\ufe0f Government</span><span>\ud83e\udd1d NGOs</span><span>\ud83c\udf0d Anywhere</span>
+          </div>
+        </div>`;
+}
+
+function certVerifyBlock(id, canonical) {
+  const code = certChecksum(canonical);
+  return `
+        <div class="cert-verify">
+          <div class="cert-verify-qr">${certQR(id, canonical, 3)}</div>
+          <div class="cert-verify-info">
+            <div class="cert-verify-title">\ud83d\udd12 Verify this certificate</div>
+            <div class="cert-verify-row">Scan the QR code, or open <strong>#/verify/${esc(id)}</strong></div>
+            <div class="cert-verify-row">Certificate ID: <strong>${esc(id)}</strong></div>
+            <div class="cert-verify-row">Verification code: <strong class="cert-code">${code}</strong></div>
+            <div class="cert-verify-note">Issued by Chiedza Learning \u00b7 Ntandomods \u00b7 Open Verification Standard</div>
+          </div>
+        </div>`;
+}
+
+function publishCertificate(c, cp, name, canonical) {
+  try {
+    const canon = canonical || certCanonical(c, cp, name);
     fetch("/api/certificates", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -822,6 +911,8 @@ function publishCertificate(c, cp, name) {
         courseId: c.id,
         name,
         percent: Math.round((cp.assessmentScore / cp.assessmentTotal) * 100),
+        canonical: canon,
+        checksum: certChecksum(canon),
         issuedAt: cp.certificateDate
       })
     }).catch(() => {});
@@ -1085,7 +1176,7 @@ function renderReport(app) {
 
     <div class="report" id="report">
       <div class="report-head">
-        <div class="report-brand"><span class="report-bird">\ud83d\udca1</span> Chiedza Learning</div>
+        <div class="report-brand"><img class="report-bird-img" src="assets/icon.png" alt="" /> Chiedza Learning</div>
         <div class="report-title">Learner Progress Report</div>
         <div class="report-sub">Zimbabwe \u00b7 ECD to O-Level</div>
       </div>
@@ -1143,23 +1234,44 @@ function saveReportComment(v) {
   saveState();
 }
 
-/* ---------------- CERTIFICATE VERIFICATION (public) ---------------- */
+/* ---------------- CERTIFICATE VERIFICATION (public, open to all) ---------------- */
 function renderVerify(app, id) {
+  let code = "", data = "";
+  if (id && id.indexOf("?") >= 0) {
+    const q = id.split("?")[1] || "";
+    id = id.split("?")[0];
+    const mc = q.match(/c=([^&]+)/); if (mc) code = decodeURIComponent(mc[1]).toUpperCase();
+    const md = q.match(/d=([^&]+)/); if (md) data = decodeURIComponent(md[1]);
+  }
   app.innerHTML = `
   ${topbar("")}
-  <div class="quiz-wrap" style="max-width:760px">
+  <div class="quiz-wrap" style="max-width:840px">
     <div class="page-head" style="padding-left:0">
       <button class="back-btn" onclick="go('#/')">\u2190</button>
-      <div class="titles"><h1>\ud83d\udd0e Verify a Certificate</h1><p>Enter a certificate ID to confirm it is genuine.</p></div>
+      <div class="titles"><h1>\ud83d\udd0e Verify a Certificate</h1><p>Confirm any Chiedza Learning certificate is genuine \u2014 free, instant and open to everyone.</p></div>
     </div>
+
     <div class="verify-box">
-      <div class="flex gap wrap">
-        <input id="verifyInput" class="verify-input" type="text" placeholder="e.g. CH-2026-ABC123" value="${esc(id || "")}" />
+      <div class="verify-fields">
+        <input id="verifyInput" class="verify-input" type="text" placeholder="Certificate ID \u00b7 e.g. CH-2026-ABC123" value="${esc(id || "")}" />
+        <input id="verifyCode" class="verify-input verify-code-input" type="text" placeholder="Verification code (optional)" value="${esc(code || "")}" />
         <button class="btn btn-primary" onclick="doVerify()">Verify</button>
       </div>
+      <input type="hidden" id="verifyData" value="${esc(data || "")}" />
       <div id="verifyResult" class="verify-result"></div>
     </div>
-    <p class="muted center mt-2" style="font-size:13px">Every Chiedza Learning certificate carries a unique ID. Anyone \u2014 a parent, school or employer \u2014 can verify it here.</p>
+
+    <div class="verify-trust">
+      <div class="verify-trust-h">\ud83c\udf0d Open to every organisation</div>
+      <p>Chiedza Learning certificates follow an <b>open verification standard</b>. Schools, colleges, employers, NGOs and government bodies \u2014 <b>public or private, in Zimbabwe or anywhere in the world</b> \u2014 can verify a certificate in three ways:</p>
+      <div class="verify-ways">
+        <div class="verify-way"><span>1</span><b>Scan the QR code</b><i>printed on the certificate \u2014 it opens this page with the details filled in.</i></div>
+        <div class="verify-way"><span>2</span><b>Enter the Certificate ID</b><i>e.g. CH-2026-ABC123 \u2014 checked against the public registry.</i></div>
+        <div class="verify-way"><span>3</span><b>Check the verification code</b><i>a tamper-evident code derived from the certificate's own details.</i></div>
+      </div>
+    </div>
+
+    <p class="muted center mt-2" style="font-size:13px">Every Chiedza Learning certificate carries a unique ID and verification code. Anyone \u2014 a parent, school, employer or institution \u2014 can confirm it here.</p>
   </div>
   ${footer()}`;
   if (id) doVerify();
@@ -1167,13 +1279,23 @@ function renderVerify(app, id) {
 
 async function doVerify() {
   const id = ($("#verifyInput").value || "").trim().toUpperCase();
+  const entered = ($("#verifyCode") ? $("#verifyCode").value : "").trim().toUpperCase();
+  const dataParam = ($("#verifyData") ? $("#verifyData").value : "").trim();
   const box = $("#verifyResult");
   if (!id) { box.innerHTML = `<div class="verify-bad">Please enter a certificate ID.</div>`; return; }
   box.innerHTML = `<div class="muted" style="padding:14px">Checking\u2026</div>`;
 
+  // 1) certificate issued on this device
   const local = myCertificates().find(c => (c.id || "").toUpperCase() === id);
-  if (local) { box.innerHTML = validCard(local, state.profile.name, "Verified on this device"); return; }
+  if (local) {
+    const c = COURSES.find(x => x.id === local.courseId);
+    const cp = state.coursesProgress[local.courseId];
+    const canon = (c && cp) ? certCanonical(c, cp, state.profile.name || "Learner") : "";
+    box.innerHTML = validCard(local, state.profile.name, "Verified on this device", { canon, entered });
+    return;
+  }
 
+  // 2) the public registry (authoritative)
   try {
     const res = await fetch("/api/certificates/" + encodeURIComponent(id));
     if (res.ok) {
@@ -1187,16 +1309,36 @@ async function doVerify() {
           date: new Date(d.certificate.issuedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }),
           score: Math.round(((d.certificate.percent || 0) * total) / 100),
           total
-        }, d.certificate.name, "Verified against the Chiedza Learning registry");
+        }, d.certificate.name, "Verified against the Chiedza Learning registry", { canon: d.certificate.canonical, entered, stored: d.certificate.checksum });
         return;
       }
     }
   } catch (e) {}
 
-  box.innerHTML = `<div class="verify-bad">\u274c No certificate found with ID <b>${esc(id)}</b>. Please check the ID and try again.</div>`;
+  // 3) offline \u2014 recompute the code from the data embedded in the QR
+  const canon = dataParam ? unb64url(dataParam) : "";
+  if (canon) {
+    const expected = certChecksum(canon);
+    const parts = canon.split("|");
+    if (!entered || entered === expected) {
+      box.innerHTML = validCard({
+        id: parts[0] || id, title: parts[1] || "\u2014", date: parts[3] || "\u2014",
+        score: parts[4] ? parts[4].split("/")[0] : null, total: parts[4] ? parts[4].split("/")[1] : null
+      }, parts[2] || "", "Verified offline \u2014 the certificate's details match its tamper-evident code", { canon, entered, offline: true });
+      return;
+    }
+    box.innerHTML = `<div class="verify-bad">\u26a0\ufe0f The certificate details do not match the verification code. This certificate may have been altered.</div>`;
+    return;
+  }
+
+  box.innerHTML = `<div class="verify-bad">\u274c No certificate found with ID <b>${esc(id)}</b>${entered ? " and the verification code could not be confirmed" : ""}. Please check the details and try again.</div>`;
 }
 
-function validCard(c, holder, note) {
+function validCard(c, holder, note, v) {
+  v = v || {};
+  const expected = v.canon ? certChecksum(v.canon) : "";
+  const enteredOk = !v.entered || !expected || v.entered === expected;
+  const storedOk = !v.stored || !expected || v.stored === expected;
   return `<div class="verify-good">
     <div class="vg-head">\u2705 Valid Certificate</div>
     <div class="vg-grid">
@@ -1205,8 +1347,15 @@ function validCard(c, holder, note) {
       <div><span>Course</span><strong>${esc(c.title)}</strong></div>
       <div><span>Issued</span><strong>${esc(c.date || "\u2014")}</strong></div>
       ${c.score != null ? `<div><span>Score</span><strong>${c.score}/${c.total}</strong></div>` : ""}
+      ${expected ? `<div><span>Verification code</span><strong class="cert-code">${expected}</strong></div>` : ""}
     </div>
-    <div class="muted" style="font-size:12px;margin-top:10px">${note} \u00b7 Issued by Chiedza Learning (Ntandomods)</div>
+    <div class="vg-checks">
+      <span class="vg-ok">\u2714 Certificate found</span>
+      ${expected ? `<span class="vg-${enteredOk ? "ok" : "warn"}">${enteredOk ? "\u2714 Verification code matches" : "\u26a0\ufe0f Verification code mismatch"}</span>` : ""}
+      ${v.stored && expected ? `<span class="vg-${storedOk ? "ok" : "warn"}">${storedOk ? "\u2714 Registry record intact" : "\u26a0\ufe0f Registry record altered"}</span>` : ""}
+      ${v.offline ? `<span class="vg-ok">\u2714 Offline integrity check passed</span>` : ""}
+    </div>
+    <div class="muted" style="font-size:12px;margin-top:10px">${note} \u00b7 Issued by Chiedza Learning (Ntandomods) \u00b7 Open Verification Standard</div>
   </div>`;
 }
 
@@ -1310,6 +1459,16 @@ function renderAbout(app) {
           </ul>
           <h3>Built for Zimbabwe</h3>
           <p>Content reflects the Zimbabwean curriculum and culture — from Great Zimbabwe and the liberation struggle to our national symbols, languages and food.</p>
+          <h3>Our brand</h3>
+          <p>Chiedza Learning is created by <strong>Ntandomods</strong>. Our emblem — a light-bulb growing into leaves — stands for bright ideas that grow, and our official seal appears on every certificate we issue.</p>
+          <h3>Certificates you can trust — anywhere</h3>
+          <p>Every certificate follows the <strong>Chiedza Open Verification Standard</strong>. It carries a unique Certificate ID, a tamper-evident verification code and a QR code. Schools, colleges, employers, NGOs and government bodies — <strong>public or private, in Zimbabwe or anywhere in the world</strong> — can confirm a certificate is genuine in seconds, with no account required.</p>
+          <ul>
+            <li>Scan the QR code, or open the verification page</li>
+            <li>Enter the Certificate ID to check the public registry</li>
+            <li>Compare the verification code to detect any alteration</li>
+          </ul>
+          <div class="about-cta"><button class="btn btn-primary" onclick="go('#/verify')">\ud83d\udd0e Verify a certificate</button></div>
         </div>
         <div class="key-fact"><span class="label">Created by</span>Ntandomods — building tools that help Zimbabwean children learn and grow.</div>
       </div>

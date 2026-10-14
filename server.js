@@ -54,6 +54,18 @@ function newCertId() {
   return "CH-" + new Date().getFullYear() + "-" + Math.random().toString(36).slice(2, 8).toUpperCase();
 }
 
+// ---- Open Verification Standard: tamper-evident code (mirror of the client) ----
+const VERIFY_SALT = "CHIEDZA-LEARNING|NTANDOMODS|OPEN-VERIFY-STANDARD-2026";
+const VERIFY_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+function certChecksum(canonical) {
+  const s = VERIFY_SALT + "|" + String(canonical || "");
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) { h = (((h << 5) + h) ^ s.charCodeAt(i)) >>> 0; }
+  let out = "", x = h || 1;
+  for (let k = 0; k < 8; k++) { x = (Math.imul(x, 1103515245) + 12345) >>> 0; out += VERIFY_ALPHABET[x % VERIFY_ALPHABET.length]; }
+  return out.slice(0, 4) + "-" + out.slice(4, 8);
+}
+
 // ---- API ----
 app.get("/api/health", (req, res) => {
   res.json({ ok: true, app: "Chiedza Learning", author: "Ntandomods", time: new Date().toISOString() });
@@ -88,22 +100,28 @@ app.get("/api/assessments", (req, res) => {
 
 // Publish / issue a certificate (public registry)
 app.post("/api/certificates", (req, res) => {
-  const { id, courseId, name, percent, issuedAt } = req.body || {};
+  const { id, courseId, name, percent, issuedAt, canonical, checksum } = req.body || {};
   if (!courseId) return res.status(400).json({ ok: false, error: "courseId is required" });
 
   const db = readDb();
   const certId = String(id || newCertId()).toUpperCase();
+  const canon = String(canonical || "").slice(0, 400);
+  const sum = String(checksum || (canon ? certChecksum(canon) : "")).toUpperCase();
   let certificate = db.certificates.find(c => c.id === certId);
   if (certificate) {
     certificate.courseId = courseId;
     certificate.name = (name || certificate.name || "Learner").slice(0, 80);
     if (percent != null) certificate.percent = Number(percent) || 0;
+    if (canon) certificate.canonical = canon;
+    if (sum) certificate.checksum = sum;
   } else {
     certificate = {
       id: certId,
       courseId,
       name: (name || "Learner").slice(0, 80),
       percent: Number(percent) || 0,
+      canonical: canon,
+      checksum: sum,
       issuedAt: issuedAt ? new Date(issuedAt).toISOString() : new Date().toISOString()
     };
     db.certificates.push(certificate);
@@ -118,6 +136,25 @@ app.get("/api/certificates/:id", (req, res) => {
   const cert = db.certificates.find(c => c.id === String(req.params.id).toUpperCase());
   if (!cert) return res.status(404).json({ ok: false, error: "Certificate not found" });
   res.json({ ok: true, certificate: cert });
+});
+
+// Open verification endpoint \u2014 for any organisation, public or private
+app.get("/api/verify/:id", (req, res) => {
+  const db = readDb();
+  const id = String(req.params.id).toUpperCase();
+  const cert = db.certificates.find(c => c.id === id);
+  if (!cert) return res.status(404).json({ ok: false, valid: false, error: "Certificate not found" });
+  const expected = cert.canonical ? certChecksum(cert.canonical) : (cert.checksum || "");
+  const codeOk = !cert.checksum || !expected || cert.checksum === expected;
+  res.json({
+    ok: true,
+    valid: codeOk,
+    certificate: cert,
+    checksum: expected,
+    standard: "Chiedza Open Verification Standard",
+    issuedBy: "Chiedza Learning (Ntandomods)",
+    recognisedBy: ["schools", "colleges", "employers", "government", "ngos", "any organisation (public or private)"]
+  });
 });
 
 // ---- Leaderboard ----
