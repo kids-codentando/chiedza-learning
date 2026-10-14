@@ -76,8 +76,9 @@ The certificate generation and progress tracking work entirely in the browser.
 | GET  | `/api/health` | Service health check |
 | POST | `/api/assessments` | Save an assessment result (auto-issues a certificate on pass) |
 | GET  | `/api/assessments` | List recent assessment submissions |
-| POST | `/api/certificates` | Issue a certificate manually |
+| POST | `/api/certificates` | Issue a certificate manually (stores the canonical data + tamper-evident code) |
 | GET  | `/api/certificates/:id` | Verify a certificate by ID |
+| GET  | `/api/verify/:id` | **Open verification** — returns validity, checksum and the recognised-by list |
 
 ---
 
@@ -87,9 +88,11 @@ The certificate generation and progress tracking work entirely in the browser.
 chiedza-learning/
 ├── public/
 │   ├── index.html          # App shell
+│   ├── assets/             # Brand kit: emblem, lockups, seal, favicon, brand sheet
 │   ├── css/styles.css      # Design system (Zimbabwe-themed, dark UI)
 │   └── js/
 │       ├── data.js         # Curriculum, courses, games, badges
+│       ├── qrcode.js       # QR generator (MIT) for certificate verification
 │       └── app.js          # Router, lessons, quizzes, courses, certificates
 ├── server.js               # Express server + API
 ├── package.json
@@ -99,11 +102,48 @@ chiedza-learning/
 
 ---
 
+## 🎨 Brand — Chiedza Learning × Ntandomods
+
+The official brand kit lives in `public/assets/`:
+
+| File | Use |
+| ---- | --- |
+| `icon.png` | Emblem (light-bulb growing into leaves) — header, report card |
+| `favicon.png` | Rounded app icon / favicon |
+| `seal.png` | Official gold & green certificate seal |
+| `logo-h-light.png` / `logo-h-dark.png` | Horizontal lockup for dark / light surfaces |
+| `logo-stack-light.png` / `logo-stack-dark.png` | Stacked lockup for dark / light surfaces |
+| `logo-full.png` / `logo-full-transparent.png` | Master stacked logos |
+| `brand-sheet.png` | Full brand sheet |
+
+The emblem stands for bright ideas that grow; the seal appears on every certificate.
+
+---
+
 ## 🎓 Certificates
 
 When a learner completes a course's assessment form with **70% or more**, a
-certificate is unlocked. It shows the learner's name, course, score, date and a
-unique certificate ID, and can be **printed or saved as a PDF** from the browser.
+certificate is unlocked. It shows the learner's name, course, the **modules
+completed**, level, duration, score, date and a unique certificate ID, and can be
+**printed or saved as a PDF** from the browser.
+
+### 🔎 Open Verification Standard — works for every organisation
+
+Every certificate is **verifiable by anyone — public or private, anywhere in the world**
+(schools, colleges, employers, NGOs, government bodies). Each certificate carries:
+
+- a unique **Certificate ID** (e.g. `CH-2026-ZW8K21`),
+- a **QR code** that deep-links to the verification page,
+- a **tamper-evident verification code** derived from the certificate's own details.
+
+Verification works in three ways:
+
+1. **Scan the QR code** — opens the verification page with the details filled in.
+2. **Enter the Certificate ID** — checked against the public registry (`/api/verify/:id`).
+3. **Check the verification code** — recomputed from the certificate's details to
+   detect any alteration (works **offline**, straight from the QR data).
+
+The public portal is at `#/verify`. No account or login is ever required.
 
 ---
 
