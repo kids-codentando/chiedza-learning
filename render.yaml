@@ -1,0 +1,19 @@
+# ============================================================
+# Kids Flix — Render Blueprint
+# Deploy with: Render Dashboard → New → Blueprint → connect repo
+# Created by Ntandomods
+# ============================================================
+services:
+  - type: web
+    name: kidsflix
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.1
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true
+    healthCheckPath: /api/health

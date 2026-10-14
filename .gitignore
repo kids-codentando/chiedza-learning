@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Runtime data (ephemeral submissions/certificates store)
+data/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
