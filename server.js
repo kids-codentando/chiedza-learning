@@ -344,6 +344,25 @@ app.get("/api/brain/status", (req, res) => {
   } catch (e) { res.status(500).json({ ok: false, error: "brain manifest missing" }); }
 });
 
+// ---- Offline support: list of files the service worker should keep on the device ----
+function walkPublic(dir, base = "") {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap(e => {
+    const rel = base + "/" + e.name;
+    return e.isDirectory() ? walkPublic(path.join(dir, e.name), rel) : [rel];
+  });
+}
+app.get("/precache.json", (req, res) => {
+  try {
+    const root = path.join(__dirname, "public");
+    const files = walkPublic(root).filter(f => !/^\/(sw\.js|precache\.json)$/.test(f) && !/\.(md|map)$/.test(f));
+    const sig = require("crypto").createHash("sha1");
+    files.forEach(f => { const st = fs.statSync(path.join(root, f)); sig.update(f + st.size + st.mtimeMs); });
+    res.set("Cache-Control", "no-cache");
+    res.json({ version: sig.digest("hex").slice(0, 12), files: ["/"].concat(files) });
+  } catch (e) { res.status(500).json({ error: "precache unavailable" }); }
+});
+app.get("/sw.js", (req, res) => { res.set("Cache-Control", "no-cache"); res.set("Service-Worker-Allowed", "/"); res.sendFile(path.join(__dirname, "public", "sw.js")); });
+
 // ---- Static files ----
 app.use(express.static(path.join(__dirname, "public")));
 

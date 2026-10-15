@@ -117,6 +117,7 @@ function render() {
 
   if (parts.length === 0) return renderHome(app);
   const [root, a, b, c] = parts;
+  if (window.FX && FX.route(root, a, b, c, app)) return;
 
   if (root === "level") return renderLevel(app, a);
   if (root === "subject") return renderSubject(app, a, b);
@@ -142,6 +143,7 @@ function topbar(active) {
     ["home", "Home", "#/"],
     ["levels", "Levels", "#/level/ecd"],
     ["courses", "Courses", "#/courses"],
+    ["practice", "Practice", "#/practice"],
     ["games", "Games", "#/games"],
     ["leaderboard", "Leaderboard", "#/leaderboard"],
     ["progress", "My Progress", "#/progress"]
@@ -176,6 +178,8 @@ function footer() {
       <a onclick="go('#/about')">About &amp; verification</a>
       <span>·</span>
       <a onclick="go('#/leaderboard')">🏆 Leaderboard</a>
+      <span>·</span>
+      <a onclick="go('#/explore')">🌍 Explore the web</a>
     </div>
     <div class="footer-legal">© ${new Date().getFullYear()} Chiedza Learning · Open Verification Standard · Recognised by schools, employers &amp; institutions worldwide</div>
   </footer>`;
@@ -220,6 +224,8 @@ function renderHome(app) {
       </div>
     </div>
   </section>
+
+  ${window.FX ? FX.homeCards() : ""}
 
   <section class="section">
     <div class="section-head"><h2>🎯 Choose Your Level</h2></div>
@@ -398,6 +404,7 @@ function renderLesson(app, levelId, subjectId, idx) {
 }
 
 function completeLesson(levelId, subjectId, idx) {
+  if (window.FX && !state.completedLessons[`${levelId}/${subjectId}/${idx}`]) FX.onLessonDone();
   state.completedLessons[`${levelId}/${subjectId}/${idx}`] = true;
   // subject-specific badge
   if (subjectId.includes("shona")) awardBadge("shona-star");
@@ -426,6 +433,7 @@ function renderQuizQuestion(app) {
   const total = quizCtx.questions.length;
   const pct = Math.round((quizCtx.i / total) * 100);
   const letters = ["A", "B", "C", "D"];
+  if (window.FX) FX.onQuizQuestion();
 
   app.innerHTML = `
   ${topbar("levels")}
@@ -442,8 +450,10 @@ function renderQuizQuestion(app) {
       <div class="quiz-options" id="quizOptions">
         ${q.options.map((o, i) => `<button class="opt" data-i="${i}" onclick="answerQuiz(${i})"><span class="letter">${letters[i]}</span>${esc(o)}</button>`).join("")}
       </div>
+      ${window.FX ? FX.hintBox() : ""}
       <div class="quiz-feedback" id="quizFeedback"></div>
       <div class="quiz-actions">
+        ${window.FX ? FX.quizTools(false) : ""}
         <button class="btn btn-primary hidden" id="nextBtn" onclick="nextQuiz()">Next →</button>
       </div>
     </div>
@@ -462,6 +472,7 @@ function answerQuiz(choice) {
   });
   const correct = choice === q.answer;
   if (correct) quizCtx.score++;
+  if (window.FX) FX.onQuizAnswer(quizCtx, correct);
   fb.className = "quiz-feedback show " + (correct ? "ok" : "no");
   fb.innerHTML = correct
     ? `✅ <strong>Correct!</strong> Well done.`
@@ -483,6 +494,7 @@ function finishQuiz() {
   const prev = state.quizScores[key];
   if (!prev || score > prev.score) state.quizScores[key] = { score, total };
   if (pct >= 60) state.quizzesPassed++;
+  if (window.FX) FX.onQuizDone();
   if (pct === 100) awardBadge("perfect");
   state.completedLessons[key] = true;
   saveState(); checkBadges();
@@ -948,6 +960,7 @@ function renderGames(app) {
 function renderGame(app, gameId) {
   if (gameId === "game-memory") return renderMemory(app);
   if (gameId === "game-math") return renderMathGame(app);
+  if (window.FXGames && FXGames.play(gameId, app)) return;
   go("#/games");
 }
 
@@ -989,7 +1002,7 @@ function flipTile(i) {
       memState.matched.push(a, b);
       memState.flipped = [];
       if (memState.matched.length === memState.deck.length) {
-        state.gamesWon++; saveState(); checkBadges();
+        state.gamesWon++; if (window.FX) FX.onGameDone(); saveState(); checkBadges();
         setTimeout(() => showToast("🏆 You won Memory Match!"), 300);
       }
       setTimeout(() => drawMemory($("#app")), 500);
@@ -1048,7 +1061,7 @@ function answerMath(choice) {
   setTimeout(() => {
     mathState.round++;
     if (mathState.round > mathState.total) {
-      state.gamesWon++; saveState(); checkBadges();
+      state.gamesWon++; if (window.FX) FX.onGameDone(); saveState(); checkBadges();
       $("#app").innerHTML = `
       ${topbar("games")}
       <div class="result-wrap">
@@ -1381,10 +1394,14 @@ function renderProgress(app) {
 
     <div class="flex gap wrap mb-2">
       <button class="btn btn-primary" onclick="go('#/report')">📄 My Report Card</button>
+      <button class="btn btn-ghost" onclick="go('#/revise')">🔁 Revise</button>
+      <button class="btn btn-ghost" onclick="go('#/practice')">📝 Practice Paper</button>
+      <button class="btn btn-ghost" onclick="go('#/parent')">👪 Parent Dashboard</button>
       <button class="btn btn-ghost" onclick="go('#/leaderboard')">🏆 Leaderboard</button>
       <button class="btn btn-ghost" onclick="go('#/verify')">🔎 Verify a Certificate</button>
     </div>
 
+    ${window.FX ? FX.goalChip() : ""}
     <div class="stat-grid">
       <div class="stat-box"><div class="v">${doneLessons}</div><div class="k">Lessons Done</div></div>
       <div class="stat-box"><div class="v">${state.quizzesPassed}</div><div class="k">Quizzes Passed</div></div>

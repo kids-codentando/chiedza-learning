@@ -146,6 +146,49 @@
       "name": "Safety guard",
       "desc": "Protects private details and points to trusted adults when a child needs help",
       "try": []
+    },
+    {
+      "id": "guided-maths",
+      "emoji": "🪜",
+      "name": "Guided maths",
+      "desc": "Walks you through a sum one hint at a time, so you learn the method instead of just getting the answer",
+      "try": [
+        "Guide me through 345 + 278",
+        "Step by step 48 ÷ 6",
+        "Give me a maths question"
+      ]
+    },
+    {
+      "id": "revise",
+      "emoji": "🔁",
+      "name": "Revision coach",
+      "desc": "Remembers the quiz questions you got wrong and helps you revise them",
+      "try": [
+        "What should I revise?",
+        "Practice paper"
+      ]
+    },
+    {
+      "id": "goals",
+      "emoji": "🎯",
+      "name": "Daily goal and challenges",
+      "desc": "Tracks your daily goal, the weekly challenge and the parent dashboard",
+      "try": [
+        "How is my daily goal?",
+        "Set my daily goal to 5",
+        "Weekly challenge"
+      ]
+    },
+    {
+      "id": "explore",
+      "emoji": "🌍",
+      "name": "Google, YouTube and more",
+      "desc": "Opens a SafeSearch Google search, kid-friendly YouTube videos, maps, translate and learning sites. A grown-up is asked first.",
+      "try": [
+        "Google volcanoes",
+        "Videos about the water cycle",
+        "Open Khan Academy"
+      ]
     }
   ]
 }

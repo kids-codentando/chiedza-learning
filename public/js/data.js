@@ -1051,7 +1051,10 @@ const COURSES = [
    ============================================================ */
 const GAMES = [
   { id: "game-memory", title: "Memory Match", emoji: "🧠", color: "#7C4DFF", desc: "Flip the cards and match the pairs. Train your memory!" },
-  { id: "game-math", title: "Math Blitz", emoji: "⚡", color: "#2E9BFF", desc: "Answer maths questions as fast as you can!" }
+  { id: "game-math", title: "Math Blitz", emoji: "⚡", color: "#2E9BFF", desc: "Answer maths questions as fast as you can!" },
+  { id: "game-spelling", title: "Spelling Bee", emoji: "🐝", color: "#FFB300", desc: "Listen to the word, then spell it. Can you win the bee?" },
+  { id: "game-scramble", title: "Word Scramble", emoji: "🔤", color: "#00C2A8", desc: "Unscramble the letters to find the hidden word." },
+  { id: "game-vocab", title: "Shona & Ndebele Match", emoji: "🇿🇼", color: "#00A651", desc: "Match English words with Shona or Ndebele. Learn our languages!" }
 ];
 
 /* ============================================================
@@ -1067,7 +1070,11 @@ const BADGES = [
   { id: "gamer", name: "Game Master", emoji: "🎮", desc: "Win a game" },
   { id: "streak", name: "On Fire", emoji: "🔥", desc: "Learn 3 days in a row" },
   { id: "shona-star", name: "Shona Star", emoji: "🇿🇼", desc: "Complete a Shona lesson" },
-  { id: "science-ace", name: "Science Ace", emoji: "🔬", desc: "Complete a Science lesson" }
+  { id: "science-ace", name: "Science Ace", emoji: "🔬", desc: "Complete a Science lesson" },
+  { id: "goal-getter", name: "Goal Getter", emoji: "🎯", desc: "Reach your daily learning goal" },
+  { id: "reviser", name: "Master Reviser", emoji: "🔁", desc: "Master 10 questions you got wrong before" },
+  { id: "exam-ready", name: "Exam Ready", emoji: "📝", desc: "Score 80% or more on a practice paper" },
+  { id: "word-wizard", name: "Word Wizard", emoji: "🪄", desc: "Score 8 or more in a spelling or word game" }
 ];
 
 /* ============================================================

@@ -1,0 +1,14 @@
+{
+  "note": "Sites Chiedza AI and the Explore page can open. Edit this file to add or remove sites. 'search' is a URL where {q} is replaced by what the learner typed. Every link asks a grown-up first.",
+  "sites": [
+    { "id": "google", "name": "Google", "emoji": "🔍", "url": "https://www.google.com/", "search": "https://www.google.com/search?q={q}&safe=active", "words": ["google", "search engine"], "about": "Search the web (SafeSearch is switched on)" },
+    { "id": "youtube", "name": "YouTube", "emoji": "▶️", "url": "https://www.youtube.com/", "search": "https://www.youtube.com/results?search_query={q}+for+kids", "words": ["youtube", "videos", "video"], "about": "Watch videos. We add “for kids” to every search" },
+    { "id": "translate", "name": "Google Translate", "emoji": "🌐", "url": "https://translate.google.com/", "search": "https://translate.google.com/?sl=en&tl=sn&text={q}&op=translate", "words": ["google translate", "translate"], "about": "Translate between English, Shona and more" },
+    { "id": "maps", "name": "Google Maps", "emoji": "🗺️", "url": "https://www.google.com/maps", "search": "https://www.google.com/maps/search/{q}", "words": ["google maps", "maps", "map"], "about": "Find places and see the world" },
+    { "id": "classroom", "name": "Google Classroom", "emoji": "🏫", "url": "https://classroom.google.com/", "words": ["google classroom", "classroom"], "about": "Open your class and homework from school" },
+    { "id": "wikipedia", "name": "Simple Wikipedia", "emoji": "📖", "url": "https://simple.wikipedia.org/", "search": "https://simple.wikipedia.org/w/index.php?search={q}", "words": ["wikipedia", "simple wikipedia"], "about": "Easy-to-read articles" },
+    { "id": "khan", "name": "Khan Academy", "emoji": "🎓", "url": "https://www.khanacademy.org/", "search": "https://www.khanacademy.org/search?page_search_query={q}", "words": ["khan academy", "khan"], "about": "Free lessons in maths, science and more" },
+    { "id": "bitesize", "name": "BBC Bitesize", "emoji": "📚", "url": "https://www.bbc.co.uk/bitesize", "search": "https://www.bbc.co.uk/bitesize/search?q={q}", "words": ["bbc bitesize", "bitesize"], "about": "Short lessons and revision for school" },
+    { "id": "natgeo", "name": "National Geographic Kids", "emoji": "🦁", "url": "https://kids.nationalgeographic.com/", "search": "https://kids.nationalgeographic.com/search?q={q}", "words": ["national geographic", "nat geo"], "about": "Animals, nature and science for kids" }
+  ]
+}

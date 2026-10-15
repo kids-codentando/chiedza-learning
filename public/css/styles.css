@@ -976,3 +976,74 @@ ul { list-style: none; }
 .cai-src { margin-top: 8px; font-size: 12px; color: var(--text-2); }
 .cai-src a { color: var(--zim-green, #2e9c5a); text-decoration: underline; word-break: break-word; }
 .cai-ai-note { margin-top: 6px; font-size: 11px; color: var(--text-2); opacity: .8; }
+
+/* ============ FEATURES: revise, practice, weekly, parent, games ============ */
+.fx-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 18px; }
+.fx-card h3 { font-size: 18px; margin: 0 0 8px; }
+.fx-card p { margin: 0; font-weight: 700; font-size: 14px; }
+.fx-wide { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.fx-big { font-family: 'Fredoka'; font-size: 52px; font-weight: 700; line-height: 1; color: var(--brand); }
+.fx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+.fx-grid .fx-card { margin: 0; display: flex; align-items: center; gap: 16px; }
+.fx-link { cursor: pointer; transition: transform .15s, background .15s; }
+.fx-link:hover { transform: translateY(-3px); background: var(--surface-2); }
+.fx-ico { font-size: 36px; }
+.fx-goal { display: flex; align-items: center; gap: 16px; }
+.fx-ring { --p: 0; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: conic-gradient(var(--zim-green) calc(var(--p) * 1%), var(--surface-3) 0); position: relative; }
+.fx-ring::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; background: var(--surface); }
+.fx-ring span { position: relative; font-family: 'Fredoka'; font-weight: 700; font-size: 17px; }
+.fx-list { display: flex; flex-direction: column; gap: 10px; }
+.fx-row { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 16px; }
+.fx-row > div:first-child { flex: 1; min-width: 0; }
+.fx-pill { background: var(--surface-3); border-radius: 999px; padding: 4px 12px; font-weight: 800; font-size: 13px; white-space: nowrap; }
+.fx-empty { text-align: center; padding: 40px 20px; }
+.fx-empty .btn { margin-top: 14px; }
+.fx-hint { display: none; margin: 14px 0 0; padding: 12px 16px; border-radius: var(--radius-sm); background: rgba(255,179,0,.12); border: 1px solid rgba(255,179,0,.4); font-weight: 700; line-height: 1.5; }
+.opt.picked { background: var(--surface-3); border-color: var(--brand-5); box-shadow: 0 0 0 2px var(--brand-5) inset; }
+.quiz-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.quiz-actions #nextBtn { margin-left: auto; }
+.fx-review { text-align: left; margin-top: 26px; }
+.fx-review h3 { margin-bottom: 10px; }
+.fx-rev-item { background: var(--surface-2); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 10px; }
+.fx-rev-q { font-weight: 800; margin-bottom: 6px; }
+.fx-rev-a { font-weight: 700; font-size: 14px; }
+.fx-rev-a.no { color: #ff7a8a; } .fx-rev-a.ok { color: #4ade80; }
+.fx-rev-link { display: inline-block; margin-top: 6px; font-weight: 800; font-size: 13px; color: var(--brand-5); }
+.fx-input { background: var(--surface-2); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; font: inherit; font-weight: 700; width: 100%; max-width: 420px; }
+.fx-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.fx-two .fx-card { margin-bottom: 0; }
+.fx-sub { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-weight: 700; }
+.fx-sub > span { flex: 1 1 42%; font-size: 14px; }
+.fx-sub .progress-bar { flex: 1 1 40%; }
+.fx-sub b { min-width: 38px; text-align: right; }
+.fx-bars { display: flex; gap: 10px; align-items: flex-end; height: 170px; margin: 12px 0; }
+.fx-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; }
+.fx-bar { flex: 1; width: 100%; max-width: 54px; display: flex; align-items: flex-end; background: var(--surface-2); border-radius: 10px; overflow: hidden; }
+.fx-bar span { display: block; width: 100%; background: var(--brand-5); border-radius: 10px 10px 0 0; }
+.fx-bar span.met { background: var(--zim-green); }
+.fx-bar-val { font-weight: 800; font-size: 13px; margin-bottom: 4px; }
+.fx-bar-lbl { font-size: 12px; font-weight: 800; color: var(--text-3); margin-top: 6px; }
+.fx-blanks { font-family: 'Fredoka'; font-size: 30px; letter-spacing: .15em; margin: 10px 0 16px; word-break: break-all; }
+.fx-built { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; min-height: 62px; align-items: center; margin-bottom: 16px; padding: 10px; border: 2px dashed var(--line); border-radius: var(--radius-sm); }
+.fx-tiles { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px; }
+.fx-tile { font-family: 'Fredoka'; font-size: 26px; font-weight: 700; width: 52px; height: 52px; border-radius: 14px; background: var(--surface-2); color: var(--text); border: 1px solid var(--line); cursor: pointer; display: inline-grid; place-items: center; }
+.fx-tile:hover:not(:disabled) { background: var(--surface-3); transform: translateY(-2px); }
+.fx-tile:disabled { opacity: .25; cursor: default; }
+.fx-tile.on { background: var(--brand-3); color: #062; border-color: transparent; cursor: default; }
+#caiForm #caiMic { background: var(--surface-3); }
+#caiForm #caiMic.on { background: var(--brand); animation: caiPulse 1s infinite; }
+@keyframes caiPulse { 50% { box-shadow: 0 0 0 8px rgba(255,61,87,.25); } }
+.fx-offline { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--surface-3); color: var(--text); border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: 13px; z-index: 1000; box-shadow: var(--shadow-sm); }
+@media (max-width: 640px) { .fx-sub > span { flex-basis: 50%; } .quiz-actions #nextBtn { margin-left: 0; } }
+@media print { .no-print, .fx-offline, #caiRoot { display: none !important; } .fx-card, .fx-row, .stat-box { background: #fff; color: #000; border: 1px solid #ccc; } .fx-bar { background: #eee; } .muted { color: #555; } }
+
+/* ============ EXPLORE (Google, YouTube and friends) ============ */
+.fx-search { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.fx-search .fx-input { flex: 1 1 260px; max-width: none; }
+.fx-videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 16px; }
+.fx-videos-chat { grid-template-columns: 1fr; margin-top: 10px; }
+.fx-video { background: var(--surface-2); border-radius: var(--radius-sm); overflow: hidden; }
+.fx-video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; display: block; }
+.fx-video-t { padding: 8px 12px 10px; font-weight: 800; font-size: 13px; }
+a.game-card { display: block; }
