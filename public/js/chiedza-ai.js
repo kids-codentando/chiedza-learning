@@ -186,22 +186,28 @@
       const top = hits[0].d, qt = tokens(input);
       const snippet = bestSentences(top.text, qt, 2);
       const more = hits.slice(1).filter(h => h.s >= hits[0].s * 0.45).map(h => [h.d.link, `${h.d.emoji} ${h.d.title}`]);
-      return { html: `${top.emoji} <strong>${esc(top.title)}</strong> <small>(${esc(top.level)} · ${esc(top.subject)})</small><br>${esc(snippet)}${top.fact ? `<br><br>💡 <strong>Key fact:</strong> ${esc(top.fact)}` : ""}`, links: [[top.link, "Open this lesson"]].concat(more), chips: ["Quiz me on " + top.subject] };
+      return { html: `${top.emoji} <strong>${esc(top.title)}</strong> <small>(${esc(top.level)} · ${esc(top.subject)})</small><br>${esc(snippet)}${top.fact ? `<br><br>💡 <strong>Key fact:</strong> ${esc(top.fact)}` : ""}`, links: [[top.link, "Open this lesson"]].concat(more), chips: ["Quiz me on " + top.subject], weak: hits[0].s < 8 };
     }
     if (faqHit && faqHit.s >= 1) return { html: faqHit.f.a, links: faqHit.f.links };
     return { html: "Hmm, I could not find that in Chiedza Learning yet. 🤔 Try asking about a subject (like <em>Shona greetings</em> or <em>fractions</em>), or say <em>\"Quiz me\"</em>.", chips: ["Quiz me", "What can you do?", "Teach me sign language"], miss: true };
   }
 
 
+  const WEB_RX = /\b(search (the )?(web|internet|online)|(look|find)( it| this| that)? up online|google|on the internet|search for|latest news|news about|breaking news)\b/i;
   const PIC_RX = /\b(picture|pictures|image|images|photo|photos|draw|drawing|illustration|show me|see)\b/i;
   function respond(input) {
     const Brain = window.ChiedzaBrain;
-    let r = Brain ? Brain.handle(input) : null;
+    let r = null;
+    // "search the internet for..." always goes to the thinking brain (the server also runs the safety check)
+    if (WEB_RX.test(input)) r = { html: "", needAI: true, forced: true };
+    if (!r && Brain) r = Brain.handle(input);
     if (!r) {
       r = respondCore(input);
-      if (r.miss && Brain) { const f = Brain.fallback(input); if (f) r = f; else Brain.miss(input); }
+      if (r.miss && Brain) { const f = Brain.fallback(input); if (f) r = f; else r.needAI = true; }
+      else if (r.miss) r.needAI = true;
+      else if (r.weak) r.needAI = true; // only a loose lesson match: let the thinking brain decide
     }
-    if (r.quiz || r.next) return r;
+    if (r.needAI || r.quiz || r.next) return r;
     const explicit = PIC_RX.test(input);
     const ctx = (r.links && r.links[0] ? r.links[0][1] : "") + " " + (r.html || "").replace(/<[^>]+>/g, " ").slice(0, 300);
     const imgs = pickImages(input, explicit, ctx);
@@ -224,8 +230,8 @@
           <div class="cai-actions"><button id="caiSpeak" title="Read answers aloud" aria-pressed="false">🔈</button><button id="caiClose" aria-label="Close">✕</button></div></header>
         <div id="caiMsgs" aria-live="polite"></div>
         <div id="caiChips"></div>
-        <form id="caiForm" autocomplete="off"><input id="caiInput" type="text" placeholder="Ask me anything about your lessons…" maxlength="200" /><button type="submit" aria-label="Send">➤</button></form>
-        <div class="cai-foot">Chiedza AI answers from the lessons on this site. It can make mistakes.</div>
+        <form id="caiForm" autocomplete="off"><input id="caiInput" type="text" placeholder="Ask me anything…" maxlength="500" /><button type="submit" aria-label="Send">➤</button></form>
+        <div class="cai-foot">Chiedza AI thinks, uses our lessons and can search the internet. It can make mistakes - ask a grown-up to check important things.</div>
       </section>`;
     document.body.appendChild(root);
     const $ = id => document.getElementById(id);
@@ -241,15 +247,59 @@
       chips(r.chips || (r.quiz || r.next ? [] : ["Quiz me", "Fun fact"]));
     };
     if (window.ChiedzaBrain) window.ChiedzaBrain.say = html => say(html, "bot");
+    /* ----- thinking brain (server AI + internet) ----- */
+    const history = []; // last turns, sent so follow-up questions make sense
+    const remember = (role, html) => { history.push({ role, text: plain(html).slice(0, 700) }); while (history.length > 8) history.shift(); };
+    let aiOn = null;
+    const aiEnabled = async () => {
+      if (aiOn !== null) return aiOn;
+      if (!/^https?:/.test(location.protocol)) return (aiOn = false);
+      try { const r = await fetch("/api/ai/status", { cache: "no-cache" }); aiOn = r.ok && !!(await r.json()).enabled; } catch (e) { aiOn = false; }
+      return aiOn;
+    };
+    const fmt = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/^\s*[-*•]\s+/gm, "• ").replace(/\n/g, "<br>");
+    const srcHtml = list => (list || []).filter(x => /^https?:\/\//i.test(x.url)).map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title || x.url)}</a>`).join(" · ");
+    async function thinkOnline(text, local) {
+      const bubble = say('<span class="cai-think">🤔 Thinking<span class="cai-dots"></span></span>', "bot");
+      const t2 = setTimeout(() => { bubble.innerHTML = '<span class="cai-think">🔎 Checking the internet for you<span class="cai-dots"></span></span>'; }, 4000);
+      const ctl = new AbortController(), kill = setTimeout(() => ctl.abort(), 55000);
+      try {
+        const mem = window.ChiedzaBrain ? ChiedzaBrain.mem() : {};
+        const ctx = facts(text, 2).map(f => `${f.title} (${f.level}): ${f.text}${f.fact ? " Key fact: " + f.fact : ""}`).join("\n");
+        const resp = await fetch("/api/ai/ask", { method: "POST", signal: ctl.signal, headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question: text, history: history.slice(0, -1), level: mem.level || "", name: window.ChiedzaBrain ? ChiedzaBrain.myName() : "", context: ctx }) });
+        const j = await resp.json().catch(() => ({}));
+        if (resp.status === 429) { bubble.innerHTML = j.error === "daily_limit" ? "I have answered a LOT of questions today! 😅 Try again tomorrow, or ask me about a lesson." : "Whoa, slow down a little! 😅 Wait a minute, then ask me again."; return { done: true, html: bubble.innerHTML }; }
+        if (!resp.ok || !j.ok || !j.answer) throw new Error(j.error || resp.status);
+        const body = j.html ? j.answer : fmt(j.answer);
+        const srcs = srcHtml(j.sources);
+        bubble.innerHTML = body + (j.searched ? `<div class="cai-src">🌐 I checked the internet.${srcs ? " Sources: " + srcs : ""}</div>` : "") + (j.safety ? "" : '<div class="cai-ai-note">🧠 Thought up by Chiedza AI - ask a grown-up to double-check important things.</div>');
+        const rel = local && local.links ? linkHtml(local.links) : "";
+        if (rel) bubble.insertAdjacentHTML("beforeend", rel);
+        return { done: true, html: bubble.innerHTML, answer: body, bubble, ok: !j.safety };
+      } catch (e) {
+        bubble.remove(); return { done: false };
+      } finally { clearTimeout(t2); clearTimeout(kill); msgs.scrollTop = msgs.scrollHeight; }
+    }
+    const addFeedback = (target, q, a) => {
+      if (!target || !window.ChiedzaBrain) return;
+      const fb = document.createElement("div"); fb.className = "cai-fb"; fb.dataset.q = q; fb.dataset.a = a || "";
+      fb.innerHTML = `<button data-fb="1" title="Good answer">👍</button><button data-fb="0" title="Teach me better">👎</button>`; target.appendChild(fb);
+    };
     const ask = text => {
-      say(esc(text), "me");
-      setTimeout(() => {
-        const r = respond(text), at = msgs.children.length; show(r);
-        const first = msgs.children[at];
-        if (first && !r.quiz && !r.next && window.ChiedzaBrain) {
-          const fb = document.createElement("div"); fb.className = "cai-fb"; fb.dataset.q = text; fb.dataset.a = r.html || "";
-          fb.innerHTML = `<button data-fb="1" title="Good answer">👍</button><button data-fb="0" title="Teach me better">👎</button>`; first.appendChild(fb);
+      say(esc(text), "me"); remember("user", esc(text));
+      setTimeout(async () => {
+        const r = respond(text);
+        if (r.needAI && await aiEnabled()) {
+          const out = await thinkOnline(text, r);
+          if (out.done) { talk(out.html); remember("assistant", out.html); chips(["Tell me more", "Quiz me", "Fun fact"]); if (out.ok) addFeedback(out.bubble, text, out.answer); return; }
         }
+        // thinking brain not available or failed: use the offline answer
+        if (r.needAI && r.miss && window.ChiedzaBrain) ChiedzaBrain.miss(text);
+        if (r.needAI && r.forced) r.html = "I could not reach the internet just now. 😕 Please try again in a moment, or ask me about a lesson.";
+        const at = msgs.children.length; show(r); remember("assistant", r.html || "");
+        const first = msgs.children[at];
+        if (first && !r.quiz && !r.next) addFeedback(first, text, r.html);
       }, 250);
     };
 

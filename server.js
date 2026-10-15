@@ -16,6 +16,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ---- Thinking brain: real AI + internet search (server/ai.js) ----
+app.use("/api/ai", require("./server/ai"));
+
 // ---- Simple JSON file store (ephemeral on Render free tier) ----
 const DATA_DIR = path.join(__dirname, "data");
 const DB_FILE = path.join(DATA_DIR, "submissions.json");

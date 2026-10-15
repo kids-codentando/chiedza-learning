@@ -16,6 +16,7 @@ Chiedza Learning brings lessons, interactive quizzes, fun games, free courses an
   - 🎓 **O-Level** (Forms 1–4) — Maths, English, Combined Science, History, Geography
 - **🤟 Sign language** — *Hands That Talk* (ECD), *Meet ZSL* (Infant), *Sign Language & Deaf Culture* (Junior) and a free **Sign Language & Deaf Awareness** course with certificate
 - **🧠 Chiedza Brain** — the AI's brain is a folder of files (`public/brain/`): knowledge, Shona/Ndebele phrasebooks, safety rules, riddles and project templates. It adds maths with working, unit conversion, study plans, daily challenges, memory, parent summaries and a **Project Writer** (reports, posters, stories, experiments, business plans, mini websites). Train it at `/teach.html`. See [`public/brain/README.md`](public/brain/README.md)
+- **🧠 Thinking mode + internet** — when the brain files do not know an answer, Chiedza AI now *thinks it through* with a real language model and can **search the internet and read web pages** (see [Thinking brain](#-thinking-brain-ai--internet)). Child-safety rules always apply
 - **💡 Chiedza AI** — a built-in learning helper (bottom-right) that answers from every lesson, quiz, course and platform fact, quizzes learners, and can read answers aloud
 - **Interactive quizzes** with instant feedback and scoring
 - **🎓 Free Courses** with module-based learning and **assessment forms**
@@ -72,6 +73,23 @@ The certificate generation and progress tracking work entirely in the browser.
 
 ---
 
+## 🧠 Thinking brain (AI + internet)
+
+Chiedza AI answers in this order: **safety rules → brain files and skills (instant, offline) → lessons → thinking brain**. Anything not covered, or only loosely matched, goes to `POST /api/ai/ask`, where a language model reasons about it and uses two tools: `web_search` and `read_page`. Learners can also force it with *"search the internet for ..."*. Answers show a "I checked the internet" note with source links.
+
+**Turn it on** (Render → Environment). Without a key the site keeps working exactly as before, offline.
+
+| Variable | Purpose |
+| -------- | ------- |
+| `ANTHROPIC_API_KEY` **or** `OPENAI_API_KEY` | The AI. `OPENAI_API_KEY` works with any OpenAI-compatible API; set `AI_BASE_URL` for Groq, Gemini or OpenRouter |
+| `AI_MODEL` | Optional model name (defaults: `claude-sonnet-4-5` / `gpt-4o-mini`) |
+| `TAVILY_API_KEY` or `BRAVE_API_KEY` | Optional better internet search (Brave uses strict safe-search). Default is free Wikipedia search |
+| `AI_DAILY_LIMIT` | Max AI questions per day for the whole site (default 2000) so a bill cannot run away |
+
+**Child safety built in:** the same `public/brain/safety.json` rules run on the server before and after the model; a strict kid-safe system prompt (built from `identity.md`) forbids personal-data requests and adult content; web pages are treated as untrusted text; the page reader blocks private/internal addresses; 30 questions per 10 minutes per visitor. Keys never reach the browser. Check `/api/ai/status` to confirm it is on.
+
+---
+
 ## 🔌 API Endpoints
 
 | Method | Endpoint | Description |
@@ -86,6 +104,8 @@ The certificate generation and progress tracking work entirely in the browser.
 | GET  | `/api/brain/trained` | Answers the owner taught the AI |
 | POST/DELETE | `/api/brain/train` | Owner-only: teach or remove an answer (also used by `/teach.html`) |
 | POST/GET | `/api/brain/feedback` | Thumbs up/down from learners (GET is owner-only) |
+| POST | `/api/ai/ask` | Thinking brain: `{question, history, level, name, context}` returns `{answer, sources, searched}` |
+| GET  | `/api/ai/status` | Is the thinking brain on, which model, which search |
 | GET  | `/api/brain/status` | Brain version and file counts |
 | GET  | `/api/verify/:id` | **Open verification** — returns validity, checksum and the recognised-by list |
 

@@ -17,5 +17,18 @@ services:
         value: production
       - key: BRAIN_ADMIN_KEY   # lets you read /api/brain/gaps (questions the AI could not answer)
         generateValue: true
+      # ---- Thinking brain (real AI + internet). Set ONE of the two AI keys in the Render dashboard ----
+      - key: ANTHROPIC_API_KEY   # Claude (https://console.anthropic.com)
+        sync: false
+      - key: OPENAI_API_KEY      # or any OpenAI-compatible API (OpenAI, Groq, Gemini, OpenRouter...)
+        sync: false
+      - key: AI_BASE_URL         # optional, e.g. https://api.groq.com/openai/v1
+        sync: false
+      - key: AI_MODEL            # optional model override
+        sync: false
+      - key: TAVILY_API_KEY      # optional, better internet search (otherwise free Wikipedia search is used)
+        sync: false
+      - key: AI_DAILY_LIMIT      # max AI questions per day across the site (cost protection)
+        value: "2000"
     autoDeploy: true
     healthCheckPath: /api/health
