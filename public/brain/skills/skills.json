@@ -1,0 +1,130 @@
+{
+  "note": "The list of things Chiedza AI can do. 'try' examples become chips and the 'what can you do' answer. Handlers live in js/brain.js.",
+  "skills": [
+    {
+      "id": "calc",
+      "emoji": "🧮",
+      "name": "Maths helper",
+      "desc": "Solves sums with working, fractions, percentages and times tables",
+      "try": [
+        "What is 12 x 15?",
+        "25% of 80",
+        "3/4 + 1/2",
+        "times table of 7"
+      ]
+    },
+    {
+      "id": "convert",
+      "emoji": "📏",
+      "name": "Unit converter",
+      "desc": "Converts length, weight, volume, time and temperature",
+      "try": [
+        "convert 5 km to m",
+        "2.5 kg in grams",
+        "30 celsius to fahrenheit"
+      ]
+    },
+    {
+      "id": "language",
+      "emoji": "🗣️",
+      "name": "Shona and Ndebele phrasebook",
+      "desc": "Translates common words and phrases and teaches numbers",
+      "try": [
+        "How do I say thank you in Shona?",
+        "Ndebele numbers",
+        "hello in Ndebele"
+      ]
+    },
+    {
+      "id": "define",
+      "emoji": "📖",
+      "name": "Word meanings",
+      "desc": "Explains school words simply",
+      "try": [
+        "define photosynthesis",
+        "what does noun mean"
+      ]
+    },
+    {
+      "id": "plan",
+      "emoji": "📅",
+      "name": "Study planner",
+      "desc": "Builds a personal study plan from your level, time and weak topics",
+      "try": [
+        "Make me a study plan",
+        "study plan for 45 minutes"
+      ]
+    },
+    {
+      "id": "projects",
+      "emoji": "🗂️",
+      "name": "Project writer",
+      "desc": "Builds school projects with you: topic reports, posters, stories, science experiments, tuckshop business plans, 'all about me' and a mini website you can download. You add your own words, so you learn.",
+      "try": [
+        "Write a project on Victoria Falls",
+        "Make a poster about water",
+        "Plan a science experiment on plants",
+        "Create a website about my school",
+        "Plan a tuckshop business"
+      ]
+    },
+    {
+      "id": "daily",
+      "emoji": "🌅",
+      "name": "Daily challenge",
+      "desc": "A new brain challenge every day, with your streak",
+      "try": [
+        "daily challenge"
+      ]
+    },
+    {
+      "id": "games",
+      "emoji": "🎲",
+      "name": "Word scramble, riddles and stories",
+      "desc": "Fun brain games and short Zimbabwean stories",
+      "try": [
+        "word scramble",
+        "tell me a riddle",
+        "tell me a story"
+      ]
+    },
+    {
+      "id": "memory",
+      "emoji": "🧠",
+      "name": "Memory",
+      "desc": "Remembers your name, favourite subject and the topics you find hard (stored only on your device)",
+      "try": [
+        "my name is Tendai",
+        "I like science",
+        "what do you remember about me"
+      ]
+    },
+    {
+      "id": "parent",
+      "emoji": "👨‍👩‍👧",
+      "name": "Parent summary",
+      "desc": "Writes a short progress note for parents or teachers",
+      "try": [
+        "summary for my parent"
+      ]
+    },
+    {
+      "id": "knowledge",
+      "emoji": "📚",
+      "name": "Brain knowledge",
+      "desc": "Answers from the brain files: Zimbabwe, science, maths help, study skills and life skills",
+      "try": [
+        "capital city of Zimbabwe",
+        "how do I study better",
+        "what is photosynthesis"
+      ]
+    },
+    {
+      "id": "safety",
+      "emoji": "🛡️",
+      "name": "Safety guard",
+      "desc": "Protects private details and points to trusted adults when a child needs help",
+      "try": []
+    }
+  ]
+}

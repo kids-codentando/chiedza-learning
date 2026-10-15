@@ -15,6 +15,7 @@ Chiedza Learning brings lessons, interactive quizzes, fun games, free courses an
   - 📘 **Junior** (Grades 3–7) — Maths, English, Science, Social Studies, Agriculture, Shona, Ndebele, creative & performing arts, reading & creative writing, sign language
   - 🎓 **O-Level** (Forms 1–4) — Maths, English, Combined Science, History, Geography
 - **🤟 Sign language** — *Hands That Talk* (ECD), *Meet ZSL* (Infant), *Sign Language & Deaf Culture* (Junior) and a free **Sign Language & Deaf Awareness** course with certificate
+- **🧠 Chiedza Brain** — the AI's brain is a folder of files (`public/brain/`): knowledge, Shona/Ndebele phrasebooks, safety rules, riddles and project templates. It adds maths with working, unit conversion, study plans, daily challenges, memory, parent summaries and a **Project Writer** (reports, posters, stories, experiments, business plans, mini websites). See [`public/brain/README.md`](public/brain/README.md)
 - **💡 Chiedza AI** — a built-in learning helper (bottom-right) that answers from every lesson, quiz, course and platform fact, quizzes learners, and can read answers aloud
 - **Interactive quizzes** with instant feedback and scoring
 - **🎓 Free Courses** with module-based learning and **assessment forms**
@@ -80,6 +81,9 @@ The certificate generation and progress tracking work entirely in the browser.
 | GET  | `/api/assessments` | List recent assessment submissions |
 | POST | `/api/certificates` | Issue a certificate manually (stores the canonical data + tamper-evident code) |
 | GET  | `/api/certificates/:id` | Verify a certificate by ID |
+| POST | `/api/brain/gaps` | Log a question the AI could not answer (anonymous) |
+| GET  | `/api/brain/gaps` | Owner-only list of those questions (header `x-admin-key`) |
+| GET  | `/api/brain/status` | Brain version and file counts |
 | GET  | `/api/verify/:id` | **Open verification** — returns validity, checksum and the recognised-by list |
 
 ---

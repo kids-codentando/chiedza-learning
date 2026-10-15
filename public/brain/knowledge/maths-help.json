@@ -1,0 +1,16 @@
+{
+  "topic": "Maths help",
+  "entries": [
+    {"id":"m-bodmas","level":"junior","keywords":"bodmas order of operations brackets pemdas first","a":"<strong>BODMAS</strong> tells us the order: <strong>B</strong>rackets, <strong>O</strong>rders (powers), <strong>D</strong>ivision and <strong>M</strong>ultiplication, then <strong>A</strong>ddition and <strong>S</strong>ubtraction. So 2 + 3 × 4 = 2 + 12 = 14, not 20.","links":[]},
+    {"id":"m-fraction","level":"junior","keywords":"fraction numerator denominator parts what is a fraction","a":"A <strong>fraction</strong> shows parts of a whole. In 3/4, the <strong>numerator</strong> 3 is the parts we have and the <strong>denominator</strong> 4 is how many equal parts there are. Half a loaf is 1/2.","links":[]},
+    {"id":"m-area","level":"junior","keywords":"area perimeter rectangle square formula length width","a":"<strong>Perimeter</strong> = distance around a shape. For a rectangle: 2 × (length + width). <strong>Area</strong> = space inside. Rectangle: length × width. Square: side × side.","links":[]},
+    {"id":"m-triangle","level":"junior","keywords":"triangle area angles sum 180 degrees base height","a":"The angles inside a triangle always add up to <strong>180°</strong>. Area of a triangle = ½ × base × height.","links":[]},
+    {"id":"m-circle","level":"olevel","keywords":"circle circumference area radius diameter pi","a":"For a circle: diameter = 2 × radius. <strong>Circumference</strong> = π × diameter (π ≈ 3.14). <strong>Area</strong> = π × radius × radius.","links":[]},
+    {"id":"m-prime","level":"junior","keywords":"prime number composite factors what is a prime","a":"A <strong>prime number</strong> has exactly two factors: 1 and itself. The first primes are 2, 3, 5, 7, 11, 13. Note that 2 is the only even prime.","links":[]},
+    {"id":"m-even-odd","level":"infant","keywords":"even odd numbers difference","a":"<strong>Even</strong> numbers can be shared into two equal groups (2, 4, 6, 8, 10). <strong>Odd</strong> numbers always have one left over (1, 3, 5, 7, 9).","links":[]},
+    {"id":"m-percent","level":"junior","keywords":"percent percentage per cent how to find calculate","a":"<strong>Percent</strong> means 'out of 100'. To find 25% of 80: divide by 100 and multiply by 25, so 80 ÷ 100 × 25 = 20. (Tip: 50% is half, 25% is a quarter, 10% is ÷10.)","links":[]},
+    {"id":"m-place","level":"infant","keywords":"place value units tens hundreds thousands digits","a":"<strong>Place value</strong>: in 457, the 4 means 4 hundreds, the 5 means 5 tens and the 7 means 7 units. So 457 = 400 + 50 + 7.","links":[]},
+    {"id":"m-pythagoras","level":"olevel","keywords":"pythagoras theorem right angled triangle hypotenuse","a":"<strong>Pythagoras' theorem</strong>: in a right-angled triangle, a² + b² = c², where c is the longest side (the hypotenuse). Example: sides 3 and 4 give c = 5.","links":[]},
+    {"id":"m-average","level":"junior","keywords":"average mean median mode range","a":"<strong>Mean</strong> = add all the numbers, divide by how many there are. <strong>Median</strong> = the middle number when in order. <strong>Mode</strong> = the number that appears most. <strong>Range</strong> = biggest minus smallest.","links":[]}
+  ]
+}

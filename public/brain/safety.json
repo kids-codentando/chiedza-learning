@@ -1,0 +1,36 @@
+{
+  "privacy": {
+    "patterns": [
+      "\\b(\\+?263|0)7\\d[\\d\\s-]{7,}\\b",
+      "\\b\\d{2}-?\\d{6,7}\\s?[a-z]\\s?\\d{2}\\b",
+      "\\bmy (phone|cell|whatsapp|home address|address|password|pin|id number)\\b",
+      "\\b[\\w.+-]+@[\\w-]+\\.[\\w.]+\\b"
+    ],
+    "reply": "🔒 Please do not share private things like phone numbers, addresses, ID numbers, emails or passwords here. Keep them safe and only share them with your parents or guardians."
+  },
+  "help_me": {
+    "patterns": [
+      "\\b(hurt(s|ing)? me|beat(s|ing)? me|touch(es|ed)? me|abus(e|ed|ing)|kill myself|want to die|suicid|hate my life|run away from home|being bullied|bully(ing)? me|scared of (him|her|them|my))\\b"
+    ],
+    "reply": "💛 I am really sorry you feel this way, and I am glad you told someone. You are not alone and it is not your fault. Please tell a trusted adult right now: a parent, guardian, teacher or church leader. In Zimbabwe you can also call <strong>Childline on 116</strong> (free) to talk to someone who cares. If you are in danger right now, go to a safe grown-up immediately."
+  },
+  "off_limits": {
+    "patterns": [
+      "\\b(porn|sex video|nude|naked pic|how to (make|build) (a )?(bomb|gun|weapon)|buy (drugs|weed|alcohol)|gambl(e|ing) site|betting)\\b"
+    ],
+    "reply": "🙅 That is not something I can help with. I am here for learning. Let's try a lesson, a quiz or a fun fact instead!"
+  },
+  "homework_cheating": {
+    "note": "The AI explains and guides; it does not just hand over exam answers.",
+    "patterns": [
+      "\\b(do my (whole )?(homework|exam|test) for me|give me (all )?(the )?exam answers)\\b"
+    ],
+    "reply": "📘 I can help you <strong>understand</strong> it, but I will not just do it for you, because you learn best when you try. Tell me which part is hard and I will explain it step by step!"
+  },
+  "emergency": {
+    "patterns": [
+      "\\b(this is an emergency|someone is (bleeding|choking|unconscious|drowning)|call (an )?ambulance|the house is on fire)\\b"
+    ],
+    "reply": "🚨 If this is an emergency, shout for a grown-up now and ask them to call for help. I am only a learning helper and cannot help in emergencies."
+  }
+}

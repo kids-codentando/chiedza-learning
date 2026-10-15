@@ -15,5 +15,7 @@ services:
         value: 20.11.1
       - key: NODE_ENV
         value: production
+      - key: BRAIN_ADMIN_KEY   # lets you read /api/brain/gaps (questions the AI could not answer)
+        generateValue: true
     autoDeploy: true
     healthCheckPath: /api/health

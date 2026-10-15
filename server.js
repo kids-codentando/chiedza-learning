@@ -189,6 +189,44 @@ app.post("/api/leaderboard", (req, res) => {
   res.json({ ok: true, entry: payload });
 });
 
+// ---- Chiedza Brain: questions the AI could not answer ("knowledge gaps") ----
+// Learners' unanswered questions are counted here so the owner can teach the brain
+// by adding entries to public/brain/knowledge/*.json. No names or personal data are stored.
+const gapHits = new Map();
+app.post("/api/brain/gaps", (req, res) => {
+  const ip = req.ip || "x", now = Date.now();
+  const h = (gapHits.get(ip) || []).filter(t => now - t < 60000);
+  if (h.length >= 20) return res.status(429).json({ ok: false });
+  h.push(now); gapHits.set(ip, h);
+  const q = String((req.body && req.body.q) || "").toLowerCase().replace(/\s+/g, " ").trim().slice(0, 160);
+  if (q.length < 4) return res.status(400).json({ ok: false });
+  // never keep anything that looks like a phone number, email or ID
+  if (/\d{6,}|@/.test(q)) return res.json({ ok: true, skipped: true });
+  const db = readDb();
+  db.brainGaps = db.brainGaps || [];
+  const hit = db.brainGaps.find(g => g.q === q);
+  if (hit) { hit.count++; hit.last = new Date().toISOString(); }
+  else db.brainGaps.push({ q, count: 1, last: new Date().toISOString() });
+  db.brainGaps = db.brainGaps.sort((a, b) => b.count - a.count).slice(0, 500);
+  writeDb(db);
+  res.json({ ok: true });
+});
+
+// Owner-only list. Set BRAIN_ADMIN_KEY on Render, then call with header  x-admin-key: <key>
+app.get("/api/brain/gaps", (req, res) => {
+  const key = process.env.BRAIN_ADMIN_KEY;
+  if (!key || req.get("x-admin-key") !== key) return res.status(403).json({ ok: false, error: "Set BRAIN_ADMIN_KEY and send it as x-admin-key" });
+  const db = readDb();
+  res.json({ ok: true, count: (db.brainGaps || []).length, gaps: db.brainGaps || [] });
+});
+
+app.get("/api/brain/status", (req, res) => {
+  try {
+    const man = JSON.parse(fs.readFileSync(path.join(__dirname, "public", "brain", "manifest.json"), "utf8"));
+    res.json({ ok: true, name: man.name, version: man.version, knowledgeFiles: (man.knowledge || []).length, languages: (man.languages || []).length });
+  } catch (e) { res.status(500).json({ ok: false, error: "brain manifest missing" }); }
+});
+
 // ---- Static files ----
 app.use(express.static(path.join(__dirname, "public")));
 

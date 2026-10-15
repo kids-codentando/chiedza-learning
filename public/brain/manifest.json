@@ -1,0 +1,22 @@
+{
+  "name": "Chiedza Brain",
+  "version": "1.0.0",
+  "description": "The file-based brain of Chiedza AI. Everything the AI knows, how it speaks and what it refuses lives in these files. Edit a file, redeploy, and the AI changes. No code needed.",
+  "identity": "identity.md",
+  "safety": "safety.json",
+  "skills": "skills/skills.json",
+  "knowledge": [
+    "knowledge/zimbabwe.json",
+    "knowledge/study-skills.json",
+    "knowledge/science-basics.json",
+    "knowledge/maths-help.json",
+    "knowledge/life-skills.json"
+  ],
+  "glossary": "knowledge/glossary.json",
+  "languages": [
+    "languages/shona.json",
+    "languages/ndebele.json"
+  ],
+  "fun": "knowledge/fun.json",
+  "projects": "projects/templates.json"
+}

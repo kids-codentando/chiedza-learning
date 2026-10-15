@@ -129,6 +129,7 @@
     const qz = activeQuiz; if (!qz) return null;
     const it = qz.items[qz.i], ok = i === it.quiz.answer;
     if (ok) qz.score++;
+    if (!ok && window.ChiedzaBrain) ChiedzaBrain.noteMiss(it.topic || it.subject || it.title);
     let html = ok ? "✅ <strong>Correct!</strong> Well done!" : `❌ Not quite. The answer is <strong>${esc(it.a)}</strong>.`;
     qz.i++;
     if (qz.i >= qz.items.length) {
@@ -188,13 +189,18 @@
       return { html: `${top.emoji} <strong>${esc(top.title)}</strong> <small>(${esc(top.level)} · ${esc(top.subject)})</small><br>${esc(snippet)}${top.fact ? `<br><br>💡 <strong>Key fact:</strong> ${esc(top.fact)}` : ""}`, links: [[top.link, "Open this lesson"]].concat(more), chips: ["Quiz me on " + top.subject] };
     }
     if (faqHit && faqHit.s >= 1) return { html: faqHit.f.a, links: faqHit.f.links };
-    return { html: "Hmm, I could not find that in Chiedza Learning yet. 🤔 Try asking about a subject (like <em>Shona greetings</em> or <em>fractions</em>), or say <em>\"Quiz me\"</em>.", chips: ["Quiz me", "What can you do?", "Teach me sign language"] };
+    return { html: "Hmm, I could not find that in Chiedza Learning yet. 🤔 Try asking about a subject (like <em>Shona greetings</em> or <em>fractions</em>), or say <em>\"Quiz me\"</em>.", chips: ["Quiz me", "What can you do?", "Teach me sign language"], miss: true };
   }
 
 
   const PIC_RX = /\b(picture|pictures|image|images|photo|photos|draw|drawing|illustration|show me|see)\b/i;
   function respond(input) {
-    const r = respondCore(input);
+    const Brain = window.ChiedzaBrain;
+    let r = Brain ? Brain.handle(input) : null;
+    if (!r) {
+      r = respondCore(input);
+      if (r.miss && Brain) { const f = Brain.fallback(input); if (f) r = f; else Brain.miss(input); }
+    }
     if (r.quiz || r.next) return r;
     const explicit = PIC_RX.test(input);
     const ctx = (r.links && r.links[0] ? r.links[0][1] : "") + " " + (r.html || "").replace(/<[^>]+>/g, " ").slice(0, 300);
@@ -234,11 +240,12 @@
       if (r.next) setTimeout(() => say(r.next.html, "bot"), 500);
       chips(r.chips || (r.quiz || r.next ? [] : ["Quiz me", "Fun fact"]));
     };
+    if (window.ChiedzaBrain) window.ChiedzaBrain.say = html => say(html, "bot");
     const ask = text => { say(esc(text), "me"); setTimeout(() => show(respond(text)), 250); };
 
     function open() {
       panel.hidden = false; $("caiLauncher").classList.add("hide"); input.focus();
-      if (!msgs.children.length) show({ html: "Mhoro! 👋 I am <strong>Chiedza AI</strong>. I know all the lessons, courses, games, certificates and sign language on this platform, and I can <strong>send pictures</strong> too. What would you like to learn today?", chips: ["Quiz me", "Show me sign language pictures", "How do I get a certificate?", "Tell me a fun fact"] });
+      if (!msgs.children.length) { const nm = window.ChiedzaBrain && ChiedzaBrain.myName(); show({ html: `Mhoro${nm ? ", " + esc(nm) : ""}! 👋 I am <strong>Chiedza AI</strong>. I know every lesson, course and game here, and my <strong>brain</strong> can also solve maths with working, convert units, teach Shona and Ndebele, build a <strong>study plan</strong>, set a <strong>daily challenge</strong> and <strong>write projects with you</strong> (reports, posters, experiments, stories, even a mini website). What shall we do today?`, chips: ["Write a project on Victoria Falls", "Make me a study plan", "Daily challenge", "What can you do?"] }); }
     }
     $("caiLauncher").onclick = open;
     $("caiClose").onclick = () => { panel.hidden = true; $("caiLauncher").classList.remove("hide"); if (window.speechSynthesis) speechSynthesis.cancel(); };
@@ -258,6 +265,11 @@
     };
   }
 
-  window.ChiedzaAI = { respond, search };
+  function facts(topic, n = 3) {
+    const qt = tokens(topic);
+    const qs = [...new Set(qt)], share = tk => qs.filter(t => tk.includes(t)).length / (qs.length || 1);
+    return search(topic, n + 3).filter(h => h.s >= 4 && share(h.d.tok) >= 0.6 && (share(tokens(h.d.title + " " + (h.d.fact || ""))) >= 0.6 || h.s >= 9)).slice(0, n).map(h => ({ title: h.d.title, level: h.d.level + " · " + h.d.subject, text: bestSentences(h.d.text, qt, 2), fact: h.d.fact, link: h.d.link }));
+  }
+  window.ChiedzaAI = { respond, search, facts };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount); else mount();
 })();
