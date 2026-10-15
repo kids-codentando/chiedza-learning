@@ -1,0 +1,13 @@
+{
+  "name": "Chiedza Learning",
+  "short_name": "Chiedza",
+  "description": "Free learning for Zimbabwean children, ECD to O-Level. Works offline.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b0d12",
+  "theme_color": "#0b0d12",
+  "icons": [
+    { "src": "assets/favicon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

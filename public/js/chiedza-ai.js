@@ -233,7 +233,7 @@
           <div class="cai-actions"><button id="caiSpeak" title="Read answers aloud" aria-pressed="false">🔈</button><button id="caiClose" aria-label="Close">✕</button></div></header>
         <div id="caiMsgs" aria-live="polite"></div>
         <div id="caiChips"></div>
-        <form id="caiForm" autocomplete="off"><input id="caiInput" type="text" placeholder="Ask me anything…" maxlength="500" /><button type="submit" aria-label="Send">➤</button></form>
+        <form id="caiForm" autocomplete="off"><input id="caiInput" type="text" placeholder="Ask me anything…" maxlength="500" /><button type="button" id="caiMic" aria-label="Speak your question" title="Speak your question">🎤</button><button type="submit" aria-label="Send">➤</button></form>
         <div class="cai-foot">Chiedza AI uses our lessons and looks things up on the internet. It can make mistakes - ask a grown-up to check important things.</div>
       </section>`;
     document.body.appendChild(root);
@@ -293,6 +293,12 @@
     const ask = text => {
       say(esc(text), "me"); remember("user", esc(text));
       setTimeout(async () => {
+        /* links to Google, YouTube and other trusted sites (each asks a grown-up first) */
+        try {
+          const unsafe = window.ChiedzaBrain && ChiedzaBrain.safetyCheck && ChiedzaBrain.safetyCheck(text);
+          const ex = window.FXExplore && !unsafe ? await FXExplore.intent(text) : null;
+          if (ex) { show({ html: ex.html + (ex.extra ? `<div class="cai-links">${ex.extra}</div>` : ""), chips: ex.chips }); remember("assistant", ex.html); return; }
+        } catch (e) { /* fall through to the normal brain */ }
         const r = respond(text);
         if (r.needAI && await aiEnabled()) {
           const out = await thinkOnline(text, r);
@@ -314,6 +320,24 @@
     $("caiLauncher").onclick = open;
     $("caiClose").onclick = () => { panel.hidden = true; $("caiLauncher").classList.remove("hide"); if (window.speechSynthesis) speechSynthesis.cancel(); };
     $("caiSpeak").onclick = e => { speak = !speak; e.currentTarget.textContent = speak ? "🔊" : "🔈"; e.currentTarget.setAttribute("aria-pressed", speak); if (!speak && window.speechSynthesis) speechSynthesis.cancel(); };
+    /* ----- voice input (browser speech recognition, no API key) ----- */
+    (function () {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition, mic = $("caiMic");
+      if (!SR) { mic.style.display = "none"; return; }
+      let rec = null;
+      mic.onclick = () => {
+        if (rec) { rec.stop(); return; }
+        rec = new SR(); rec.lang = navigator.language || "en-GB"; rec.interimResults = false; rec.maxAlternatives = 1;
+        rec.onresult = ev => {
+          const t = ev.results[0] && ev.results[0][0] ? ev.results[0][0].transcript : ""; if (!t) return;
+          speak = true; $("caiSpeak").textContent = "🔊"; $("caiSpeak").setAttribute("aria-pressed", "true"); // answer out loud after a spoken question
+          ask(t);
+        };
+        rec.onerror = ev => { say(ev.error === "not-allowed" ? "🎤 I need permission to use the microphone. Allow it in your browser, or type your question." : "🎤 I could not hear you. Try again or type your question.", "bot"); };
+        rec.onend = () => { rec = null; mic.classList.remove("on"); };
+        try { rec.start(); mic.classList.add("on"); } catch (e) { rec = null; }
+      };
+    })();
     $("caiForm").onsubmit = e => { e.preventDefault(); const v = input.value.trim(); if (!v) return; input.value = ""; ask(v); };
     $("caiChips").onclick = e => { const b = e.target.closest(".cai-chip"); if (b) ask(b.textContent); };
     msgs.onclick = e => {

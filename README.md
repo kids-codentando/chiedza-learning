@@ -17,6 +17,14 @@ Chiedza Learning brings lessons, interactive quizzes, fun games, free courses an
 - **🤟 Sign language** — *Hands That Talk* (ECD), *Meet ZSL* (Infant), *Sign Language & Deaf Culture* (Junior) and a free **Sign Language & Deaf Awareness** course with certificate
 - **🧠 Chiedza Brain** — the AI's brain is a folder of files (`public/brain/`): knowledge, Shona/Ndebele phrasebooks, safety rules, riddles and project templates. It adds maths with working, unit conversion, study plans, daily challenges, memory, parent summaries and a **Project Writer** (reports, posters, stories, experiments, business plans, mini websites). Train it at `/teach.html`. See [`public/brain/README.md`](public/brain/README.md)
 - **🌐 Internet skills (no API keys)** — when the brain files do not know an answer, Chiedza AI looks it up on Simple Wikipedia / Wikipedia, explains it simply with the source, and has dictionary and live weather skills. Train it from `/teach.html`. See [Web brain](#-web-brain-our-own-ai-no-api-keys)
+- **🧠 Smarter brain** - guided maths (one hint at a time, with column working), a maths coach, a revision helper that reads the learner's own mistakes, daily-goal and weekly-challenge helpers, and a 🎤 button to ask questions by voice
+- **🔁 Adaptive revision** - every quiz question a learner misses is remembered on their device and brought back (`#/revise`) until they get it right twice without hints
+- **💡 Hints and read-aloud** - every quiz offers three hints (look back at the lesson, cross out wrong answers, first letter) and a 🔊 button
+- **📝 Practice papers and 🏆 weekly challenge** - timed exam-style papers marked at the end (`#/practice`), and the same 10 questions for everyone each week (`#/weekly`)
+- **🎯 Daily goal and 👪 parent dashboard** - goal ring on the home page; a parent area (`#/parent`, behind a grown-up maths question) with time, accuracy, strong and weak subjects and a printable report
+- **🎮 More games** - Spelling Bee, Word Scramble, and Shona & Ndebele Match
+- **🌍 Explore the web** - safe doors to Google (SafeSearch on), YouTube ("for kids" added), Maps, Translate, Khan Academy and more (`#/explore`, or ask Chiedza AI: *"google volcanoes"*, *"videos about the water cycle"*, *"open Khan Academy"*). Every link outside the site asks a grown-up first. Edit `public/brain/links.json` to change the list
+- **📴 Works offline** - installable app with a service worker that keeps lessons, quizzes, games and the brain on the device
 - **💡 Chiedza AI** — a built-in learning helper (bottom-right) that answers from every lesson, quiz, course and platform fact, quizzes learners, and can read answers aloud
 - **Interactive quizzes** with instant feedback and scoring
 - **🎓 Free Courses** with module-based learning and **assessment forms**
@@ -91,6 +99,26 @@ Learners can force it with *"search the internet for ..."*. It is honest about i
 
 ---
 
+## 🌍 Explore: Google, YouTube and more
+
+The list of sites is `public/brain/links.json` (name, link, and an optional search URL with `{q}`). All outside links go through a grown-up question (a times-table sum) and are remembered for 15 minutes. Search words run through the same `safety.json` rules as the chat, so adult topics are never searched.
+
+**Videos inside Chiedza (optional).** Without a key, YouTube opens in a new tab. To play kid-safe videos on the site and in the chat, set `YOUTUBE_API_KEY` (a free YouTube Data API v3 key) on the server, for example in Render's *Environment* tab. The server then asks YouTube for embeddable videos with `safeSearch=strict`, adds "for kids" to the search, caches results for 6 hours, rate-limits each visitor, and shows them with `youtube-nocookie.com`. Check `/api/brain/videos-status`.
+
+## 📴 Offline mode
+
+`public/sw.js` keeps every file the server lists at `/precache.json`, so new lessons or brain files are picked up automatically after a deploy. API calls and the internet skills always go live.
+
+## ✅ Tests
+
+```bash
+npm i --no-save jsdom
+node scripts/test-features.js   # starts the server on port 3111 and checks every new feature
+npm run check:brain
+```
+
+---
+
 ## 🔌 API Endpoints
 
 | Method | Endpoint | Description |
@@ -109,6 +137,9 @@ Learners can force it with *"search the internet for ..."*. It is honest about i
 | GET  | `/api/brain/web-status` | Is the web brain on and which sources it uses |
 | GET  | `/api/brain/web-answers` | Owner-only: answers found online, to review |
 | POST | `/api/brain/web-answers/review` | Owner-only: `{q, action: approve/block/dismiss}` |
+| GET  | `/api/brain/videos?q=` | Kid-safe YouTube videos (needs `YOUTUBE_API_KEY`, otherwise returns an empty list) |
+| GET  | `/api/brain/videos-status` | Is the in-site video player on |
+| GET  | `/precache.json` | Files the service worker keeps for offline use |
 | GET  | `/api/brain/status` | Brain version and file counts |
 | GET  | `/api/verify/:id` | **Open verification** — returns validity, checksum and the recognised-by list |
 

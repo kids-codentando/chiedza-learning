@@ -1,6 +1,6 @@
 {
   "name": "Chiedza Brain",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The file-based brain of Chiedza AI. Everything the AI knows, how it speaks and what it refuses lives in these files. Edit a file, redeploy, and the AI changes. No code needed.",
   "identity": "identity.md",
   "safety": "safety.json",

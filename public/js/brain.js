@@ -485,7 +485,7 @@
   function fallback(input) { return knowledgeSearch(input, false); }
 
   window.ChiedzaBrain = {
-    ready, handle, fallback, miss, feedback, noteMiss, whatCanIDo, mem, saveMem, tokens, esc, plain, cap, pick, today, myName, detectLevel, fileDownload, printHtml, actions,
+    ready, handle, fallback, safetyCheck, miss, feedback, noteMiss, whatCanIDo, mem, saveMem, tokens, esc, plain, cap, pick, today, myName, detectLevel, fileDownload, printHtml, actions,
     data: B, register: h => B.handlers.push(h), setPending: p => { B.pending = p; }, onLoad: f => { if (B.loaded) f(); else (B.onload = B.onload || []).push(f); },
     set lastCopy(v) { lastCopy = v; }
   };

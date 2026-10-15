@@ -213,6 +213,33 @@ function allowed(ip) {
 /* ---------- routes ---------- */
 router.get("/web-status", (req, res) => { res.set("Cache-Control", "no-cache"); res.json({ ok: true, enabled: true, skills: ["define", "weather", "knowledge"], sources: ["Simple Wikipedia", "Wikipedia", "Wiktionary", "dictionaryapi.dev", "Open-Meteo"] }); });
 
+/* Kid-safe YouTube videos. Optional: only works when YOUTUBE_API_KEY is set on the server.
+   Uses YouTube's strict safe search, embeddable videos only, and the "for kids" bias; the same
+   safety rules as the chat run on the search words first. Without a key the site shows search links instead. */
+const vidCache = new Map();
+router.get("/videos-status", (req, res) => res.json({ ok: true, enabled: !!process.env.YOUTUBE_API_KEY }));
+router.get("/videos", async (req, res) => {
+  res.set("Cache-Control", "no-cache");
+  if (!process.env.YOUTUBE_API_KEY) return res.json({ ok: true, enabled: false, videos: [] });
+  const q = String(req.query.q || "").replace(/\s+/g, " ").trim().slice(0, 100);
+  if (q.length < 2) return res.status(400).json({ ok: false, error: "empty" });
+  if (safetyCheck(q) || GROWN_UP.test(q)) return res.json({ ok: true, enabled: true, videos: [], safety: true });
+  if (!allowed(req.ip)) return res.status(429).json({ ok: false, error: "slow_down" });
+  const key = q.toLowerCase(), hit = vidCache.get(key);
+  if (hit && Date.now() - hit.t < 6 * 3600 * 1000) return res.json({ ok: true, enabled: true, videos: hit.v });
+  try {
+    const u = new URL("https://www.googleapis.com/youtube/v3/search");
+    Object.entries({ part: "snippet", type: "video", maxResults: "6", safeSearch: "strict", videoEmbeddable: "true", videoSyndicated: "true", relevanceLanguage: "en", q: q + " for kids", key: process.env.YOUTUBE_API_KEY }).forEach(([k, v]) => u.searchParams.set(k, v));
+    const r = await fetch(u, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(8000) });
+    if (!r.ok) return res.json({ ok: true, enabled: true, videos: [], error: "youtube_" + r.status });
+    const j = await r.json();
+    const videos = (j.items || []).filter(i => i.id && i.id.videoId && !safetyCheck((i.snippet.title || "") + " " + (i.snippet.description || ""))).slice(0, 4)
+      .map(i => ({ id: i.id.videoId, title: String(i.snippet.title || "").replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"').slice(0, 120), channel: String(i.snippet.channelTitle || "").slice(0, 60) }));
+    vidCache.set(key, { t: Date.now(), v: videos }); if (vidCache.size > 300) vidCache.delete(vidCache.keys().next().value);
+    res.json({ ok: true, enabled: true, videos });
+  } catch (e) { res.json({ ok: true, enabled: true, videos: [], error: "unreachable" }); }
+});
+
 router.post("/ask", async (req, res) => {
   const b = req.body || {};
   const question = clean(b.question, 300);
