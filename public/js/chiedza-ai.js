@@ -193,13 +193,16 @@
   }
 
 
-  const WEB_RX = /\b(search (the )?(web|internet|online)|(look|find)( it| this| that)? up online|google|on the internet|search for|latest news|news about|breaking news)\b/i;
+  let lastWeb = null; // last question answered from the internet, for "tell me more"
+  const MORE_RX = /^(tell me more|more|go on|continue|keep going|say more)\b[ !.?]*$/i;
+  const WEB_RX = /\b(weather (in|for|at|of)|(what|how)('s| is) the weather|forecast for|how (hot|cold|warm) is it in|search (the )?(web|internet|online)|(look|find)( it| this| that)? up online|google|on the internet|search for|latest news|news about|breaking news)\b/i;
   const PIC_RX = /\b(picture|pictures|image|images|photo|photos|draw|drawing|illustration|show me|see)\b/i;
   function respond(input) {
     const Brain = window.ChiedzaBrain;
     let r = null;
     // "search the internet for..." always goes to the thinking brain (the server also runs the safety check)
-    if (WEB_RX.test(input)) r = { html: "", needAI: true, forced: true };
+    if (lastWeb && MORE_RX.test(input.trim())) r = { html: "", needAI: true, forced: true, more: lastWeb.more + 1, q: lastWeb.q };
+    else if (WEB_RX.test(input)) r = { html: "", needAI: true, forced: true };
     if (!r && Brain) r = Brain.handle(input);
     if (!r) {
       r = respondCore(input);
@@ -231,7 +234,7 @@
         <div id="caiMsgs" aria-live="polite"></div>
         <div id="caiChips"></div>
         <form id="caiForm" autocomplete="off"><input id="caiInput" type="text" placeholder="Ask me anything…" maxlength="500" /><button type="submit" aria-label="Send">➤</button></form>
-        <div class="cai-foot">Chiedza AI thinks, uses our lessons and can search the internet. It can make mistakes - ask a grown-up to check important things.</div>
+        <div class="cai-foot">Chiedza AI uses our lessons and looks things up on the internet. It can make mistakes - ask a grown-up to check important things.</div>
       </section>`;
     document.body.appendChild(root);
     const $ = id => document.getElementById(id);
@@ -254,29 +257,30 @@
     const aiEnabled = async () => {
       if (aiOn !== null) return aiOn;
       if (!/^https?:/.test(location.protocol)) return (aiOn = false);
-      try { const r = await fetch("/api/ai/status", { cache: "no-cache" }); aiOn = r.ok && !!(await r.json()).enabled; } catch (e) { aiOn = false; }
+      try { const r = await fetch("/api/brain/web-status", { cache: "no-cache" }); aiOn = r.ok && !!(await r.json()).enabled; } catch (e) { aiOn = false; }
       return aiOn;
     };
     const fmt = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/^\s*[-*•]\s+/gm, "• ").replace(/\n/g, "<br>");
     const srcHtml = list => (list || []).filter(x => /^https?:\/\//i.test(x.url)).map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title || x.url)}</a>`).join(" · ");
     async function thinkOnline(text, local) {
+      const more = local && local.more ? local.more : 0, qs = local && local.q ? local.q : text;
       const bubble = say('<span class="cai-think">🤔 Thinking<span class="cai-dots"></span></span>', "bot");
-      const t2 = setTimeout(() => { bubble.innerHTML = '<span class="cai-think">🔎 Checking the internet for you<span class="cai-dots"></span></span>'; }, 4000);
+      const t2 = setTimeout(() => { bubble.innerHTML = '<span class="cai-think">🔎 Looking it up on the internet<span class="cai-dots"></span></span>'; }, 4000);
       const ctl = new AbortController(), kill = setTimeout(() => ctl.abort(), 55000);
       try {
         const mem = window.ChiedzaBrain ? ChiedzaBrain.mem() : {};
-        const ctx = facts(text, 2).map(f => `${f.title} (${f.level}): ${f.text}${f.fact ? " Key fact: " + f.fact : ""}`).join("\n");
-        const resp = await fetch("/api/ai/ask", { method: "POST", signal: ctl.signal, headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ question: text, history: history.slice(0, -1), level: mem.level || "", name: window.ChiedzaBrain ? ChiedzaBrain.myName() : "", context: ctx }) });
+        const resp = await fetch("/api/brain/ask", { method: "POST", signal: ctl.signal, headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question: qs, level: mem.level || "", more }) });
         const j = await resp.json().catch(() => ({}));
-        if (resp.status === 429) { bubble.innerHTML = j.error === "daily_limit" ? "I have answered a LOT of questions today! 😅 Try again tomorrow, or ask me about a lesson." : "Whoa, slow down a little! 😅 Wait a minute, then ask me again."; return { done: true, html: bubble.innerHTML }; }
+        if (resp.status === 429) { bubble.innerHTML = j.error === "daily_limit" ? "Whoa, slow down a little! 😅 Wait a minute, then ask me again." : "Whoa, slow down a little! 😅 Wait a minute, then ask me again."; return { done: true, html: bubble.innerHTML }; }
         if (!resp.ok || !j.ok || !j.answer) throw new Error(j.error || resp.status);
         const body = j.html ? j.answer : fmt(j.answer);
         const srcs = srcHtml(j.sources);
-        bubble.innerHTML = body + (j.searched ? `<div class="cai-src">🌐 I checked the internet.${srcs ? " Sources: " + srcs : ""}</div>` : "") + (j.safety ? "" : '<div class="cai-ai-note">🧠 Thought up by Chiedza AI - ask a grown-up to double-check important things.</div>');
+        bubble.innerHTML = body + (j.searched ? `<div class="cai-src">🌐 I looked this up on the internet.${srcs ? " Source: " + srcs : ""}</div>` : "") + (j.safety ? "" : '<div class="cai-ai-note">🧠 Found by Chiedza Brain. Ask a grown-up to double-check important things.</div>');
         const rel = local && local.links ? linkHtml(local.links) : "";
         if (rel) bubble.insertAdjacentHTML("beforeend", rel);
-        return { done: true, html: bubble.innerHTML, answer: body, bubble, ok: !j.safety };
+        if (!j.safety && j.kind === "knowledge") lastWeb = { q: qs, more }; else if (j.kind !== "done") lastWeb = null;
+        return { done: true, html: bubble.innerHTML, answer: body, bubble, ok: !j.safety, more: j.kind === "knowledge" };
       } catch (e) {
         bubble.remove(); return { done: false };
       } finally { clearTimeout(t2); clearTimeout(kill); msgs.scrollTop = msgs.scrollHeight; }
@@ -292,7 +296,7 @@
         const r = respond(text);
         if (r.needAI && await aiEnabled()) {
           const out = await thinkOnline(text, r);
-          if (out.done) { talk(out.html); remember("assistant", out.html); chips(["Tell me more", "Quiz me", "Fun fact"]); if (out.ok) addFeedback(out.bubble, text, out.answer); return; }
+          if (out.done) { talk(out.html); remember("assistant", out.html); chips(out.more ? ["Tell me more", "Quiz me", "Fun fact"] : ["Quiz me", "Fun fact"]); if (out.ok) addFeedback(out.bubble, text, out.answer); return; }
         }
         // thinking brain not available or failed: use the offline answer
         if (r.needAI && r.miss && window.ChiedzaBrain) ChiedzaBrain.miss(text);

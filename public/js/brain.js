@@ -68,7 +68,7 @@
 
   /* ---------- 1. safety guard ---------- */
   function safetyCheck(input) {
-    const order = ["help_me", "emergency", "off_limits", "privacy", "homework_cheating"];
+    const order = ["help_me", "emergency", "off_limits", "grown_up", "privacy", "homework_cheating"];
     for (const k of order) {
       const g = B.safety[k]; if (!g) continue;
       for (const p of g.patterns || []) { try { if (new RegExp(p, "i").test(input)) return { html: g.reply, safety: k }; } catch (e) {} }

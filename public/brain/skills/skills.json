@@ -39,7 +39,7 @@
       "id": "define",
       "emoji": "📖",
       "name": "Word meanings",
-      "desc": "Explains school words simply",
+      "desc": "Explains school words simply, from our glossary first and then a free online dictionary",
       "try": [
         "define photosynthesis",
         "what does noun mean"
@@ -106,6 +106,27 @@
       "desc": "Writes a short progress note for parents or teachers",
       "try": [
         "summary for my parent"
+      ]
+    },
+    {
+      "id": "web",
+      "emoji": "🌐",
+      "name": "Internet lookup",
+      "desc": "Looks things up on the internet (Simple Wikipedia and Wikipedia) when the brain does not know, then explains it simply and shows the source. Say \"tell me more\" to hear more",
+      "try": [
+        "Why is the sky blue?",
+        "How tall is Mount Everest?",
+        "Search the internet for pandas"
+      ]
+    },
+    {
+      "id": "weather",
+      "emoji": "🌦️",
+      "name": "Weather",
+      "desc": "Tells you the live weather for any town or city",
+      "try": [
+        "Weather in Harare",
+        "Is it hot in Bulawayo?"
       ]
     },
     {

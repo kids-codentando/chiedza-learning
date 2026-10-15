@@ -32,5 +32,11 @@
       "\\b(this is an emergency|someone is (bleeding|choking|unconscious|drowning)|call (an )?ambulance|the house is on fire)\\b"
     ],
     "reply": "🚨 If this is an emergency, shout for a grown-up now and ask them to call for help. I am only a learning helper and cannot help in emergencies."
+  },
+  "grown_up": {
+    "patterns": [
+      "\\b(how (are|do|does|did) (a )?(babies|baby) (made|get made|born|come)|where do (babies|baby) come from|how (do|does) (people|a woman|a mother) get pregnant|pregnan(t|cy)|sex|sexual|intercourse|genitals?|penis|vagina|masturbat\\w*|abortion|contracepti\\w*|rape|suicide|self[- ]harm|kill myself|overdose)\\b"
+    ],
+    "reply": "🤝 That is a good question for a parent, teacher or another trusted grown-up. They can explain it in the right way for you. Is there something else I can help you learn?"
   }
 }

@@ -16,8 +16,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ---- Thinking brain: real AI + internet search (server/ai.js) ----
-app.use("/api/ai", require("./server/ai"));
+// ---- Web brain: free internet skills, no API keys (server/webbrain.js) ----
+app.use("/api/brain", require("./server/webbrain"));
 
 // ---- Simple JSON file store (ephemeral on Render free tier) ----
 const DATA_DIR = path.join(__dirname, "data");
@@ -261,6 +261,36 @@ function scheduleGithubSync() {
   }, 4000);
 }
 
+// ---- Training from the internet ----
+// Every answer the web brain finds is logged (anonymously) so the owner can review it in /teach.html:
+// teach it (promote to a vetted offline answer), block it (never serve it again) or dismiss it.
+const webBrain = require("./server/webbrain");
+const normQ = q => String(q || "").toLowerCase().replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 160);
+webBrain.hooks.record = (question, out) => {
+  const q = normQ(question); if (q.length < 4 || /\d{6,}|@/.test(question)) return;
+  const db = readDb(); db.webAnswers = db.webAnswers || [];
+  let w = db.webAnswers.find(x => x.q === q);
+  const src = (out.sources && out.sources[0]) || {};
+  if (w) { w.count++; w.last = new Date().toISOString(); w.a = out.answer.slice(0, 900); w.source = src.title || w.source; w.url = src.url || w.url; }
+  else db.webAnswers.push({ q, a: out.answer.slice(0, 900), kind: out.kind, source: src.title || "", url: src.url || "", count: 1, status: "new", last: new Date().toISOString() });
+  db.webAnswers = db.webAnswers.sort((a, b) => (a.status === "new" ? 0 : 1) - (b.status === "new" ? 0 : 1) || b.count - a.count).slice(0, 300);
+  writeDb(db);
+};
+webBrain.hooks.isBlocked = (question, sources) => {
+  const db = readDb(), bl = (db.webAnswers || []).filter(x => x.status === "blocked"); if (!bl.length) return false;
+  const q = normQ(question), urls = new Set(bl.map(x => x.url).filter(Boolean));
+  return bl.some(x => x.q === q) || (sources || []).some(x => urls.has(x.url));
+};
+app.get("/api/brain/web-answers", adminOnly, (req, res) => res.json({ ok: true, answers: readDb().webAnswers || [] }));
+app.post("/api/brain/web-answers/review", adminOnly, (req, res) => {
+  const q = normQ(req.body && req.body.q), action = req.body && req.body.action;
+  if (!["approve", "block", "dismiss"].includes(action)) return res.status(400).json({ ok: false, error: "action must be approve, block or dismiss" });
+  const db = readDb(), w = (db.webAnswers || []).find(x => x.q === q);
+  if (!w) return res.status(404).json({ ok: false, error: "Not found" });
+  w.status = action === "approve" ? "approved" : action === "block" ? "blocked" : "dismissed";
+  writeDb(db); res.json({ ok: true, status: w.status });
+});
+
 app.get("/api/brain/trained", (req, res) => { res.set("Cache-Control", "no-cache"); res.json(trainedPayload(readDb())); });
 
 app.post("/api/brain/train", adminOnly, (req, res) => {
@@ -271,7 +301,7 @@ app.post("/api/brain/train", adminOnly, (req, res) => {
   const entry = { id: b.id || "t-" + Date.now().toString(36), topic: String(b.topic || "Taught by the owner").slice(0, 60), level: ["all", "ecd", "infant", "junior", "olevel"].includes(b.level) ? b.level : "all", keywords, a, links: Array.isArray(b.links) ? b.links.slice(0, 3).map(l => [String(l[0]).slice(0, 120), String(l[1]).slice(0, 60)]) : [], taughtAt: new Date().toISOString() };
   const i = db.trained.findIndex(e => e.id === entry.id);
   if (i >= 0) db.trained[i] = entry; else db.trained.push(entry);
-  if (b.fromGap) db.brainGaps = (db.brainGaps || []).filter(g => g.q !== String(b.fromGap).toLowerCase());
+  if (b.fromGap) { db.brainGaps = (db.brainGaps || []).filter(g => g.q !== String(b.fromGap).toLowerCase()); const wq = String(b.fromGap).toLowerCase().replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 160); (db.webAnswers || []).forEach(w => { if (w.q === wq) w.status = "approved"; }); }
   writeDb(db); scheduleGithubSync();
   res.json({ ok: true, entry, total: db.trained.length });
 });

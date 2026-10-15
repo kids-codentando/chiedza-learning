@@ -16,7 +16,7 @@ Chiedza Learning brings lessons, interactive quizzes, fun games, free courses an
   - 🎓 **O-Level** (Forms 1–4) — Maths, English, Combined Science, History, Geography
 - **🤟 Sign language** — *Hands That Talk* (ECD), *Meet ZSL* (Infant), *Sign Language & Deaf Culture* (Junior) and a free **Sign Language & Deaf Awareness** course with certificate
 - **🧠 Chiedza Brain** — the AI's brain is a folder of files (`public/brain/`): knowledge, Shona/Ndebele phrasebooks, safety rules, riddles and project templates. It adds maths with working, unit conversion, study plans, daily challenges, memory, parent summaries and a **Project Writer** (reports, posters, stories, experiments, business plans, mini websites). Train it at `/teach.html`. See [`public/brain/README.md`](public/brain/README.md)
-- **🧠 Thinking mode + internet** — when the brain files do not know an answer, Chiedza AI now *thinks it through* with a real language model and can **search the internet and read web pages** (see [Thinking brain](#-thinking-brain-ai--internet)). Child-safety rules always apply
+- **🌐 Internet skills (no API keys)** — when the brain files do not know an answer, Chiedza AI looks it up on Simple Wikipedia / Wikipedia, explains it simply with the source, and has dictionary and live weather skills. Train it from `/teach.html`. See [Web brain](#-web-brain-our-own-ai-no-api-keys)
 - **💡 Chiedza AI** — a built-in learning helper (bottom-right) that answers from every lesson, quiz, course and platform fact, quizzes learners, and can read answers aloud
 - **Interactive quizzes** with instant feedback and scoring
 - **🎓 Free Courses** with module-based learning and **assessment forms**
@@ -73,20 +73,21 @@ The certificate generation and progress tracking work entirely in the browser.
 
 ---
 
-## 🧠 Thinking brain (AI + internet)
+## 🧠 Web brain (our own AI, no API keys)
 
-Chiedza AI answers in this order: **safety rules → brain files and skills (instant, offline) → lessons → thinking brain**. Anything not covered, or only loosely matched, goes to `POST /api/ai/ask`, where a language model reasons about it and uses two tools: `web_search` and `read_page`. Learners can also force it with *"search the internet for ..."*. Answers show a "I checked the internet" note with source links.
+Chiedza AI answers in this order: **safety rules → brain files and skills (instant, offline) → lessons → web brain**. Anything the files do not cover goes to `POST /api/brain/ask`, which runs our own skills in `server/webbrain.js`. **No paid AI, no API key, no monthly bill.**
 
-**Turn it on** (Render → Environment). Without a key the site keeps working exactly as before, offline.
+| Skill | What it does | Source (free, no key) |
+| ----- | ------------ | --------------------- |
+| Knowledge | Understands the question (what/who/why/how/how-tall), finds the best page, picks the sentences that really answer it, tidies them for a child, shows the source. "Tell me more" gives the next facts | Simple Wikipedia, then Wikipedia |
+| Word meanings | `define photosynthesis` | Wiktionary, dictionaryapi.dev |
+| Weather | `weather in Harare` (live) | Open-Meteo |
 
-| Variable | Purpose |
-| -------- | ------- |
-| `ANTHROPIC_API_KEY` **or** `OPENAI_API_KEY` | The AI. `OPENAI_API_KEY` works with any OpenAI-compatible API; set `AI_BASE_URL` for Groq, Gemini or OpenRouter |
-| `AI_MODEL` | Optional model name (defaults: `claude-sonnet-4-5` / `gpt-4o-mini`) |
-| `TAVILY_API_KEY` or `BRAVE_API_KEY` | Optional better internet search (Brave uses strict safe-search). Default is free Wikipedia search |
-| `AI_DAILY_LIMIT` | Max AI questions per day for the whole site (default 2000) so a bill cannot run away |
+Learners can force it with *"search the internet for ..."*. It is honest about its limits: it finds and explains, it does not invent. When it finds nothing the question goes to the "could not answer" list in `/teach.html`.
 
-**Child safety built in:** the same `public/brain/safety.json` rules run on the server before and after the model; a strict kid-safe system prompt (built from `identity.md`) forbids personal-data requests and adult content; web pages are treated as untrusted text; the page reader blocks private/internal addresses; 30 questions per 10 minutes per visitor. Keys never reach the browser. Check `/api/ai/status` to confirm it is on.
+**Training from the internet.** Every answer the web brain finds is listed (anonymously) under *Learned from the internet* in `/teach.html`. For each one you can **Teach** (edit and save it as a checked offline answer), **Block** (the AI never gives that answer again) or dismiss it.
+
+**Child safety built in:** the same `public/brain/safety.json` rules run before and after every lookup; adult topics (and questions like "where do babies come from") are sent to a parent or teacher; pages are never fetched from learner-supplied links; 40 lookups per 10 minutes per visitor; results are cached for 6 hours. Check `/api/brain/web-status` to confirm it is on.
 
 ---
 
@@ -104,8 +105,10 @@ Chiedza AI answers in this order: **safety rules → brain files and skills (ins
 | GET  | `/api/brain/trained` | Answers the owner taught the AI |
 | POST/DELETE | `/api/brain/train` | Owner-only: teach or remove an answer (also used by `/teach.html`) |
 | POST/GET | `/api/brain/feedback` | Thumbs up/down from learners (GET is owner-only) |
-| POST | `/api/ai/ask` | Thinking brain: `{question, history, level, name, context}` returns `{answer, sources, searched}` |
-| GET  | `/api/ai/status` | Is the thinking brain on, which model, which search |
+| POST | `/api/brain/ask` | Web brain: `{question, level, more}` returns `{answer, sources, kind}` |
+| GET  | `/api/brain/web-status` | Is the web brain on and which sources it uses |
+| GET  | `/api/brain/web-answers` | Owner-only: answers found online, to review |
+| POST | `/api/brain/web-answers/review` | Owner-only: `{q, action: approve/block/dismiss}` |
 | GET  | `/api/brain/status` | Brain version and file counts |
 | GET  | `/api/verify/:id` | **Open verification** — returns validity, checksum and the recognised-by list |
 

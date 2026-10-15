@@ -32,7 +32,7 @@
 </style>
 </head>
 <body>
-<header><img src="assets/icon.png" alt="" onerror="this.style.display='none'"><div><h1>💡 Teach Chiedza AI</h1><small>Train the brain: add answers, fix mistakes, see what children ask</small></div></header>
+<header><img src="assets/icon.png" alt="" onerror="this.style.display='none'"><div><h1>💡 Teach Chiedza AI</h1><small>Train the brain: approve what it found online, add answers, fix mistakes, see what children ask</small></div></header>
 
 <main id="lock"><div class="card">
   <h2>Owner login</h2>
@@ -48,6 +48,11 @@
     <div class="card"><h2>❓ Questions it could not answer</h2><div id="gaps"></div></div>
     <div class="card"><h2>👎 Answers children marked as bad</h2><div id="fbs"></div></div>
   </div>
+
+  <div class="card"><h2>🌐 Learned from the internet</h2>
+    <div class="hint" id="webstat" style="margin-bottom:8px"></div>
+    <div class="hint" style="margin-bottom:8px">When the brain looks something up (Simple Wikipedia, Wikipedia, Wiktionary), it is listed here. <strong>Teach</strong> turns a good one into a checked answer that works offline and instantly. <strong>Block</strong> stops the AI from ever giving that answer again.</div>
+    <div id="webs"></div></div>
 
   <div class="card" id="formCard">
     <h2>✍️ Teach a new answer</h2>
@@ -78,7 +83,7 @@
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const STOP = new Set("a an the is are was were am be to of in on at for and or but with what whats who how why when where which do does did can could would should i me my we you your it its this that these those about tell please explain give show want need some any more from as by us our".split(" "));
-let KEY = sessionStorage.getItem("brainKey") || "", editing = null, TRAINED = [];
+let KEY = sessionStorage.getItem("brainKey") || "", editing = null, TRAINED = [], WEBS = [];
 async function api(path, opt = {}) {
   const r = await fetch(path, Object.assign({}, opt, { headers: Object.assign({ "x-admin-key": KEY, "Content-Type": "application/json" }, opt.headers || {}) }));
   if (r.status === 403) { sessionStorage.removeItem("brainKey"); throw new Error("Wrong admin key"); }
@@ -92,7 +97,11 @@ async function unlock() {
 }
 $("unlock").onclick = unlock; $("key").onkeydown = e => { if (e.key === "Enter") unlock(); };
 async function load() {
-  const [g, f, t, s] = await Promise.all([api("/api/brain/gaps"), api("/api/brain/feedback"), fetch("/api/brain/trained").then(r => r.json()), api("/api/brain/sync-status")]);
+  const [g, f, t, s, wa, ws] = await Promise.all([api("/api/brain/gaps"), api("/api/brain/feedback"), fetch("/api/brain/trained").then(r => r.json()), api("/api/brain/sync-status"), api("/api/brain/web-answers"), fetch("/api/brain/web-status").then(r => r.json()).catch(() => ({}))]);
+  WEBS = wa.answers || [];
+  $("webstat").innerHTML = ws.enabled ? `🟢 Internet skills are <strong>on</strong>: ${esc((ws.sources || []).join(", "))}. No API key or cost.` : `🔴 Internet skills are off.`;
+  const open = WEBS.filter(x => x.status === "new");
+  $("webs").innerHTML = open.length ? open.slice(0, 40).map(x => `<div class="item"><div class="q"><strong>${esc(x.q)}</strong> <span class="badge">${x.count}×</span> <span class="badge">${esc(x.kind)}</span><div class="hint">${esc(x.a.length > 320 ? x.a.slice(0, 320) + "…" : x.a)}</div><div class="hint">Source: ${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener" style="color:var(--y)">${esc(x.source || x.url)}</a>` : esc(x.source)}</div></div><div class="row" style="flex:0 0 auto;flex-wrap:nowrap"><button class="sm" data-webteach="${esc(x.q)}">Teach</button><button class="sm del" data-webblock="${esc(x.q)}">Block</button><button class="sm sec" data-webdismiss="${esc(x.q)}" title="Looks fine, hide it">✕</button></div></div>`).join("") : `<div class="empty">Nothing new. Answers the brain finds online will show up here for you to check.</div>`;
   TRAINED = t.entries || [];
   $("sync").innerHTML = s.configured ? `GitHub backup: <strong>${esc(s.message)}</strong>${s.last ? " · " + new Date(s.last).toLocaleString() : ""}` : `⚠️ GitHub backup is <strong>off</strong>. Taught answers could be lost when Render redeploys. Use "Download trained.json" regularly, or set GITHUB_TOKEN on Render.`;
   $("gaps").innerHTML = (g.gaps || []).length ? g.gaps.map(x => `<div class="item"><div class="q">${esc(x.q)} <span class="badge">asked ${x.count}×</span></div><button class="sm" data-teach="${esc(x.q)}">Teach</button><button class="sm sec" data-hide="${esc(x.q)}" title="Ignore">✕</button></div>`).join("") : `<div class="empty">Nothing yet. When children ask something the AI cannot answer, it shows up here.</div>`;
@@ -116,6 +125,10 @@ document.addEventListener("click", async e => {
   if (t) { clearForm(); $("q").value = t.dataset.teach; suggest(); $("formCard").scrollIntoView({ behavior: "smooth" }); $("a").focus(); }
   if (ed) { const x = TRAINED.find(v => v.id === ed.dataset.edit); if (!x) return; editing = x.id; $("q").value = ""; $("kw").value = x.keywords; $("a").value = x.a; $("topic").value = x.topic; $("lvl").value = x.level; $("lk").value = (x.links && x.links[0] && x.links[0][0]) || ""; $("ll").value = (x.links && x.links[0] && x.links[0][1]) || ""; preview(); $("formCard").scrollIntoView({ behavior: "smooth" }); }
   if (del && confirm("Delete this answer?")) { await api("/api/brain/train/" + encodeURIComponent(del.dataset.del), { method: "DELETE" }); load(); }
+  const wt = e.target.closest("[data-webteach]"), wb = e.target.closest("[data-webblock]"), wd = e.target.closest("[data-webdismiss]");
+  if (wt) { const x = WEBS.find(v => v.q === wt.dataset.webteach); if (!x) return; clearForm(); $("q").value = x.q; suggest(); $("a").value = esc(x.a).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>") + (x.source ? `<br><small>Source: ${esc(x.source)}</small>` : ""); $("topic").value = "From the internet (checked)"; preview(); $("formCard").scrollIntoView({ behavior: "smooth" }); }
+  if (wb && confirm("Block this answer? The AI will never give it again.")) { await api("/api/brain/web-answers/review", { method: "POST", body: JSON.stringify({ q: wb.dataset.webblock, action: "block" }) }); load(); }
+  if (wd) { await api("/api/brain/web-answers/review", { method: "POST", body: JSON.stringify({ q: wd.dataset.webdismiss, action: "dismiss" }) }); load(); }
   if (hid) { await api("/api/brain/gaps?q=" + encodeURIComponent(hid.dataset.hide), { method: "DELETE" }); load(); }
 });
 $("export").onclick = async () => { const d = await api("/api/brain/export"); const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: "application/json" })); a.download = "trained.json"; a.click(); };
