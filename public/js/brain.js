@@ -56,6 +56,11 @@
       rest.slice(0, nk).forEach(k => { if (k && k.entries) k.entries.forEach(e => B.knowledge.push(Object.assign({ topic: k.topic }, e, { kt: tokens(e.keywords), at: tokens(e.a) }))); });
       rest.slice(nk, nk + nl).forEach(l => { if (l && l.language) B.langs[l.language.toLowerCase()] = l; });
       B.projectTemplates = rest[nk + nl] || null;
+      // taught by the owner (live from the server; falls back to the committed file)
+      let tr = null;
+      try { const r = await fetch("/api/brain/trained", { cache: "no-cache" }); if (r.ok) tr = await r.json(); } catch (e) {}
+      if (!tr) tr = await safe(getJSON("knowledge/trained.json"));
+      if (tr && tr.entries) tr.entries.forEach(e => { B.knowledge = B.knowledge.filter(k => k.id !== e.id); B.knowledge.push(Object.assign({ topic: tr.topic }, e, { trained: true, kt: tokens(e.keywords), at: tokens(e.a) })); });
       B.loaded = true;
       (B.onload || []).forEach(f => { try { f(); } catch (e) {} });
     } catch (e) { console.warn("Chiedza Brain files could not be loaded (open the site through the server). Built-in skills still work.", e.message); }
@@ -410,8 +415,8 @@
     B.knowledge.forEach(e => {
       const kw = qt.filter(t => e.kt.includes(t)).length, tx = qt.filter(t => e.at.includes(t) && !e.kt.includes(t)).length;
       const sc = kw * 2 + tx * 0.5, ratio = kw / qt.length;
-      const ok = strict ? (kw >= 2 && ratio >= 0.5) || (kw >= 1 && qt.length === 1 && e.kt.length < 12 && false) : (kw >= 1 && (ratio >= 0.34 || kw >= 2));
-      if (ok && sc > bs) { bs = sc; best = e; }
+      const ok = e.trained ? (kw >= 1 && ratio >= 0.5) : strict ? (kw >= 2 && ratio >= 0.5) : (kw >= 1 && (ratio >= 0.34 || kw >= 2));
+      if (ok && sc + (e.trained ? 3 : 0) > bs) { bs = sc + (e.trained ? 3 : 0); best = e; }
     });
     return best ? { html: `${best.a}<br><small>🧠 From the Chiedza Brain · ${esc(best.topic || "")}</small>`, links: best.links || [], chips: ["Quiz me", "Fun fact"] } : null;
   }
@@ -445,11 +450,18 @@
 
   /* ---------- gaps: questions the brain could not answer ---------- */
   function miss(input) {
-    const q = String(input || "").trim().slice(0, 160); if (!q || q.length < 4) return;
+    const q = String(input || "").trim().slice(0, 160); if (!q || q.length < 4 || safetyCheck(q)) return;
     try {
       const list = JSON.parse(localStorage.getItem(GAP_KEY) || "[]"); list.push({ q, at: new Date().toISOString() }); localStorage.setItem(GAP_KEY, JSON.stringify(list.slice(-50)));
     } catch (e) {}
     if (/^https?:/.test(location.protocol)) { try { fetch("/api/brain/gaps", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ q }) }).catch(() => {}); } catch (e) {} }
+  }
+
+  /* ---------- feedback (thumbs up / down) ---------- */
+  function feedback(q, snippet, good) {
+    q = String(q || "").trim(); if (!q || safetyCheck(q) || !/^https?:/.test(location.protocol)) return;
+    try { fetch("/api/brain/feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ q, a: plain(snippet).slice(0, 200), good: !!good }) }).catch(() => {}); } catch (e) {}
+    if (!good) { try { const l = JSON.parse(localStorage.getItem(GAP_KEY) || "[]"); l.push({ q, at: new Date().toISOString(), bad: true }); localStorage.setItem(GAP_KEY, JSON.stringify(l.slice(-50))); } catch (e) {} }
   }
 
   /* ---------- main entry ---------- */
@@ -473,7 +485,7 @@
   function fallback(input) { return knowledgeSearch(input, false); }
 
   window.ChiedzaBrain = {
-    ready, handle, fallback, miss, noteMiss, whatCanIDo, mem, saveMem, tokens, esc, plain, cap, pick, today, myName, detectLevel, fileDownload, printHtml, actions,
+    ready, handle, fallback, miss, feedback, noteMiss, whatCanIDo, mem, saveMem, tokens, esc, plain, cap, pick, today, myName, detectLevel, fileDownload, printHtml, actions,
     data: B, register: h => B.handlers.push(h), setPending: p => { B.pending = p; }, onLoad: f => { if (B.loaded) f(); else (B.onload = B.onload || []).push(f); },
     set lastCopy(v) { lastCopy = v; }
   };

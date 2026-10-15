@@ -241,7 +241,17 @@
       chips(r.chips || (r.quiz || r.next ? [] : ["Quiz me", "Fun fact"]));
     };
     if (window.ChiedzaBrain) window.ChiedzaBrain.say = html => say(html, "bot");
-    const ask = text => { say(esc(text), "me"); setTimeout(() => show(respond(text)), 250); };
+    const ask = text => {
+      say(esc(text), "me");
+      setTimeout(() => {
+        const r = respond(text), at = msgs.children.length; show(r);
+        const first = msgs.children[at];
+        if (first && !r.quiz && !r.next && window.ChiedzaBrain) {
+          const fb = document.createElement("div"); fb.className = "cai-fb"; fb.dataset.q = text; fb.dataset.a = r.html || "";
+          fb.innerHTML = `<button data-fb="1" title="Good answer">👍</button><button data-fb="0" title="Teach me better">👎</button>`; first.appendChild(fb);
+        }
+      }, 250);
+    };
 
     function open() {
       panel.hidden = false; $("caiLauncher").classList.add("hide"); input.focus();
@@ -253,6 +263,13 @@
     $("caiForm").onsubmit = e => { e.preventDefault(); const v = input.value.trim(); if (!v) return; input.value = ""; ask(v); };
     $("caiChips").onclick = e => { const b = e.target.closest(".cai-chip"); if (b) ask(b.textContent); };
     msgs.onclick = e => {
+      const f = e.target.closest("[data-fb]");
+      if (f) {
+        const box = f.parentNode, good = f.dataset.fb === "1";
+        if (window.ChiedzaBrain) ChiedzaBrain.feedback(box.dataset.q, box.dataset.a, good);
+        box.innerHTML = good ? "Thank you! 🌟" : "Thanks for telling me. 💛 My teacher will help me learn this.";
+        return;
+      }
       const o = e.target.closest("[data-quiz]");
       if (o) {
         msgs.querySelectorAll("[data-quiz]").forEach(b => b.disabled = true);

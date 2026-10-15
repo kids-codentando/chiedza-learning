@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Teach Chiedza AI</title>
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<style>
+  :root { --g:#0a7d36; --y:#ffd200; --r:#d4202c; --bg:#0b0d12; --s:#151925; --s2:#1d2332; --t:#f2f4f8; --m:#98a1b5; --line:#2a3145; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui, Arial, sans-serif; background: var(--bg); color: var(--t); line-height:1.5; }
+  header { background: linear-gradient(90deg, var(--g), #0b5d29); border-bottom: 6px solid var(--y); padding: 18px 20px; display:flex; align-items:center; gap:14px; }
+  header img { width:44px; height:44px; border-radius:10px; }
+  header h1 { margin:0; font-size:21px; } header small { opacity:.85; }
+  main { max-width: 980px; margin: 0 auto; padding: 18px; display:grid; gap:18px; }
+  .card { background: var(--s); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  h2 { margin:0 0 10px; font-size:17px; color: var(--y); }
+  label { display:block; font-size:13px; color: var(--m); margin:10px 0 4px; }
+  input, textarea, select { width:100%; background: var(--s2); color: var(--t); border:1px solid var(--line); border-radius:9px; padding:10px; font: inherit; }
+  textarea { min-height: 110px; resize: vertical; }
+  button { background: var(--g); color:#fff; border:0; border-radius:999px; padding:9px 16px; font-weight:700; cursor:pointer; font: inherit; font-weight:700; }
+  button.sec { background: var(--s2); border:1px solid var(--line); } button.del { background: var(--r); } button.sm { padding:5px 11px; font-size:12.5px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; } .row > * { flex:1; min-width:150px; } .row > button { flex:0 0 auto; }
+  .item { display:flex; gap:10px; align-items:center; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); }
+  .item:last-child { border-bottom:0; } .item .q { flex:1; word-break: break-word; } .badge { background: var(--s2); border:1px solid var(--line); border-radius:999px; padding:1px 9px; font-size:12px; color: var(--m); }
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:18px; } @media (max-width:760px){ .grid2 { grid-template-columns: 1fr; } }
+  .msg { padding:8px 12px; border-radius:9px; margin-top:10px; font-size:14px; } .ok { background:#0f3d22; } .bad { background:#4a1418; }
+  .empty { color: var(--m); font-size:14px; } .hint { color: var(--m); font-size:12.5px; }
+  .prev { background: var(--s2); border:1px solid var(--line); border-left:5px solid var(--g); border-radius:10px; padding:10px 12px; margin-top:8px; }
+  #lock { max-width: 460px; margin: 60px auto; }
+</style>
+</head>
+<body>
+<header><img src="assets/icon.png" alt="" onerror="this.style.display='none'"><div><h1>💡 Teach Chiedza AI</h1><small>Train the brain: add answers, fix mistakes, see what children ask</small></div></header>
+
+<main id="lock"><div class="card">
+  <h2>Owner login</h2>
+  <label for="key">Admin key (BRAIN_ADMIN_KEY)</label>
+  <input id="key" type="password" autocomplete="off" placeholder="Paste your admin key" />
+  <div class="row" style="margin-top:12px"><button id="unlock">Unlock</button></div>
+  <div id="lockmsg"></div>
+</div></main>
+
+<main id="app" hidden>
+  <div class="card"><div class="row"><div id="sync" class="hint">…</div><button class="sec sm" id="export">⬇ Download trained.json</button></div></div>
+  <div class="grid2">
+    <div class="card"><h2>❓ Questions it could not answer</h2><div id="gaps"></div></div>
+    <div class="card"><h2>👎 Answers children marked as bad</h2><div id="fbs"></div></div>
+  </div>
+
+  <div class="card" id="formCard">
+    <h2>✍️ Teach a new answer</h2>
+    <label for="q">What do children ask? (an example question)</label>
+    <input id="q" placeholder="e.g. who was the first president of Zimbabwe" />
+    <label for="kw">Keywords the AI should listen for <span class="hint">(separate with spaces, include words children really use)</span></label>
+    <div class="row"><input id="kw" placeholder="first president zimbabwe leader" /><button class="sec sm" id="suggest">Suggest from question</button></div>
+    <label for="a">Answer <span class="hint">(simple words for children. Allowed formatting: &lt;strong&gt;, &lt;em&gt;, &lt;br&gt;)</span></label>
+    <textarea id="a" placeholder="Write the answer exactly as the AI should say it."></textarea>
+    <div class="row">
+      <div><label for="topic">Topic</label><input id="topic" placeholder="History" /></div>
+      <div><label for="lvl">Level</label><select id="lvl"><option value="all">All levels</option><option value="ecd">ECD</option><option value="infant">Infant</option><option value="junior">Junior</option><option value="olevel">O-Level</option></select></div>
+    </div>
+    <div class="row">
+      <div><label for="lk">Link to a lesson (optional)</label><input id="lk" placeholder="#/subject/junior/jun-social" /></div>
+      <div><label for="ll">Link label</label><input id="ll" placeholder="Open Social Studies" /></div>
+    </div>
+    <div class="prev" id="prev" hidden></div>
+    <div class="row" style="margin-top:14px"><button id="save">💾 Teach it</button><button class="sec" id="clear">Clear form</button></div>
+    <div id="formmsg"></div>
+    <div class="hint" style="margin-top:8px">New answers reach children straight away, no redeploy needed. Tip: write only things you are sure are true. Check them with a teacher.</div>
+  </div>
+
+  <div class="card"><h2>📚 Everything I was taught</h2><div id="trained"></div></div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const STOP = new Set("a an the is are was were am be to of in on at for and or but with what whats who how why when where which do does did can could would should i me my we you your it its this that these those about tell please explain give show want need some any more from as by us our".split(" "));
+let KEY = sessionStorage.getItem("brainKey") || "", editing = null, TRAINED = [];
+async function api(path, opt = {}) {
+  const r = await fetch(path, Object.assign({}, opt, { headers: Object.assign({ "x-admin-key": KEY, "Content-Type": "application/json" }, opt.headers || {}) }));
+  if (r.status === 403) { sessionStorage.removeItem("brainKey"); throw new Error("Wrong admin key"); }
+  return r.json();
+}
+async function unlock() {
+  KEY = $("key").value.trim() || KEY;
+  try { const s = await api("/api/brain/sync-status"); if (!s.ok) throw new Error("Wrong admin key");
+    sessionStorage.setItem("brainKey", KEY); $("lock").hidden = true; $("app").hidden = false; load();
+  } catch (e) { $("lockmsg").innerHTML = `<div class="msg bad">${esc(e.message)}. On Render the key is the BRAIN_ADMIN_KEY setting.</div>`; }
+}
+$("unlock").onclick = unlock; $("key").onkeydown = e => { if (e.key === "Enter") unlock(); };
+async function load() {
+  const [g, f, t, s] = await Promise.all([api("/api/brain/gaps"), api("/api/brain/feedback"), fetch("/api/brain/trained").then(r => r.json()), api("/api/brain/sync-status")]);
+  TRAINED = t.entries || [];
+  $("sync").innerHTML = s.configured ? `GitHub backup: <strong>${esc(s.message)}</strong>${s.last ? " · " + new Date(s.last).toLocaleString() : ""}` : `⚠️ GitHub backup is <strong>off</strong>. Taught answers could be lost when Render redeploys. Use "Download trained.json" regularly, or set GITHUB_TOKEN on Render.`;
+  $("gaps").innerHTML = (g.gaps || []).length ? g.gaps.map(x => `<div class="item"><div class="q">${esc(x.q)} <span class="badge">asked ${x.count}×</span></div><button class="sm" data-teach="${esc(x.q)}">Teach</button><button class="sm sec" data-hide="${esc(x.q)}" title="Ignore">✕</button></div>`).join("") : `<div class="empty">Nothing yet. When children ask something the AI cannot answer, it shows up here.</div>`;
+  const bad = (f.feedback || []).filter(x => !x.good);
+  $("fbs").innerHTML = bad.length ? bad.map(x => `<div class="item"><div class="q">${esc(x.q)} <span class="badge">${x.count}×</span><div class="hint">AI said: ${esc(x.a || "")}</div></div><button class="sm" data-teach="${esc(x.q)}">Fix</button></div>`).join("") : `<div class="empty">No thumbs-down yet.</div>`;
+  $("trained").innerHTML = TRAINED.length ? TRAINED.map(e => `<div class="item"><div class="q"><strong>${esc(e.keywords)}</strong> <span class="badge">${esc(e.topic)}</span> <span class="badge">${esc(e.level)}</span><div class="hint">${e.a}</div></div><button class="sm sec" data-edit="${esc(e.id)}">Edit</button><button class="sm del" data-del="${esc(e.id)}">Delete</button></div>`).join("") : `<div class="empty">You have not taught me anything yet.</div>`;
+}
+function clearForm() { editing = null; ["q", "kw", "a", "topic", "lk", "ll"].forEach(i => $(i).value = ""); $("lvl").value = "all"; $("prev").hidden = true; $("formmsg").innerHTML = ""; }
+function suggest() { const w = [...new Set($("q").value.toLowerCase().replace(/[^a-z0-9' ]+/g, " ").split(/\s+/).filter(x => x && !STOP.has(x)))]; $("kw").value = w.join(" "); preview(); }
+function preview() { const a = $("a").value.trim(); $("prev").hidden = !a; $("prev").innerHTML = a ? `<small class="hint">This is how a child sees it:</small><br>${a.replace(/<(?!\/?(strong|em|br)\s*\/?>)[^>]*>/gi, "")}` : ""; }
+$("suggest").onclick = suggest; $("a").oninput = preview; $("clear").onclick = clearForm; $("q").onblur = () => { if (!$("kw").value) suggest(); };
+$("save").onclick = async () => {
+  const body = { id: editing, keywords: $("kw").value, a: $("a").value, topic: $("topic").value || "Taught by the owner", level: $("lvl").value, fromGap: $("q").value.trim().toLowerCase() };
+  if ($("lk").value.trim()) body.links = [[$("lk").value.trim(), $("ll").value.trim() || "Open lesson"]];
+  const r = await api("/api/brain/train", { method: "POST", body: JSON.stringify(body) });
+  $("formmsg").innerHTML = r.ok ? `<div class="msg ok">✅ Taught! The AI now knows this. (${r.total} answers taught so far)</div>` : `<div class="msg bad">${esc(r.error || "Could not save")}</div>`;
+  if (r.ok) { setTimeout(clearForm, 1800); load(); }
+};
+document.addEventListener("click", async e => {
+  const t = e.target.closest("[data-teach]"), ed = e.target.closest("[data-edit]"), del = e.target.closest("[data-del]"), hid = e.target.closest("[data-hide]");
+  if (t) { clearForm(); $("q").value = t.dataset.teach; suggest(); $("formCard").scrollIntoView({ behavior: "smooth" }); $("a").focus(); }
+  if (ed) { const x = TRAINED.find(v => v.id === ed.dataset.edit); if (!x) return; editing = x.id; $("q").value = ""; $("kw").value = x.keywords; $("a").value = x.a; $("topic").value = x.topic; $("lvl").value = x.level; $("lk").value = (x.links && x.links[0] && x.links[0][0]) || ""; $("ll").value = (x.links && x.links[0] && x.links[0][1]) || ""; preview(); $("formCard").scrollIntoView({ behavior: "smooth" }); }
+  if (del && confirm("Delete this answer?")) { await api("/api/brain/train/" + encodeURIComponent(del.dataset.del), { method: "DELETE" }); load(); }
+  if (hid) { await api("/api/brain/gaps?q=" + encodeURIComponent(hid.dataset.hide), { method: "DELETE" }); load(); }
+});
+$("export").onclick = async () => { const d = await api("/api/brain/export"); const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: "application/json" })); a.download = "trained.json"; a.click(); };
+if (KEY) { $("key").value = KEY; unlock(); }
+</script>
+</body>
+</html>

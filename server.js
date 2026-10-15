@@ -220,6 +220,90 @@ app.get("/api/brain/gaps", (req, res) => {
   res.json({ ok: true, count: (db.brainGaps || []).length, gaps: db.brainGaps || [] });
 });
 
+// ---- Chiedza Brain: TRAINING ----
+// The owner teaches the AI through /teach.html (protected by BRAIN_ADMIN_KEY).
+// Trained answers live in db.trained, are served to every learner at /api/brain/trained,
+// and (optional) are committed to GitHub so they survive redeploys:
+//   set GITHUB_TOKEN (repo write access) and GITHUB_REPO (default kids-codentando/chiedza-learning) on Render.
+const TRAINED_FILE = path.join(__dirname, "public", "brain", "knowledge", "trained.json");
+function adminOnly(req, res, next) {
+  const key = process.env.BRAIN_ADMIN_KEY;
+  if (!key || req.get("x-admin-key") !== key) return res.status(403).json({ ok: false, error: "Set BRAIN_ADMIN_KEY and send it as x-admin-key" });
+  next();
+}
+function seedTrained() {
+  const db = readDb();
+  if (db.trained && db.trained.length) return;
+  try {
+    const f = JSON.parse(fs.readFileSync(TRAINED_FILE, "utf8"));
+    if (f.entries && f.entries.length) { db.trained = f.entries; writeDb(db); }
+  } catch (e) {}
+}
+seedTrained();
+function trainedPayload(db) { return { topic: "Taught by the owner", entries: db.trained || [] }; }
+let syncTimer = null, syncStatus = { last: null, ok: null, message: "GitHub sync not configured" };
+function scheduleGithubSync() {
+  if (!process.env.GITHUB_TOKEN) return;
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(async () => {
+    const repo = process.env.GITHUB_REPO || "kids-codentando/chiedza-learning";
+    const url = `https://api.github.com/repos/${repo}/contents/public/brain/knowledge/trained.json`;
+    const H = { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json", "User-Agent": "chiedza-brain" };
+    try {
+      const cur = await fetch(url, { headers: H }); const sha = cur.ok ? (await cur.json()).sha : undefined;
+      const body = { message: "Brain: update trained answers", content: Buffer.from(JSON.stringify(trainedPayload(readDb()), null, 2) + "\n").toString("base64"), sha };
+      const r = await fetch(url, { method: "PUT", headers: Object.assign({ "Content-Type": "application/json" }, H), body: JSON.stringify(body) });
+      syncStatus = { last: new Date().toISOString(), ok: r.ok, message: r.ok ? "Saved to GitHub" : "GitHub said " + r.status };
+    } catch (e) { syncStatus = { last: new Date().toISOString(), ok: false, message: e.message }; }
+  }, 4000);
+}
+
+app.get("/api/brain/trained", (req, res) => { res.set("Cache-Control", "no-cache"); res.json(trainedPayload(readDb())); });
+
+app.post("/api/brain/train", adminOnly, (req, res) => {
+  const b = req.body || {};
+  const a = String(b.a || "").replace(/<(script|style)[\s\S]*?<\/\1>/gi, "").replace(/<(?!\/?(strong|em|br)\s*\/?>)[^>]*>/gi, "").replace(/<(strong|em|br)\s[^>]*>/gi, "<$1>").trim().slice(0, 1500), keywords = String(b.keywords || "").toLowerCase().replace(/[^a-z0-9' -]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 300);
+  if (a.length < 5 || keywords.length < 3) return res.status(400).json({ ok: false, error: "Need keywords and an answer" });
+  const db = readDb(); db.trained = db.trained || [];
+  const entry = { id: b.id || "t-" + Date.now().toString(36), topic: String(b.topic || "Taught by the owner").slice(0, 60), level: ["all", "ecd", "infant", "junior", "olevel"].includes(b.level) ? b.level : "all", keywords, a, links: Array.isArray(b.links) ? b.links.slice(0, 3).map(l => [String(l[0]).slice(0, 120), String(l[1]).slice(0, 60)]) : [], taughtAt: new Date().toISOString() };
+  const i = db.trained.findIndex(e => e.id === entry.id);
+  if (i >= 0) db.trained[i] = entry; else db.trained.push(entry);
+  if (b.fromGap) db.brainGaps = (db.brainGaps || []).filter(g => g.q !== String(b.fromGap).toLowerCase());
+  writeDb(db); scheduleGithubSync();
+  res.json({ ok: true, entry, total: db.trained.length });
+});
+
+app.delete("/api/brain/train/:id", adminOnly, (req, res) => {
+  const db = readDb(); const n = (db.trained || []).length;
+  db.trained = (db.trained || []).filter(e => e.id !== req.params.id);
+  writeDb(db); scheduleGithubSync();
+  res.json({ ok: true, removed: n - db.trained.length });
+});
+
+app.get("/api/brain/export", adminOnly, (req, res) => res.json(trainedPayload(readDb())));
+app.get("/api/brain/sync-status", adminOnly, (req, res) => res.json(Object.assign({ ok: true, configured: !!process.env.GITHUB_TOKEN }, syncStatus)));
+app.delete("/api/brain/gaps", adminOnly, (req, res) => {
+  const db = readDb(); const q = String(req.query.q || "").toLowerCase();
+  db.brainGaps = (db.brainGaps || []).filter(g => g.q !== q); writeDb(db); res.json({ ok: true });
+});
+
+// Learners tap a thumbs up / down on answers. Thumbs down = "teach me this better".
+app.post("/api/brain/feedback", (req, res) => {
+  const ip = req.ip || "x", now = Date.now();
+  const h = (gapHits.get("fb" + ip) || []).filter(t => now - t < 60000);
+  if (h.length >= 20) return res.status(429).json({ ok: false });
+  h.push(now); gapHits.set("fb" + ip, h);
+  const q = String((req.body && req.body.q) || "").toLowerCase().replace(/\s+/g, " ").trim().slice(0, 160);
+  const snippet = String((req.body && req.body.a) || "").replace(/\s+/g, " ").trim().slice(0, 200);
+  if (q.length < 3 || /\d{6,}|@/.test(q)) return res.json({ ok: true, skipped: true });
+  const db = readDb(); db.feedback = db.feedback || [];
+  const good = !!(req.body && req.body.good);
+  const hit = db.feedback.find(f => f.q === q && f.good === good);
+  if (hit) { hit.count++; hit.last = new Date().toISOString(); } else db.feedback.push({ q, a: snippet, good, count: 1, last: new Date().toISOString() });
+  db.feedback = db.feedback.slice(-400); writeDb(db); res.json({ ok: true });
+});
+app.get("/api/brain/feedback", adminOnly, (req, res) => res.json({ ok: true, feedback: (readDb().feedback || []).sort((a, b) => (a.good - b.good) || (b.count - a.count)) }));
+
 app.get("/api/brain/status", (req, res) => {
   try {
     const man = JSON.parse(fs.readFileSync(path.join(__dirname, "public", "brain", "manifest.json"), "utf8"));
