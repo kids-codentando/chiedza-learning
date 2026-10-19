@@ -146,6 +146,29 @@
       "name": "Safety guard",
       "desc": "Protects private details and points to trusted adults when a child needs help",
       "try": []
+    },
+    {
+      "id": "reason",
+      "emoji": "🧠",
+      "name": "Reasoning helper",
+      "desc": "Solves equations, quadratics, simultaneous equations, number patterns, ratios, percentage change, speed and interest step by step, and helps you make decisions",
+      "try": [
+        "Solve 3x + 5 = 20",
+        "Next number in 2, 4, 8, 16",
+        "Share 50 in the ratio 2:3",
+        "Help me decide between maths and science"
+      ]
+    },
+    {
+      "id": "code",
+      "emoji": "💻",
+      "name": "Coding helper",
+      "desc": "Examples and explanations for HTML, CSS, JavaScript and Python",
+      "try": [
+        "Python hello world",
+        "How do I make a button click in JavaScript?",
+        "Learn to code roadmap"
+      ]
     }
   ]
 }

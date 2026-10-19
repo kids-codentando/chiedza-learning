@@ -1,10 +1,10 @@
 /* Chiedza Learning service worker: installable + works offline.
    Pages and files: network first, fall back to cache. Static assets are cached as they are used.
    API calls and non-GET requests are never cached, except the taught-answers file. */
-const CACHE = "chiedza-v3";
+const CACHE = "chiedza-v4";
 const CORE = ["/", "/index.html", "/css/styles.css", "/manifest.webmanifest", "/assets/icon.png", "/assets/favicon.png",
   "/js/qrcode.js", "/js/data.js", "/js/extra-core.js", "/js/extra-ecd.js", "/js/extra-infant.js", "/js/extra-junior.js",
-  "/js/extra-courses.js", "/js/extra-final.js", "/js/app.js", "/js/brain.js", "/js/brain-projects.js", "/js/chiedza-ai.js",
+  "/js/extra-courses.js", "/js/extra-final.js", "/js/app.js", "/js/brain.js", "/js/brain-projects.js", "/js/brain-reason.js", "/js/chiedza-ai.js",
   "/brain/manifest.json", "/brain/identity.md", "/brain/safety.json", "/brain/skills/skills.json",
   "/brain/knowledge/zimbabwe.json", "/brain/knowledge/study-skills.json", "/brain/knowledge/science-basics.json",
   "/brain/knowledge/maths-help.json", "/brain/knowledge/life-skills.json", "/brain/knowledge/glossary.json",
