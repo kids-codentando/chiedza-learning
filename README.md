@@ -1,6 +1,6 @@
 # 💡 Chiedza Learning
 
-**A free learning platform for Zimbabwean children — from ECD to O-Level.**
+**A free learning platform for everyone - Zimbabwean children from ECD to O-Level, plus parents, teachers and adult learners.**
 Created with ❤️ by **Ntandomods**.
 
 Chiedza Learning brings lessons, interactive quizzes, fun games, free courses and printable certificates together in one colourful, kid-friendly app built around the Zimbabwean curriculum.
