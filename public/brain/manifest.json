@@ -15,7 +15,11 @@
     "knowledge/english-help.json",
     "knowledge/science-more.json",
     "knowledge/social-agri.json",
-    "knowledge/everyone.json"
+    "knowledge/everyone.json",
+    "knowledge/world.json",
+    "knowledge/tech-digital.json",
+    "knowledge/health.json",
+    "knowledge/life-work.json"
   ],
   "glossary": "knowledge/glossary.json",
   "languages": [

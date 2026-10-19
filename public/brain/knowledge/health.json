@@ -1,0 +1,89 @@
+{
+ "topic": "Health and wellbeing",
+ "entries": [
+  {
+   "id": "hl-exercise",
+   "level": "all",
+   "keywords": "exercise sport fitness active health play running",
+   "a": "Being active for about an hour a day helps children, and adults do well with 30 minutes on most days. Walking, running, skipping, football and netball all count. Exercise strengthens the heart and improves mood and sleep.",
+   "links": []
+  },
+  {
+   "id": "hl-sleep",
+   "level": "all",
+   "keywords": "sleep how much sleep rest tired bedtime",
+   "a": "Children aged 6 to 12 need about 9 to 12 hours of sleep, teenagers 8 to 10, and adults 7 to 9. Keep a regular bedtime and avoid screens before bed.",
+   "links": []
+  },
+  {
+   "id": "hl-water",
+   "level": "all",
+   "keywords": "drink water hydration thirsty dehydration",
+   "a": "Drink clean water through the day, more when it is hot or you exercise. If water is unsafe, boil it for at least a minute or treat it. Signs of dehydration: dark urine, dry mouth, headache.",
+   "links": []
+  },
+  {
+   "id": "hl-first-aid",
+   "level": "all",
+   "keywords": "first aid cut burn nosebleed bleeding emergency basic",
+   "a": "Basic first aid: for a <strong>cut</strong>, wash hands, press on it with a clean cloth and cover it. For a <strong>burn</strong>, cool under running water for 10 minutes. Do not use butter or toothpaste. Get an adult or clinic for anything serious.",
+   "links": []
+  },
+  {
+   "id": "hl-malaria",
+   "level": "all",
+   "keywords": "malaria mosquito net prevention symptoms fever",
+   "a": "Malaria is spread by mosquito bites. Prevent it with sleeping under a treated net, clearing standing water and using repellent. Fever, chills and headache need a <strong>test at a clinic</strong> quickly.",
+   "links": []
+  },
+  {
+   "id": "hl-nutrition-kids",
+   "level": "all",
+   "keywords": "nutrition children growing eat vegetables fruit breakfast",
+   "a": "Growing bodies need a good breakfast, vegetables, fruit, beans, eggs or meat, and water. Limit sweets and fizzy drinks. Eating a variety of colours gives different vitamins.",
+   "links": []
+  },
+  {
+   "id": "hl-puberty",
+   "level": "all",
+   "keywords": "puberty growing up changes body teenagers adolescence",
+   "a": "Puberty is when a child's body changes into an adult's body, usually between ages 8 and 16. Changes are normal and happen at different times for everyone. Talk to a parent, guardian, nurse or teacher you trust.",
+   "links": []
+  },
+  {
+   "id": "hl-hiv",
+   "level": "all",
+   "keywords": "hiv aids prevention testing treatment art stigma",
+   "a": "HIV is a virus that weakens the immune system. It is not spread by hugging, sharing food or touching. Testing and treatment (ART) at clinics let people live long, healthy lives. Never judge people living with HIV.",
+   "links": []
+  },
+  {
+   "id": "hl-hygiene",
+   "level": "all",
+   "keywords": "hygiene bathing clean hands nails teeth menstrual hygiene toilet",
+   "a": "Good hygiene: wash hands with soap after the toilet and before eating, bathe regularly, brush teeth twice a day, keep nails short and wash clothes. Clean hands stop many illnesses.",
+   "links": []
+  },
+  {
+   "id": "hl-stress-exam",
+   "level": "all",
+   "keywords": "exam stress nervous anxiety calm breathing test",
+   "a": "If you feel nervous before an exam: breathe in for four counts and out for four, sleep well, eat breakfast, and start with questions you know. A little nerves is normal.",
+   "links": []
+  },
+  {
+   "id": "hl-posture",
+   "level": "all",
+   "keywords": "posture back pain school bag sit carry",
+   "a": "Carry your school bag on both shoulders, keep it light, sit with your back straight and feet flat, and stand up and stretch often.",
+   "links": []
+  },
+  {
+   "id": "hl-substances",
+   "level": "all",
+   "keywords": "alcohol drugs smoking tobacco cigarettes say no peer pressure",
+   "a": "Alcohol, tobacco and drugs harm growing bodies and brains. It is okay to say no. Spend time with friends who respect you, and talk to a trusted adult if you feel pressured.",
+   "links": []
+  }
+ ]
+}

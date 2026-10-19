@@ -1,0 +1,117 @@
+{
+ "topic": "Technology and digital skills",
+ "entries": [
+  {
+   "id": "tc-computer",
+   "level": "all",
+   "keywords": "computer parts hardware software cpu memory ram storage monitor keyboard mouse",
+   "a": "A computer has <strong>hardware</strong> (parts you can touch: screen, keyboard, mouse, processor, memory, storage) and <strong>software</strong> (programs that tell it what to do). The CPU is the brain; RAM is short-term memory; storage keeps files.",
+   "links": []
+  },
+  {
+   "id": "tc-internet",
+   "level": "all",
+   "keywords": "internet what is internet web browser website wifi data",
+   "a": "The <strong>internet</strong> is a worldwide network of connected computers. The web is the websites you open with a browser such as Chrome. Wi-Fi connects a device to a local network; mobile data uses your phone network.",
+   "links": []
+  },
+  {
+   "id": "tc-password",
+   "level": "all",
+   "keywords": "strong password safe passwords manager two factor 2fa account security",
+   "a": "A strong <strong>password</strong> is long (12+ characters), mixes words, numbers and symbols, and is different for each account. Never share it. Turn on <strong>two-step verification</strong> where you can, so a stolen password alone is not enough.",
+   "links": []
+  },
+  {
+   "id": "tc-phishing",
+   "level": "all",
+   "keywords": "phishing fake link email sms click link bank hack",
+   "a": "Phishing is a fake message that tries to trick you into giving passwords or money. Warning signs: urgency, spelling mistakes, unknown senders, strange links. Do not click; go to the official website or app yourself.",
+   "links": []
+  },
+  {
+   "id": "tc-privacy",
+   "level": "all",
+   "keywords": "privacy online personal information social media share posts photos",
+   "a": "Think before you post. Do not share your address, ID number, school, phone number or live location online. What you post can be copied and kept. Use privacy settings, and ask a trusted adult if something feels wrong.",
+   "links": []
+  },
+  {
+   "id": "tc-cyberbullying",
+   "level": "all",
+   "keywords": "cyberbullying online bullying mean messages block report",
+   "a": "If someone is mean to you online: do not reply, take a screenshot, block them, report them and tell a trusted adult. Being kind online matters just as much as in person.",
+   "links": []
+  },
+  {
+   "id": "tc-coding",
+   "level": "all",
+   "keywords": "coding programming learn code beginner python javascript html",
+   "a": "Coding means writing instructions for a computer. Start with <strong>HTML</strong> (page structure), CSS (style) and JavaScript (behaviour), or <strong>Python</strong> for beginners. Practise by building small things, like a calculator or a quiz.",
+   "links": []
+  },
+  {
+   "id": "tc-algorithm",
+   "level": "all",
+   "keywords": "algorithm steps instructions flowchart loop condition if",
+   "a": "An <strong>algorithm</strong> is a list of clear steps to solve a problem, like a recipe. Computers use sequence (do steps in order), selection (if this, then that) and loops (repeat). A flowchart draws the steps as a diagram.",
+   "links": []
+  },
+  {
+   "id": "tc-ai",
+   "level": "all",
+   "keywords": "artificial intelligence ai machine learning chatbot model",
+   "a": "Artificial intelligence (AI) is software that does tasks that normally need human thinking. Some AI learns from large amounts of data. AI can make mistakes, so check important answers with a trusted source.",
+   "links": []
+  },
+  {
+   "id": "tc-typing",
+   "level": "all",
+   "keywords": "typing skills keyboard home row touch typing practise",
+   "a": "To type faster: sit up straight, keep fingers on the home row (A S D F and J K L ;), look at the screen not the keys, and practise a little every day for accuracy first, then speed.",
+   "links": []
+  },
+  {
+   "id": "tc-files",
+   "level": "all",
+   "keywords": "file folder save backup usb cloud storage organise documents",
+   "a": "Save work often, give files clear names, keep them in folders, and make a <strong>backup</strong> on a second place (flash drive or cloud). Computers and phones can break or be stolen.",
+   "links": []
+  },
+  {
+   "id": "tc-spreadsheet",
+   "level": "all",
+   "keywords": "spreadsheet excel sheets formula sum cells rows columns",
+   "a": "A spreadsheet has rows, columns and cells. Type a formula starting with =, such as =SUM(A1:A5) to add cells. Spreadsheets are good for budgets, marks and stock lists.",
+   "links": []
+  },
+  {
+   "id": "tc-phone-battery",
+   "level": "all",
+   "keywords": "phone battery save charge slow data bundle save data",
+   "a": "To save <strong>data</strong>: use Wi-Fi when you can, turn off auto-downloads and background app refresh, download videos at lower quality. To save battery: lower brightness and close unused apps.",
+   "links": []
+  },
+  {
+   "id": "tc-email",
+   "level": "all",
+   "keywords": "email how to write email subject cc attachment professional",
+   "a": "Good email: a clear subject, a greeting, a short message, a polite closing and your name. Check the address before sending and attach files before you hit send.",
+   "links": []
+  },
+  {
+   "id": "tc-fakenews",
+   "level": "all",
+   "keywords": "fake news misinformation check source verify facts rumours whatsapp forwards",
+   "a": "Before sharing a message: who wrote it, is there a date, do trusted news sources report it, and does it make you very angry or scared? Pause before forwarding. If unsure, do not share it.",
+   "links": []
+  },
+  {
+   "id": "tc-screen",
+   "level": "all",
+   "keywords": "screen time balance games phone health eyes sleep",
+   "a": "Healthy screen habits: take breaks every 30 minutes to rest your eyes, avoid screens before bed, play outside and keep homework first. A parent and child can agree rules together.",
+   "links": []
+  }
+ ]
+}
