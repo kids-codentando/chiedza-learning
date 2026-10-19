@@ -19,7 +19,9 @@
     "knowledge/world.json",
     "knowledge/tech-digital.json",
     "knowledge/health.json",
-    "knowledge/life-work.json"
+    "knowledge/life-work.json",
+    "knowledge/coding-web.json",
+    "knowledge/coding-python.json"
   ],
   "glossary": "knowledge/glossary.json",
   "languages": [

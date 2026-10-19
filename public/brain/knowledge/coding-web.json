@@ -1,0 +1,82 @@
+{
+ "topic": "Coding: web basics",
+ "entries": [
+  {
+   "id": "cd-what",
+   "level": "all",
+   "keywords": "what is coding programming code computer program beginner start",
+   "a": "Coding is writing step-by-step instructions that a computer follows. A <strong>program</strong> is a set of those instructions. Start with the web: <strong>HTML</strong> builds the page, <strong>CSS</strong> styles it and <strong>JavaScript</strong> makes it do things. Ask me for 'html example', 'css example' or 'javascript example'.",
+   "links": []
+  },
+  {
+   "id": "cd-html",
+   "level": "all",
+   "keywords": "html example hello world web page structure tags how to make a webpage",
+   "a": "<strong>HTML</strong> uses tags to build a page. A simple page:<pre class=\"cai-code\"><code>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;&lt;title&gt;My Page&lt;/title&gt;&lt;/head&gt;\n&lt;body&gt;\n  &lt;h1&gt;Hello, Zimbabwe!&lt;/h1&gt;\n  &lt;p&gt;This is my first web page.&lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;</code></pre>Save it as <em>index.html</em> and open it in a browser.",
+   "links": []
+  },
+  {
+   "id": "cd-html-tags",
+   "level": "all",
+   "keywords": "html tags list heading paragraph link image list button common elements",
+   "a": "Common HTML tags: <code>&lt;h1&gt;</code> heading, <code>&lt;p&gt;</code> paragraph, <code>&lt;a href=\"...\"&gt;</code> link, <code>&lt;img src=\"...\"&gt;</code> image, <code>&lt;ul&gt;&lt;li&gt;</code> list, <code>&lt;button&gt;</code> button, <code>&lt;div&gt;</code> a box that groups things. Most tags open and close: <code>&lt;p&gt;text&lt;/p&gt;</code>.",
+   "links": []
+  },
+  {
+   "id": "cd-css",
+   "level": "all",
+   "keywords": "css example style color font background layout how to style page",
+   "a": "<strong>CSS</strong> styles HTML. Example:<pre class=\"cai-code\"><code>body { font-family: Arial, sans-serif; background: #fff8e7; }\nh1 { color: #0b6e4f; text-align: center; }\n.button { background: gold; padding: 10px 20px; border-radius: 8px; }</code></pre>A name with a dot (<code>.button</code>) styles every element with class=\"button\".",
+   "links": []
+  },
+  {
+   "id": "cd-js",
+   "level": "all",
+   "keywords": "javascript example js hello alert function variable beginner",
+   "a": "<strong>JavaScript</strong> makes pages interactive. Example:<pre class=\"cai-code\"><code>let name = &quot;Tendai&quot;;\nfunction greet(who) {\n  return &quot;Mhoro, &quot; + who + &quot;!&quot;;\n}\nconsole.log(greet(name));</code></pre><code>let</code> makes a variable. A function packages steps you can reuse.",
+   "links": []
+  },
+  {
+   "id": "cd-js-button",
+   "level": "all",
+   "keywords": "javascript button click event dom change text getelementbyid addeventlistener",
+   "a": "Make a button change text:<pre class=\"cai-code\"><code>&lt;button id=&quot;btn&quot;&gt;Click me&lt;/button&gt;\n&lt;p id=&quot;msg&quot;&gt;&lt;/p&gt;\n&lt;script&gt;\n  document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;, function () {\n    document.getElementById(&quot;msg&quot;).textContent = &quot;You clicked!&quot;;\n  });\n&lt;/script&gt;</code></pre>",
+   "links": []
+  },
+  {
+   "id": "cd-js-loop",
+   "level": "all",
+   "keywords": "javascript loop for while repeat array list example",
+   "a": "Loops repeat steps. Arrays hold lists:<pre class=\"cai-code\"><code>const fruits = [&quot;mango&quot;, &quot;banana&quot;, &quot;orange&quot;];\nfor (let i = 0; i &lt; fruits.length; i++) {\n  console.log(fruits[i]);\n}</code></pre>",
+   "links": []
+  },
+  {
+   "id": "cd-js-if",
+   "level": "all",
+   "keywords": "javascript if else condition decision compare example",
+   "a": "Use if/else to make decisions:<pre class=\"cai-code\"><code>let mark = 65;\nif (mark &gt;= 50) {\n  console.log(&quot;Pass&quot;);\n} else {\n  console.log(&quot;Try again&quot;);\n}</code></pre>Compare with <code>==</code> (or <code>===</code>), <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>.",
+   "links": []
+  },
+  {
+   "id": "cd-html-form",
+   "level": "all",
+   "keywords": "html form input submit text box label example",
+   "a": "A simple form:<pre class=\"cai-code\"><code>&lt;form&gt;\n  &lt;label&gt;Name: &lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;/label&gt;\n  &lt;button type=&quot;submit&quot;&gt;Send&lt;/button&gt;\n&lt;/form&gt;</code></pre>",
+   "links": []
+  },
+  {
+   "id": "cd-flexbox",
+   "level": "all",
+   "keywords": "css flexbox layout center align row column responsive",
+   "a": "Centre things with flexbox:<pre class=\"cai-code\"><code>.box {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 12px;\n}</code></pre>Use <code>flex-direction: column</code> for a vertical layout. Add <code>flex-wrap: wrap</code> so items wrap on small phone screens.",
+   "links": []
+  },
+  {
+   "id": "cd-responsive",
+   "level": "all",
+   "keywords": "responsive design mobile phone screen viewport media query",
+   "a": "To make a page work on phones, add <code>&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;</code> and use a media query:<pre class=\"cai-code\"><code>@media (max-width: 600px) {\n  .menu { display: none; }\n}</code></pre>",
+   "links": []
+  }
+ ]
+}

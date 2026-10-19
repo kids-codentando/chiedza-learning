@@ -1,0 +1,103 @@
+{
+ "topic": "Coding: Python and concepts",
+ "entries": [
+  {
+   "id": "py-hello",
+   "level": "all",
+   "keywords": "python hello world print first program beginner example",
+   "a": "<strong>Python</strong> is a friendly first language.<pre class=\"cai-code\"><code>print(&quot;Mhoro, world!&quot;)</code></pre>Save as <em>hello.py</em> and run <code>python hello.py</code>.",
+   "links": []
+  },
+  {
+   "id": "py-variables",
+   "level": "all",
+   "keywords": "python variables types string integer float input example",
+   "a": "Variables store values:<pre class=\"cai-code\"><code>name = &quot;Rudo&quot;\nage = 12\nheight = 1.5\nprint(name, age, height)\nanswer = input(&quot;What is your name? &quot;)\nprint(&quot;Hello&quot;, answer)</code></pre>",
+   "links": []
+  },
+  {
+   "id": "py-if",
+   "level": "all",
+   "keywords": "python if elif else condition indentation example",
+   "a": "Python uses indentation (4 spaces) to show blocks:<pre class=\"cai-code\"><code>mark = int(input(&quot;Mark: &quot;))\nif mark &gt;= 75:\n    print(&quot;Distinction&quot;)\nelif mark &gt;= 50:\n    print(&quot;Pass&quot;)\nelse:\n    print(&quot;Try again&quot;)</code></pre>",
+   "links": []
+  },
+  {
+   "id": "py-loop",
+   "level": "all",
+   "keywords": "python for loop while range list repeat example",
+   "a": "Loops in Python:<pre class=\"cai-code\"><code>for i in range(1, 6):\n    print(i)\n\nfruits = [&quot;mango&quot;, &quot;banana&quot;, &quot;orange&quot;]\nfor f in fruits:\n    print(f)\n\nn = 3\nwhile n &gt; 0:\n    print(n)\n    n -= 1</code></pre>",
+   "links": []
+  },
+  {
+   "id": "py-function",
+   "level": "all",
+   "keywords": "python function def return parameter example",
+   "a": "A function:<pre class=\"cai-code\"><code>def area(length, width):\n    return length * width\n\nprint(area(5, 3))   # 15</code></pre>",
+   "links": []
+  },
+  {
+   "id": "py-times-table",
+   "level": "all",
+   "keywords": "python times table program multiplication loop example",
+   "a": "A times table program:<pre class=\"cai-code\"><code>n = int(input(&quot;Which table? &quot;))\nfor i in range(1, 13):\n    print(n, &quot;x&quot;, i, &quot;=&quot;, n * i)</code></pre>",
+   "links": []
+  },
+  {
+   "id": "py-guess",
+   "level": "all",
+   "keywords": "python guessing game random number example game",
+   "a": "A number guessing game:<pre class=\"cai-code\"><code>import random\nsecret = random.randint(1, 10)\nguess = 0\nwhile guess != secret:\n    guess = int(input(&quot;Guess 1-10: &quot;))\nprint(&quot;You got it!&quot;)</code></pre>",
+   "links": []
+  },
+  {
+   "id": "py-list-dict",
+   "level": "all",
+   "keywords": "python list dictionary dict append key value example",
+   "a": "Lists and dictionaries:<pre class=\"cai-code\"><code>marks = [60, 72, 85]\nmarks.append(90)\nprint(sum(marks) / len(marks))\n\nlearner = {&quot;name&quot;: &quot;Tendai&quot;, &quot;grade&quot;: 6}\nprint(learner[&quot;name&quot;])</code></pre>",
+   "links": []
+  },
+  {
+   "id": "cd-variable",
+   "level": "all",
+   "keywords": "variable what is variable concept box store value",
+   "a": "A <strong>variable</strong> is a named box that stores a value, such as <code>score = 10</code>. You can change what is inside: <code>score = score + 5</code>.",
+   "links": []
+  },
+  {
+   "id": "cd-debug",
+   "level": "all",
+   "keywords": "debug bug error fix code not working syntax error find mistake",
+   "a": "To debug: 1) read the error message, it tells you the line; 2) check spelling, brackets and quotes; 3) print values to see what is happening; 4) test one small part at a time; 5) take a break and explain the code aloud. Every programmer gets bugs.",
+   "links": []
+  },
+  {
+   "id": "cd-data-types",
+   "level": "all",
+   "keywords": "data types string number boolean integer float list array",
+   "a": "Common data types: <strong>string</strong> (text), <strong>integer</strong> (whole number), <strong>float</strong> (decimal), <strong>boolean</strong> (true or false) and <strong>list/array</strong> (many values).",
+   "links": []
+  },
+  {
+   "id": "cd-git",
+   "level": "all",
+   "keywords": "git github version control commit branch push pull request",
+   "a": "Git records versions of your code. Basic flow: <code>git add .</code>, <code>git commit -m \"message\"</code>, <code>git push</code>. A <strong>branch</strong> lets you try changes safely, and a <strong>pull request</strong> asks to merge them.",
+   "links": []
+  },
+  {
+   "id": "cd-learn-path",
+   "level": "all",
+   "keywords": "learn to code roadmap path where to start free resources practice projects",
+   "a": "A learning path: 1) HTML and CSS, 2) JavaScript basics, 3) Python basics, 4) build small projects (quiz, calculator, to-do list), 5) put your work on GitHub. Practise a little every day and build things you care about.",
+   "links": []
+  },
+  {
+   "id": "cd-project-ideas",
+   "level": "all",
+   "keywords": "coding project ideas beginner what to build practice",
+   "a": "Beginner project ideas: a personal profile page, a times-table quiz, a tip calculator, a to-do list, a tuckshop price list, a number guessing game, a countdown to exams.",
+   "links": []
+  }
+ ]
+}
