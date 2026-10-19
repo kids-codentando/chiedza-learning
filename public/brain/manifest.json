@@ -14,7 +14,8 @@
     "knowledge/maths-more.json",
     "knowledge/english-help.json",
     "knowledge/science-more.json",
-    "knowledge/social-agri.json"
+    "knowledge/social-agri.json",
+    "knowledge/everyone.json"
   ],
   "glossary": "knowledge/glossary.json",
   "languages": [

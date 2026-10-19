@@ -309,7 +309,7 @@
 
     function open() {
       panel.hidden = false; $("caiLauncher").classList.add("hide"); input.focus();
-      if (!msgs.children.length) { const nm = window.ChiedzaBrain && ChiedzaBrain.myName(); show({ html: `Mhoro${nm ? ", " + esc(nm) : ""}! 👋 I am <strong>Chiedza AI</strong>. I know every lesson, course and game here, and my <strong>brain</strong> can also solve maths with working, convert units, teach Shona and Ndebele, build a <strong>study plan</strong>, set a <strong>daily challenge</strong> and <strong>write projects with you</strong> (reports, posters, experiments, stories, even a mini website). What shall we do today?`, chips: ["Write a project on Victoria Falls", "Make me a study plan", "Daily challenge", "What can you do?"] }); }
+      if (!msgs.children.length) { const nm = window.ChiedzaBrain && ChiedzaBrain.myName(); show({ html: `Mhoro${nm ? ", " + esc(nm) : ""}! 👋 I am <strong>Chiedza AI</strong>, a helper for <strong>everyone</strong> - children, parents, teachers and adult learners. I know every lesson, course and game here, and my <strong>brain</strong> can also solve maths with working, convert units, teach Shona and Ndebele, build a <strong>study plan</strong>, set a <strong>daily challenge</strong> and <strong>write projects with you</strong> (reports, posters, experiments, stories, even a mini website). What shall we do today?`, chips: ["Write a project on Victoria Falls", "Make me a study plan", "How can I help my child learn?", "How do I make a budget?", "What can you do?"] }); }
     }
     $("caiLauncher").onclick = open;
     $("caiClose").onclick = () => { panel.hidden = true; $("caiLauncher").classList.remove("hide"); if (window.speechSynthesis) speechSynthesis.cancel(); };
