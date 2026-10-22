@@ -1,0 +1,25 @@
+{
+  "description": "Words used by the logic reasoner. Each comparative has a superlative and the opposite word. 'up' means the first word means MORE of the quality.",
+  "comparatives": [
+    {"word": "taller", "super": "tallest", "opposite": "shorter", "opSuper": "shortest", "quality": "tall"},
+    {"word": "older", "super": "oldest", "opposite": "younger", "opSuper": "youngest", "quality": "old"},
+    {"word": "faster", "super": "fastest", "opposite": "slower", "opSuper": "slowest", "quality": "fast"},
+    {"word": "heavier", "super": "heaviest", "opposite": "lighter", "opSuper": "lightest", "quality": "heavy"},
+    {"word": "bigger", "super": "biggest", "opposite": "smaller", "opSuper": "smallest", "quality": "big"},
+    {"word": "larger", "super": "largest", "opposite": "smaller", "opSuper": "smallest", "quality": "large"},
+    {"word": "richer", "super": "richest", "opposite": "poorer", "opSuper": "poorest", "quality": "rich"},
+    {"word": "stronger", "super": "strongest", "opposite": "weaker", "opSuper": "weakest", "quality": "strong"},
+    {"word": "longer", "super": "longest", "opposite": "shorter", "opSuper": "shortest", "quality": "long"},
+    {"word": "cleverer", "super": "cleverest", "opposite": "less clever", "opSuper": "least clever", "quality": "clever"},
+    {"word": "smarter", "super": "smartest", "opposite": "less smart", "opSuper": "least smart", "quality": "smart"},
+    {"word": "hotter", "super": "hottest", "opposite": "colder", "opSuper": "coldest", "quality": "hot"},
+    {"word": "higher", "super": "highest", "opposite": "lower", "opSuper": "lowest", "quality": "high"},
+    {"word": "happier", "super": "happiest", "opposite": "sadder", "opSuper": "saddest", "quality": "happy"},
+    {"word": "earlier", "super": "earliest", "opposite": "later", "opSuper": "latest", "quality": "early"},
+    {"word": "more expensive", "super": "most expensive", "opposite": "cheaper", "opSuper": "cheapest", "quality": "expensive"}
+  ],
+  "tips": {
+    "transitive": "If A is more than B and B is more than C, then A is more than C. This is called transitive reasoning.",
+    "unknown": "The facts do not connect these two, so we cannot tell. Saying 'I cannot tell' is a correct answer in logic."
+  }
+}

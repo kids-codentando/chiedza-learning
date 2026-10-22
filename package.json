@@ -1,13 +1,14 @@
 {
   "name": "chiedza-learning",
   "version": "1.0.0",
-  "description": "Chiedza Learning \u2014 a free learning platform for Zimbabwean children from ECD to O-Level. Created by Ntandomods.",
+  "description": "Chiedza Learning — a free learning platform for Zimbabwean children from ECD to O-Level. Created by Ntandomods.",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "check:brain": "node scripts/check-brain.js"
+    "check:brain": "node scripts/check-brain.js && node scripts/test-reasoning.js",
+    "test:reasoning": "node scripts/test-reasoning.js"
   },
   "engines": {
     "node": ">=18.0.0"

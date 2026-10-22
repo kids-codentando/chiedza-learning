@@ -1,6 +1,6 @@
 {
   "name": "Chiedza Brain",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The file-based brain of Chiedza AI. Everything the AI knows, how it speaks and what it refuses lives in these files. Edit a file, redeploy, and the AI changes. No code needed.",
   "identity": "identity.md",
   "safety": "safety.json",
@@ -27,5 +27,11 @@
     "languages/ndebele.json"
   ],
   "fun": "knowledge/fun.json",
-  "projects": "projects/templates.json"
+  "projects": "projects/templates.json",
+  "reasoning": [
+    "reasoning/reasoning.json",
+    "reasoning/logic.json",
+    "reasoning/causes.json",
+    "reasoning/compare.json"
+  ]
 }

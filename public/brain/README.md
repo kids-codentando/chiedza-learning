@@ -47,6 +47,22 @@ Code that reads these files: `public/js/brain.js` (skills engine) and `public/js
 - Output can be **downloaded** (printable HTML), **printed** or **copied**. The mini-website project downloads a working `.html` file (HTML + CSS + JavaScript) to learn from.
 - The last 8 projects are saved **on the learner's device** (`my projects`).
 
+## Reasoning (how Chiedza thinks)
+
+`public/js/reasoning.js` is a small thinking engine that uses the files in `reasoning/`:
+
+| File | What it holds |
+| ---- | ------------- |
+| `reasoning.json` | cue words (`altogether` = add, `left` = take away, `each` = multiply, `shared` = divide), thinking steps, logic warnings |
+| `logic.json` | comparison words for ordering puzzles (taller/shortest, older/oldest ...) |
+| `causes.json` | cause and effect chains for "why" questions (add your own: `id`, `keywords`, `q`, `chain`, `because`, `think`) |
+| `compare.json` | side by side tables for "difference between X and Y" |
+| `examples.json` | questions with the expected answer. These are the tests |
+
+It handles word problems (several steps, money, percentages, speed, averages, area, ratios, unitary method), number patterns, logic puzzles ("All A are B...", "If ... then ..."), cause and effect and comparisons. It always shows its working and a check. If the story is unclear it shows the thinking steps and asks, instead of guessing, and in logic puzzles it says "we cannot tell" when the facts are not enough. Learners can say **guide me step by step** to be coached with hints instead of being told the answer.
+
+After changing any reasoning file, run `npm run test:reasoning`. Add a line to `examples.json` for each new thing you teach it.
+
 ## Training the AI (no code)
 
 Open **`/teach.html`** on your site and enter your `BRAIN_ADMIN_KEY`.

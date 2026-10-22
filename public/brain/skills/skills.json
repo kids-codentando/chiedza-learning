@@ -146,6 +146,18 @@
       "name": "Safety guard",
       "desc": "Protects private details and points to trusted adults when a child needs help",
       "try": []
+    },
+    {
+      "id": "reasoning",
+      "emoji": "🧠",
+      "name": "Thinking helper",
+      "desc": "Reasons step by step: word problems, number patterns, logic puzzles, cause and effect, and side-by-side comparisons. It shows its working and says 'I cannot tell' when the facts are not enough",
+      "try": [
+        "Tendai has 24 mangoes. He gives 9 away. How many are left?",
+        "What comes next: 2, 4, 8, 16?",
+        "Why do we have seasons?",
+        "Difference between weather and climate"
+      ]
     }
   ]
 }

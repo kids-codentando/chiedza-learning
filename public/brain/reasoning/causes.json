@@ -1,0 +1,213 @@
+{
+ "description": "Cause and effect chains. When a child asks 'why' or 'what happens if', Chiedza AI shows the chain link by link. Add a chain: id, keywords, q (the question it answers), chain (the steps in order), because (one line), think (a question for the child to think about).",
+ "chains": [
+  {
+   "id": "cause-drought-food",
+   "keywords": "drought no rain dry farmers crops fail food expensive",
+   "q": "Why does a drought make food more expensive?",
+   "chain": [
+    "There is very little rain for a long time (drought).",
+    "Soil and dams dry up, so crops such as maize do not get enough water.",
+    "The harvest is small, so there is less food to sell.",
+    "When something is scarce but people still need it, sellers can ask for more money, so prices go up."
+   ],
+   "because": "Less rain means a smaller harvest, and a smaller harvest means higher food prices.",
+   "think": "What could farmers do to protect their crops in a drought? (Think: mulching, drought-resistant seeds, small dams, water harvesting.)"
+  },
+  {
+   "id": "cause-deforestation-erosion",
+   "keywords": "cutting trees deforestation erosion soil washed rivers siltation",
+   "q": "Why does cutting down trees cause soil erosion?",
+   "chain": [
+    "Trees are cut down and not replaced.",
+    "Roots no longer hold the soil together, and there are no leaves to slow the falling rain.",
+    "Heavy rain washes the loose topsoil away.",
+    "The soil ends up in rivers and dams (siltation), and the land left behind is poor for farming."
+   ],
+   "because": "Tree roots and leaves protect the soil. Remove the trees and the rain carries the soil away.",
+   "think": "What can a community do to stop this? (Think: plant trees, contour ridges, grass strips.)"
+  },
+  {
+   "id": "cause-handwashing-germs",
+   "keywords": "wash hands handwashing germs diarrhoea disease sick soap",
+   "q": "Why should we wash our hands with soap?",
+   "chain": [
+    "Our hands touch many things, including toilets, animals, money and soil.",
+    "Germs are tiny living things we cannot see, and they stick to our hands.",
+    "If we eat or touch our eyes, nose or mouth, the germs get inside our body.",
+    "Germs can then make us sick, for example with diarrhoea. Soap and water lift the germs off so they wash away."
+   ],
+   "because": "Washing with soap removes germs before they can enter the body.",
+   "think": "When are the most important times to wash your hands? (Before eating, after using the toilet.)"
+  },
+  {
+   "id": "cause-plants-light",
+   "keywords": "plant light dark dies yellow photosynthesis leaves sunlight",
+   "q": "Why does a plant kept in the dark turn yellow and weak?",
+   "chain": [
+    "Plants make their own food by photosynthesis, and this needs light.",
+    "In the dark, photosynthesis cannot happen, so the plant cannot make food.",
+    "Green chlorophyll is not made without light, so the leaves turn pale or yellow.",
+    "With no food, the plant becomes weak and may die."
+   ],
+   "because": "No light means no photosynthesis, so no food for the plant.",
+   "think": "How could you test this with two plants? (One in the light and one in the dark, and everything else the same: a fair test.)"
+  },
+  {
+   "id": "cause-seasons",
+   "keywords": "seasons summer winter earth tilt sun why seasons change",
+   "q": "Why do we have seasons?",
+   "chain": [
+    "The Earth goes around the Sun once a year.",
+    "The Earth is tilted on its axis.",
+    "Because of the tilt, different parts of the Earth lean towards the Sun at different times of the year.",
+    "The part leaning towards the Sun gets more direct sunlight and longer days, so it is warmer (summer). The part leaning away is cooler (winter)."
+   ],
+   "because": "Seasons are caused by the tilt of the Earth, not by how close it is to the Sun.",
+   "think": "In Zimbabwe, when is it summer? Is it the same time of year as in England? Why not?"
+  },
+  {
+   "id": "cause-rain-water-cycle",
+   "keywords": "why does it rain rain clouds evaporation condensation water cycle",
+   "q": "Why does it rain?",
+   "chain": [
+    "The Sun heats water in rivers, lakes and oceans, and it evaporates into water vapour.",
+    "The vapour rises, cools high up in the air, and condenses into tiny droplets that form clouds.",
+    "The droplets join together and become heavy.",
+    "When they are too heavy to stay up, they fall as rain (precipitation)."
+   ],
+   "because": "Heat makes water vapour rise, cooling makes clouds, and heavy droplets fall as rain.",
+   "think": "Where does the rainwater go after it falls? (Rivers, soil, back to the sea, and the cycle starts again.)"
+  },
+  {
+   "id": "cause-ice-floats",
+   "keywords": "why ice floats water density float sink",
+   "q": "Why does ice float on water?",
+   "chain": [
+    "When water freezes, its particles spread into a regular pattern with small gaps.",
+    "So a piece of ice takes up more space than the same water as a liquid.",
+    "The same mass in more space means ice is less dense than liquid water.",
+    "Things that are less dense than a liquid float on it."
+   ],
+   "because": "Ice is less dense than liquid water, so it floats.",
+   "think": "What would happen to fish in a pond if ice sank instead of floating?"
+  },
+  {
+   "id": "cause-saving-money",
+   "keywords": "why save money savings emergency future budget",
+   "q": "Why is it good to save money?",
+   "chain": [
+    "You keep some of the money you get instead of spending it all.",
+    "The saved money grows slowly as you add to it.",
+    "When something unexpected happens (a broken phone, a sick family member) you have money to pay for it.",
+    "You can also reach bigger goals, such as school fees or starting a small business, without borrowing."
+   ],
+   "because": "Saving gives you a safety net and helps you reach bigger goals.",
+   "think": "What is one thing you would save for? How much would you need to put away each week?"
+  },
+  {
+   "id": "cause-pollution-water",
+   "keywords": "dirty water pollution river cholera disease waste sewage",
+   "q": "Why can dirty water make people sick?",
+   "chain": [
+    "Waste, sewage or chemicals get into rivers, wells or taps.",
+    "Harmful germs such as the ones that cause cholera and typhoid live and grow in the dirty water.",
+    "People drink the water, cook with it or wash food in it.",
+    "The germs enter the body and cause illness. Boiling or treating water kills the germs."
+   ],
+   "because": "Unsafe water carries germs straight into our bodies.",
+   "think": "Name two ways to make water safe to drink. (Boil it, use water purification tablets, filter it.)"
+  },
+  {
+   "id": "cause-load-shedding",
+   "keywords": "power cut load shedding electricity demand supply kariba",
+   "q": "Why do power cuts (load shedding) happen?",
+   "chain": [
+    "People and businesses want more electricity than the power stations can make (demand is higher than supply).",
+    "Stations can produce less when machines break down or when water levels at the dam, such as Kariba, are low.",
+    "If too much electricity is used, the whole power grid could fail.",
+    "So the power company switches electricity off in turns for different areas to protect the grid."
+   ],
+   "because": "Load shedding happens when electricity demand is higher than supply.",
+   "think": "How can a family use less electricity? (Solar lamps, efficient bulbs, switching off unused devices.)"
+  },
+  {
+   "id": "cause-exercise-heartbeat",
+   "keywords": "exercise running heart beats faster breathing faster muscles oxygen",
+   "q": "Why does your heart beat faster when you run?",
+   "chain": [
+    "When you run, your muscles work hard.",
+    "Working muscles need more oxygen and more energy from food.",
+    "The heart pumps faster to send blood (carrying oxygen) to the muscles more quickly, and you breathe faster to take in more oxygen.",
+    "When you rest, the muscles need less and your heart slows down again."
+   ],
+   "because": "Muscles that work hard need more oxygen, and the heart delivers it faster.",
+   "think": "How could you measure your pulse before and after running? What do you expect?"
+  },
+  {
+   "id": "cause-eclipse-moon",
+   "keywords": "why moon phases moon changes shape orbit sun light",
+   "q": "Why does the Moon seem to change shape?",
+   "chain": [
+    "The Moon does not make its own light. It reflects light from the Sun.",
+    "The Moon goes around the Earth about once every month.",
+    "As it moves, we see different amounts of its sunlit half from Earth.",
+    "So we see a thin crescent, a half moon, a full moon and so on. The Moon itself does not change shape."
+   ],
+   "because": "The shape we see depends on how much of the sunlit side faces Earth.",
+   "think": "About how many days from one full moon to the next? (About 29 or 30.)"
+  },
+  {
+   "id": "cause-rust",
+   "keywords": "rust iron rusting oxygen water metal corrode",
+   "q": "Why does iron rust?",
+   "chain": [
+    "Iron is exposed to the air and to water or damp.",
+    "Iron slowly reacts with oxygen when water is present.",
+    "This chemical reaction makes a new reddish-brown substance, rust, which is weak and flaky.",
+    "Painting, oiling or galvanising iron keeps air and water away, so it does not rust."
+   ],
+   "because": "Iron + oxygen + water makes rust.",
+   "think": "Why do bicycle chains get oil on them?"
+  },
+  {
+   "id": "cause-inflation",
+   "keywords": "prices go up inflation why prices rise cost of living",
+   "q": "Why do prices go up over time (inflation)?",
+   "chain": [
+    "More money is chasing the same amount of goods, or goods become scarcer or more costly to make.",
+    "Sellers pay more for fuel, transport, imported goods or wages.",
+    "They add the extra cost to the price they charge you.",
+    "Each unit of money then buys a little less than before."
+   ],
+   "because": "Inflation is a general rise in prices, which means money buys less.",
+   "think": "If your pocket money stays the same but bread costs more, what happens to what you can buy?"
+  },
+  {
+   "id": "cause-malaria",
+   "keywords": "malaria mosquito stagnant water bites fever net sick",
+   "q": "How do people get malaria and how can we stop it?",
+   "chain": [
+    "Female Anopheles mosquitoes lay eggs in still water such as puddles and old tins.",
+    "If a mosquito bites a person who has malaria, it picks up the parasite.",
+    "It then bites another person and passes the parasite into their blood.",
+    "Sleeping under a treated net, emptying standing water and clearing bushes near the house break the chain."
+   ],
+   "because": "Malaria is spread by mosquito bites, not by touching or sharing food.",
+   "think": "Which link in the chain is easiest for your family to break?"
+  },
+  {
+   "id": "cause-soil-fertility",
+   "keywords": "poor soil crops grow badly fertiliser manure compost nutrients crop rotation",
+   "q": "Why do crops grow badly in the same field year after year?",
+   "chain": [
+    "Crops take nutrients such as nitrogen out of the soil to grow.",
+    "If the same crop grows in the same place again and again, those nutrients are used up.",
+    "Without manure, compost or fertiliser the soil becomes poor, so the plants are small.",
+    "Crop rotation and adding manure or compost put nutrients back."
+   ],
+   "because": "Soil nutrients are used up unless they are put back.",
+   "think": "Which crops could you rotate with maize? (Legumes such as groundnuts, beans and cowpeas add nitrogen.)"
+  }
+ ]
+}
