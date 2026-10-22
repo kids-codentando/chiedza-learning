@@ -231,6 +231,33 @@
       <section id="caiPanel" role="dialog" aria-label="Chiedza AI chat" hidden>
         <header><div class="cai-title"><span class="cai-dot"></span><div><strong>Chiedza AI</strong><small>Your learning helper</small></div></div>
           <div class="cai-actions"><button id="caiVoice" title="Voice chat: talk to me and I talk back" aria-pressed="false">🎙️</button><button id="caiSpeak" title="Read answers aloud" aria-pressed="false">🔈</button><button id="caiClose" aria-label="Close">✕</button></div></header>
+        <div id="caiFace" class="face-idle" hidden aria-hidden="true">
+          <svg viewBox="0 0 200 200" width="132" height="132" role="img">
+            <defs>
+              <radialGradient id="cfHead" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#FFF3A6"/><stop offset=".55" stop-color="#FFD83A"/><stop offset="1" stop-color="#F5B800"/></radialGradient>
+              <radialGradient id="cfGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFE45C" stop-opacity=".75"/><stop offset="1" stop-color="#FFE45C" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle class="cf-glow" cx="100" cy="106" r="98" fill="url(#cfGlow)"/>
+            <g class="cf-ring"><circle cx="100" cy="106" r="88" fill="none" stroke="#00A651" stroke-width="3" opacity=".0"/></g>
+            <g class="cf-head">
+              <path class="cf-leaf" d="M100 34 C96 18 82 12 70 16 C72 30 84 38 100 34 Z" fill="#00A651"/>
+              <path class="cf-leaf" d="M100 34 C104 18 118 12 130 16 C128 30 116 38 100 34 Z" fill="#007A3D"/>
+              <rect x="88" y="36" width="24" height="12" rx="4" fill="#9aa0a6"/>
+              <circle cx="100" cy="112" r="72" fill="url(#cfHead)" stroke="#E0A200" stroke-width="3"/>
+              <ellipse cx="62" cy="130" rx="11" ry="7" fill="#FF8A80" opacity=".55"/>
+              <ellipse cx="138" cy="130" rx="11" ry="7" fill="#FF8A80" opacity=".55"/>
+              <g class="cf-brows" stroke="#5a3b00" stroke-width="5" stroke-linecap="round" fill="none">
+                <path class="cf-brow-l" d="M64 84 Q75 78 87 84"/><path class="cf-brow-r" d="M113 84 Q125 78 136 84"/>
+              </g>
+              <g class="cf-eye cf-eye-l"><ellipse cx="76" cy="104" rx="13" ry="15" fill="#fff" stroke="#5a3b00" stroke-width="2"/><g class="cf-pupil"><circle cx="76" cy="106" r="7.5" fill="#26180a"/><circle cx="73" cy="102" r="2.4" fill="#fff"/></g></g>
+              <g class="cf-eye cf-eye-r"><ellipse cx="124" cy="104" rx="13" ry="15" fill="#fff" stroke="#5a3b00" stroke-width="2"/><g class="cf-pupil"><circle cx="124" cy="106" r="7.5" fill="#26180a"/><circle cx="121" cy="102" r="2.4" fill="#fff"/></g></g>
+              <path class="cf-smile" d="M72 138 Q100 162 128 138" fill="none" stroke="#5a3b00" stroke-width="5" stroke-linecap="round"/>
+              <g class="cf-mouth" style="display:none"><ellipse class="cf-mouth-o" cx="100" cy="146" rx="16" ry="10" fill="#6d1d1d" stroke="#5a3b00" stroke-width="3"/><ellipse class="cf-tongue" cx="100" cy="151" rx="9" ry="4" fill="#ff7a8a"/></g>
+            </g>
+            <g class="cf-dots" fill="#00A651"><circle cx="150" cy="40" r="5"/><circle cx="166" cy="30" r="6.5"/><circle cx="186" cy="22" r="8"/></g>
+          </svg>
+          <div id="caiFaceCap" aria-live="off">Hi! I am Chiedza</div>
+        </div>
         <div id="caiMsgs" aria-live="polite"></div>
         <div id="caiChips"></div>
         <form id="caiForm" autocomplete="off"><input id="caiInput" type="text" placeholder="Ask me anything…" maxlength="500" /><button type="button" id="caiMic" class="cai-mic" aria-label="Speak your question" title="Tap and speak">🎤</button><button type="submit" aria-label="Send">➤</button></form>
@@ -245,7 +272,13 @@
     const say = (html, who) => { const d = document.createElement("div"); d.className = "cai-msg " + who; d.innerHTML = html; msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d; };
     const chips = list => { $("caiChips").innerHTML = (list || []).map(c => `<button class="cai-chip">${esc(c)}</button>`).join(""); };
     const spoken = html => plain(html).replace(/[\p{Extended_Pictographic}\uFE0F\u20E3]/gu, " ").replace(/×/g, " times ").replace(/÷/g, " divided by ").replace(/−/g, " minus ").replace(/\+/g, " plus ").replace(/=/g, " equals ").replace(/[→⬇➤✔]/g, " ").replace(/\s+/g, " ").trim().slice(0, 900);
-    const talk = html => { if (!speak || !window.speechSynthesis) return; const t = spoken(html); if (!t) return; const u = new SpeechSynthesisUtterance(t); u.rate = 0.95; speechSynthesis.cancel(); speechSynthesis.speak(u); };
+    const talk = html => {
+      if (!speak || !window.speechSynthesis) return; const t = spoken(html); if (!t) return;
+      const u = new SpeechSynthesisUtterance(t); u.rate = 0.95;
+      u.onstart = () => faceState("speaking"); u.onboundary = () => faceBeat();
+      u.onend = u.onerror = () => faceState(voiceChat ? "idle" : "idle", true);
+      speechSynthesis.cancel(); speechSynthesis.speak(u); faceState("speaking");
+    };
     const show = r => {
       say(r.html + imgHtml(r.images) + linkHtml(r.links), "bot"); talk(r.html);
       if (r.next) setTimeout(() => say(r.next.html, "bot"), 500);
@@ -310,6 +343,48 @@
     };
 
 
+    /* ----- the face: moves while Chiedza listens, thinks and speaks ----- */
+    const faceEl = $("caiFace"), faceCap = $("caiFaceCap");
+    const smile = faceEl.querySelector(".cf-smile"), mouthG = faceEl.querySelector(".cf-mouth"), mouthO = faceEl.querySelector(".cf-mouth-o"), tongue = faceEl.querySelector(".cf-tongue");
+    const CAP = { idle: "Hi! I am Chiedza 💡", listening: "I am listening…", thinking: "Let me think…", speaking: "" };
+    let fState = "idle", mouthTimer = null, hideTimer = null, blinkTimer = null, lastAsk = 0;
+    const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function mouth(open, wide) { // open 0..1, wide 0..1
+      if (open < 0.08) { smile.style.display = ""; mouthG.style.display = "none"; return; }
+      smile.style.display = "none"; mouthG.style.display = "";
+      mouthO.setAttribute("rx", (11 + 14 * wide).toFixed(1)); mouthO.setAttribute("ry", (3 + 17 * open).toFixed(1));
+      tongue.setAttribute("rx", (6 + 6 * wide).toFixed(1)); tongue.setAttribute("cy", (146 + 3 + 6 * open).toFixed(1)); tongue.style.opacity = open > 0.35 ? 1 : 0;
+    }
+    let beat = 0;
+    function faceBeat() { beat = 1; }
+    function faceState(st, ended) {
+      if (st === fState && !ended) return;
+      if (ended && fState !== "speaking") return;
+      fState = st; faceEl.className = "face-" + st;
+      clearTimeout(hideTimer); clearInterval(mouthTimer); mouth(0, 0);
+      const show = st !== "idle" || voiceChat;
+      faceEl.hidden = !show;
+      faceCap.textContent = CAP[st] || "";
+      if (st === "speaking") {
+        let t = 0, vis = [[.55, .3], [.9, .7], [.35, .2], [.75, .1], [.2, .6], [.95, .5], [.5, .9], [.1, .2]];
+        mouthTimer = setInterval(() => { t++; const v = vis[(t + Math.floor(Math.random() * 3)) % vis.length]; const k = beat ? 1 : 0.8; beat = 0; mouth(v[0] * k, v[1]); }, 105);
+      }
+      if (st === "idle" && !voiceChat) hideTimer = setTimeout(() => { if (fState === "idle" && !voiceChat) faceEl.hidden = true; }, 2600);
+    }
+    function blink() { const eyes = faceEl.querySelectorAll(".cf-eye"); eyes.forEach(e => e.classList.add("blink")); setTimeout(() => eyes.forEach(e => e.classList.remove("blink")), 150); blinkTimer = setTimeout(blink, 2200 + Math.random() * 3200); }
+    if (!reduce) blinkTimer = setTimeout(blink, 1800);
+    // keep the face honest: thinking while an answer is being prepared, idle when everything is quiet
+    setInterval(() => {
+      if (faceEl.hidden && !voiceChat) return;
+      const thinking = !!msgs.querySelector(".cai-think");
+      const talking = window.speechSynthesis && speechSynthesis.speaking;
+      if (talking) { if (fState !== "speaking") faceState("speaking"); return; }
+      if (fState === "speaking") { faceState("idle"); return; }
+      if (thinking || (Date.now() - lastAsk < 700)) { if (fState !== "thinking") faceState("thinking"); return; }
+      if (listening) { if (fState !== "listening") faceState("listening"); return; }
+      if (fState !== "idle") faceState("idle");
+    }, 250);
+
     /* ----- voice: speak to Chiedza, and hear it answer ----- */
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     const micBtn = $("caiMic"), voiceBtn = $("caiVoice"), bar = $("caiVoiceBar"), note = $("caiVoiceNote"), langSel = $("caiLang");
@@ -325,7 +400,7 @@
       let got = false;
       try { rec = new SR(); } catch (e) { return; }
       rec.lang = langSel.value || "en-ZA"; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
-      rec.onstart = () => { listening = true; micBtn.classList.add("on"); micBtn.textContent = "⏹️"; input.placeholder = "Listening… speak now"; setNote("🎤 Listening…"); };
+      rec.onstart = () => { listening = true; faceState("listening"); micBtn.classList.add("on"); micBtn.textContent = "⏹️"; input.placeholder = "Listening… speak now"; setNote("🎤 Listening…"); };
       rec.onresult = ev => {
         let txt = "", fin = false;
         for (let i = ev.resultIndex; i < ev.results.length; i++) { txt += ev.results[i][0].transcript; if (ev.results[i].isFinal) fin = true; }
@@ -348,7 +423,7 @@
       if (ok) { try { localStorage.setItem(OK_KEY, "1"); } catch (e) {} }
       return ok;
     }
-    function syncVoice() { voiceBtn.setAttribute("aria-pressed", voiceChat); voiceBtn.classList.toggle("on", voiceChat); if (!voiceChat) { if (listening) stopListen(); } }
+    function syncVoice() { voiceBtn.setAttribute("aria-pressed", voiceChat); voiceBtn.classList.toggle("on", voiceChat); if (!voiceChat) { if (listening) stopListen(); setTimeout(() => { if (fState === "idle") faceEl.hidden = true; }, 600); } }
     if (!SR) { micBtn.disabled = true; micBtn.title = "Voice typing is not supported in this browser. Try Chrome or Edge."; voiceBtn.disabled = true; voiceBtn.title = micBtn.title; micBtn.classList.add("off"); }
     micBtn.onclick = () => { if (!SR) { say("🎤 Voice is not supported in this browser. Please try <strong>Chrome</strong> or <strong>Edge</strong>.", "bot"); return; } if (listening) { stopListen(); return; } if (!consent()) return; errCount = 0; startListen(); };
     voiceBtn.onclick = () => {
@@ -356,7 +431,7 @@
       if (voiceChat) { voiceChat = false; syncVoice(); setNote("Voice chat is off."); speechSynthesis && speechSynthesis.cancel(); return; }
       if (!consent()) return;
       voiceChat = true; errCount = 0; speak = true; $("caiSpeak").textContent = "🔊"; $("caiSpeak").setAttribute("aria-pressed", true);
-      syncVoice(); bar.hidden = false; setNote("🎙️ Voice chat is on. Just talk, and I will talk back.");
+      syncVoice(); faceState("idle"); faceEl.hidden = false; bar.hidden = false; setNote("🎙️ Voice chat is on. Just talk, and I will talk back.");
       say("🎙️ <strong>Voice chat is on.</strong> Ask me anything by speaking. Tap 🎙️ again to stop.", "bot");
       lastActive = Date.now(); startListen();
     };
@@ -370,7 +445,7 @@
       startListen();
     }, 900);
     const _ask = ask;
-    ask = text => { lastActive = Date.now() + 1500; return _ask(text); };
+    ask = text => { lastActive = Date.now() + 1500; lastAsk = Date.now(); faceState("thinking"); return _ask(text); };
 
     function open() {
       panel.hidden = false; $("caiLauncher").classList.add("hide"); input.focus();
