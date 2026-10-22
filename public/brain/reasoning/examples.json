@@ -1,0 +1,294 @@
+{
+ "examples": [
+  {
+   "q": "Tendai has 24 mangoes. He gives 9 to Rudo. How many mangoes does Tendai have left?",
+   "a": 15
+  },
+  {
+   "q": "A farmer has 45 chickens and buys 18 more. How many chickens does he have altogether?",
+   "a": 63
+  },
+  {
+   "q": "Chipo has 5 boxes with 12 eggs in each box. How many eggs does she have?",
+   "a": 60
+  },
+  {
+   "q": "There are 36 pupils shared equally among 4 groups. How many pupils are in each group?",
+   "a": 9
+  },
+  {
+   "q": "Rudo had $50. She spent $18 on books and $12 on a pen. How much money is left?",
+   "a": 20
+  },
+  {
+   "q": "A shop sells pens at $2 each. Tendai buys 7 pens. How much does he pay?",
+   "a": 14
+  },
+  {
+   "q": "Each pen costs $3. Chipo buys 6 pens and pays with $20. How much change does she get?",
+   "a": 2
+  },
+  {
+   "q": "A bus carries 40 passengers. How many passengers can 6 buses carry?",
+   "a": 240
+  },
+  {
+   "q": "Tendai has 18 marbles and Rudo has 25 marbles. How many marbles do they have altogether?",
+   "a": 43
+  },
+  {
+   "q": "A bike costs $120. Rudo has $75. How much more money does she need?",
+   "a": 45
+  },
+  {
+   "q": "Tino picked 120 mangoes and packed them 10 in each bag. How many bags did he fill?",
+   "a": 12
+  },
+  {
+   "q": "A dress costs $80 and has a 25% discount. What is the new price?",
+   "a": 60
+  },
+  {
+   "q": "A phone costs $200 with a 10% discount. How much does Rudo save?",
+   "a": 20
+  },
+  {
+   "q": "A car travels at 60 km/h for 3 hours. How far does it travel?",
+   "a": 180
+  },
+  {
+   "q": "A bus travels 150 km in 3 hours. How fast does it go?",
+   "a": 50
+  },
+  {
+   "q": "What is the average of 12, 15, 18 and 23?",
+   "a": 17
+  },
+  {
+   "q": "Find the median of 3, 9, 4, 7 and 12.",
+   "a": 7
+  },
+  {
+   "q": "A rectangular garden is 8 m long and 5 m wide. What is its area?",
+   "a": 40
+  },
+  {
+   "q": "A rectangular field is 20 m long and 10 m wide. What is the perimeter?",
+   "a": 60
+  },
+  {
+   "q": "Share $60 in the ratio 1:2. How much is the bigger share?",
+   "a": [
+    20,
+    40
+   ]
+  },
+  {
+   "q": "A baker makes 48 buns in the morning and 36 in the afternoon. He sells 70 buns. How many buns are left?",
+   "a": 14
+  },
+  {
+   "q": "A teacher has 3 packets of 24 pencils. She gives 20 pencils away. How many pencils are left?",
+   "a": 52
+  },
+  {
+   "q": "What comes next in the pattern 2, 4, 6, 8, ?",
+   "a": 10
+  },
+  {
+   "q": "Find the next number in the sequence 3, 6, 12, 24",
+   "a": 48
+  },
+  {
+   "q": "What is the missing number: 5, 10, ?, 20, 25",
+   "a": 15
+  },
+  {
+   "q": "What comes next in this pattern: 1, 4, 9, 16, 25",
+   "a": 36
+  },
+  {
+   "q": "What are the next two numbers in the sequence 1, 1, 2, 3, 5, 8",
+   "a": [
+    13,
+    21
+   ]
+  },
+  {
+   "q": "Find the next number in the pattern 100, 90, 80, 70",
+   "a": 60
+  },
+  {
+   "q": "What comes next in the sequence 2, 3, 5, 7, 11",
+   "a": null
+  },
+  {
+   "q": "Tendai is taller than Rudo. Rudo is taller than Chipo. Who is the tallest?",
+   "a": "Tendai"
+  },
+  {
+   "q": "Tendai is taller than Rudo. Rudo is taller than Chipo. Who is the shortest?",
+   "a": "Chipo"
+  },
+  {
+   "q": "Tendai is older than Rudo. Rudo is older than Chipo. Is Tendai older than Chipo?",
+   "a": "yes"
+  },
+  {
+   "q": "Tendai is older than Rudo. Chipo is older than Rudo. Who is the oldest?",
+   "a": "unknown"
+  },
+  {
+   "q": "Tendai is faster than Rudo. Rudo is slower than Chipo. Who is the fastest?",
+   "a": "unknown"
+  },
+  {
+   "q": "All birds have feathers. Is that right? All eagles are birds. Eagles are birds. Is an eagle a bird?",
+   "a": null
+  },
+  {
+   "q": "All dogs are animals. Rex is a dog. Is Rex an animal?",
+   "a": "yes"
+  },
+  {
+   "q": "All dogs are animals. Rex is an animal. Is Rex a dog?",
+   "a": "unknown"
+  },
+  {
+   "q": "All mammals are animals. All cows are mammals. Daisy is a cow. Is Daisy an animal?",
+   "a": "yes"
+  },
+  {
+   "q": "If it rains then the ground gets wet. It rains. Is the ground wet?",
+   "a": "yes"
+  },
+  {
+   "q": "If it rains then the ground gets wet. The ground is wet. Did it rain?",
+   "a": "unknown"
+  },
+  {
+   "q": "If it rains then the ground gets wet. The ground is not wet. Did it rain?",
+   "a": "no"
+  },
+  {
+   "q": "Why does a drought make food expensive?",
+   "a": "cause-drought-food"
+  },
+  {
+   "q": "Why do we have seasons?",
+   "a": "cause-seasons"
+  },
+  {
+   "q": "why does ice float on water",
+   "a": "cause-ice-floats"
+  },
+  {
+   "q": "What is the difference between a plant cell and an animal cell?",
+   "a": "plant-animal-cell"
+  },
+  {
+   "q": "compare weather and climate",
+   "a": "weather-climate"
+  },
+  {
+   "q": "area vs perimeter",
+   "a": "area-perimeter"
+  },
+  {
+   "q": "Tendai has some mangoes and gives a few to Rudo. How many are left?",
+   "a": null
+  },
+  {
+   "q": "Why is the sky purple on Mars at night?",
+   "a": null
+  },
+  {
+   "q": "What is the capital of Zimbabwe?",
+   "a": null
+  },
+  {
+   "q": "12 x 15",
+   "a": null
+  },
+  {
+   "q": "hello how are you today",
+   "a": null
+  },
+  {
+   "q": "Rudo has 3 times as many sweets as Tendai. Tendai has 8 sweets. How many sweets does Rudo have?",
+   "a": 24
+  },
+  {
+   "q": "Tendai is 12 years old. His sister is 5 years younger. How old is his sister?",
+   "a": 7
+  },
+  {
+   "q": "I have 3 apples and 4 oranges. How many fruits do I have?",
+   "a": 7
+  },
+  {
+   "q": "If 5 pens cost $10, how much do 8 pens cost?",
+   "a": 16
+  },
+  {
+   "q": "Chipo is 10 years old. In 5 years how old will she be?",
+   "a": 15
+  },
+  {
+   "q": "The temperature was 25 degrees in the morning and 31 in the afternoon. How many degrees did it rise?",
+   "a": 6
+  },
+  {
+   "q": "I scored 45 out of 60 in my maths test. What percentage is that?",
+   "a": 75
+  },
+  {
+   "q": "Rudo bought 2 kg of sugar at $1.50 per kg and 3 loaves at $0.80 each. How much did she spend?",
+   "a": 5.4
+  },
+  {
+   "q": "The ratio of boys to girls is 3:2. There are 30 pupils. How many boys are there?",
+   "a": 18
+  },
+  {
+   "q": "Tendai had 24 mangoes. 9 were rotten. How many are left?",
+   "a": 15
+  },
+  {
+   "q": "There are 7 days in a week. How many days are in 4 weeks?",
+   "a": 28
+  },
+  {
+   "q": "A farmer plants 4 rows of maize with 15 plants in each row. How many plants are there?",
+   "a": 60
+  },
+  {
+   "q": "Tendai ran 5 km on Monday and 7 km on Tuesday. How far did he run in total?",
+   "a": 12
+  },
+  {
+   "q": "Tendai has 7 goats and Rudo has 12 goats. How many more goats does Rudo have?",
+   "a": 5
+  },
+  {
+   "q": "A class has 30 pupils. 12 are boys. How many are girls?",
+   "a": null
+  },
+  {
+   "q": "How many days are there in January and February in 2024?",
+   "a": null
+  },
+  {
+   "q": "My phone number is 0771234567 what is the weather in Harare today?",
+   "a": null
+  },
+  {
+   "q": "Write a project about the 3 branches of government and how many ministers there are",
+   "a": null
+  },
+  {
+   "q": "What is the capital of Zimbabwe and when did it become independent in 1980?",
+   "a": null
+  }
+ ]
+}

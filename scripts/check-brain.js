@@ -17,6 +17,7 @@ const ids = new Set();
   console.log(`✓ ${f}: ${(d.entries || []).length} entries`);
 });
 (man.languages || []).forEach(f => { const d = readJSON(f); if (d) { if (!d.phrases || !d.numbers || d.numbers.length !== 10) fail(`${f}: needs phrases and 10 numbers`); else console.log(`✓ ${f}: ${d.phrases.length} phrases`); } });
+(man.reasoning || []).forEach(f => { const d = readJSON(f); if (d) console.log(`✓ ${f}`); });
 const g = man.glossary && readJSON(man.glossary); if (g) console.log(`✓ glossary: ${g.words.length} words`);
 const sf = man.safety && readJSON(man.safety); if (sf) Object.entries(sf).forEach(([k, v]) => (v.patterns || []).forEach(p => { try { new RegExp(p, "i"); } catch (e) { fail(`safety.${k}: bad pattern ${p}`); } }));
 const pr = man.projects && readJSON(man.projects); if (pr) console.log(`✓ projects: ${Object.keys(pr.kinds).length} kinds, ${pr.experiments.length} experiments`);

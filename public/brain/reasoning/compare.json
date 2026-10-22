@@ -1,0 +1,504 @@
+{
+ "description": "Side by side comparisons. When a child says 'difference between X and Y' or 'compare X and Y' the AI builds a table from here. Add a pair: id, a (names for side one), b (names for side two), rows [point, side one, side two], summary.",
+ "pairs": [
+  {
+   "id": "plant-animal-cell",
+   "a": [
+    "plant cell",
+    "plant cells"
+   ],
+   "b": [
+    "animal cell",
+    "animal cells"
+   ],
+   "rows": [
+    [
+     "Cell wall",
+     "Yes",
+     "No"
+    ],
+    [
+     "Cell membrane",
+     "Yes",
+     "Yes"
+    ],
+    [
+     "Chloroplasts",
+     "Yes (for photosynthesis)",
+     "No"
+    ],
+    [
+     "Large central vacuole",
+     "Yes",
+     "Small or none"
+    ],
+    [
+     "Shape",
+     "Fixed, often box-like",
+     "Round or irregular"
+    ],
+    [
+     "Nucleus",
+     "Yes",
+     "Yes"
+    ]
+   ],
+   "summary": "Both have a nucleus and a cell membrane. Plant cells also have a cell wall and chloroplasts."
+  },
+  {
+   "id": "weather-climate",
+   "a": [
+    "weather"
+   ],
+   "b": [
+    "climate"
+   ],
+   "rows": [
+    [
+     "Time",
+     "Short term (hours, days)",
+     "Long term (30 years or more)"
+    ],
+    [
+     "Example",
+     "It rained today",
+     "Harare has a wet season from November to March"
+    ],
+    [
+     "Changes",
+     "Changes quickly",
+     "Changes very slowly"
+    ]
+   ],
+   "summary": "Weather is what happens today. Climate is the average pattern over many years."
+  },
+  {
+   "id": "renewable-nonrenewable",
+   "a": [
+    "renewable energy",
+    "renewable",
+    "renewable resources"
+   ],
+   "b": [
+    "non-renewable",
+    "nonrenewable",
+    "non renewable",
+    "non-renewable energy"
+   ],
+   "rows": [
+    [
+     "Can it run out?",
+     "Not in a human lifetime",
+     "Yes, it takes millions of years to form"
+    ],
+    [
+     "Examples",
+     "Sun, wind, water, biomass",
+     "Coal, oil, natural gas"
+    ],
+    [
+     "Pollution",
+     "Usually little",
+     "Burning gives off carbon dioxide and other pollution"
+    ],
+    [
+     "Zimbabwe example",
+     "Kariba hydropower, solar",
+     "Coal at Hwange"
+    ]
+   ],
+   "summary": "Renewable sources are replaced naturally. Non-renewable ones are used up faster than they form."
+  },
+  {
+   "id": "conductor-insulator",
+   "a": [
+    "conductor",
+    "conductors"
+   ],
+   "b": [
+    "insulator",
+    "insulators"
+   ],
+   "rows": [
+    [
+     "Lets electricity or heat flow?",
+     "Yes",
+     "No (or very poorly)"
+    ],
+    [
+     "Examples",
+     "Copper, iron, aluminium, water with salt",
+     "Plastic, rubber, wood, glass"
+    ],
+    [
+     "Use",
+     "Wires inside a cable",
+     "Plastic covering around the wire"
+    ]
+   ],
+   "summary": "A cable uses both: a metal conductor inside and an insulator outside for safety."
+  },
+  {
+   "id": "solid-liquid-gas",
+   "a": [
+    "solid",
+    "solids"
+   ],
+   "b": [
+    "liquid",
+    "liquids",
+    "gas",
+    "gases"
+   ],
+   "rows": [
+    [
+     "Shape",
+     "Fixed",
+     "Takes the shape of its container"
+    ],
+    [
+     "Volume",
+     "Fixed",
+     "Liquid: fixed. Gas: fills the container"
+    ],
+    [
+     "Particles",
+     "Packed tightly, only vibrate",
+     "Liquid: close but slide. Gas: far apart, move freely"
+    ],
+    [
+     "Can be squashed?",
+     "Hardly",
+     "Liquid: hardly. Gas: easily"
+    ]
+   ],
+   "summary": "The difference is how close the particles are and how freely they move."
+  },
+  {
+   "id": "area-perimeter",
+   "a": [
+    "area"
+   ],
+   "b": [
+    "perimeter"
+   ],
+   "rows": [
+    [
+     "What it measures",
+     "The space inside a shape",
+     "The distance around the edge"
+    ],
+    [
+     "Units",
+     "Square units (cm2, m2)",
+     "Ordinary length units (cm, m)"
+    ],
+    [
+     "Rectangle formula",
+     "length x width",
+     "2 x (length + width)"
+    ],
+    [
+     "Example use",
+     "How much paint or grass seed to cover a floor",
+     "How much fencing to go round a garden"
+    ]
+   ],
+   "summary": "Area is covering the inside. Perimeter is walking around the edge."
+  },
+  {
+   "id": "mean-median-mode",
+   "a": [
+    "mean",
+    "average"
+   ],
+   "b": [
+    "median"
+   ],
+   "rows": [
+    [
+     "How to find it",
+     "Add all the values, divide by how many",
+     "Put in order, take the middle value"
+    ],
+    [
+     "Affected by very large or small values?",
+     "Yes, a lot",
+     "Not much"
+    ],
+    [
+     "Example for 2, 3, 3, 4, 18",
+     "Mean = 6",
+     "Median = 3"
+    ]
+   ],
+   "summary": "The mean can be pulled up by one big value. The median shows the typical middle value."
+  },
+  {
+   "id": "herbivore-carnivore",
+   "a": [
+    "herbivore",
+    "herbivores"
+   ],
+   "b": [
+    "carnivore",
+    "carnivores",
+    "omnivore",
+    "omnivores"
+   ],
+   "rows": [
+    [
+     "Eats",
+     "Only plants",
+     "Carnivore: only meat. Omnivore: both plants and meat"
+    ],
+    [
+     "Teeth",
+     "Flat teeth for grinding",
+     "Carnivore: sharp teeth for tearing. Omnivore: a mixture"
+    ],
+    [
+     "Zimbabwe examples",
+     "Zebra, impala, elephant",
+     "Lion, leopard (carnivores); baboon, humans (omnivores)"
+    ]
+   ],
+   "summary": "Teeth tell you a lot about what an animal eats."
+  },
+  {
+   "id": "needs-wants",
+   "a": [
+    "needs",
+    "need"
+   ],
+   "b": [
+    "wants",
+    "want"
+   ],
+   "rows": [
+    [
+     "Meaning",
+     "Things we must have to live",
+     "Things we would like but can live without"
+    ],
+    [
+     "Examples",
+     "Food, water, shelter, clothes, basic health care",
+     "Toys, sweets, a new phone, fashionable shoes"
+    ],
+    [
+     "When money is short",
+     "Pay for these first",
+     "Wait or save"
+    ]
+   ],
+   "summary": "In a budget, pay for needs first, then use what is left for wants."
+  },
+  {
+   "id": "sound-light",
+   "a": [
+    "sound"
+   ],
+   "b": [
+    "light"
+   ],
+   "rows": [
+    [
+     "Needs a material to travel through?",
+     "Yes (air, water, solids). It cannot travel in a vacuum",
+     "No. It can travel through a vacuum, like from the Sun"
+    ],
+    [
+     "Speed",
+     "About 340 m/s in air",
+     "About 300 000 km/s"
+    ],
+    [
+     "Travels as",
+     "Vibrations (sound waves)",
+     "Light waves"
+    ]
+   ],
+   "summary": "That is why we see lightning before we hear thunder."
+  },
+  {
+   "id": "primary-secondary-source",
+   "a": [
+    "primary source",
+    "primary sources"
+   ],
+   "b": [
+    "secondary source",
+    "secondary sources"
+   ],
+   "rows": [
+    [
+     "What it is",
+     "Made at the time, by someone who was there",
+     "Made later by someone who studied the event"
+    ],
+    [
+     "Examples",
+     "Diary, photograph, letter, an interview",
+     "Textbook, encyclopedia, documentary"
+    ],
+    [
+     "Good for",
+     "First-hand evidence",
+     "Summary and explanation"
+    ]
+   ],
+   "summary": "Historians use both to check each other."
+  },
+  {
+   "id": "vertebrate-invertebrate",
+   "a": [
+    "vertebrate",
+    "vertebrates"
+   ],
+   "b": [
+    "invertebrate",
+    "invertebrates"
+   ],
+   "rows": [
+    [
+     "Backbone",
+     "Yes",
+     "No"
+    ],
+    [
+     "Examples",
+     "Fish, frogs, snakes, birds, mammals",
+     "Insects, worms, snails, spiders"
+    ],
+    [
+     "Most numerous?",
+     "About 5 percent of animal species",
+     "Most animal species"
+    ]
+   ],
+   "summary": "Humans are vertebrates. Most animals on Earth are invertebrates."
+  },
+  {
+   "id": "noun-verb",
+   "a": [
+    "noun",
+    "nouns"
+   ],
+   "b": [
+    "verb",
+    "verbs"
+   ],
+   "rows": [
+    [
+     "Job",
+     "Names a person, place, animal or thing",
+     "Shows an action or state"
+    ],
+    [
+     "Examples",
+     "Tendai, Harare, goat, happiness",
+     "run, sing, is, become"
+    ],
+    [
+     "Test",
+     "Can you put 'the' in front?",
+     "Can you put 'to' in front?"
+    ]
+   ],
+   "summary": "A sentence needs at least a verb, and usually a noun as well."
+  },
+  {
+   "id": "virus-bacteria",
+   "a": [
+    "virus",
+    "viruses"
+   ],
+   "b": [
+    "bacteria",
+    "bacterium"
+   ],
+   "rows": [
+    [
+     "Size",
+     "Much smaller",
+     "Larger"
+    ],
+    [
+     "Living cell?",
+     "No cell. They need a host cell to multiply",
+     "Yes, single-celled and alive"
+    ],
+    [
+     "Antibiotics work?",
+     "No",
+     "Often yes"
+    ],
+    [
+     "Examples of diseases",
+     "Flu, measles, HIV, COVID-19",
+     "Cholera, TB, typhoid"
+    ]
+   ],
+   "summary": "Antibiotics cannot cure virus diseases."
+  },
+  {
+   "id": "saving-investing",
+   "a": [
+    "saving",
+    "savings"
+   ],
+   "b": [
+    "investing",
+    "investment"
+   ],
+   "rows": [
+    [
+     "Aim",
+     "Keep money safe for later",
+     "Make money grow"
+    ],
+    [
+     "Risk",
+     "Low",
+     "Higher: you can also lose money"
+    ],
+    [
+     "Access",
+     "Quickly",
+     "Often slower or with a risk of loss"
+    ]
+   ],
+   "summary": "Save first for emergencies, then think about investing."
+  },
+  {
+   "id": "fraction-decimal",
+   "a": [
+    "fraction",
+    "fractions"
+   ],
+   "b": [
+    "decimal",
+    "decimals"
+   ],
+   "rows": [
+    [
+     "Written as",
+     "A top and a bottom number, like 3/4",
+     "Using a point, like 0.75"
+    ],
+    [
+     "Meaning",
+     "Parts of a whole",
+     "Parts of a whole, in tens, hundreds..."
+    ],
+    [
+     "Conversion",
+     "Divide top by bottom",
+     "Put over 10, 100, 1000..."
+    ]
+   ],
+   "summary": "3/4, 0.75 and 75% all name the same amount."
+  }
+ ]
+}
