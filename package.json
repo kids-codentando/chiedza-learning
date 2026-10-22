@@ -7,8 +7,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "check:brain": "node scripts/check-brain.js && node scripts/test-reasoning.js",
-    "test:reasoning": "node scripts/test-reasoning.js"
+    "check:brain": "node scripts/check-brain.js && node scripts/test-reasoning.js && node scripts/test-matching.js",
+    "test:reasoning": "node scripts/test-reasoning.js",
+    "test:matching": "node scripts/test-matching.js"
   },
   "engines": {
     "node": ">=18.0.0"

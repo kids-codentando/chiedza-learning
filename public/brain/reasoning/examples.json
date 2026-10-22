@@ -301,6 +301,26 @@
   {
    "q": "what comes next in the pattern 5 10 15 20",
    "a": 25
+  },
+  {
+   "q": "Form 3 maths 4 questions how many marks in total",
+   "a": null
+  },
+  {
+   "q": "Grade 5 pupils have 30 pencils and 12 are lost. How many are left?",
+   "a": 18
   }
+ ],
+ "nomatch": [
+  "how do I make a cake",
+  "how do planes fly",
+  "how do I make friends",
+  "what is love",
+  "how tall is mount everest",
+  "what is bitcoin",
+  "how much does a car cost",
+  "what is the biggest animal",
+  "why is the sky blue",
+  "what is the best football team"
  ]
 }

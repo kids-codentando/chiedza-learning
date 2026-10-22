@@ -555,11 +555,12 @@
         if (inL(p.a, b) && inL(p.b, a)) { hit = p; flip = true; break; }
       }
       if (!hit) return null;
-      const L = flip ? b : a, Rr = flip ? a : b;
+      // columns follow the order the child asked in; the data is swapped when the file lists the pair the other way round
+      const L = a, Rr = b;
       const nameA = esc(L.replace(/\b[a-z]/g, c => c.toUpperCase())), nameB = esc(Rr.replace(/\b[a-z]/g, c => c.toUpperCase()));
       const cell = "padding:4px 8px;border:1px solid #cfd8dc;vertical-align:top";
       const rows = hit.rows.map(r => `<tr><td style="${cell}"><strong>${esc(r[0])}</strong></td><td style="${cell}">${esc(r[flip ? 2 : 1])}</td><td style="${cell}">${esc(r[flip ? 1 : 2])}</td></tr>`).join("");
-      const tbl = `<table style="border-collapse:collapse;font-size:.92em;margin:6px 0"><tr><th style="${cell}"></th><th style="${cell}">${hit.a.includes(L) || !flip ? nameA : nameA}</th><th style="${cell}">${nameB}</th></tr>${rows}</table>`;
+      const tbl = `<table style="border-collapse:collapse;font-size:.92em;margin:6px 0"><tr><th style="${cell}"></th><th style="${cell}">${nameA}</th><th style="${cell}">${nameB}</th></tr>${rows}</table>`;
       return { kind: "compare", id: hit.id, answer: hit.id, html: `⚖️ <strong>${nameA} or ${nameB}?</strong><br><em>Side by side:</em><br>${tbl}<br>✅ <strong>In short:</strong> ${esc(hit.summary)}<br><br>🤔 <strong>Think about it:</strong> Which row surprised you most? Can you find one more thing they share?` };
     }
 
@@ -602,8 +603,10 @@
     const WP_HINT = /\?|\b(how many|how much|find|calculate|work out|determine|what is the (total|difference|average|area|perimeter|cost|price|speed|distance))\b/i;
     const GUIDE_RX = /\b(guide me|don'?t (tell|give) me the answer|do not (tell|give) me the answer|help me (think|work (it )?out|solve it myself)|let me try|hint only)\b/i;
     let last = null;
+    // "Form 3", "Grade 5", "Page 12" are labels, not amounts
+    const LABEL = /\b(form|grade|class|std|standard|page|chapter|lesson|unit|room|level|paper|question|q)\s*\.?\s*\d+\b/gi;
     function route(input) {
-      const text = String(input || "").trim();
+      const text = String(input || "").replace(LABEL, " ").replace(/\s+/g, " ").trim();
       if (text.length < 6) return null;
       let r = solveCompare(text) || solveSequence(text);
       if (r) return r;

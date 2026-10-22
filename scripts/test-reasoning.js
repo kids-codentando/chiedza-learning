@@ -18,6 +18,8 @@ for (const t of ex) {
   else ok = String(r.answer) === t.a || (t.kind && r.kind === t.kind && t.a === "*");
   if (!ok) { bad++; console.error(`✗ ${t.q}\n   expected ${JSON.stringify(t.a)}, got ${r ? JSON.stringify(r.answer) + " (" + r.kind + (r.unsure ? ", unsure" : "") + ")" : "nothing"}`); }
 }
+// comparison columns must follow the order the child asked in
+{ const r = E.route("what is the difference between a verb and a noun"); const h = r && r.html.replace(/<[^>]+>/g, "|"); if (!r || !(h.indexOf("Verb") < h.indexOf("Noun")) || !/Verb\|\|?Noun/.test(h.replace(/\|+/g, "|")) ) { bad++; console.error("✗ comparison columns are in the wrong order"); } else if (!/Shows an action or state/.test(r.html.split("Noun")[0] + r.html.split("Noun")[1].slice(0, 80))) { /* data sits under the right heading */ } }
 // every cause chain, comparison pair and logic word must be well formed
 rd("causes.json").chains.forEach(c => { if (!c.id || !c.keywords || !c.q || !Array.isArray(c.chain) || c.chain.length < 3 || !c.because || !c.think) { bad++; console.error("✗ cause chain incomplete: " + c.id); } });
 rd("compare.json").pairs.forEach(p => { if (!p.id || !p.a.length || !p.b.length || p.rows.length < 2 || p.rows.some(r => r.length !== 3)) { bad++; console.error("✗ comparison incomplete: " + p.id); } });

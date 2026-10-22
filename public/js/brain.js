@@ -409,13 +409,36 @@
   }
 
   /* ---------- 10. brain knowledge ---------- */
+  // Matching: every word is weighted by how special it is (a rare word like "photosynthesis" counts far more than
+  // "make" or "plant"), and words the brain has never seen count AGAINST a match. An answer is only given when it
+  // covers most of what the child actually asked, so a vague overlap no longer returns an unrelated answer.
+  const FILLER = new Set("tell know thing things help like mean get make way lot good name called kind one two use used does many much long big small best new old".split(" "));
+  let IDF = null;
+  function buildIdf() {
+    const df = {}, seen = new Set();
+    B.knowledge.forEach(e => { new Set(e.kt).forEach(t => { df[t] = (df[t] || 0) + 1; }); });
+    (B.glossary || []).forEach(g => tokens(g.w).forEach(t => seen.add(t)));
+    IDF = { df, n: Math.max(B.knowledge.length, 1), seen: seen };
+  }
+  function weight(t) {
+    const d = IDF.df[t] || 0, base = Math.log(1 + IDF.n / (1 + d));
+    return FILLER.has(t) ? base * 0.25 : base;
+  }
   function knowledgeSearch(input, strict) {
     const qt = [...new Set(tokens(input))]; if (!qt.length || !B.knowledge.length) return null;
+    if (!IDF || IDF.n !== B.knowledge.length) buildIdf();
+    const total = qt.reduce((a, t) => a + weight(t), 0) || 1;
     let best = null, bs = 0;
     B.knowledge.forEach(e => {
-      const kw = qt.filter(t => e.kt.includes(t)).length, tx = qt.filter(t => e.at.includes(t) && !e.kt.includes(t)).length;
-      const sc = kw * 2 + tx * 0.5, ratio = kw / qt.length;
-      const ok = e.trained ? (kw >= 1 && ratio >= 0.5) : strict ? (kw >= 2 && ratio >= 0.5) : (kw >= 1 && (ratio >= 0.34 || kw >= 2));
+      const hit = qt.filter(t => e.kt.includes(t)), kw = hit.length;
+      if (!kw) return;
+      const tx = qt.filter(t => e.at.includes(t) && !e.kt.includes(t)).length;
+      const hw = hit.reduce((a, t) => a + weight(t), 0), cov = hw / total;
+      const rare = hit.some(t => (IDF.df[t] || 0) <= 4 && !FILLER.has(t));
+      const sc = hw * 2 + tx * 0.3;
+      const ok = e.trained ? (kw >= 1 && kw / qt.length >= 0.5)
+        : strict ? (kw >= 2 && cov >= 0.6)
+        : ((kw >= 2 && cov >= 0.5) || (kw === 1 && rare && cov >= 0.55));
       if (ok && sc + (e.trained ? 3 : 0) > bs) { bs = sc + (e.trained ? 3 : 0); best = e; }
     });
     return best ? { html: `${best.a}<br><small>🧠 From the Chiedza Brain · ${esc(best.topic || "")}</small>`, links: best.links || [], chips: ["Quiz me", "Fun fact"] } : null;
