@@ -1461,7 +1461,7 @@ function renderAbout(app) {
           <h3>Built for Zimbabwe</h3>
           <p>Content reflects the Zimbabwean curriculum and culture — from Great Zimbabwe and the liberation struggle to our national symbols, languages and food.</p>
           <h3>Our brand</h3>
-          <p>Chiedza Learning is created by <strong>Ntandomods</strong>. Our emblem — a light-bulb growing into leaves — stands for bright ideas that grow, and our official seal appears on every certificate we issue.</p>
+          <p>Chiedza Learning is created by <strong>Ntandoyenkosi Chisaya</strong>, known as <strong>Ntandomods</strong> (age 20). Our emblem — a light-bulb growing into leaves — stands for bright ideas that grow, and our official seal appears on every certificate we issue.</p>
           <h3>Certificates you can trust — anywhere</h3>
           <p>Every certificate follows the <strong>Chiedza Open Verification Standard</strong>. It carries a unique Certificate ID, a tamper-evident verification code and a QR code. Schools, colleges, employers, NGOs and government bodies — <strong>public or private, in Zimbabwe or anywhere in the world</strong> — can confirm a certificate is genuine in seconds, with no account required.</p>
           <ul>
