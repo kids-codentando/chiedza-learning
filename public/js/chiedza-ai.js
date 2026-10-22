@@ -232,30 +232,42 @@
         <header><div class="cai-title"><span class="cai-dot"></span><div><strong>Chiedza AI</strong><small>Your learning helper</small></div></div>
           <div class="cai-actions"><button id="caiVoice" title="Voice chat: talk to me and I talk back" aria-pressed="false">🎙️</button><button id="caiSpeak" title="Read answers aloud" aria-pressed="false">🔈</button><button id="caiClose" aria-label="Close">✕</button></div></header>
         <div id="caiFace" class="face-idle" hidden aria-hidden="true">
-          <svg viewBox="0 0 200 200" width="132" height="132" role="img">
+          <svg viewBox="0 0 200 220" width="132" height="145" role="img">
             <defs>
-              <radialGradient id="cfHead" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#FFF3A6"/><stop offset=".55" stop-color="#FFD83A"/><stop offset="1" stop-color="#F5B800"/></radialGradient>
-              <radialGradient id="cfGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFE45C" stop-opacity=".75"/><stop offset="1" stop-color="#FFE45C" stop-opacity="0"/></radialGradient>
+              <radialGradient id="cfSkin" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#B9784F"/><stop offset="1" stop-color="#8F5638"/></radialGradient>
+              <linearGradient id="cfHair" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a2650"/><stop offset=".5" stop-color="#1c1228"/><stop offset="1" stop-color="#0f0a17"/></linearGradient>
+              <radialGradient id="cfIris" cx="50%" cy="35%" r="75%"><stop offset="0" stop-color="#F2B24A"/><stop offset=".55" stop-color="#B8641C"/><stop offset="1" stop-color="#5c2a0c"/></radialGradient>
+              <radialGradient id="cfGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFE45C" stop-opacity=".7"/><stop offset="1" stop-color="#FFE45C" stop-opacity="0"/></radialGradient>
+              <radialGradient id="cfBulb" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#FFFBD0"/><stop offset="1" stop-color="#FFD200"/></radialGradient>
+              <clipPath id="cfClipL"><ellipse cx="78" cy="108" rx="14.5" ry="13"/></clipPath>
+              <clipPath id="cfClipR"><ellipse cx="122" cy="108" rx="14.5" ry="13"/></clipPath>
             </defs>
-            <circle class="cf-glow" cx="100" cy="106" r="98" fill="url(#cfGlow)"/>
-            <g class="cf-ring"><circle cx="100" cy="106" r="88" fill="none" stroke="#00A651" stroke-width="3" opacity=".0"/></g>
+            <circle class="cf-glow" cx="100" cy="112" r="100" fill="url(#cfGlow)"/>
+            <g class="cf-body"><path d="M38 220 C40 192 66 180 100 180 C134 180 160 192 162 220 Z" fill="#00A651"/><path d="M100 180 L82 184 L100 204 L118 184 Z" fill="#FFD200"/><path d="M88 196 L100 204 L112 196 L100 190Z" fill="#007A3D"/><path d="M86 160 L86 183 C92 190 108 190 114 183 L114 160 Z" fill="#7d4a30"/></g>
             <g class="cf-head">
-              <path class="cf-leaf" d="M100 34 C96 18 82 12 70 16 C72 30 84 38 100 34 Z" fill="#00A651"/>
-              <path class="cf-leaf" d="M100 34 C104 18 118 12 130 16 C128 30 116 38 100 34 Z" fill="#007A3D"/>
-              <rect x="88" y="36" width="24" height="12" rx="4" fill="#9aa0a6"/>
-              <circle cx="100" cy="112" r="72" fill="url(#cfHead)" stroke="#E0A200" stroke-width="3"/>
-              <ellipse cx="62" cy="130" rx="11" ry="7" fill="#FF8A80" opacity=".55"/>
-              <ellipse cx="138" cy="130" rx="11" ry="7" fill="#FF8A80" opacity=".55"/>
-              <g class="cf-brows" stroke="#5a3b00" stroke-width="5" stroke-linecap="round" fill="none">
-                <path class="cf-brow-l" d="M64 84 Q75 78 87 84"/><path class="cf-brow-r" d="M113 84 Q125 78 136 84"/>
+              <g class="cf-hair-back"><path d="M34 104 C26 50 60 16 100 16 C140 16 174 50 166 104 C164 142 172 178 152 204 C140 200 130 190 128 176 L72 176 C70 190 60 200 48 204 C28 178 36 142 34 104 Z" fill="url(#cfHair)"/><path d="M52 60 C60 40 80 28 100 26" stroke="#6a4a8a" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".55"/></g>
+              <path d="M52 94 C52 56 74 42 100 42 C126 42 148 56 148 94 C148 122 138 148 122 160 C112 168 106 170 100 170 C94 170 88 168 78 160 C62 148 52 122 52 94 Z" fill="url(#cfSkin)"/>
+              <ellipse cx="68" cy="130" rx="10" ry="5.6" fill="#ff6f8a" opacity=".38"/><ellipse cx="132" cy="130" rx="10" ry="5.6" fill="#ff6f8a" opacity=".38"/>
+              <g class="cf-brows" stroke="#241410" stroke-width="2.8" stroke-linecap="round" fill="none"><path class="cf-brow-l" d="M62 91 Q75 84 91 89"/><path class="cf-brow-r" d="M109 89 Q125 84 138 91"/></g>
+              <g class="cf-eye cf-eye-l">
+                <ellipse cx="78" cy="108" rx="14.5" ry="13" fill="#fff"/>
+                <g clip-path="url(#cfClipL)"><g class="cf-pupil"><ellipse cx="78" cy="109" rx="10.5" ry="12.5" fill="url(#cfIris)"/><ellipse cx="78" cy="109" rx="5" ry="7" fill="#170a04"/><circle cx="73.5" cy="103.5" r="3.8" fill="#fff"/><circle cx="82.5" cy="114" r="2" fill="#fff" opacity=".9"/></g></g>
+                <path d="M62 107 C66 94 90 93 94 107" stroke="#120a10" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M62.5 106 L57 101.5" stroke="#120a10" stroke-width="2.6" stroke-linecap="round"/><path d="M66 114 C72 120 84 120 90 114" stroke="#4a2a22" stroke-width="1.1" fill="none" opacity=".6"/>
               </g>
-              <g class="cf-eye cf-eye-l"><ellipse cx="76" cy="104" rx="13" ry="15" fill="#fff" stroke="#5a3b00" stroke-width="2"/><g class="cf-pupil"><circle cx="76" cy="106" r="7.5" fill="#26180a"/><circle cx="73" cy="102" r="2.4" fill="#fff"/></g></g>
-              <g class="cf-eye cf-eye-r"><ellipse cx="124" cy="104" rx="13" ry="15" fill="#fff" stroke="#5a3b00" stroke-width="2"/><g class="cf-pupil"><circle cx="124" cy="106" r="7.5" fill="#26180a"/><circle cx="121" cy="102" r="2.4" fill="#fff"/></g></g>
-              <path class="cf-smile" d="M72 138 Q100 162 128 138" fill="none" stroke="#5a3b00" stroke-width="5" stroke-linecap="round"/>
-              <g class="cf-mouth" style="display:none"><ellipse class="cf-mouth-o" cx="100" cy="146" rx="16" ry="10" fill="#6d1d1d" stroke="#5a3b00" stroke-width="3"/><ellipse class="cf-tongue" cx="100" cy="151" rx="9" ry="4" fill="#ff7a8a"/></g>
+              <g class="cf-eye cf-eye-r">
+                <ellipse cx="122" cy="108" rx="14.5" ry="13" fill="#fff"/>
+                <g clip-path="url(#cfClipR)"><g class="cf-pupil"><ellipse cx="122" cy="109" rx="10.5" ry="12.5" fill="url(#cfIris)"/><ellipse cx="122" cy="109" rx="5" ry="7" fill="#170a04"/><circle cx="117.5" cy="103.5" r="3.8" fill="#fff"/><circle cx="126.5" cy="114" r="2" fill="#fff" opacity=".9"/></g></g>
+                <path d="M106 107 C110 93 134 94 138 107" stroke="#120a10" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M137.5 106 L143 101.5" stroke="#120a10" stroke-width="2.6" stroke-linecap="round"/><path d="M110 114 C116 120 128 120 134 114" stroke="#4a2a22" stroke-width="1.1" fill="none" opacity=".6"/>
+              </g>
+              <path d="M99 124 q-2.4 3.4 1.6 4" stroke="#6b3a24" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+              <path class="cf-smile" d="M90 145 Q100 155 110 145" fill="none" stroke="#5a2420" stroke-width="2.8" stroke-linecap="round"/>
+              <g class="cf-mouth" style="display:none"><ellipse class="cf-mouth-o" cx="100" cy="148" rx="7" ry="5" fill="#7a1f2b" stroke="#4a1018" stroke-width="2"/><ellipse class="cf-tongue" cx="100" cy="151" rx="4" ry="2" fill="#ff8a98"/></g>
+              <g class="cf-bangs"><path d="M49 100 C42 52 70 28 100 28 C98 52 84 72 64 86 C56 92 52 96 49 100 Z" fill="url(#cfHair)"/><path d="M151 100 C158 52 130 28 100 28 C104 52 118 72 138 84 C146 90 149 95 151 100 Z" fill="url(#cfHair)"/><path d="M49 100 C47 124 50 144 60 160 C54 142 53 122 57 102 Z" fill="#1c1228"/><path d="M151 100 C153 124 150 144 140 160 C146 142 147 122 143 102 Z" fill="#1c1228"/><path d="M64 44 C74 36 88 32 100 32" stroke="#7a5aa0" stroke-width="2" fill="none" stroke-linecap="round" opacity=".6"/></g>
+              <g class="cf-clip"><circle class="cf-bulbglow" cx="60" cy="58" r="17" fill="url(#cfGlow)"/><path d="M52 58 C46 56 42 50 44 44 C50 44 54 50 52 58Z" fill="#00A651"/><path d="M68 58 C74 56 76 50 74 44 C68 44 64 50 66 58Z" fill="#007A3D"/><rect x="56" y="61" width="8" height="6" rx="1.6" fill="#9aa0a6"/><circle cx="60" cy="56" r="8.4" fill="url(#cfBulb)" stroke="#E0A200" stroke-width="1.6"/><path d="M57 55 q3 -4 6 0" stroke="#E08A00" stroke-width="1" fill="none"/></g>
+              <g class="cf-sparkle" fill="#FFE45C"><path d="M150 70 l2.4 6 6 2.4 -6 2.4 -2.4 6 -2.4 -6 -6 -2.4 6 -2.4z"/><path d="M42 118 l1.8 4.4 4.4 1.8 -4.4 1.8 -1.8 4.4 -1.8 -4.4 -4.4 -1.8 4.4 -1.8z"/></g>
             </g>
-            <g class="cf-dots" fill="#00A651"><circle cx="150" cy="40" r="5"/><circle cx="166" cy="30" r="6.5"/><circle cx="186" cy="22" r="8"/></g>
-          </svg>
+            <g class="cf-dots" fill="#00A651"><circle cx="156" cy="40" r="4.5"/><circle cx="170" cy="30" r="6"/><circle cx="187" cy="20" r="7.5"/></g>
+            </svg>
           <div id="caiFaceCap" aria-live="off">Hi! I am Chiedza</div>
         </div>
         <div id="caiMsgs" aria-live="polite"></div>
@@ -352,8 +364,9 @@
     function mouth(open, wide) { // open 0..1, wide 0..1
       if (open < 0.08) { smile.style.display = ""; mouthG.style.display = "none"; return; }
       smile.style.display = "none"; mouthG.style.display = "";
-      mouthO.setAttribute("rx", (11 + 14 * wide).toFixed(1)); mouthO.setAttribute("ry", (3 + 17 * open).toFixed(1));
-      tongue.setAttribute("rx", (6 + 6 * wide).toFixed(1)); tongue.setAttribute("cy", (146 + 3 + 6 * open).toFixed(1)); tongue.style.opacity = open > 0.35 ? 1 : 0;
+      const ry = 1.8 + 8.5 * open;
+      mouthO.setAttribute("rx", (4.5 + 6.5 * wide).toFixed(1)); mouthO.setAttribute("ry", ry.toFixed(1)); mouthO.setAttribute("cy", (146 + ry * 0.55).toFixed(1));
+      tongue.setAttribute("rx", (2.6 + 3.2 * wide).toFixed(1)); tongue.setAttribute("cy", (146 + ry * 0.55 + ry * 0.5).toFixed(1)); tongue.setAttribute("ry", Math.max(1, ry * 0.3).toFixed(1)); tongue.style.opacity = open > 0.4 ? 1 : 0;
     }
     let beat = 0;
     function faceBeat() { beat = 1; }

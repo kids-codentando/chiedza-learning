@@ -996,6 +996,14 @@ ul { list-style: none; }
 #caiFace .cf-eye.blink { transform: scaleY(.1); transition-duration: .08s; }
 #caiFace .cf-dots { opacity: 0; }
 #caiFace .cf-glow { opacity: .35; }
+#caiFace .cf-sparkle { opacity: 0; transform-box: fill-box; transform-origin: center; }
+#caiFace .cf-hair-back, #caiFace .cf-body, #caiFace .cf-bangs { transform-box: fill-box; transform-origin: 50% 0; }
+#caiFace .cf-body { transform-origin: 50% 100%; animation: cfBreathe 3.6s ease-in-out infinite; }
+#caiFace .cf-hair-back { animation: cfHair 5s ease-in-out infinite; }
+#caiFace .cf-bulbglow { opacity: .35; transition: opacity .3s; }
+#caiFace.face-speaking .cf-bulbglow, #caiFace.face-listening .cf-bulbglow { opacity: 1; animation: cfGlow .9s ease-in-out infinite; }
+#caiFace.face-speaking .cf-sparkle, #caiFace.face-listening .cf-sparkle { opacity: 1; animation: cfTwinkle 1.3s ease-in-out infinite; }
+#caiFace.face-speaking .cf-hair-back { animation: cfHair 1.2s ease-in-out infinite; }
 #caiFace.face-idle .cf-head { animation: cfFloat 4s ease-in-out infinite; }
 #caiFace.face-speaking .cf-head { animation: cfTalk .55s ease-in-out infinite; }
 #caiFace.face-speaking .cf-glow { opacity: .8; animation: cfGlow 1s ease-in-out infinite; }
@@ -1018,5 +1026,8 @@ ul { list-style: none; }
 @keyframes cfGlow { 0%, 100% { transform: scale(.96); } 50% { transform: scale(1.06); } }
 @keyframes cfBrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 @keyframes cfDot { 0%, 80%, 100% { opacity: .2; } 40% { opacity: 1; } }
-@media (max-width: 520px) { #caiFace svg { width: 104px; height: 104px; } }
+@media (max-width: 520px) { #caiFace svg { width: 104px; height: 114px; } }
 @media (prefers-reduced-motion: reduce) { #caiFace * { animation: none !important; transition: none !important; } }
+@keyframes cfBreathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.025); } }
+@keyframes cfHair { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1.2deg); } }
+@keyframes cfTwinkle { 0%, 100% { transform: scale(.7) rotate(0); opacity: .5; } 50% { transform: scale(1.15) rotate(20deg); opacity: 1; } }
