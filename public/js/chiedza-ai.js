@@ -230,10 +230,11 @@
       <button id="caiLauncher" aria-label="Open Chiedza AI" title="Ask Chiedza AI"><img src="assets/icon.png" alt="" onerror="this.replaceWith(document.createTextNode('💡'))"><span>Ask Chiedza AI</span></button>
       <section id="caiPanel" role="dialog" aria-label="Chiedza AI chat" hidden>
         <header><div class="cai-title"><span class="cai-dot"></span><div><strong>Chiedza AI</strong><small>Your learning helper</small></div></div>
-          <div class="cai-actions"><button id="caiSpeak" title="Read answers aloud" aria-pressed="false">🔈</button><button id="caiClose" aria-label="Close">✕</button></div></header>
+          <div class="cai-actions"><button id="caiVoice" title="Voice chat: talk to me and I talk back" aria-pressed="false">🎙️</button><button id="caiSpeak" title="Read answers aloud" aria-pressed="false">🔈</button><button id="caiClose" aria-label="Close">✕</button></div></header>
         <div id="caiMsgs" aria-live="polite"></div>
         <div id="caiChips"></div>
-        <form id="caiForm" autocomplete="off"><input id="caiInput" type="text" placeholder="Ask me anything…" maxlength="500" /><button type="submit" aria-label="Send">➤</button></form>
+        <form id="caiForm" autocomplete="off"><input id="caiInput" type="text" placeholder="Ask me anything…" maxlength="500" /><button type="button" id="caiMic" class="cai-mic" aria-label="Speak your question" title="Tap and speak">🎤</button><button type="submit" aria-label="Send">➤</button></form>
+        <div id="caiVoiceBar" hidden><label>Voice language <select id="caiLang"><option value="en-ZA">English</option><option value="sn-ZW">Shona (may not work on every device)</option></select></label><span id="caiVoiceNote"></span></div>
         <div class="cai-foot">Chiedza AI uses our lessons and looks things up on the internet. It can make mistakes - ask a grown-up to check important things.</div>
       </section>`;
     document.body.appendChild(root);
@@ -243,7 +244,8 @@
 
     const say = (html, who) => { const d = document.createElement("div"); d.className = "cai-msg " + who; d.innerHTML = html; msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d; };
     const chips = list => { $("caiChips").innerHTML = (list || []).map(c => `<button class="cai-chip">${esc(c)}</button>`).join(""); };
-    const talk = html => { if (!speak || !window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(plain(html)); u.rate = 0.95; speechSynthesis.cancel(); speechSynthesis.speak(u); };
+    const spoken = html => plain(html).replace(/[\p{Extended_Pictographic}\uFE0F\u20E3]/gu, " ").replace(/×/g, " times ").replace(/÷/g, " divided by ").replace(/−/g, " minus ").replace(/\+/g, " plus ").replace(/=/g, " equals ").replace(/[→⬇➤✔]/g, " ").replace(/\s+/g, " ").trim().slice(0, 900);
+    const talk = html => { if (!speak || !window.speechSynthesis) return; const t = spoken(html); if (!t) return; const u = new SpeechSynthesisUtterance(t); u.rate = 0.95; speechSynthesis.cancel(); speechSynthesis.speak(u); };
     const show = r => {
       say(r.html + imgHtml(r.images) + linkHtml(r.links), "bot"); talk(r.html);
       if (r.next) setTimeout(() => say(r.next.html, "bot"), 500);
@@ -290,7 +292,7 @@
       const fb = document.createElement("div"); fb.className = "cai-fb"; fb.dataset.q = q; fb.dataset.a = a || "";
       fb.innerHTML = `<button data-fb="1" title="Good answer">👍</button><button data-fb="0" title="Teach me better">👎</button>`; target.appendChild(fb);
     };
-    const ask = text => {
+    let ask = text => {
       say(esc(text), "me"); remember("user", esc(text));
       setTimeout(async () => {
         const r = respond(text);
@@ -307,12 +309,75 @@
       }, 250);
     };
 
+
+    /* ----- voice: speak to Chiedza, and hear it answer ----- */
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const micBtn = $("caiMic"), voiceBtn = $("caiVoice"), bar = $("caiVoiceBar"), note = $("caiVoiceNote"), langSel = $("caiLang");
+    let rec = null, listening = false, voiceChat = false, lastActive = Date.now(), errCount = 0;
+    const LANG_KEY = "chiedza_voice_lang", OK_KEY = "chiedza_voice_ok";
+    try { const l = localStorage.getItem(LANG_KEY); if (l) langSel.value = l; } catch (e) {}
+    const setNote = t => { note.textContent = t || ""; bar.hidden = !t && !voiceChat && !listening; };
+    const spokenNumbers = t => { const W = { zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 }; const w = t.toLowerCase().replace(/[^a-z -]/g, "").trim().split(/[\s-]+/); if (w.length && w.length <= 2 && W[w[0]] !== undefined && (w.length === 1 || (W[w[0]] >= 20 && W[w[1]] > 0 && W[w[1]] < 10))) return String(W[w[0]] + (w[1] ? W[w[1]] : 0)); return t; };
+    function stopListen() { listening = false; micBtn.classList.remove("on"); micBtn.textContent = "🎤"; input.placeholder = "Ask me anything…"; if (rec) { try { rec.abort(); } catch (e) {} } }
+    function startListen() {
+      if (!SR || listening) return;
+      if (window.speechSynthesis && speechSynthesis.speaking) return;
+      let got = false;
+      try { rec = new SR(); } catch (e) { return; }
+      rec.lang = langSel.value || "en-ZA"; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
+      rec.onstart = () => { listening = true; micBtn.classList.add("on"); micBtn.textContent = "⏹️"; input.placeholder = "Listening… speak now"; setNote("🎤 Listening…"); };
+      rec.onresult = ev => {
+        let txt = "", fin = false;
+        for (let i = ev.resultIndex; i < ev.results.length; i++) { txt += ev.results[i][0].transcript; if (ev.results[i].isFinal) fin = true; }
+        input.value = txt;
+        if (fin) { got = true; errCount = 0; const v = spokenNumbers(txt.trim()); input.value = ""; lastActive = Date.now(); if (v) ask(v); }
+      };
+      rec.onerror = ev => {
+        const e = ev.error;
+        if (e === "not-allowed" || e === "service-not-allowed") { voiceChat = false; syncVoice(); setNote("🔒 The microphone is blocked. Allow it in your browser settings and try again."); }
+        else if (e === "language-not-supported") { langSel.value = "en-ZA"; setNote("This language is not supported on your device, so I switched to English."); }
+        else if (e === "network") { setNote("Voice needs an internet connection."); errCount++; }
+        else if (e === "no-speech") { errCount++; }
+      };
+      rec.onend = () => { listening = false; micBtn.classList.remove("on"); micBtn.textContent = "🎤"; input.placeholder = "Ask me anything…"; if (!got && input.value.trim() && !voiceChat) { /* leave the words in the box so they can be sent */ } if (!voiceChat) setNote(""); if (voiceChat && errCount >= 3) { voiceChat = false; syncVoice(); setNote("I did not hear anything, so voice chat is off. Tap 🎙️ to start again."); } };
+      try { rec.start(); } catch (e) {}
+    }
+    function consent() {
+      try { if (localStorage.getItem(OK_KEY) === "1") return true; } catch (e) {}
+      const ok = window.confirm("Voice uses your browser's speech service, and your voice may be sent to the company that makes your browser to turn it into words. Please ask a parent or guardian first. Do you have permission to use voice?");
+      if (ok) { try { localStorage.setItem(OK_KEY, "1"); } catch (e) {} }
+      return ok;
+    }
+    function syncVoice() { voiceBtn.setAttribute("aria-pressed", voiceChat); voiceBtn.classList.toggle("on", voiceChat); if (!voiceChat) { if (listening) stopListen(); } }
+    if (!SR) { micBtn.disabled = true; micBtn.title = "Voice typing is not supported in this browser. Try Chrome or Edge."; voiceBtn.disabled = true; voiceBtn.title = micBtn.title; micBtn.classList.add("off"); }
+    micBtn.onclick = () => { if (!SR) { say("🎤 Voice is not supported in this browser. Please try <strong>Chrome</strong> or <strong>Edge</strong>.", "bot"); return; } if (listening) { stopListen(); return; } if (!consent()) return; errCount = 0; startListen(); };
+    voiceBtn.onclick = () => {
+      if (!SR) return;
+      if (voiceChat) { voiceChat = false; syncVoice(); setNote("Voice chat is off."); speechSynthesis && speechSynthesis.cancel(); return; }
+      if (!consent()) return;
+      voiceChat = true; errCount = 0; speak = true; $("caiSpeak").textContent = "🔊"; $("caiSpeak").setAttribute("aria-pressed", true);
+      syncVoice(); bar.hidden = false; setNote("🎙️ Voice chat is on. Just talk, and I will talk back.");
+      say("🎙️ <strong>Voice chat is on.</strong> Ask me anything by speaking. Tap 🎙️ again to stop.", "bot");
+      lastActive = Date.now(); startListen();
+    };
+    langSel.onchange = () => { try { localStorage.setItem(LANG_KEY, langSel.value); } catch (e) {} };
+    // in voice chat: after Chiedza finishes thinking and speaking, listen again
+    setInterval(() => {
+      if (!voiceChat || listening || panel.hidden) return;
+      if (msgs.querySelector(".cai-think")) return;
+      if (window.speechSynthesis && (speechSynthesis.speaking || speechSynthesis.pending)) return;
+      if (Date.now() - lastActive < 1200) return;
+      startListen();
+    }, 900);
+    const _ask = ask;
+    ask = text => { lastActive = Date.now() + 1500; return _ask(text); };
+
     function open() {
       panel.hidden = false; $("caiLauncher").classList.add("hide"); input.focus();
       if (!msgs.children.length) { const nm = window.ChiedzaBrain && ChiedzaBrain.myName(); show({ html: `Mhoro${nm ? ", " + esc(nm) : ""}! 👋 I am <strong>Chiedza AI</strong>, a helper for <strong>everyone</strong> - children, parents, teachers and adult learners. I know every lesson, course and game here, and my <strong>brain</strong> can also solve maths with working, convert units, teach Shona and Ndebele, build a <strong>study plan</strong>, set a <strong>daily challenge</strong> and <strong>write projects with you</strong> (reports, posters, experiments, stories, even a mini website). What shall we do today?`, chips: ["Write a project on Victoria Falls", "Make me a study plan", "How can I help my child learn?", "How do I make a budget?", "What can you do?"] }); }
     }
     $("caiLauncher").onclick = open;
-    $("caiClose").onclick = () => { panel.hidden = true; $("caiLauncher").classList.remove("hide"); if (window.speechSynthesis) speechSynthesis.cancel(); };
+    $("caiClose").onclick = () => { voiceChat = false; if (typeof syncVoice === "function") syncVoice(); panel.hidden = true; $("caiLauncher").classList.remove("hide"); if (window.speechSynthesis) speechSynthesis.cancel(); };
     $("caiSpeak").onclick = e => { speak = !speak; e.currentTarget.textContent = speak ? "🔊" : "🔈"; e.currentTarget.setAttribute("aria-pressed", speak); if (!speak && window.speechSynthesis) speechSynthesis.cancel(); };
     $("caiForm").onsubmit = e => { e.preventDefault(); const v = input.value.trim(); if (!v) return; input.value = ""; ask(v); };
     $("caiChips").onclick = e => { const b = e.target.closest(".cai-chip"); if (b) ask(b.textContent); };

@@ -61,6 +61,8 @@
     const WORDOP = { add: "add", subtract: "take away", multiply: "multiply", divide: "divide" };
     function apply(op, a, b) { return op === "add" ? a + b : op === "subtract" ? a - b : op === "multiply" ? a * b : b === 0 ? NaN : a / b; }
     function splitSentences(s) {
+      // spoken questions arrive without punctuation: put a full stop before the question part
+      if (!/[?]/.test(s)) s = s.replace(/([a-z0-9])\s+(how (?:many|much)\b|what is the\b|find the\b|work out\b)/gi, "$1. $2");
       return s.replace(/(\d)\.(\d)/g, "$1\u0001$2").replace(/(\d),(\d{3})/g, "$1$2").split(/(?<=[.!?])\s+|\n+/).map(x => x.replace(/\u0001/g, ".").trim()).filter(Boolean);
     }
     function cueOf(sentence) {
