@@ -1,38 +1,18 @@
 {
   "name": "Chiedza Brain",
-  "version": "1.1.0",
-  "description": "The file-based brain of Chiedza AI. Everything the AI knows, how it speaks and what it refuses lives in these files. Edit a file, redeploy, and the AI changes. No code needed.",
+  "version": "2.0.0",
+  "description": "The file-based brain of Chiedza AI. It only reasons: it follows rules in these files to solve problems, explain causes, compare things and build full websites. Edit a file, redeploy, and the AI changes.",
   "identity": "identity.md",
   "safety": "safety.json",
-  "skills": "skills/skills.json",
-  "knowledge": [
-    "knowledge/zimbabwe.json",
-    "knowledge/study-skills.json",
-    "knowledge/science-basics.json",
-    "knowledge/maths-help.json",
-    "knowledge/life-skills.json",
-    "knowledge/maths-more.json",
-    "knowledge/english-help.json",
-    "knowledge/science-more.json",
-    "knowledge/social-agri.json",
-    "knowledge/everyone.json",
-    "knowledge/world.json",
-    "knowledge/tech-digital.json",
-    "knowledge/health.json",
-    "knowledge/life-work.json",
-    "knowledge/about.json"
-  ],
-  "glossary": "knowledge/glossary.json",
-  "languages": [
-    "languages/shona.json",
-    "languages/ndebele.json"
-  ],
-  "fun": "knowledge/fun.json",
-  "projects": "projects/templates.json",
   "reasoning": [
     "reasoning/reasoning.json",
     "reasoning/logic.json",
     "reasoning/causes.json",
     "reasoning/compare.json"
+  ],
+  "website": [
+    "reasoning/site-rules.json",
+    "reasoning/website.json",
+    "reasoning/website-more.json"
   ]
 }

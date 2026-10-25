@@ -527,13 +527,13 @@
     function solveCause(text) {
       const low = text.toLowerCase();
       if (!/\b(why|what causes?|what makes?|how come|what happens (if|when)|what is the cause|because of)\b/.test(low)) return null;
-      const qt = tokens(text); if (qt.length < 2) return null;
+      const qt = tokens(text); if (qt.length < 1) return null;
       let best = null, bs = 0;
       (CS.chains || []).forEach(c => {
         const kt = new Set(tokens(c.keywords + " " + c.q));
         const hit = qt.filter(w => kt.has(w)).length;
-        const score = hit / Math.max(2, Math.min(qt.length, 5));
-        if (hit >= 2 && score > bs) { bs = score; best = c; }
+        const qq = new Set(tokens(c.q)), score = hit / Math.max(2, Math.min(qt.length, 5)) + qt.filter(w => qq.has(w)).length * 0.01;
+        if (hit >= Math.min(2, qt.length) && score > bs) { bs = score; best = c; }
       });
       if (!best || bs < 0.5) return null;
       const chain = best.chain.map((s, i) => `${i === 0 ? "🔹" : "⬇️"} ${esc(s)}`).join("<br>");

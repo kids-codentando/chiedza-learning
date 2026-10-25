@@ -1,39 +1,37 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chiedza Learning — Learn, Play & Grow | Zimbabwe ECD to O-Level</title>
-  <meta name="description" content="Chiedza Learning is a free learning platform for Zimbabwean children from ECD to O-Level. Lessons, quizzes, games, free courses and verifiable certificates. Created by Ntandomods." />
-  <meta name="theme-color" content="#0b0d12" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="assets/icon.png" />
-  <meta property="og:title" content="Chiedza Learning — Learn, Play & Grow" />
-  <meta property="og:description" content="A free learning platform for Zimbabwean children, ECD to O-Level. Lessons, quizzes, games, free courses and verifiable certificates. Created by Ntandomods." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/logo-full.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Chiedza Learning — Learn, Play & Grow" />
-  <meta name="twitter:image" content="assets/logo-full.png" />
-  <link rel="stylesheet" href="css/styles.css" />
-<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chiedza AI | Reasoning AI that builds full websites</title>
+<meta name="description" content="Chiedza AI reasons step by step and builds complete multi-page websites from a short description. No outside AI, no API keys.">
+<meta name="theme-color" content="#0b0d12">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/studio.css">
 </head>
 <body>
-  <div id="app"></div>
-  <script src="js/qrcode.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/extra-core.js"></script>
-  <script src="js/extra-ecd.js"></script>
-  <script src="js/extra-infant.js"></script>
-  <script src="js/extra-junior.js"></script>
-  <script src="js/extra-courses.js"></script>
-  <script src="js/extra-final.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/brain.js"></script>
-  <script src="js/brain-projects.js"></script>
-  <script src="js/reasoning.js"></script>
-  <script src="js/chiedza-ai.js"></script>
-<script>if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("/sw.js").catch(function () {}); }); }</script>
+<header class="bar">
+  <div class="brand"><img src="assets/icon.png" alt="" width="34" height="34"><div><strong>Chiedza AI</strong><small>Reasons. Then builds your website.</small></div></div>
+  <div class="bar-actions"><button type="button" id="newBtn" class="ghost">New website</button><button type="button" id="showPreview" class="ghost only-small" hidden>Preview</button></div>
+</header>
+<div class="layout" id="layout">
+  <section class="chat" aria-label="Chat with Chiedza AI">
+    <div id="msgs" class="msgs" aria-live="polite"></div>
+    <div id="chips" class="chips"></div>
+    <form id="form" autocomplete="off"><input id="input" type="text" maxlength="700" placeholder="Describe the website you want, or ask me to solve something…" aria-label="Your message"><button type="submit" class="send">Send</button></form>
+    <p class="foot">Chiedza AI follows rules in its brain files. It shows its reasoning and never invents phone numbers, prices or reviews.</p>
+  </section>
+  <section class="side" id="side" aria-label="Website preview" hidden>
+    <div class="side-top"><div id="tabs" class="tabs" role="tablist"></div><div class="side-actions"><button type="button" data-dev="desktop" class="ghost on">Desktop</button><button type="button" data-dev="mobile" class="ghost">Phone</button><button type="button" id="closePreview" class="ghost only-small">Close</button></div></div>
+    <div class="frame-wrap" id="frameWrap"><iframe id="frame" title="Website preview" sandbox="allow-scripts allow-same-origin allow-popups"></iframe></div>
+    <div id="codeView" class="code" hidden><div id="codeFiles" class="tabs"></div><textarea id="codeText" readonly spellcheck="false"></textarea><div class="code-actions"><button type="button" id="copyCode">Copy this file</button><button type="button" id="backPreview" class="ghost">Back to preview</button></div></div>
+  </section>
+</div>
+<script src="js/brain.js"></script>
+<script src="js/reasoning.js"></script>
+<script src="js/sitebuilder.js"></script>
+<script src="js/studio.js"></script>
+<script>if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(function () {});</script>
 </body>
 </html>

@@ -1,0 +1,83 @@
+{
+ "name": "Chiedza Website Types (part 2)",
+ "description": "More website types, same shape as website.json. Add a type here and the builder can reason about it.",
+ "types": [
+  {
+   "id": "portfolio", "label": "portfolio website", "emoji": "🎨", "palette": "teal", "tone": "bold",
+   "keywords": ["portfolio", "photographer", "photography", "designer", "artist", "freelancer", "developer", "writer", "musician", "dj", "videographer", "illustrator", "cv site", "my work", "personal site", "personal website"],
+   "offerLabel": "My Work", "offerFile": "work", "cta": { "kind": "contact", "label": "Hire me" },
+   "taglines": ["Creative work with a clear purpose", "Ideas made real", "See what I can do for you"],
+   "about": ["I am {name}{in}, and I turn ideas into finished work. I listen carefully, work honestly and deliver on time.", "Browse my work, then get in touch to talk about your project."],
+   "offers": [{ "t": "Project work", "d": "From first idea to finished result." }, { "t": "Ongoing support", "d": "Updates and improvements after the project is done." }, { "t": "Advice", "d": "A second opinion on your plans." }],
+   "blurbs": ["{o}: a project I am proud of.", "Examples of my {o}.", "{o}, made to fit the client's goals."],
+   "values": [{ "i": "🎯", "t": "Focused", "d": "I start with what you want to achieve." }, { "i": "💬", "t": "Clear communication", "d": "You always know where the project is." }, { "i": "⏱️", "t": "Reliable", "d": "I deliver when I say I will." }],
+   "faq": [{ "q": "How do we start?", "a": "Send me a message describing your project, budget and deadline." }, { "q": "How much do you charge?", "a": "It depends on the work. I give a fixed quote after we talk." }, { "q": "Can I see more examples?", "a": "Yes, ask and I will send more." }]
+  },
+  {
+   "id": "farm", "label": "farm or agriculture website", "emoji": "🌱", "palette": "green", "tone": "professional",
+   "keywords": ["farm", "farming", "farmer", "agriculture", "agri", "crops", "livestock", "poultry", "chickens", "eggs", "dairy", "milk", "garden", "nursery plants", "irrigation", "seeds", "fertiliser", "fertilizer", "horticulture", "fish farming", "piggery", "goats", "cattle", "maize", "vegetables"],
+   "offerLabel": "Our Produce", "offerFile": "produce", "cta": { "kind": "order", "label": "Order fresh produce" },
+   "taglines": ["Fresh from our land to your table", "Grown with care{in}", "Good farming, good food"],
+   "about": ["{name} is a farm{in} that grows and sells good produce. We farm with care for the soil, the animals and the people who eat what we grow.", "Buy direct from us for fresh produce at fair prices."],
+   "offers": [{ "t": "Fresh produce", "d": "Harvested and delivered while it is fresh." }, { "t": "Bulk orders", "d": "Restaurants, schools and shops are welcome." }, { "t": "Farm visits", "d": "See how your food is grown." }],
+   "blurbs": ["Fresh {o} from our farm.", "{o}, available in small and bulk quantities.", "Order {o} directly from the farmer."],
+   "values": [{ "i": "🌾", "t": "Farm fresh", "d": "No long journey from field to you." }, { "i": "♻️", "t": "Caring for the land", "d": "We protect the soil and water." }, { "i": "🤝", "t": "Buy direct", "d": "Fair prices for both sides." }],
+   "faq": [{ "q": "How do I order?", "a": "Message us the product and quantity. We confirm the price and collection or delivery." }, { "q": "Do you sell in bulk?", "a": "Yes. Tell us what you need and how often." }, { "q": "Can I visit the farm?", "a": "Yes, arrange a time with us first." }]
+  },
+  {
+   "id": "clinic", "label": "clinic or health website", "emoji": "🩺", "palette": "teal", "tone": "professional",
+   "keywords": ["clinic", "doctor", "dentist", "dental", "pharmacy", "hospital", "health", "medical", "physio", "physiotherapy", "optician", "nurse", "wellness", "therapy", "counselling", "counseling", "vet", "veterinary"],
+   "offerLabel": "Services", "offerFile": "services", "cta": { "kind": "book", "label": "Book a visit" },
+   "taglines": ["Caring for your health", "Gentle, professional care{in}", "Your health, our priority"],
+   "about": ["{name} is a health practice{in} focused on clear advice and respectful care. We listen, explain and treat you with dignity.", "This website gives general information only and does not replace seeing a health professional."],
+   "offers": [{ "t": "Consultations", "d": "Time to talk through your concerns." }, { "t": "Check-ups", "d": "Regular checks that catch problems early." }, { "t": "Follow-up care", "d": "We keep checking how you are doing." }],
+   "blurbs": ["{o}, provided by trained staff.", "Book {o} and get clear advice.", "{o} with privacy and respect."],
+   "values": [{ "i": "🔒", "t": "Private", "d": "Your information stays confidential." }, { "i": "🧑‍⚕️", "t": "Trained staff", "d": "Care from qualified people." }, { "i": "🕒", "t": "Easy appointments", "d": "Book by message." }],
+   "faq": [{ "q": "How do I book?", "a": "Message us to choose a time." }, { "q": "Is this an emergency service?", "a": "No. In an emergency go to the nearest hospital or call your local emergency number." }, { "q": "What should I bring?", "a": "Bring any medicine and records you have. We will tell you if anything else is needed." }]
+  },
+  {
+   "id": "tech", "label": "tech or startup website", "emoji": "💻", "palette": "purple", "tone": "bold",
+   "keywords": ["tech", "software", "app", "startup", "saas", "platform", "it company", "web design", "computer", "digital", "ai", "fintech", "cyber", "data", "iot", "robotics", "coding"],
+   "offerLabel": "Features", "offerFile": "features", "cta": { "kind": "contact", "label": "Request a demo" },
+   "taglines": ["Technology that makes work simpler", "Built to solve a real problem", "Smarter tools{in}"],
+   "about": ["{name} builds technology{in} that solves real problems for real people. We keep things simple and we listen to the people who use our work.", "Talk to us about what you want to improve and we will show you how."],
+   "offers": [{ "t": "Simple to use", "d": "Clear design so anyone can start in minutes." }, { "t": "Secure by default", "d": "Your data is protected." }, { "t": "Support that answers", "d": "Real people help when you are stuck." }],
+   "blurbs": ["{o}: built to save you time.", "With {o} you get more done.", "{o}, designed around how people really work."],
+   "values": [{ "i": "⚡", "t": "Fast", "d": "Quick to learn, quick to use." }, { "i": "🔐", "t": "Secure", "d": "Safety is built in." }, { "i": "🧩", "t": "Flexible", "d": "It adapts to your way of working." }],
+   "faq": [{ "q": "How do I get started?", "a": "Contact us and we will set up a short demo." }, { "q": "Is my data safe?", "a": "We protect data with access controls and backups, and we explain exactly what we store." }, { "q": "What does it cost?", "a": "It depends on your needs. Contact us for a clear price." }]
+  },
+  {
+   "id": "event", "label": "event website", "emoji": "🎉", "palette": "gold", "tone": "elegant",
+   "keywords": ["event", "wedding", "conference", "festival", "party", "birthday", "concert", "launch", "fundraiser", "graduation", "reunion", "expo", "workshop", "seminar", "summit", "funeral programme"],
+   "offerLabel": "Programme", "offerFile": "programme", "cta": { "kind": "contact", "label": "RSVP" },
+   "taglines": ["Join us for a day to remember", "You are invited{in}", "Save the date"],
+   "about": ["{name} is coming{in}. It is a day for people to meet, celebrate and share.", "Check the programme, plan your trip and let us know you are coming."],
+   "offers": [{ "t": "Arrival and welcome", "d": "Doors open and guests are seated." }, { "t": "Main programme", "d": "The heart of the day." }, { "t": "Food and fellowship", "d": "Time to eat, talk and enjoy." }],
+   "blurbs": ["{o}", "{o}: do not miss it.", "{o}"],
+   "values": [{ "i": "📍", "t": "Where", "d": "{serve}" }, { "i": "🗓️", "t": "When", "d": "Add your date and time here." }, { "i": "👗", "t": "Dress code", "d": "Come comfortable and ready to enjoy." }],
+   "faq": [{ "q": "How do I RSVP?", "a": "Use the contact page to tell us how many people are coming." }, { "q": "Can I bring children?", "a": "Please ask us when you RSVP." }, { "q": "Is there parking?", "a": "Ask us and we will explain the options." }]
+  },
+  {
+   "id": "blog", "label": "blog or news website", "emoji": "📝", "palette": "grey", "tone": "professional",
+   "keywords": ["blog", "news site", "magazine", "journal", "articles", "newsletter site", "stories", "podcast", "vlog"],
+   "offerLabel": "Latest posts", "offerFile": "posts", "cta": { "kind": "contact", "label": "Get in touch" },
+   "taglines": ["Stories worth reading", "Clear writing on things that matter", "Fresh ideas{in}"],
+   "about": ["{name} is a blog{in} where we share what we learn. We write plainly and we check our facts.", "Read, share and tell us what you would like us to write about."],
+   "offers": [{ "t": "How-to guides", "d": "Step-by-step help on a single topic." }, { "t": "Opinion", "d": "Our honest view, clearly marked as opinion." }, { "t": "Interviews", "d": "Conversations with people worth hearing from." }],
+   "blurbs": ["{o}: add your first post here.", "{o}", "{o}"],
+   "values": [{ "i": "✍️", "t": "Plain language", "d": "No jargon." }, { "i": "🔎", "t": "Checked facts", "d": "We say where information comes from." }, { "i": "💬", "t": "Your voice", "d": "We read every message." }],
+   "faq": [{ "q": "How often do you post?", "a": "Add your posting schedule here." }, { "q": "Can I write for you?", "a": "Yes, contact us with your idea." }, { "q": "Can I share your posts?", "a": "Yes, please link back to us." }]
+  },
+  {
+   "id": "personal", "label": "personal website", "emoji": "🙋", "palette": "blue", "tone": "bold",
+   "keywords": ["personal", "about me", "me and my", "my story", "my life", "my family", "myself"],
+   "offerLabel": "What I do", "offerFile": "work", "cta": { "kind": "contact", "label": "Say hello" },
+   "taglines": ["Hello, I am {name}", "A little about me{in}", "Welcome to my corner of the web"],
+   "about": ["Hi, I am {name}{in}. This is my space to share who I am and what I care about.", "Thanks for visiting. Say hello if you want to connect."],
+   "offers": [{ "t": "What I care about", "d": "Add the things that matter most to you." }, { "t": "What I am working on", "d": "Add your current projects." }, { "t": "Let us talk", "d": "I enjoy meeting new people." }],
+   "blurbs": ["{o}", "{o}", "{o}"],
+   "values": [{ "i": "🌟", "t": "Curious", "d": "Always learning." }, { "i": "🤝", "t": "Friendly", "d": "Happy to connect." }, { "i": "🎯", "t": "Determined", "d": "I finish what I start." }],
+   "faq": [{ "q": "How can I contact you?", "a": "Use the contact page." }, { "q": "Where are you based?", "a": "{serve}" }, { "q": "Can we work together?", "a": "Possibly. Tell me what you have in mind." }]
+  }
+ ]
+}

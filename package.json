@@ -1,31 +1,19 @@
 {
-  "name": "chiedza-learning",
-  "version": "1.0.0",
-  "description": "Chiedza Learning — a free learning platform for Zimbabwean children from ECD to O-Level. Created by Ntandomods.",
+  "name": "chiedza-ai",
+  "version": "2.0.0",
+  "description": "Chiedza AI - a reasoning AI that solves problems step by step and builds full websites. No outside AI, no API keys. Created by Ntandomods.",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "check:brain": "node scripts/check-brain.js && node scripts/test-reasoning.js && node scripts/test-matching.js",
+    "check:brain": "node scripts/check-brain.js && node scripts/test-reasoning.js && node scripts/test-website.js",
     "test:reasoning": "node scripts/test-reasoning.js",
-    "test:matching": "node scripts/test-matching.js"
+    "test:website": "node scripts/test-website.js"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "keywords": [
-    "education",
-    "zimbabwe",
-    "kids",
-    "learning",
-    "ecd",
-    "olevel",
-    "zimsec"
-  ],
+  "engines": { "node": ">=18.0.0" },
+  "keywords": ["reasoning", "ai", "website-builder", "zimbabwe", "no-api-key"],
   "author": "Ntandomods",
   "license": "MIT",
-  "dependencies": {
-    "express": "^4.19.2"
-  }
+  "dependencies": { "express": "^4.19.2" }
 }

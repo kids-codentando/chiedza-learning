@@ -1,0 +1,72 @@
+{
+ "name": "Chiedza Website Types (part 1)",
+ "description": "Each type says how Chiedza reasons about one kind of website: words that give it away, pages, colours, tone, call to action and the starting copy. {name} {in} {o} are filled in by the builder.",
+ "types": [
+  {
+   "id": "business", "label": "business website", "emoji": "🏢", "palette": "blue", "tone": "professional",
+   "keywords": ["business", "company", "services", "consulting", "agency", "contractor", "construction", "cleaning", "transport", "logistics", "security", "plumbing", "electrician", "mechanic", "garage", "printing", "repairs"],
+   "offerLabel": "Services", "offerFile": "services", "cta": { "kind": "contact", "label": "Get a free quote" },
+   "taglines": ["Reliable service you can trust", "Done properly, on time", "Your trusted partner{in}"],
+   "about": ["{name} is a business{in} that puts customers first. We keep our promises, explain our prices clearly and finish the job properly.", "Whether you are a first-time customer or have worked with us for years, you get the same honest advice and friendly service."],
+   "offers": [{ "t": "Free consultation", "d": "Tell us what you need and we will suggest the best way to do it." }, { "t": "Quality work", "d": "Skilled people and good materials, so the result lasts." }, { "t": "After-sales support", "d": "We stay in touch and fix problems quickly." }],
+   "blurbs": ["Professional {o} delivered with care and clear pricing.", "{o} done by people who take pride in the result.", "Ask us about {o}. We will explain every step."],
+   "values": [{ "i": "✅", "t": "Honest prices", "d": "You know the cost before we start." }, { "i": "⏱️", "t": "On time", "d": "We respect your time and keep to the plan." }, { "i": "🤝", "t": "Friendly support", "d": "A real person answers your questions." }],
+   "faq": [{ "q": "How do I get a quote?", "a": "Use the contact page or message us and describe what you need. We reply with a clear price." }, { "q": "How long does a job take?", "a": "It depends on the work. We give you a time estimate together with the quote." }, { "q": "Which areas do you serve?", "a": "{serve}" }]
+  },
+  {
+   "id": "shop", "label": "online shop", "emoji": "🛍️", "palette": "orange", "tone": "playful",
+   "keywords": ["shop", "store", "boutique", "retail", "clothes", "clothing", "fashion", "shoes", "phones", "electronics", "furniture", "hardware", "tuckshop", "tuck shop", "grocery", "groceries", "wholesale", "ecommerce", "e-commerce", "products", "sell", "selling", "sells"],
+   "offerLabel": "Products", "offerFile": "products", "cta": { "kind": "order", "label": "Order now" },
+   "taglines": ["Good products at fair prices", "Everything you need, in one place", "Shop with confidence{in}"],
+   "about": ["{name} is a shop{in} where you find good products at fair prices. We choose what we sell carefully so you do not waste your money.", "Order by message, collect from us or ask about delivery. We are happy to help you choose."],
+   "offers": [{ "t": "Everyday essentials", "d": "Products people use every day, always in stock." }, { "t": "Special orders", "d": "Cannot find it? Ask us and we will try to get it for you." }, { "t": "Bulk and wholesale", "d": "Better prices when you buy more." }],
+   "blurbs": ["{o}: carefully chosen and fairly priced.", "Ask us for {o}. Message us to check stock and price.", "Quality {o} for you and your family."],
+   "values": [{ "i": "💰", "t": "Fair prices", "d": "Good value, no hidden extras." }, { "i": "🚚", "t": "Easy ordering", "d": "Message us to order, collect or arrange delivery." }, { "i": "⭐", "t": "Checked quality", "d": "We only sell what we would use ourselves." }],
+   "faq": [{ "q": "How do I order?", "a": "Send us a message with the product you want. We confirm the price and stock, then arrange payment and delivery or collection." }, { "q": "Do you deliver?", "a": "Ask us. Delivery depends on where you are." }, { "q": "Can I return something?", "a": "Tell us within a few days if something is wrong and we will sort it out fairly." }]
+  },
+  {
+   "id": "restaurant", "label": "restaurant or food website", "emoji": "🍽️", "palette": "red", "tone": "playful",
+   "keywords": ["restaurant", "cafe", "café", "bakery", "baker", "catering", "caterer", "food", "kitchen", "takeaway", "takeaways", "fast food", "bar", "grill", "braai", "pizza", "coffee", "cakes", "bread", "mandazi", "sadza", "meals", "lodge dining", "tea room"],
+   "offerLabel": "Menu", "offerFile": "menu", "cta": { "kind": "order", "label": "Order or reserve" },
+   "taglines": ["Fresh food, made with love", "Taste the difference{in}", "Good food brings people together"],
+   "about": ["{name} is a food business{in} that cooks fresh every day. Our meals are made with care, good ingredients and a lot of love.", "Come and eat with us, order for your event, or ask about takeaways."],
+   "offers": [{ "t": "Today's meal", "d": "Freshly cooked and served hot." }, { "t": "Catering for events", "d": "Weddings, funerals, parties and meetings of any size." }, { "t": "Takeaways", "d": "Order ahead and pick up when it suits you." }],
+   "blurbs": ["{o}, freshly made and full of flavour.", "Our {o} is a favourite with regular customers.", "Try the {o}. You will come back for more."],
+   "values": [{ "i": "🥘", "t": "Cooked fresh", "d": "Made every day, never reheated from last week." }, { "i": "🧼", "t": "Clean kitchen", "d": "Hygiene is part of every meal." }, { "i": "🎉", "t": "Events welcome", "d": "We cater for any size of gathering." }],
+   "faq": [{ "q": "Can I order for an event?", "a": "Yes. Tell us the date, number of guests and what you would like, and we will quote you." }, { "q": "Do you do takeaways?", "a": "Yes. Message us ahead so your food is ready when you arrive." }, { "q": "Do you cater for special diets?", "a": "Tell us what you need and we will do our best." }]
+  },
+  {
+   "id": "salon", "label": "salon or beauty website", "emoji": "💇", "palette": "pink", "tone": "elegant",
+   "keywords": ["salon", "hair", "hairdresser", "barber", "barbershop", "beauty", "nails", "nail", "spa", "makeup", "massage", "braids", "braiding", "weave", "lashes", "skincare"],
+   "offerLabel": "Services", "offerFile": "services", "cta": { "kind": "book", "label": "Book an appointment" },
+   "taglines": ["Look good. Feel wonderful.", "Beauty that starts with care{in}", "Your style, done right"],
+   "about": ["{name} is a salon{in} where every client is treated with care. We listen first, then we create the look you want.", "Book ahead for the best time slots, or send us a picture of the style you love."],
+   "offers": [{ "t": "Hair styling", "d": "Cuts, braids, treatments and styling for every occasion." }, { "t": "Nails and beauty", "d": "Neat, long-lasting finishes." }, { "t": "Bridal and events", "d": "Look your best on your big day." }],
+   "blurbs": ["{o} by skilled hands, with products we trust.", "Book {o} and leave feeling great.", "{o}, done neatly and on time."],
+   "values": [{ "i": "💖", "t": "Gentle care", "d": "Your hair and skin come first." }, { "i": "🧴", "t": "Good products", "d": "We use products that suit you." }, { "i": "📅", "t": "Easy booking", "d": "Message us to choose your time." }],
+   "faq": [{ "q": "How do I book?", "a": "Message us the service and the day you would like. We confirm your time." }, { "q": "Can I bring a picture of the style I want?", "a": "Yes, it helps us get it right." }, { "q": "What if I am late?", "a": "Please tell us. We will fit you in if we can." }]
+  },
+  {
+   "id": "school", "label": "school or training website", "emoji": "🎓", "palette": "navy", "tone": "professional",
+   "keywords": ["school", "college", "academy", "nursery", "preschool", "creche", "crèche", "training", "tutor", "tutoring", "lessons", "classes", "institute", "university", "courses", "daycare", "ecd", "kindergarten"],
+   "offerLabel": "Programmes", "offerFile": "programmes", "cta": { "kind": "contact", "label": "Enquire about enrolment" },
+   "taglines": ["Learning that lights the way", "Where learners grow{in}", "Caring teachers, confident learners"],
+   "about": ["{name} is a place of learning{in} where every learner is known by name. We combine caring teachers, a safe place and high expectations.", "Parents are our partners. We share progress openly and welcome your questions."],
+   "offers": [{ "t": "Early learning", "d": "Play-based learning for the youngest children." }, { "t": "Primary and secondary", "d": "A full curriculum taught by qualified teachers." }, { "t": "Extra lessons", "d": "Extra help and practice before exams." }],
+   "blurbs": ["{o}: clear teaching and regular feedback.", "Our {o} help learners build confidence.", "Ask about {o} and how to enrol."],
+   "values": [{ "i": "👩‍🏫", "t": "Caring teachers", "d": "Teachers who know every learner." }, { "i": "🛡️", "t": "Safe place", "d": "Supervision and clear rules for everyone." }, { "i": "📈", "t": "Progress you can see", "d": "Regular reports for parents." }],
+   "faq": [{ "q": "How do I enrol my child?", "a": "Contact us to book a visit. We explain the steps and the documents needed." }, { "q": "What are the fees?", "a": "Fees depend on the programme. Contact us for the current fee list." }, { "q": "When does the term start?", "a": "Contact the office for the current term dates." }]
+  },
+  {
+   "id": "community", "label": "church, charity or community website", "emoji": "🕊️", "palette": "purple", "tone": "elegant",
+   "keywords": ["church", "ministry", "charity", "ngo", "foundation", "community", "mosque", "non-profit", "nonprofit", "fellowship", "youth group", "orphanage", "trust", "volunteer", "donate", "donations", "club", "association", "society", "cooperative"],
+   "offerLabel": "What we do", "offerFile": "programmes", "cta": { "kind": "contact", "label": "Join or support us" },
+   "taglines": ["Together we are stronger", "Serving our community{in}", "Hope, help and heart"],
+   "about": ["{name} is a community group{in} working together to help others. Everything we do is built on care, honesty and service.", "Everyone is welcome. Come, volunteer, or support our work in any way you can."],
+   "offers": [{ "t": "Meetings and gatherings", "d": "Regular times when we meet, learn and support each other." }, { "t": "Community projects", "d": "Practical help for people who need it." }, { "t": "Volunteering", "d": "Give your time and skills to make a difference." }],
+   "blurbs": ["{o}: open to everyone who wants to take part.", "Join us for {o}.", "{o} is part of how we serve our community."],
+   "values": [{ "i": "💛", "t": "Compassion", "d": "We treat everyone with kindness." }, { "i": "🔍", "t": "Honesty", "d": "We are open about how support is used." }, { "i": "🌍", "t": "Community", "d": "Local people solving local problems." }],
+   "faq": [{ "q": "How can I help?", "a": "You can volunteer, give, or share our work. Contact us to find out what is needed." }, { "q": "Who can join?", "a": "Everyone is welcome." }, { "q": "Where do you meet?", "a": "{serve}" }]
+  }
+ ]
+}
