@@ -1,0 +1,61 @@
+{
+ "name": "Chiedza Website Rules",
+ "description": "How Chiedza AI reasons about what website to build: colour words, tones, fonts, extra sections, places and how to read a request. Edit a list, run npm run test:website, redeploy.",
+ "intent": {
+  "verbs": ["build", "create", "make", "generate", "design", "write", "code", "develop", "set up", "setup", "need", "want", "give me", "i need", "i want"],
+  "things": ["website", "web site", "webpage", "web page", "landing page", "homepage", "home page", "online shop", "online store", "web shop", "portfolio site", "site"],
+  "startOver": ["start over", "new website", "another website", "start again", "begin again", "reset website"]
+ },
+ "colors": {
+  "red": "#c62828", "orange": "#e65100", "yellow": "#f9a825", "gold": "#b8860b", "green": "#1b7a3d", "teal": "#00796b",
+  "blue": "#1565c0", "navy": "#14305e", "purple": "#6a1b9a", "pink": "#c2185b", "brown": "#6d4c41", "black": "#212121",
+  "grey": "#455a64", "gray": "#455a64", "maroon": "#7b1f2b", "turquoise": "#00838f", "cyan": "#00838f", "lime": "#558b2f"
+ },
+ "accents": {
+  "red": "#f9a825", "orange": "#1565c0", "yellow": "#212121", "gold": "#1b7a3d", "green": "#f9a825", "teal": "#ff7043",
+  "blue": "#ff9800", "navy": "#f9a825", "purple": "#ffb300", "pink": "#6a1b9a", "brown": "#f9a825", "black": "#f9a825",
+  "grey": "#ff7043", "gray": "#ff7043", "maroon": "#f9a825", "turquoise": "#ff7043", "cyan": "#ff7043", "lime": "#6a1b9a"
+ },
+ "themes": {
+  "zimbabwe": { "primary": "#1b7a3d", "accent": "#f9a825", "extra": "#c62828" },
+  "zimbabwean": { "primary": "#1b7a3d", "accent": "#f9a825", "extra": "#c62828" }
+ },
+ "tones": {
+  "playful": ["fun", "playful", "kids", "children", "colourful", "colorful", "cheerful", "friendly", "bright"],
+  "elegant": ["elegant", "luxury", "luxurious", "classy", "premium", "upmarket", "wedding", "boutique", "fancy"],
+  "professional": ["professional", "corporate", "formal", "serious", "trusted", "law", "legal", "accounting", "consulting", "bank"],
+  "bold": ["bold", "modern", "sleek", "tech", "startup", "futuristic", "strong", "energetic"]
+ },
+ "fonts": {
+  "playful": { "head": "'Trebuchet MS','Segoe UI',system-ui,sans-serif", "body": "'Segoe UI',system-ui,-apple-system,sans-serif", "why": "round, friendly letters feel playful" },
+  "elegant": { "head": "Georgia,'Times New Roman',serif", "body": "'Segoe UI',system-ui,-apple-system,sans-serif", "why": "a serif heading feels classy and calm" },
+  "professional": { "head": "'Segoe UI',system-ui,-apple-system,sans-serif", "body": "'Segoe UI',system-ui,-apple-system,sans-serif", "why": "clean sans-serif reads as trustworthy" },
+  "bold": { "head": "'Arial Black','Segoe UI',system-ui,sans-serif", "body": "'Segoe UI',system-ui,-apple-system,sans-serif", "why": "heavy headings feel strong and modern" }
+ },
+ "extras": {
+  "gallery": ["gallery", "photos", "pictures", "images", "portfolio of photos"],
+  "pricing": ["pricing", "prices", "price list", "packages", "rates", "plans", "how much"],
+  "testimonials": ["testimonial", "testimonials", "reviews", "customer reviews", "what customers say"],
+  "team": ["team", "staff", "our people", "meet the team"],
+  "faq": ["faq", "faqs", "frequently asked", "questions page"],
+  "stats": ["stats", "numbers", "statistics", "achievements"],
+  "blog": ["blog", "news", "articles", "updates"],
+  "map": ["map", "directions", "find us", "location map"],
+  "newsletter": ["newsletter", "subscribe", "mailing list"]
+ },
+ "layout": {
+  "single": ["one page", "single page", "one-page", "single-page", "all on one page", "landing page"],
+  "multi": ["multi page", "multi-page", "several pages", "full website", "multiple pages"]
+ },
+ "dark": ["dark mode", "dark theme", "dark background", "dark website", "dark site", "night"],
+ "ctaKinds": { "whatsapp": ["whatsapp", "chat with us"], "book": ["book", "booking", "appointment", "reserve", "reservation"], "order": ["order", "orders", "buy", "shop online", "delivery"] },
+ "places": ["Harare", "Bulawayo", "Mutare", "Gweru", "Masvingo", "Kwekwe", "Kadoma", "Chitungwiza", "Chinhoyi", "Victoria Falls", "Hwange", "Marondera", "Bindura", "Beitbridge", "Kariba", "Zvishavane", "Rusape", "Chegutu", "Norton", "Ruwa", "Epworth", "Gokwe", "Karoi", "Zimbabwe", "Lusaka", "Johannesburg", "Cape Town", "Durban", "Nairobi", "Lagos", "Accra", "London", "Gaborone", "Maputo", "Windhoek"],
+ "nameStop": ["in", "at", "that", "which", "who", "with", "selling", "sells", "offering", "offers", "providing", "based", "located", "for", "and the", "where", "because", "to", "from", "so", "it", "using", "on", "of"],
+ "dropWords": ["a", "an", "the", "my", "our", "some", "all", "various", "different", "many", "lots of", "good", "nice", "quality", "great"],
+ "tips": {
+  "noName": "I did not hear a name, so I used a placeholder. Tell me: call it Your Name.",
+  "noContact": "I have no phone, WhatsApp or email yet, so the contact page shows a marked placeholder. Tell me: phone is 0770 000 000 and email is hello@example.com.",
+  "noPhotos": "The pictures are colour tiles and icons, because I cannot invent real photos. Put your own photos in an images folder and swap them in.",
+  "noQuotes": "I will not invent customer quotes. The testimonial cards are marked so you can paste real ones."
+ }
+}
