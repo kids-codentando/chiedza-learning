@@ -1,202 +1,60 @@
-# 💡 Chiedza Learning
+# 💡 Chiedza AI
 
-**A free learning platform for everyone - Zimbabwean children from ECD to O-Level, plus parents, teachers and adult learners.**
+**A reasoning AI that solves problems step by step and builds complete websites.**
 Created with ❤️ by **Ntandomods**.
 
-Chiedza Learning brings lessons, interactive quizzes, fun games, free courses and printable certificates together in one colourful, kid-friendly app built around the Zimbabwean curriculum.
+Chiedza AI runs on **files, not on a paid AI**. Its brain is a folder of plain JSON and Markdown files plus a small reasoning engine. There is no API key, no database and no monthly bill. It shows its working, says "I cannot tell" when the files do not give enough, and never invents facts.
 
----
+## What it does
 
-## ✨ Features
+- 🌐 **Builds full websites.** Describe the site in a sentence. Chiedza works out the purpose, name, place, offerings, colours, tone and pages, builds a real multi-page site (HTML, CSS, JS), checks its own work, shows every reasoning step, and lets you **preview**, **read the code** and **download a ZIP**.
+- ✏️ **Edits the site you built.** `make it green`, `add pricing`, `add a gallery`, `dark mode`, `make it one page`, `change the name to ...`, `phone is 0771 234 567`.
+- 🧮 **Word problems and sums** with working shown.
+- 🔗 **Logic** (who is tallest, if-then, all/some/none), **cause and effect** and **comparisons**.
+- 🛡️ **Safety rules** run first: no phishing or scam pages, no private IDs or passwords.
 
-- **4 Learning Levels**
-  - 🧸 **ECD** (Ages 3–5) — colours, shapes, numbers, letters, animals, body, fine motor & pre-writing, feelings & manners, sorting & patterns, five senses, Ndebele, sign language
-  - 📗 **Infant** (Grades 1–2) — Maths, English, Shona, Ndebele, phonics & reading, time/money/measuring, creative arts, values & safety, sign language
-  - 📘 **Junior** (Grades 3–7) — Maths, English, Science, Social Studies, Agriculture, Shona, Ndebele, creative & performing arts, reading & creative writing, sign language
-  - 🎓 **O-Level** (Forms 1–4) — Maths, English, Combined Science, History, Geography
-- **🤟 Sign language** — *Hands That Talk* (ECD), *Meet ZSL* (Infant), *Sign Language & Deaf Culture* (Junior) and a free **Sign Language & Deaf Awareness** course with certificate
-- **🧠 Chiedza Brain** — the AI's brain is a folder of files (`public/brain/`): knowledge, Shona/Ndebele phrasebooks, safety rules, riddles and project templates. It adds maths with working, unit conversion, study plans, daily challenges, memory, parent summaries and a **Project Writer** (reports, posters, stories, experiments, business plans, mini websites). Train it at `/teach.html`. See [`public/brain/README.md`](public/brain/README.md)
-- **🌐 Internet skills (no API keys)** — when the brain files do not know an answer, Chiedza AI looks it up on Simple Wikipedia / Wikipedia, explains it simply with the source, and has dictionary and live weather skills. Train it from `/teach.html`. See [Web brain](#-web-brain-our-own-ai-no-api-keys)
-- **💡 Chiedza AI** — a built-in learning helper (bottom-right) that answers from every lesson, quiz, course and platform fact, quizzes learners, and can read answers aloud
-- **Interactive quizzes** with instant feedback and scoring
-- **🎓 Free Courses** with module-based learning and **assessment forms**
-- **Printable certificates** (with unique certificate IDs) on passing
-- **🎮 Games** — Memory Match & Math Blitz
-- **🏅 Badge system** and **progress tracking** (saved in your browser)
-- **Zimbabwean identity** — Shona & Ndebele, Great Zimbabwe, national symbols, local culture
-- Fully **responsive** and **print-friendly**
+Try: `Build a website for Mai Chido Bakery in Harare selling cakes, bread and mandazi. Make it pink with a gallery`
 
----
+13 kinds of site are built in: business, online shop, restaurant or food, salon, school, church or charity, portfolio, farm, clinic, tech or startup, event, blog and personal.
 
-## 🚀 Deploy on Render
+**Honest limits.** The copy comes from templates in the brain files, so it is solid but generic. Photos are colour tiles, contact forms open WhatsApp or email (no server), and anything Chiedza cannot know (phone, prices, reviews) is left as a yellow `[placeholder]` for you to fill in.
 
-This project is ready to deploy on [Render](https://render.com) as a **Web Service**.
-
-### Option A — One-click Blueprint (recommended)
-
-1. Push this folder to a GitHub/GitLab repository.
-2. In Render, click **New → Blueprint**.
-3. Connect your repository — Render reads `render.yaml` automatically.
-4. Click **Apply**. Render will build and deploy. Done! ✅
-
-### Option B — Manual Web Service
-
-1. In Render, click **New → Web Service** and connect your repo.
-2. Set:
-   - **Environment:** `Node`
-   - **Build Command:** `npm install`
-   - **Start Command:** `npm start`
-   - **Health Check Path:** `/api/health`
-3. (Optional) Add env var `NODE_VERSION = 20.11.1`.
-4. Click **Create Web Service**.
-
-Render will provide a public URL such as `https://chiedza-learning.onrender.com`.
-
-> **Note:** On the Render free tier the filesystem is ephemeral, so assessment
-> submissions/certificates are stored in a JSON file that resets on redeploy.
-> For permanent storage, connect a database (e.g. Render Postgres) in `server.js`.
-
----
-
-## 💻 Run Locally
+## Run locally
 
 ```bash
-cd chiedza-learning
 npm install
 npm start
 # open http://localhost:3000
 ```
 
-The app also works as a **pure static site** (no server needed) — just open
-`public/index.html`, or host the `public/` folder on any static host.
-The certificate generation and progress tracking work entirely in the browser.
+It also works as a plain static site: host the `public/` folder anywhere.
 
----
+## Checks
 
-## 🧠 Web brain (our own AI, no API keys)
+```bash
+npm run check:brain   # brain files + reasoning examples + website builder tests
+```
 
-Chiedza AI answers in this order: **safety rules → brain files and skills (instant, offline) → lessons → web brain**. Anything the files do not cover goes to `POST /api/brain/ask`, which runs our own skills in `server/webbrain.js`. **No paid AI, no API key, no monthly bill.**
+## Deploy on Render
 
-| Skill | What it does | Source (free, no key) |
-| ----- | ------------ | --------------------- |
-| Knowledge | Understands the question (what/who/why/how/how-tall), finds the best page, picks the sentences that really answer it, tidies them for a child, shows the source. "Tell me more" gives the next facts | Simple Wikipedia, then Wikipedia |
-| Word meanings | `define photosynthesis` | Wiktionary, dictionaryapi.dev |
-| Weather | `weather in Harare` (live) | Open-Meteo |
+1. Push this repo to GitHub.
+2. In Render choose **New → Blueprint** and connect the repo. `render.yaml` does the rest (health check `/api/health`).
 
-Learners can force it with *"search the internet for ..."*. It is honest about its limits: it finds and explains, it does not invent. When it finds nothing the question goes to the "could not answer" list in `/teach.html`.
-
-**Training from the internet.** Every answer the web brain finds is listed (anonymously) under *Learned from the internet* in `/teach.html`. For each one you can **Teach** (edit and save it as a checked offline answer), **Block** (the AI never gives that answer again) or dismiss it.
-
-**Child safety built in:** the same `public/brain/safety.json` rules run before and after every lookup; adult topics (and questions like "where do babies come from") are sent to a parent or teacher; pages are never fetched from learner-supplied links; 40 lookups per 10 minutes per visitor; results are cached for 6 hours. Check `/api/brain/web-status` to confirm it is on.
-
----
-
-## 🔌 API Endpoints
-
-| Method | Endpoint | Description |
-| ------ | -------- | ----------- |
-| GET  | `/api/health` | Service health check |
-| POST | `/api/assessments` | Save an assessment result (auto-issues a certificate on pass) |
-| GET  | `/api/assessments` | List recent assessment submissions |
-| POST | `/api/certificates` | Issue a certificate manually (stores the canonical data + tamper-evident code) |
-| GET  | `/api/certificates/:id` | Verify a certificate by ID |
-| POST | `/api/brain/gaps` | Log a question the AI could not answer (anonymous) |
-| GET  | `/api/brain/gaps` | Owner-only list of those questions (header `x-admin-key`) |
-| GET  | `/api/brain/trained` | Answers the owner taught the AI |
-| POST/DELETE | `/api/brain/train` | Owner-only: teach or remove an answer (also used by `/teach.html`) |
-| POST/GET | `/api/brain/feedback` | Thumbs up/down from learners (GET is owner-only) |
-| POST | `/api/brain/ask` | Web brain: `{question, level, more}` returns `{answer, sources, kind}` |
-| GET  | `/api/brain/web-status` | Is the web brain on and which sources it uses |
-| GET  | `/api/brain/web-answers` | Owner-only: answers found online, to review |
-| POST | `/api/brain/web-answers/review` | Owner-only: `{q, action: approve/block/dismiss}` |
-| GET  | `/api/brain/status` | Brain version and file counts |
-| GET  | `/api/verify/:id` | **Open verification** — returns validity, checksum and the recognised-by list |
-
----
-
-## 📁 Project Structure
+## Project structure
 
 ```
-chiedza-learning/
+chiedza-ai/
 ├── public/
-│   ├── index.html          # App shell
-│   ├── assets/             # Brand kit: emblem, lockups, seal, favicon, brand sheet
-│   ├── css/styles.css      # Design system (Zimbabwe-themed, dark UI)
-│   └── js/
-│       ├── data.js         # Curriculum, courses, games, badges
-│       ├── extra-*.js      # Additional ECD / Infant / Junior subjects + sign-language course
-│       ├── chiedza-ai.js   # Chiedza AI helper (client-side, searches all lessons & FAQs)
-│       ├── qrcode.js       # QR generator (MIT) for certificate verification
-│       └── app.js          # Router, lessons, quizzes, courses, certificates
-├── server.js               # Express server + API
-├── package.json
-├── render.yaml             # Render Blueprint
-└── README.md
+│   ├── index.html, css/studio.css, js/studio.js   # chat + preview + ZIP download
+│   ├── js/brain.js        # loads the brain, runs safety, calculator
+│   ├── js/reasoning.js    # word problems, logic, causes, comparisons
+│   ├── js/sitebuilder.js  # website builder
+│   └── brain/             # the AI's files (see public/brain/README.md)
+├── scripts/               # check-brain, test-reasoning, test-website
+├── server.js              # tiny static server + /api/health
+└── render.yaml
 ```
 
----
+## License
 
-## 🎨 Brand — Chiedza Learning × Ntandomods
-
-The official brand kit lives in `public/assets/`:
-
-| File | Use |
-| ---- | --- |
-| `icon.png` | Emblem (light-bulb growing into leaves) — header, report card |
-| `favicon.png` | Rounded app icon / favicon |
-| `seal.png` | Official gold & green certificate seal |
-| `logo-h-light.png` / `logo-h-dark.png` | Horizontal lockup for dark / light surfaces |
-| `logo-stack-light.png` / `logo-stack-dark.png` | Stacked lockup for dark / light surfaces |
-| `logo-full.png` / `logo-full-transparent.png` | Master stacked logos |
-| `brand-sheet.png` | Full brand sheet |
-
-The emblem stands for bright ideas that grow; the seal appears on every certificate.
-
----
-
-## 🎓 Certificates
-
-When a learner completes a course's assessment form with **70% or more**, a
-certificate is unlocked. It shows the learner's name, course, the **modules
-completed**, level, duration, score, date and a unique certificate ID, and can be
-**printed or saved as a PDF** from the browser.
-
-### 🔎 Open Verification Standard — works for every organisation
-
-Every certificate is **verifiable by anyone — public or private, anywhere in the world**
-(schools, colleges, employers, NGOs, government bodies). Each certificate carries:
-
-- a unique **Certificate ID** (e.g. `CH-2026-ZW8K21`),
-- a **QR code** that deep-links to the verification page,
-- a **tamper-evident verification code** derived from the certificate's own details.
-
-Verification works in three ways:
-
-1. **Scan the QR code** — opens the verification page with the details filled in.
-2. **Enter the Certificate ID** — checked against the public registry (`/api/verify/:id`).
-3. **Check the verification code** — recomputed from the certificate's details to
-   detect any alteration (works **offline**, straight from the QR data).
-
-The public portal is at `#/verify`. No account or login is ever required.
-
----
-
-## 📜 License
-
-MIT — free to use and adapt for education.
-
-**Created by Ntandomods** 🇿🇼
-
----
-
-## 🤟 A note on sign language content
-
-The sign-language lessons teach what Zimbabwean Sign Language (ZSL) is, fingerspelling, Deaf etiquette, interpreters and inclusion. They deliberately **do not claim specific ZSL handshapes**, because signs vary by country and region. To add real signs, embed videos/images from a ZSL-fluent Deaf signer or the [King George VI Centre](https://www.kgvi.org/programs/sign-language/) inside a lesson `body`.
-
-## 💡 Chiedza AI
-
-`public/js/chiedza-ai.js` builds a search index from `LEVELS` and `COURSES` plus a platform FAQ, so **new lessons are picked up automatically**. It runs entirely in the browser (no API key, no cost). Language content (Shona/Ndebele) should be reviewed by a native-speaker teacher.
-
-## 🖼️ Pictures from Chiedza AI
-
-Chiedza AI can send pictures ("show me sign language pictures", "picture of hand washing"). Images live in `public/assets/learn/` and each carries the Chiedza Learning × Ntandomods logo band. To add one, drop a JPG in that folder and add an entry (file name, caption, keywords) to the `IMAGES` list in `public/js/chiedza-ai.js`. The sign-language images are general illustrations of Deaf etiquette, not ZSL handshape charts.
+MIT © Ntandomods

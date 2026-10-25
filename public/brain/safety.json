@@ -1,42 +1,34 @@
 {
-  "privacy": {
-    "patterns": [
-      "\\b(\\+?263|0)7\\d[\\d\\s-]{7,}\\b",
-      "\\b\\d{2}-?\\d{6,7}\\s?[a-z]\\s?\\d{2}\\b",
-      "\\bmy (phone|cell|whatsapp|home address|address|password|pin|id number)\\b",
-      "\\b[\\w.+-]+@[\\w-]+\\.[\\w.]+\\b"
-    ],
-    "reply": "🔒 Please do not share private things like phone numbers, addresses, ID numbers, emails or passwords here. Keep them safe and only share them with your parents or guardians."
-  },
-  "help_me": {
-    "patterns": [
-      "\\b(hurt(s|ing)? me|beat(s|ing)? me|touch(es|ed)? me|abus(e|ed|ing)|kill myself|want to die|suicid|hate my life|run away from home|being bullied|bully(ing)? me|scared of (him|her|them|my))\\b"
-    ],
-    "reply": "💛 I am really sorry you feel this way, and I am glad you told someone. You are not alone and it is not your fault. Please tell a trusted adult right now: a parent, guardian, teacher or church leader. In Zimbabwe you can also call <strong>Childline on 116</strong> (free) to talk to someone who cares. If you are in danger right now, go to a safe grown-up immediately."
-  },
-  "off_limits": {
-    "patterns": [
-      "\\b(porn|sex video|nude|naked pic|how to (make|build) (a )?(bomb|gun|weapon)|buy (drugs|weed|alcohol)|gambl(e|ing) site|betting)\\b"
-    ],
-    "reply": "🙅 That is not something I can help with. I am here for learning. Let's try a lesson, a quiz or a fun fact instead!"
-  },
-  "homework_cheating": {
-    "note": "The AI explains and guides; it does not just hand over exam answers.",
-    "patterns": [
-      "\\b(do my (whole )?(homework|exam|test) for me|give me (all )?(the )?exam answers)\\b"
-    ],
-    "reply": "📘 I can help you <strong>understand</strong> it, but I will not just do it for you, because you learn best when you try. Tell me which part is hard and I will explain it step by step!"
-  },
-  "emergency": {
-    "patterns": [
-      "\\b(this is an emergency|someone is (bleeding|choking|unconscious|drowning)|call (an )?ambulance|the house is on fire)\\b"
-    ],
-    "reply": "🚨 If this is an emergency, shout for a grown-up now and ask them to call for help. I am only a learning helper and cannot help in emergencies."
-  },
-  "grown_up": {
-    "patterns": [
-      "\\b(how (are|do|does|did) (a )?(babies|baby) (made|get made|born|come)|where do (babies|baby) come from|how (do|does) (people|a woman|a mother) get pregnant|pregnan(t|cy)|sex|sexual|intercourse|genitals?|penis|vagina|masturbat\\w*|abortion|contracepti\\w*|rape|suicide|self[- ]harm|kill myself|overdose)\\b"
-    ],
-    "reply": "🤝 That is a good question for a parent, teacher or another trusted grown-up. They can explain it in the right way for you. Is there something else I can help you learn?"
-  }
+ "privacy": {
+  "patterns": [
+   "\\b\\d{2}-?\\d{6,7}\\s?[a-z]\\s?\\d{2}\\b",
+   "\\b(my|the) (password|pin|id number|passport number|card number|cvv)\\b",
+   "\\b\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}\\b"
+  ],
+  "reply": "🔒 Please do not type private things like ID numbers, passwords, PINs or card numbers here. I never need them. Business phone numbers and emails for a website are fine."
+ },
+ "help_me": {
+  "patterns": [
+   "\\b(hurt(s|ing)? me|beat(s|ing)? me|touch(es|ed)? me|abus(e|ed|ing)|kill myself|want to die|suicid|hate my life|run away from home|being bullied|bully(ing)? me|scared of (him|her|them|my))\\b"
+  ],
+  "reply": "💛 I am really sorry you feel this way, and I am glad you told someone. You are not alone and it is not your fault. Please tell a trusted adult right now. In Zimbabwe you can also call <strong>Childline on 116</strong> (free) to talk to someone who cares. If you are in danger right now, go to a safe grown-up immediately."
+ },
+ "emergency": {
+  "patterns": [
+   "\\b(this is an emergency|someone is (bleeding|choking|unconscious|drowning)|call (an )?ambulance|the house is on fire)\\b"
+  ],
+  "reply": "🚨 If this is an emergency, shout for a grown-up now and ask them to call for help. I am only a learning helper and cannot help in emergencies."
+ },
+ "off_limits": {
+  "patterns": [
+   "\\b(porn|sex video|nude|naked pic|how to (make|build) (a )?(bomb|gun|weapon)|buy (drugs|weed)|gambl(e|ing) site|betting site)\\b"
+  ],
+  "reply": "🙅 That is not something I can help with. I can build you a different website, or help with a reasoning problem."
+ },
+ "site_abuse": {
+  "patterns": [
+   "\\b(phishing|fake (bank|login|paypal|ecocash|certificate|degree|id|passport)|clone (of )?(a )?(bank|paypal|ecocash)|steal(ing)? (passwords?|cards?|logins?)|collect (passwords?|card numbers?|pins?)|scam|ponzi|pyramid scheme|malware|keylogger|impersonat\\w+|pretend to be (a )?(bank|police|government))\\b"
+  ],
+  "reply": "🛑 I will not build a site designed to trick or harm people (fake logins, fake bank or payment pages, scams, forged certificates or malware). Tell me about a real business or project and I will build it properly."
+ }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "Chiedza Learning",
-  "short_name": "Chiedza",
-  "description": "Free learning for everyone in Zimbabwe, from ECD to O-Level.",
+  "name": "Chiedza AI",
+  "short_name": "Chiedza AI",
+  "description": "A reasoning AI that builds full websites from a short description.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

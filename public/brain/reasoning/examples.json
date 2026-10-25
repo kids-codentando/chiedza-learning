@@ -309,6 +309,11 @@
   {
    "q": "Grade 5 pupils have 30 pencils and 12 are lost. How many are left?",
    "a": 18
+  },
+  {
+   "q": "why does it rain",
+   "a": "cause-rain-water-cycle",
+   "kind": "cause"
   }
  ],
  "nomatch": [
