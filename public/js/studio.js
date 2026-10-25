@@ -72,7 +72,7 @@
     const h = document.createElement("div");
     h.className = "hero";
     h.innerHTML =
-      `<div class="hero-logo" aria-hidden="true">✦</div>` +
+      `<img class="hero-logo" src="assets/icon.png" alt="" width="64" height="64">` +
       `<h1>Think it through with <em>Chiedza</em></h1>` +
       `<p>Ask about almost anything. I break the question down, weigh the options and show every step of my reasoning — then I can build you a complete website.</p>` +
       `<div class="cap-grid">` +

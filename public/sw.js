@@ -1,9 +1,11 @@
 /* Chiedza AI service worker: network first, so brain edits show up at once; cached copy when offline. */
-const CACHE = "chiedza-ai-v2";
-const CORE = ["/", "/index.html", "/css/studio.css", "/js/brain.js", "/js/reasoning.js", "/js/sitebuilder.js", "/js/studio.js",
+const CACHE = "chiedza-ai-v3";
+const CORE = ["/", "/index.html", "/css/studio.css", "/js/brain.js", "/js/reasoning.js", "/js/reasoning-general.js", "/js/sitebuilder.js", "/js/studio.js",
   "/brain/manifest.json", "/brain/identity.md", "/brain/safety.json",
+  "/brain/knowledge/general.json",
   "/brain/reasoning/reasoning.json", "/brain/reasoning/logic.json", "/brain/reasoning/causes.json", "/brain/reasoning/compare.json",
-  "/brain/reasoning/site-rules.json", "/brain/reasoning/website.json", "/brain/reasoning/website-more.json"];
+  "/brain/reasoning/site-rules.json", "/brain/reasoning/website.json", "/brain/reasoning/website-more.json",
+  "/assets/icon.png", "/assets/favicon.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => Promise.allSettled(CORE.map(u => c.add(u)))).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener("fetch", e => {
