@@ -1,36 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chiedza AI | Reasoning AI that builds full websites</title>
-<meta name="description" content="Chiedza AI reasons step by step and builds complete multi-page websites from a short description. No outside AI, no API keys.">
+<title>Chiedza AI — Reason about anything, build a whole website</title>
+<meta name="description" content="Chiedza AI reasons step by step about any topic — explanations, decisions, plans, what-ifs and analysis — and builds complete multi-page websites. No outside AI, no API keys.">
 <meta name="theme-color" content="#0b0d12">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/favicon.png">
 <link rel="stylesheet" href="css/studio.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
-<header class="bar">
-  <div class="brand"><img src="assets/icon.png" alt="" width="34" height="34"><div><strong>Chiedza AI</strong><small>Reasons. Then builds your website.</small></div></div>
-  <div class="bar-actions"><button type="button" id="newBtn" class="ghost">New website</button><button type="button" id="showPreview" class="ghost only-small" hidden>Preview</button></div>
+<a class="skip" href="#input">Skip to the message box</a>
+
+<header class="app-bar">
+  <div class="brand">
+    <img src="assets/icon.png" alt="" width="38" height="38" class="brand-logo">
+    <div class="brand-text">
+      <span class="brand-name">Chiedza AI</span>
+      <span class="brand-tag">Reasons about anything · builds whole websites</span>
+    </div>
+    <span class="brand-badge">Reasoning</span>
+  </div>
+  <div class="bar-actions">
+    <button type="button" id="themeToggle" class="icon-btn" aria-label="Switch theme" title="Switch light / dark theme">
+      <span class="theme-ico" aria-hidden="true">🌙</span>
+    </button>
+    <button type="button" id="newBtn" class="ghost-btn">＋ New chat</button>
+    <button type="button" id="showPreview" class="ghost-btn only-small" hidden>Preview</button>
+  </div>
 </header>
-<div class="layout" id="layout">
-  <section class="chat" aria-label="Chat with Chiedza AI">
-    <div id="msgs" class="msgs" aria-live="polite"></div>
-    <div id="chips" class="chips"></div>
-    <form id="form" autocomplete="off"><input id="input" type="text" maxlength="700" placeholder="Describe the website you want, or ask me to solve something…" aria-label="Your message"><button type="submit" class="send">Send</button></form>
-    <p class="foot">Chiedza AI follows rules in its brain files. It shows its reasoning and never invents phone numbers, prices or reviews.</p>
+
+<main class="layout no-side" id="layout">
+  <section class="chat-pane" aria-label="Chat with Chiedza AI">
+    <div id="msgs" class="msgs" aria-live="polite" aria-label="Conversation"></div>
+
+    <div class="composer-wrap">
+      <div id="chips" class="chips" aria-label="Suggested questions"></div>
+      <form id="form" class="composer" autocomplete="off">
+        <label class="sr-only" for="input">Your message</label>
+        <textarea id="input" rows="1" maxlength="1200" placeholder="Ask me to explain, decide, plan or analyse anything — or describe the website you want…" aria-label="Your message"></textarea>
+        <button type="submit" class="send" aria-label="Send message" title="Send">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6 3.4 10l12 2-12 2z" fill="currentColor"/></svg>
+        </button>
+      </form>
+      <p class="foot">Chiedza follows rules in its brain files. It shows its reasoning and never invents phone numbers, prices or reviews.</p>
+    </div>
   </section>
-  <section class="side" id="side" aria-label="Website preview" hidden>
-    <div class="side-top"><div id="tabs" class="tabs" role="tablist"></div><div class="side-actions"><button type="button" data-dev="desktop" class="ghost on">Desktop</button><button type="button" data-dev="mobile" class="ghost">Phone</button><button type="button" id="closePreview" class="ghost only-small">Close</button></div></div>
-    <div class="frame-wrap" id="frameWrap"><iframe id="frame" title="Website preview" sandbox="allow-scripts allow-same-origin allow-popups"></iframe></div>
-    <div id="codeView" class="code" hidden><div id="codeFiles" class="tabs"></div><textarea id="codeText" readonly spellcheck="false"></textarea><div class="code-actions"><button type="button" id="copyCode">Copy this file</button><button type="button" id="backPreview" class="ghost">Back to preview</button></div></div>
-  </section>
-</div>
+
+  <aside class="preview-pane" id="side" aria-label="Website preview" hidden>
+    <div class="preview-top">
+      <div id="tabs" class="tabs" role="tablist" aria-label="Website pages"></div>
+      <div class="preview-actions">
+        <div class="seg" role="group" aria-label="Preview size">
+          <button type="button" data-dev="desktop" class="seg-btn on" title="Desktop preview">🖥️</button>
+          <button type="button" data-dev="mobile" class="seg-btn" title="Phone preview">📱</button>
+        </div>
+        <button type="button" id="downloadBtn" class="ghost-btn" title="Download the website as a ZIP">⬇️ ZIP</button>
+        <button type="button" id="codeBtn" class="ghost-btn" title="View the generated code">📄 Code</button>
+        <button type="button" id="closePreview" class="icon-btn only-small" aria-label="Close preview">✕</button>
+      </div>
+    </div>
+    <div class="frame-wrap" id="frameWrap">
+      <iframe id="frame" title="Website preview" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+    </div>
+    <div id="codeView" class="code" hidden>
+      <div id="codeFiles" class="tabs" aria-label="Website files"></div>
+      <textarea id="codeText" readonly spellcheck="false" aria-label="Website source code"></textarea>
+      <div class="code-actions">
+        <button type="button" id="copyCode">Copy this file</button>
+        <button type="button" id="backPreview" class="ghost-btn">← Back to preview</button>
+      </div>
+    </div>
+  </aside>
+</main>
+
 <script src="js/brain.js"></script>
 <script src="js/reasoning.js"></script>
 <script src="js/sitebuilder.js"></script>
+<script src="js/reasoning-general.js"></script>
 <script src="js/studio.js"></script>
 <script>if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(function () {});</script>
 </body>

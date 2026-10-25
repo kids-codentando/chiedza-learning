@@ -143,7 +143,8 @@
       if (r) { if (!r.keep && B.pending === p) B.pending = null; return r; }
       if (B.pending === p) B.pending = null;
     }
-    for (const h of B.handlers) { const r = h.handle(text); if (r) return r; }
+    const ordered = B.handlers.slice().sort((a, b) => (a.priority || 0) - (b.priority || 0));
+    for (const h of ordered) { const r = h.handle(text); if (r) return r; }
     return trySkillCalc(text) || null;
   }
 

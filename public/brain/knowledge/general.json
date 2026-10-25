@@ -1,0 +1,983 @@
+{
+  "name": "General Reasoning Knowledge",
+  "version": "1.0.0",
+  "description": "Broad concepts Chiedza can reason with. Each concept has a plain definition, how it works, why it matters, an example and related ideas. Edit or add concepts to teach the AI more.",
+  "concepts": [
+    {
+      "id": "photosynthesis",
+      "title": "Photosynthesis",
+      "domain": "science",
+      "terms": ["photosynthesis", "photosynthesise", "how plants make food", "plants make food", "chlorophyll"],
+      "summary": "The process plants use to turn sunlight, water and carbon dioxide into sugar and oxygen.",
+      "definition": "Photosynthesis is how green plants, algae and some bacteria make their own food. They use light energy to combine water and carbon dioxide into glucose (a sugar) and release oxygen.",
+      "how": [
+        "Roots take in water and leaves take in carbon dioxide through tiny pores called stomata.",
+        "Chlorophyll in the chloroplasts absorbs sunlight and uses that energy to split water.",
+        "Hydrogen from the water joins carbon dioxide to make glucose, and oxygen is released as a by-product."
+      ],
+      "why": "It is the base of almost every food chain and it produces the oxygen animals breathe.",
+      "example": "A maize plant in a sunny field uses water from the soil and carbon dioxide from the air to grow cobs, while giving off oxygen.",
+      "related": ["respiration", "ecosystem", "food-chain", "climate-change"]
+    },
+    {
+      "id": "water-cycle",
+      "title": "The water cycle",
+      "domain": "nature",
+      "terms": ["water cycle", "rain", "evaporation", "condensation", "precipitation", "why does it rain"],
+      "summary": "Water moves between the ground, the air and the sea in a continuous loop.",
+      "definition": "The water cycle is the journey water takes as it evaporates from oceans, lakes and soil, condenses into clouds, falls as rain or snow, and flows back to the sea.",
+      "how": [
+        "The sun heats water, which evaporates into invisible water vapour.",
+        "As the vapour rises it cools and condenses into tiny droplets that form clouds.",
+        "Droplets join until they are heavy enough to fall as precipitation (rain, hail or snow).",
+        "Water runs over land or soaks into the ground and eventually returns to rivers and oceans."
+      ],
+      "why": "It supplies fresh water for drinking, farming and life, and it moves heat around the planet.",
+      "example": "Water from Lake Kariba evaporates, forms clouds, falls as rain on Harare, and flows back down rivers to the lake.",
+      "related": ["climate-change", "erosion", "ecosystem"]
+    },
+    {
+      "id": "gravity",
+      "title": "Gravity",
+      "domain": "science",
+      "terms": ["gravity", "gravitational force", "why things fall", "weight", "orbit"],
+      "summary": "The force that pulls objects with mass toward each other.",
+      "definition": "Gravity is a force of attraction between any two objects that have mass. The more mass an object has, the stronger its pull, and the pull weakens with distance.",
+      "how": [
+        "Every object with mass attracts every other object.",
+        "On Earth the pull is strong enough to keep us on the ground and to make dropped things fall.",
+        "Gravity also keeps the Moon orbiting Earth and the planets orbiting the Sun."
+      ],
+      "why": "Gravity shapes the universe, gives us weight, and makes tides, orbits and falling motion possible.",
+      "example": "A ball thrown into the air always curves back down because Earth's gravity pulls it toward the centre of the planet.",
+      "related": ["solar-system", "force", "energy"]
+    },
+    {
+      "id": "electricity",
+      "title": "Electricity",
+      "domain": "science",
+      "terms": ["electricity", "electric current", "circuit", "voltage", "how electricity works"],
+      "summary": "The flow of electric charge, usually electrons moving through a conductor.",
+      "definition": "Electricity is the movement of electric charge. In a wire, electrons flow when a voltage pushes them, and this current can carry energy to lights, motors and devices.",
+      "how": [
+        "A source such as a battery or generator creates a voltage difference.",
+        "The voltage pushes electrons through a closed circuit.",
+        "The moving electrons transfer energy to components like bulbs, which convert it into light and heat."
+      ],
+      "why": "Electricity powers homes, schools, hospitals, phones and almost all modern technology.",
+      "example": "Closing a switch completes a circuit so electrons flow from a battery through a bulb and back, making it glow.",
+      "related": ["magnetism", "energy", "computer"]
+    },
+    {
+      "id": "magnetism",
+      "title": "Magnetism",
+      "domain": "science",
+      "terms": ["magnetism", "magnet", "magnetic field", "north pole", "south pole"],
+      "summary": "A force that attracts or repels certain materials, caused by moving electric charge.",
+      "definition": "Magnetism is a force produced by moving electric charges. Magnets have a north and a south pole; like poles repel and opposite poles attract.",
+      "how": [
+        "Inside a magnet, groups of atoms line up so their tiny magnetic fields add together.",
+        "This creates a magnetic field around the magnet.",
+        "The field pulls on magnetic materials such as iron and on other magnets."
+      ],
+      "why": "Magnetism is used in motors, generators, speakers, hard drives and compasses.",
+      "example": "A compass needle turns to line up with Earth's magnetic field, pointing roughly north.",
+      "related": ["electricity", "force"]
+    },
+    {
+      "id": "light",
+      "title": "Light",
+      "domain": "science",
+      "terms": ["light", "reflection", "refraction", "rainbow", "colour", "spectrum"],
+      "summary": "A form of energy that travels in waves and lets us see.",
+      "definition": "Light is electromagnetic radiation that our eyes can detect. It travels in straight lines, can reflect off surfaces and bend (refract) when it passes between materials.",
+      "how": [
+        "Light travels from a source in straight lines at about 300,000 km per second.",
+        "When it hits an object it can be absorbed, reflected or scattered.",
+        "When it passes from air into water or glass it bends, which is why a straw looks broken in a glass."
+      ],
+      "why": "Light lets us see, drives photosynthesis, and carries information through fibre-optic cables.",
+      "example": "White light splits into a rainbow when it refracts through water droplets because each colour bends by a different amount.",
+      "related": ["sound", "energy", "photosynthesis"]
+    },
+    {
+      "id": "sound",
+      "title": "Sound",
+      "domain": "science",
+      "terms": ["sound", "vibration", "echo", "pitch", "volume", "how sound travels"],
+      "summary": "Vibrations that travel through a material as waves and are heard by the ear.",
+      "definition": "Sound is a pressure wave created by vibrating objects. It needs a medium such as air, water or a solid to travel through and cannot travel through a vacuum.",
+      "how": [
+        "An object vibrates and pushes nearby air molecules together and apart.",
+        "The wave of pressure travels outward.",
+        "The ear collects the wave and the brain interprets it as sound."
+      ],
+      "why": "Sound lets us communicate, enjoy music and detect danger.",
+      "example": "A drum skin vibrates when struck, sending pressure waves through the air to your ears.",
+      "related": ["light", "energy"]
+    },
+    {
+      "id": "energy",
+      "title": "Energy",
+      "domain": "science",
+      "terms": ["energy", "kinetic", "potential", "conservation of energy", "renewable"],
+      "summary": "The ability to do work or cause change; it cannot be created or destroyed, only changed in form.",
+      "definition": "Energy is the capacity to do work. It comes in forms such as kinetic (movement), potential (stored), thermal, chemical, electrical and light energy.",
+      "how": [
+        "Energy changes from one form to another but the total amount stays the same.",
+        "For example, chemical energy in food becomes kinetic energy when you run.",
+        "Renewable sources like sunlight, wind and water are continually replenished."
+      ],
+      "why": "Everything that happens — growth, movement, heating, thinking — involves energy transfer.",
+      "example": "A falling ball changes potential energy into kinetic energy, and some becomes heat and sound on impact.",
+      "related": ["force", "electricity", "climate-change"]
+    },
+    {
+      "id": "force",
+      "title": "Force and motion",
+      "domain": "science",
+      "terms": ["force", "motion", "newton", "friction", "acceleration", "push", "pull"],
+      "summary": "A push or pull that can change an object's speed, direction or shape.",
+      "definition": "A force is a push or pull acting on an object. Unbalanced forces change motion; balanced forces keep an object still or moving steadily.",
+      "how": [
+        "Forces act on objects in particular directions.",
+        "When forces are unbalanced, the object speeds up, slows down or changes direction.",
+        "Friction is a force that opposes motion between surfaces."
+      ],
+      "why": "Forces explain how everything moves, from bicycles to rockets.",
+      "example": "A ball rolls farther on smooth ground than on rough ground because there is less friction.",
+      "related": ["gravity", "energy", "magnetism"]
+    },
+    {
+      "id": "atoms",
+      "title": "Atoms and matter",
+      "domain": "science",
+      "terms": ["atom", "molecule", "matter", "element", "proton", "electron"],
+      "summary": "Atoms are the tiny building blocks that make up all matter.",
+      "definition": "An atom is the smallest unit of an element. It has a nucleus of protons and neutrons, surrounded by electrons. Atoms join to form molecules.",
+      "how": [
+        "Protons and neutrons sit in the nucleus at the centre.",
+        "Electrons move around the nucleus in shells.",
+        "Atoms bond together by sharing or transferring electrons to form compounds."
+      ],
+      "why": "Understanding atoms explains chemistry, materials, medicines and life itself.",
+      "example": "Two hydrogen atoms bond with one oxygen atom to make a water molecule (H2O).",
+      "related": ["dna", "energy"]
+    },
+    {
+      "id": "solar-system",
+      "title": "The solar system",
+      "domain": "science",
+      "terms": ["solar system", "planet", "sun", "moon", "earth", "orbit", "space"],
+      "summary": "The Sun and everything that orbits it, including eight planets, moons, asteroids and comets.",
+      "definition": "The solar system is the Sun and all the objects bound to it by gravity. The eight planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune.",
+      "how": [
+        "The Sun holds most of the mass and its gravity keeps the planets in orbit.",
+        "Planets orbit at different distances and speeds.",
+        "Moons orbit planets, while asteroids and comets follow their own paths."
+      ],
+      "why": "It is our home in space and helps us understand seasons, tides and the possibility of life elsewhere.",
+      "example": "Earth takes about 365 days to orbit the Sun once, which gives us our year.",
+      "related": ["gravity", "seasons"]
+    },
+    {
+      "id": "seasons",
+      "title": "Seasons",
+      "domain": "science",
+      "terms": ["seasons", "summer", "winter", "tilt of the earth", "why seasons happen"],
+      "summary": "Seasons happen because Earth's axis is tilted as it orbits the Sun.",
+      "definition": "Seasons are caused by the 23.5-degree tilt of Earth's axis. Different parts of Earth receive sunlight at different angles through the year.",
+      "how": [
+        "Earth orbits the Sun while spinning on a tilted axis.",
+        "When your hemisphere tilts toward the Sun, sunlight is more direct and days are longer (summer).",
+        "When it tilts away, sunlight is slanted and days are shorter (winter)."
+      ],
+      "why": "Seasons control weather, farming cycles and daylight hours.",
+      "example": "Zimbabwe has a warm, rainy season and a cooler, dry season because of the tilt and its position in the southern hemisphere.",
+      "related": ["solar-system", "climate-change", "water-cycle"]
+    },
+    {
+      "id": "earthquakes",
+      "title": "Earthquakes",
+      "domain": "nature",
+      "terms": ["earthquake", "seismic", "fault", "tectonic", "richter"],
+      "summary": "Sudden shaking of the ground caused by movement of rock along faults.",
+      "definition": "An earthquake is the shaking that happens when energy stored in rocks is suddenly released, usually along a fault where tectonic plates move.",
+      "how": [
+        "Tectonic plates push against each other and stress builds up in the rock.",
+        "The rock suddenly slips along a fault, releasing energy.",
+        "Seismic waves spread out from the focus and shake the ground."
+      ],
+      "why": "Earthquakes can cause great damage and help scientists understand how the planet moves.",
+      "example": "The ground shakes when a fault slips, and the strength is measured on the Richter or moment magnitude scale.",
+      "related": ["volcanoes", "plate-tectonics", "erosion"]
+    },
+    {
+      "id": "volcanoes",
+      "title": "Volcanoes",
+      "domain": "nature",
+      "terms": ["volcano", "lava", "magma", "eruption", "volcanic"],
+      "summary": "Openings in Earth's surface where magma, ash and gases escape.",
+      "definition": "A volcano is a vent in the crust through which molten rock (magma), ash and gas reach the surface. Once magma reaches the surface it is called lava.",
+      "how": [
+        "Magma forms deep underground where rock melts.",
+        "Pressure pushes the magma up through cracks and a central vent.",
+        "It erupts as lava, ash and gas, and cools to form new rock."
+      ],
+      "why": "Volcanoes build new land, enrich soil and reveal what is inside the Earth.",
+      "example": "Volcanic ash can make very fertile soil, which is why people farm near some volcanoes.",
+      "related": ["earthquakes", "plate-tectonics"]
+    },
+    {
+      "id": "erosion",
+      "title": "Erosion",
+      "domain": "nature",
+      "terms": ["erosion", "weathering", "soil erosion", "wind erosion", "water erosion"],
+      "summary": "The wearing away and movement of rock and soil by water, wind or ice.",
+      "definition": "Erosion is the process where natural forces carry away soil and rock. Weathering breaks the material down and erosion moves it.",
+      "how": [
+        "Water, wind or ice loosens and breaks up rock and soil.",
+        "The material is carried downhill or downwind.",
+        "It is deposited somewhere else, often in rivers, valleys or the sea."
+      ],
+      "why": "Erosion shapes landscapes but can destroy farmland and cause landslides.",
+      "example": "Heavy rain on bare soil washes the topsoil into rivers, leaving the field less fertile.",
+      "related": ["water-cycle", "volcanoes", "climate-change"]
+    },
+    {
+      "id": "ecosystem",
+      "title": "Ecosystems",
+      "domain": "nature",
+      "terms": ["ecosystem", "habitat", "food web", "producer", "consumer", "decomposer"],
+      "summary": "A community of living things interacting with each other and their environment.",
+      "definition": "An ecosystem is made of living organisms (plants, animals, microbes) and the non-living parts of their environment (water, soil, air, sunlight) interacting together.",
+      "how": [
+        "Producers such as plants capture energy from the sun.",
+        "Consumers eat producers or other consumers, forming food chains and webs.",
+        "Decomposers break down dead material and return nutrients to the soil."
+      ],
+      "why": "Healthy ecosystems provide food, clean water, clean air and stability for all life.",
+      "example": "A river ecosystem includes plants, fish, insects, birds and the water and soil they depend on.",
+      "related": ["food-chain", "biodiversity", "photosynthesis"]
+    },
+    {
+      "id": "food-chain",
+      "title": "Food chains and webs",
+      "domain": "nature",
+      "terms": ["food chain", "food web", "predator", "prey", "herbivore", "carnivore"],
+      "summary": "The path energy takes from plants through animals that eat them.",
+      "definition": "A food chain shows who eats whom, starting with a producer. A food web is many food chains linked together.",
+      "how": [
+        "Producers (plants) capture sunlight energy.",
+        "Herbivores eat the plants.",
+        "Carnivores eat the herbivores, and decomposers recycle the nutrients."
+      ],
+      "why": "Food chains show how energy moves and why removing one species can affect many others.",
+      "example": "Grass is eaten by a grasshopper, which is eaten by a frog, which is eaten by a snake.",
+      "related": ["ecosystem", "biodiversity", "photosynthesis"]
+    },
+    {
+      "id": "biodiversity",
+      "title": "Biodiversity",
+      "domain": "nature",
+      "terms": ["biodiversity", "species", "extinction", "endangered", "variety of life"],
+      "summary": "The variety of living things in a place, from genes to species to ecosystems.",
+      "definition": "Biodiversity is the variety of life. It includes differences within a species, between species, and between whole ecosystems.",
+      "how": [
+        "Many species evolve and fill different roles in an ecosystem.",
+        "More variety makes ecosystems more resilient to change.",
+        "Habitat loss, pollution and climate change reduce biodiversity."
+      ],
+      "why": "Biodiversity keeps ecosystems stable and provides food, medicine and materials.",
+      "example": "A forest with many plant and animal species can recover better from disease than a single-species plantation.",
+      "related": ["ecosystem", "climate-change", "pollution"]
+    },
+    {
+      "id": "climate-change",
+      "title": "Climate change",
+      "domain": "environment",
+      "terms": ["climate change", "global warming", "greenhouse gases", "carbon dioxide", "emissions"],
+      "summary": "Long-term shifts in temperature and weather caused mainly by human greenhouse-gas emissions.",
+      "definition": "Climate change is the long-term change in Earth's climate, especially the warming caused by burning fossil fuels and releasing greenhouse gases such as carbon dioxide and methane.",
+      "how": [
+        "Burning coal, oil and gas releases carbon dioxide into the atmosphere.",
+        "Greenhouse gases trap heat that would otherwise escape into space.",
+        "More trapped heat raises average temperatures, changing rainfall, ice and sea levels."
+      ],
+      "why": "It threatens food and water supplies, causes extreme weather and endangers coastal communities.",
+      "example": "Melting glaciers and more frequent droughts are signs of a warming climate.",
+      "related": ["greenhouse-effect", "pollution", "recycling", "energy"]
+    },
+    {
+      "id": "greenhouse-effect",
+      "title": "The greenhouse effect",
+      "domain": "environment",
+      "terms": ["greenhouse effect", "greenhouse gas", "trapped heat", "atmosphere"],
+      "summary": "The way certain gases in the atmosphere trap heat and keep Earth warm.",
+      "definition": "The greenhouse effect is the warming of Earth's surface because gases in the atmosphere absorb and re-emit heat. It is natural and necessary, but human emissions strengthen it.",
+      "how": [
+        "Sunlight passes through the atmosphere and warms the ground.",
+        "The ground gives off heat as infrared radiation.",
+        "Greenhouse gases absorb some of that heat and send it back, keeping Earth warm."
+      ],
+      "why": "A natural greenhouse effect keeps Earth habitable; too much of it causes global warming.",
+      "example": "Without any greenhouse effect Earth would be far colder, but adding extra carbon dioxide makes it warmer than normal.",
+      "related": ["climate-change", "energy"]
+    },
+    {
+      "id": "pollution",
+      "title": "Pollution",
+      "domain": "environment",
+      "terms": ["pollution", "pollutant", "air pollution", "water pollution", "plastic waste"],
+      "summary": "Harmful substances released into the environment.",
+      "definition": "Pollution is the introduction of harmful materials into air, water or land. It can come from factories, vehicles, farms, litter and waste.",
+      "how": [
+        "Human activities release pollutants into the environment.",
+        "Pollutants build up in air, water or soil.",
+        "They harm plants, animals and people, and can enter the food chain."
+      ],
+      "why": "Pollution causes disease, damages ecosystems and contributes to climate change.",
+      "example": "Plastic bags that reach rivers can be eaten by fish and end up in the food chain.",
+      "related": ["recycling", "climate-change", "biodiversity"]
+    },
+    {
+      "id": "recycling",
+      "title": "Recycling",
+      "domain": "environment",
+      "terms": ["recycling", "reuse", "reduce", "waste", "compost"],
+      "summary": "Turning used materials into new products instead of throwing them away.",
+      "definition": "Recycling is collecting and processing used materials such as paper, glass, plastic and metal so they can be made into new products.",
+      "how": [
+        "Used materials are collected and sorted.",
+        "They are cleaned and processed into raw material.",
+        "The material is used to make new products, saving energy and resources."
+      ],
+      "why": "Recycling reduces landfill waste, saves energy and lowers pollution.",
+      "example": "Old plastic bottles can be recycled into new bottles or clothing fibres.",
+      "related": ["pollution", "climate-change", "energy"]
+    },
+    {
+      "id": "digestion",
+      "title": "The digestive system",
+      "domain": "health",
+      "terms": ["digestion", "digestive system", "stomach", "intestines", "how food is digested"],
+      "summary": "How the body breaks food down into nutrients it can use.",
+      "definition": "Digestion is the process of breaking food into small molecules that can be absorbed into the blood. It starts in the mouth and continues through the stomach and intestines.",
+      "how": [
+        "Teeth and saliva break food into smaller pieces and start digesting starch.",
+        "The stomach churns food with acid and enzymes.",
+        "The small intestine absorbs nutrients, and the large intestine absorbs water before waste leaves the body."
+      ],
+      "why": "Digestion supplies the body with energy and building materials.",
+      "example": "A piece of bread is chewed, broken down in the stomach and its sugars are absorbed in the small intestine.",
+      "related": ["nutrition", "respiration", "circulatory-system"]
+    },
+    {
+      "id": "respiration",
+      "title": "Respiration",
+      "domain": "science",
+      "terms": ["respiration", "breathing", "cellular respiration", "oxygen", "carbon dioxide"],
+      "summary": "The process cells use to release energy from food, using oxygen and producing carbon dioxide.",
+      "definition": "Respiration is the chemical process in cells that releases energy from glucose. Aerobic respiration uses oxygen and produces carbon dioxide and water.",
+      "how": [
+        "Oxygen enters the body through the lungs and is carried by blood.",
+        "Cells use oxygen to break down glucose.",
+        "Energy is released for the body to use, and carbon dioxide is carried back to the lungs and breathed out."
+      ],
+      "why": "Respiration powers every cell and is the opposite of photosynthesis in terms of gases.",
+      "example": "When you run, your muscles respire faster, so you breathe harder to get more oxygen.",
+      "related": ["digestion", "circulatory-system", "photosynthesis"]
+    },
+    {
+      "id": "circulatory-system",
+      "title": "The circulatory system",
+      "domain": "health",
+      "terms": ["circulatory system", "heart", "blood", "blood vessels", "circulation"],
+      "summary": "The heart, blood and blood vessels that carry oxygen and nutrients around the body.",
+      "definition": "The circulatory system moves blood through the body. The heart pumps it, arteries carry it away from the heart and veins bring it back.",
+      "how": [
+        "The heart pumps oxygen-rich blood to the body through arteries.",
+        "Tiny capillaries deliver oxygen and nutrients to cells and pick up waste.",
+        "Veins carry the blood back to the heart and lungs to get more oxygen."
+      ],
+      "why": "Every cell needs a constant supply of oxygen and nutrients and a way to remove waste.",
+      "example": "Your heart beats faster when you exercise so more oxygen reaches your muscles.",
+      "related": ["respiration", "nutrition", "exercise"]
+    },
+    {
+      "id": "immune-system",
+      "title": "The immune system",
+      "domain": "health",
+      "terms": ["immune system", "immunity", "germs", "antibodies", "white blood cells", "infection"],
+      "summary": "The body's defence system against germs and disease.",
+      "definition": "The immune system is a network of cells, tissues and organs that defend the body against bacteria, viruses and other threats.",
+      "how": [
+        "Skin and mucus form barriers that keep germs out.",
+        "White blood cells detect and attack invaders.",
+        "Some cells remember the germ so the body can respond faster next time."
+      ],
+      "why": "It keeps us healthy and is the basis of how vaccines work.",
+      "example": "After you recover from a virus, memory cells help your body fight it quickly if it returns.",
+      "related": ["vaccination", "nutrition", "sleep"]
+    },
+    {
+      "id": "vaccination",
+      "title": "Vaccines",
+      "domain": "health",
+      "terms": ["vaccine", "vaccination", "immunisation", "immunization", "jab"],
+      "summary": "A medicine that trains the immune system to fight a disease without making you sick.",
+      "definition": "A vaccine contains a harmless part or weakened form of a germ. It teaches the immune system to recognise and fight that germ.",
+      "how": [
+        "The vaccine introduces a harmless version of the germ.",
+        "The immune system responds and makes antibodies.",
+        "Memory cells remain, so the body can fight the real germ quickly."
+      ],
+      "why": "Vaccines prevent serious illness and protect whole communities through herd immunity.",
+      "example": "The measles vaccine protects a child from measles by training their immune system in advance.",
+      "related": ["immune-system", "nutrition"]
+    },
+    {
+      "id": "nutrition",
+      "title": "Nutrition",
+      "domain": "health",
+      "terms": ["nutrition", "healthy diet", "vitamins", "protein", "carbohydrates", "balanced diet"],
+      "summary": "Getting the right nutrients the body needs to grow and stay healthy.",
+      "definition": "Nutrition is about the food the body needs: carbohydrates for energy, proteins for growth and repair, fats for energy and vitamins and minerals for health.",
+      "how": [
+        "Eat a variety of foods from different groups.",
+        "Include fruits and vegetables for vitamins and fibre.",
+        "Drink enough water and limit sugary and highly processed foods."
+      ],
+      "why": "Good nutrition supports growth, learning, immunity and long-term health.",
+      "example": "A balanced meal might include sadza (carbohydrate), beans (protein), greens (vitamins) and water.",
+      "related": ["digestion", "immune-system", "exercise"]
+    },
+    {
+      "id": "sleep",
+      "title": "Sleep",
+      "domain": "health",
+      "terms": ["sleep", "why we sleep", "rest", "dream", "tired"],
+      "summary": "A regular state of rest that the brain and body need to repair and remember.",
+      "definition": "Sleep is a natural state of reduced consciousness that the body uses to repair tissues, consolidate memories and regulate hormones.",
+      "how": [
+        "The brain cycles through light and deep sleep stages.",
+        "During deep sleep the body repairs itself and growth hormones are released.",
+        "REM sleep helps process emotions and memories."
+      ],
+      "why": "Lack of sleep harms concentration, mood, immunity and health.",
+      "example": "Students who sleep well remember what they studied better than those who stay up all night.",
+      "related": ["mental-health", "exercise", "immune-system"]
+    },
+    {
+      "id": "exercise",
+      "title": "Exercise",
+      "domain": "health",
+      "terms": ["exercise", "fitness", "physical activity", "workout", "sport"],
+      "summary": "Physical activity that strengthens the body and improves health.",
+      "definition": "Exercise is planned physical activity that raises heart rate and works muscles. It improves fitness, strength and mood.",
+      "how": [
+        "Muscles use more oxygen and energy during activity.",
+        "The heart and lungs become stronger with regular exercise.",
+        "The body releases endorphins that improve mood."
+      ],
+      "why": "Exercise protects against disease, builds strength and supports mental health.",
+      "example": "Walking, running, football or dancing for 30 minutes a day improves fitness.",
+      "related": ["circulatory-system", "mental-health", "nutrition"]
+    },
+    {
+      "id": "mental-health",
+      "title": "Mental health",
+      "domain": "health",
+      "terms": ["mental health", "stress", "anxiety", "depression", "wellbeing", "feelings"],
+      "summary": "How we think, feel and cope with everyday life.",
+      "definition": "Mental health is our emotional and psychological wellbeing. It affects how we handle stress, relate to others and make choices.",
+      "how": [
+        "Sleep, exercise, nutrition and supportive relationships protect mental health.",
+        "Talking about feelings helps reduce stress.",
+        "When difficulties last or feel overwhelming, professional help is important."
+      ],
+      "why": "Mental health affects learning, relationships and physical health.",
+      "example": "Taking a break, breathing slowly and talking to a trusted person can help when you feel stressed.",
+      "related": ["sleep", "exercise", "communication"]
+    },
+    {
+      "id": "internet",
+      "title": "The internet",
+      "domain": "technology",
+      "terms": ["internet", "how the internet works", "website", "network", "online", "wifi"],
+      "summary": "A global network of computers that send data to each other using shared rules.",
+      "definition": "The internet is a worldwide network of connected computers. Data is broken into packets and sent between devices using protocols such as TCP/IP.",
+      "how": [
+        "Your device sends a request to a router, which connects to your internet provider.",
+        "The request travels through cables and networks to a server.",
+        "The server sends data back in packets, which your device reassembles."
+      ],
+      "why": "The internet enables communication, learning, business and access to information worldwide.",
+      "example": "When you open a website, your browser asks a server for the page and displays the files it receives.",
+      "related": ["computer", "encryption", "artificial-intelligence"]
+    },
+    {
+      "id": "computer",
+      "title": "Computers",
+      "domain": "technology",
+      "terms": ["computer", "hardware", "software", "cpu", "memory", "how computers work"],
+      "summary": "Machines that process information using hardware and software.",
+      "definition": "A computer is a machine that takes input, processes it using a central processing unit (CPU), stores data in memory and produces output.",
+      "how": [
+        "Input devices such as keyboards send data into the computer.",
+        "The CPU follows instructions from software to process the data.",
+        "Results are stored in memory or shown on output devices such as screens."
+      ],
+      "why": "Computers power communication, education, science, business and entertainment.",
+      "example": "When you type a letter, the keyboard sends signals, the CPU processes them and the screen shows the letters.",
+      "related": ["internet", "artificial-intelligence", "algorithm"]
+    },
+    {
+      "id": "artificial-intelligence",
+      "title": "Artificial intelligence",
+      "domain": "technology",
+      "terms": ["artificial intelligence", "ai", "machine learning", "neural network", "how ai works"],
+      "summary": "Computer systems that perform tasks that normally need human intelligence.",
+      "definition": "Artificial intelligence (AI) is software that can learn patterns from data and make decisions or predictions. Machine learning is a common approach where models improve with examples.",
+      "how": [
+        "Large amounts of data are collected and prepared.",
+        "A model is trained to find patterns in the data.",
+        "The trained model makes predictions or decisions on new data."
+      ],
+      "why": "AI is used in medicine, transport, education and communication, but it must be used carefully and fairly.",
+      "example": "A spam filter learns from many emails to recognise which new messages are likely to be spam.",
+      "related": ["computer", "algorithm", "internet"]
+    },
+    {
+      "id": "algorithm",
+      "title": "Algorithms",
+      "domain": "technology",
+      "terms": ["algorithm", "step by step instructions", "programming", "code", "sorting"],
+      "summary": "A clear set of steps for solving a problem or completing a task.",
+      "definition": "An algorithm is a finite sequence of clear instructions that takes an input and produces an output. Computer programs are algorithms written in code.",
+      "how": [
+        "Define the problem and the input.",
+        "Write clear, ordered steps to process the input.",
+        "Test the steps and improve them if the result is wrong."
+      ],
+      "why": "Algorithms are the foundation of all software and help us solve problems systematically.",
+      "example": "A recipe is like an algorithm: follow the steps in order and you get the dish.",
+      "related": ["computer", "artificial-intelligence", "problem-solving"]
+    },
+    {
+      "id": "encryption",
+      "title": "Encryption",
+      "domain": "technology",
+      "terms": ["encryption", "security", "password", "privacy", "cryptography"],
+      "summary": "Scrambling data so only the right person can read it.",
+      "definition": "Encryption converts readable data into a coded form using a key. Only someone with the correct key can decrypt it back.",
+      "how": [
+        "Plain data is combined with a key using a mathematical process.",
+        "The result looks like random characters.",
+        "The receiver uses the key to decrypt and read the data."
+      ],
+      "why": "Encryption protects messages, bank details and private information online.",
+      "example": "When you shop online, your card details are encrypted so others cannot read them.",
+      "related": ["internet", "computer"]
+    },
+    {
+      "id": "democracy",
+      "title": "Democracy",
+      "domain": "society",
+      "terms": ["democracy", "voting", "election", "government by the people", "parliament"],
+      "summary": "A system where people choose their leaders and have a say in decisions.",
+      "definition": "Democracy is a form of government in which power comes from the people, usually through free and fair elections and protected rights.",
+      "how": [
+        "Citizens vote for representatives or decide issues directly.",
+        "Elected leaders make laws within a constitution.",
+        "Rights, courts and free media help hold leaders accountable."
+      ],
+      "why": "Democracy gives people a voice and protects freedoms, though it depends on participation and strong institutions.",
+      "example": "In a general election, citizens vote for the party or candidate they want to represent them.",
+      "related": ["constitution", "human-rights", "leadership"]
+    },
+    {
+      "id": "constitution",
+      "title": "A constitution",
+      "domain": "society",
+      "terms": ["constitution", "rule of law", "rights", "law", "supreme law"],
+      "summary": "The highest set of rules that defines how a country is governed.",
+      "definition": "A constitution is the supreme law of a country. It sets out the structure of government, the powers of leaders and the rights of citizens.",
+      "how": [
+        "It establishes institutions such as the legislature, executive and courts.",
+        "It lists citizens' rights and limits on government power.",
+        "Laws and actions must comply with it, and courts can strike down those that do not."
+      ],
+      "why": "It prevents abuse of power and protects citizens' rights.",
+      "example": "A court can declare a law invalid if it goes against the constitution.",
+      "related": ["democracy", "human-rights", "leadership"]
+    },
+    {
+      "id": "human-rights",
+      "title": "Human rights",
+      "domain": "society",
+      "terms": ["human rights", "freedom", "equality", "dignity", "rights"],
+      "summary": "Basic rights every person has simply because they are human.",
+      "definition": "Human rights are the freedoms and protections that belong to every person, such as the right to life, education, safety, equality and free expression.",
+      "how": [
+        "Rights are recognised in national constitutions and international agreements.",
+        "Laws and institutions are meant to protect them.",
+        "People and organisations speak up when rights are violated."
+      ],
+      "why": "They protect dignity and fairness, especially for people who are vulnerable.",
+      "example": "The right to education means every child should be able to go to school.",
+      "related": ["democracy", "constitution", "communication"]
+    },
+    {
+      "id": "inflation",
+      "title": "Inflation",
+      "domain": "money",
+      "terms": ["inflation", "rising prices", "cost of living", "money loses value"],
+      "summary": "A general rise in prices over time, which means money buys less.",
+      "definition": "Inflation is the rate at which the general level of prices for goods and services rises. When inflation is high, each unit of money buys fewer things.",
+      "how": [
+        "Demand can grow faster than the supply of goods.",
+        "Costs such as fuel or wages can rise and be passed on as higher prices.",
+        "Too much money circulating can also push prices up."
+      ],
+      "why": "Inflation affects savings, wages and the cost of living, especially for poorer households.",
+      "example": "If a loaf of bread costs $1 today and $1.20 next year, that is inflation.",
+      "related": ["supply-demand", "interest", "budgeting"]
+    },
+    {
+      "id": "supply-demand",
+      "title": "Supply and demand",
+      "domain": "money",
+      "terms": ["supply and demand", "demand", "supply", "price", "market"],
+      "summary": "How prices are set by how much is available and how much people want.",
+      "definition": "Supply is how much of a good is available; demand is how much people want it. Prices tend to rise when demand is high and supply is low, and fall when supply is high and demand is low.",
+      "how": [
+        "Buyers compete for goods, which pushes prices up when supply is short.",
+        "Sellers compete for customers, which pushes prices down when there is plenty.",
+        "The market settles at a price where supply and demand balance."
+      ],
+      "why": "It explains prices, shortages and why markets change.",
+      "example": "Tomato prices rise when a drought reduces the harvest but people still want to buy them.",
+      "related": ["inflation", "entrepreneurship", "marketing"]
+    },
+    {
+      "id": "budgeting",
+      "title": "Budgeting",
+      "domain": "money",
+      "terms": ["budget", "budgeting", "spending plan", "save money", "expenses"],
+      "summary": "Planning how to spend and save the money you have.",
+      "definition": "A budget is a plan for income and expenses over a period. It helps you spend on needs first, save regularly and avoid debt.",
+      "how": [
+        "List all your income.",
+        "List your needs and wants, and add up the costs.",
+        "Spend on needs first, set aside savings, then allow for wants within what is left."
+      ],
+      "why": "Budgeting helps you avoid debt, reach goals and handle emergencies.",
+      "example": "A family budget might put 50% toward needs, 30% toward wants and 20% toward savings.",
+      "related": ["savings", "interest", "inflation"]
+    },
+    {
+      "id": "savings",
+      "title": "Saving",
+      "domain": "money",
+      "terms": ["saving", "savings", "save money", "emergency fund"],
+      "summary": "Setting money aside for future needs and goals.",
+      "definition": "Saving is keeping part of your income instead of spending it, so you can use it later for goals or emergencies.",
+      "how": [
+        "Decide on a savings goal and a regular amount.",
+        "Move the money to a safe place before you spend it.",
+        "Review your progress and adjust when needed."
+      ],
+      "why": "Savings provide security and make big goals possible.",
+      "example": "Saving a small amount each week can add up to enough for school supplies or an emergency.",
+      "related": ["budgeting", "interest", "entrepreneurship"]
+    },
+    {
+      "id": "interest",
+      "title": "Interest",
+      "domain": "money",
+      "terms": ["interest", "compound interest", "loan", "borrowing", "bank"],
+      "summary": "The cost of borrowing money or the reward for saving it.",
+      "definition": "Interest is a percentage paid for the use of money. When you save, the bank may pay you interest; when you borrow, you pay interest to the lender.",
+      "how": [
+        "The interest rate is applied to the amount of money involved.",
+        "Simple interest is calculated on the original amount.",
+        "Compound interest is calculated on the original amount plus interest already earned, so it grows faster."
+      ],
+      "why": "Understanding interest helps you save wisely and avoid expensive debt.",
+      "example": "$100 saved at 10% simple interest earns $10 in a year.",
+      "related": ["savings", "budgeting", "inflation"]
+    },
+    {
+      "id": "entrepreneurship",
+      "title": "Entrepreneurship",
+      "domain": "money",
+      "terms": ["entrepreneur", "entrepreneurship", "business", "startup", "start a business"],
+      "summary": "Starting and running a business to solve a problem and create value.",
+      "definition": "Entrepreneurship is the process of identifying an opportunity, organising resources and taking on risk to create a business.",
+      "how": [
+        "Find a real problem people will pay to solve.",
+        "Plan your product, costs, customers and pricing.",
+        "Start small, test with real customers and improve."
+      ],
+      "why": "Entrepreneurs create jobs, solve problems and grow economies.",
+      "example": "A young person who bakes and sells cakes at school is practising entrepreneurship.",
+      "related": ["supply-demand", "marketing", "budgeting"]
+    },
+    {
+      "id": "marketing",
+      "title": "Marketing",
+      "domain": "money",
+      "terms": ["marketing", "advertising", "customers", "brand", "promotion"],
+      "summary": "How a business tells people about its products and persuades them to buy.",
+      "definition": "Marketing is the process of understanding customers and promoting products or services so people know about them and want them.",
+      "how": [
+        "Understand who your customers are and what they need.",
+        "Decide on a clear message and a fair price.",
+        "Reach customers through channels such as word of mouth, social media or local advertising."
+      ],
+      "why": "Even a great product fails if nobody knows about it.",
+      "example": "A bakery markets itself by posting photos of fresh bread and offering a small discount on Mondays.",
+      "related": ["entrepreneurship", "supply-demand", "communication"]
+    },
+    {
+      "id": "grammar-noun",
+      "title": "Nouns",
+      "domain": "language",
+      "terms": ["noun", "nouns", "naming word", "proper noun", "common noun"],
+      "summary": "A noun is a word that names a person, place, thing or idea.",
+      "definition": "A noun names a person, place, thing or idea. Common nouns are general (dog, city) and proper nouns name specific things and start with a capital letter (Harare, Tendai).",
+      "how": [
+        "Ask: who or what is this sentence about?",
+        "If the word names a person, place, thing or idea, it is a noun.",
+        "Check whether it is common (general) or proper (specific)."
+      ],
+      "why": "Nouns are the building blocks of sentences because they tell us what we are talking about.",
+      "example": "In 'Rudo lives in Bulawayo', 'Rudo' and 'Bulawayo' are proper nouns.",
+      "related": ["grammar-verb", "metaphor"]
+    },
+    {
+      "id": "grammar-verb",
+      "title": "Verbs",
+      "domain": "language",
+      "terms": ["verb", "verbs", "action word", "doing word", "state of being"],
+      "summary": "A verb is a word that shows an action or a state of being.",
+      "definition": "A verb tells us what the subject does or is. Action verbs show actions (run, write) and state verbs show being or feeling (is, seem, love).",
+      "how": [
+        "Find the subject of the sentence.",
+        "Ask what the subject does or is.",
+        "The word that answers is the verb."
+      ],
+      "why": "Every complete sentence needs a verb to show what is happening.",
+      "example": "In 'The children sing loudly', 'sing' is the verb.",
+      "related": ["grammar-noun", "metaphor"]
+    },
+    {
+      "id": "metaphor",
+      "title": "Metaphors and similes",
+      "domain": "language",
+      "terms": ["metaphor", "simile", "figurative language", "comparison in writing"],
+      "summary": "Ways of comparing things to create vivid meaning.",
+      "definition": "A simile compares two things using 'like' or 'as'. A metaphor says one thing is another to create a strong image.",
+      "how": [
+        "Notice the two things being compared.",
+        "Check whether 'like' or 'as' is used (simile) or a direct comparison (metaphor).",
+        "Work out the quality the writer wants you to imagine."
+      ],
+      "why": "Figurative language makes writing clearer, richer and more memorable.",
+      "example": "'Her smile was sunshine' is a metaphor; 'her smile was like sunshine' is a simile.",
+      "related": ["grammar-noun", "communication"]
+    },
+    {
+      "id": "critical-thinking",
+      "title": "Critical thinking",
+      "domain": "learning",
+      "terms": ["critical thinking", "evidence", "bias", "fact", "opinion", "reasoning"],
+      "summary": "Thinking carefully about whether a claim is true and well supported.",
+      "definition": "Critical thinking is the habit of questioning claims, checking evidence, spotting assumptions and considering other explanations before deciding what to believe.",
+      "how": [
+        "Identify the claim and the evidence offered.",
+        "Ask whether the source is reliable and whether there is bias.",
+        "Consider alternative explanations and decide what the evidence supports."
+      ],
+      "why": "It protects us from misinformation and helps us make better decisions.",
+      "example": "Before sharing a shocking post, check who wrote it and whether other reliable sources agree.",
+      "related": ["problem-solving", "communication", "algorithm"]
+    },
+    {
+      "id": "problem-solving",
+      "title": "Problem solving",
+      "domain": "learning",
+      "terms": ["problem solving", "solve a problem", "steps to solve", "strategy"],
+      "summary": "A structured way to find a solution to a difficulty.",
+      "definition": "Problem solving is the process of understanding a problem, choosing a strategy, trying it and checking the result.",
+      "how": [
+        "Understand the problem and what a good solution would look like.",
+        "Break it into smaller parts and choose a strategy.",
+        "Try it, check the result and change the plan if needed."
+      ],
+      "why": "It turns overwhelming problems into manageable steps.",
+      "example": "If you are behind on homework, list the tasks, do the most urgent first and ask for help where needed.",
+      "related": ["critical-thinking", "algorithm", "teamwork"]
+    },
+    {
+      "id": "teamwork",
+      "title": "Teamwork",
+      "domain": "learning",
+      "terms": ["teamwork", "team", "working together", "collaboration", "group work"],
+      "summary": "People combining their skills to reach a shared goal.",
+      "definition": "Teamwork is when people work together, share tasks and support each other to achieve something they could not do alone.",
+      "how": [
+        "Agree on a clear shared goal.",
+        "Divide tasks according to strengths and set deadlines.",
+        "Communicate openly, listen and help each other."
+      ],
+      "why": "Teams can solve bigger problems and produce better ideas than individuals alone.",
+      "example": "A group project works well when each member researches one part and they combine their work.",
+      "related": ["leadership", "communication", "problem-solving"]
+    },
+    {
+      "id": "leadership",
+      "title": "Leadership",
+      "domain": "society",
+      "terms": ["leadership", "leader", "leading", "responsibility", "role model"],
+      "summary": "Guiding and supporting others toward a shared goal.",
+      "definition": "Leadership is the ability to influence and support a group to achieve a goal. Good leaders listen, take responsibility and serve others.",
+      "how": [
+        "Set a clear direction and explain why it matters.",
+        "Listen to the team and use their strengths.",
+        "Take responsibility, stay fair and lead by example."
+      ],
+      "why": "Good leadership helps groups stay focused and treat people with respect.",
+      "example": "A class captain who listens to classmates and helps organise tasks shows leadership.",
+      "related": ["teamwork", "democracy", "communication"]
+    },
+    {
+      "id": "communication",
+      "title": "Communication",
+      "domain": "learning",
+      "terms": ["communication", "listening", "speaking", "clear message", "body language"],
+      "summary": "Sharing information and ideas clearly and listening well.",
+      "definition": "Communication is the exchange of information through speaking, writing, listening and body language. It works best when the message is clear and the listener understands.",
+      "how": [
+        "Decide what you want to say and who you are saying it to.",
+        "Speak or write clearly and check understanding.",
+        "Listen actively and respond respectfully."
+      ],
+      "why": "Clear communication prevents misunderstandings and builds strong relationships.",
+      "example": "Explaining a task step by step and asking 'does that make sense?' improves understanding.",
+      "related": ["teamwork", "critical-thinking", "mental-health"]
+    },
+    {
+      "id": "fractions",
+      "title": "Fractions",
+      "domain": "math",
+      "terms": ["fraction", "fractions", "numerator", "denominator", "half", "quarter"],
+      "summary": "Numbers that show part of a whole.",
+      "definition": "A fraction shows how many equal parts of a whole you have. The denominator (bottom) says how many parts the whole is divided into, and the numerator (top) says how many you have.",
+      "how": [
+        "Split the whole into equal parts shown by the denominator.",
+        "Count the parts you have, shown by the numerator.",
+        "To add or subtract, use a common denominator."
+      ],
+      "why": "Fractions are used in cooking, money, measurement and sharing.",
+      "example": "If a pizza is cut into 4 equal slices and you eat 1, you have eaten 1/4 of the pizza.",
+      "related": ["algebra", "probability"]
+    },
+    {
+      "id": "algebra",
+      "title": "Algebra",
+      "domain": "math",
+      "terms": ["algebra", "equation", "variable", "solve for x", "unknown"],
+      "summary": "Using letters to stand for unknown numbers and solving for them.",
+      "definition": "Algebra uses symbols such as x to represent unknown numbers. An equation states that two expressions are equal, and solving it means finding the value that makes it true.",
+      "how": [
+        "Identify the unknown and give it a letter.",
+        "Write an equation that describes the situation.",
+        "Do the same operation to both sides until the letter is alone."
+      ],
+      "why": "Algebra helps solve problems where some information is missing.",
+      "example": "If x + 3 = 10, subtract 3 from both sides to get x = 7.",
+      "related": ["fractions", "problem-solving"]
+    },
+    {
+      "id": "probability",
+      "title": "Probability",
+      "domain": "math",
+      "terms": ["probability", "chance", "likelihood", "odds", "random"],
+      "summary": "A measure of how likely an event is to happen.",
+      "definition": "Probability is a number between 0 and 1 that describes how likely an event is. 0 means impossible and 1 means certain.",
+      "how": [
+        "Count the number of possible equally likely outcomes.",
+        "Count how many of those outcomes are the event you want.",
+        "Divide the wanted outcomes by the total outcomes."
+      ],
+      "why": "Probability helps us make decisions under uncertainty, from weather to games.",
+      "example": "The probability of getting heads when flipping a fair coin is 1/2.",
+      "related": ["fractions", "critical-thinking"]
+    },
+    {
+      "id": "evolution",
+      "title": "Evolution",
+      "domain": "science",
+      "terms": ["evolution", "natural selection", "adaptation", "survival of the fittest", "species change"],
+      "summary": "How species change over generations through natural selection.",
+      "definition": "Evolution is the change in the inherited characteristics of populations over generations. Natural selection means individuals with helpful traits are more likely to survive and reproduce.",
+      "how": [
+        "Individuals in a population vary in their traits.",
+        "Some traits help survival and reproduction more than others.",
+        "Those helpful traits become more common over many generations."
+      ],
+      "why": "Evolution explains the diversity of life and how species adapt to their environments.",
+      "example": "Bacteria that survive antibiotics pass on resistance, making future infections harder to treat.",
+      "related": ["dna", "biodiversity", "ecosystem"]
+    },
+    {
+      "id": "dna",
+      "title": "DNA",
+      "domain": "science",
+      "terms": ["dna", "genes", "genetics", "inheritance", "chromosome"],
+      "summary": "The molecule that carries the instructions for building and running living things.",
+      "definition": "DNA (deoxyribonucleic acid) is a molecule shaped like a twisted ladder that stores genetic information. Genes are sections of DNA that carry instructions for traits.",
+      "how": [
+        "DNA is made of four bases (A, T, C, G) arranged in a sequence.",
+        "The sequence spells out instructions for making proteins.",
+        "Genes are passed from parents to offspring, creating inherited traits."
+      ],
+      "why": "DNA explains inheritance, health, and how living things grow and function.",
+      "example": "Eye colour and blood type are influenced by genes inherited from your parents.",
+      "related": ["evolution", "atoms", "immune-system"]
+    },
+    {
+      "id": "plate-tectonics",
+      "title": "Plate tectonics",
+      "domain": "science",
+      "terms": ["plate tectonics", "tectonic plates", "continental drift", "plates"],
+      "summary": "The theory that Earth's outer shell is broken into plates that move.",
+      "definition": "Plate tectonics is the scientific theory that Earth's lithosphere is divided into large plates that slowly move over the mantle, causing earthquakes, volcanoes and mountain building.",
+      "how": [
+        "Heat from Earth's interior causes slow movement in the mantle.",
+        "The plates above move, colliding, separating or sliding past each other.",
+        "Their interactions create mountains, earthquakes, volcanoes and ocean trenches."
+      ],
+      "why": "It explains the location of earthquakes, volcanoes and continents.",
+      "example": "The Himalayas formed as two plates pushed together over millions of years.",
+      "related": ["earthquakes", "volcanoes", "erosion"]
+    }
+  ],
+  "analogies": [
+    { "id": "internet-road", "a": "internet", "b": "road network", "text": "Think of the internet like a road network: data is traffic, routers are junctions and servers are the destinations." },
+    { "id": "brain-computer", "a": "brain", "b": "computer", "text": "The brain is like a computer: neurons are circuits, memory is storage and thinking is processing." },
+    { "id": "cell-factory", "a": "cell", "b": "factory", "text": "A cell is like a factory: the nucleus is the office with instructions, mitochondria are the power station and the membrane is the gate." },
+    { "id": "ecosystem-machine", "a": "ecosystem", "b": "machine", "text": "An ecosystem is like a machine: every part has a job, and removing one part can make the whole thing stop working well." },
+    { "id": "algorithm-recipe", "a": "algorithm", "b": "recipe", "text": "An algorithm is like a recipe: follow the steps in order and you get the result." }
+  ],
+  "heuristics": [
+    { "id": "cause", "pattern": "cause", "text": "Look for the chain: what triggered it, what conditions allowed it, and what made it worse." },
+    { "id": "effect", "pattern": "effect", "text": "Trace the consequences: short-term and long-term, direct and indirect, and who is affected." },
+    { "id": "compare", "pattern": "compare", "text": "Compare on the same criteria: purpose, cost, risk, benefit and who benefits." },
+    { "id": "decision", "pattern": "decision", "text": "List options, criteria and trade-offs, then choose the option with the best balance for your values." },
+    { "id": "definition", "pattern": "definition", "text": "Define the key term, give an example and say why it matters." },
+    { "id": "system", "pattern": "system", "text": "Find the parts, how they connect, and what feedback loops keep the system stable or push it to change." }
+  ]
+}

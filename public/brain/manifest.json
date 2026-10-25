@@ -14,5 +14,8 @@
     "reasoning/site-rules.json",
     "reasoning/website.json",
     "reasoning/website-more.json"
+  ],
+  "knowledge": [
+    "knowledge/general.json"
   ]
 }

@@ -22,5 +22,20 @@ const ids = new Set();
   });
   console.log(`✓ ${f}: ${(d.types || []).length} website types`);
 });
+const kid = new Set();
+(man.knowledge || []).forEach(f => {
+  const d = readJSON(f); if (!d) return;
+  const cs = d.concepts || [];
+  if (!cs.length) fail(`${f}: no concepts`);
+  cs.forEach(c => {
+    ["id", "title", "domain", "summary", "definition", "why", "example"].forEach(k => { if (!c[k]) fail(`${f}: concept ${c.id || "?"} missing ${k}`); });
+    if (!c.terms || !c.terms.length) fail(`${f}: concept ${c.id || "?"} needs terms`);
+    if (!c.how || !c.how.length) fail(`${f}: concept ${c.id || "?"} needs how steps`);
+    if (kid.has(c.id)) fail(`duplicate concept id ${c.id}`); kid.add(c.id);
+  });
+  (d.analogies || []).forEach(a => { ["id", "a", "b", "text"].forEach(k => { if (!a[k]) fail(`${f}: analogy ${a.id || "?"} missing ${k}`); }); });
+  (d.heuristics || []).forEach(h => { ["id", "pattern", "text"].forEach(k => { if (!h[k]) fail(`${f}: heuristic ${h.id || "?"} missing ${k}`); }); });
+  console.log(`✓ ${f}: ${cs.length} concepts, ${(d.analogies || []).length} analogies, ${(d.heuristics || []).length} heuristics`);
+});
 console.log(errors ? `\n${errors} problem(s) found` : "\nBrain OK ✔");
 process.exit(errors ? 1 : 0);
