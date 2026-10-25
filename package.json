@@ -1,20 +1,34 @@
 {
   "name": "chiedza-ai",
-  "version": "2.0.0",
-  "description": "Chiedza AI - a reasoning AI that solves problems step by step and builds full websites. No outside AI, no API keys. Created by Ntandomods.",
+  "version": "2.1.0",
+  "description": "Chiedza AI - a reasoning AI that writes essays, compositions, projects and letters, solves problems step by step and builds full websites. No outside AI, no API keys. Created by Ntandomods.",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "check:brain": "node scripts/check-brain.js && node scripts/test-reasoning.js && node scripts/test-website.js && node scripts/test-general.js",
+    "check:brain": "node scripts/check-brain.js && node scripts/test-reasoning.js && node scripts/test-website.js && node scripts/test-general.js && node scripts/test-writing.js",
     "test:reasoning": "node scripts/test-reasoning.js",
     "test:website": "node scripts/test-website.js",
-    "test:general": "node scripts/test-general.js"
+    "test:general": "node scripts/test-general.js",
+    "test:writing": "node scripts/test-writing.js"
   },
-  "engines": { "node": ">=18.0.0" },
-  "keywords": ["reasoning", "ai", "website-builder", "zimbabwe", "no-api-key"],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "reasoning",
+    "writing",
+    "essays",
+    "compositions",
+    "ai",
+    "website-builder",
+    "zimbabwe",
+    "no-api-key"
+  ],
   "author": "Ntandomods",
   "license": "MIT",
-  "dependencies": { "express": "^4.19.2" }
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }

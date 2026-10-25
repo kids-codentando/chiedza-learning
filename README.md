@@ -1,6 +1,6 @@
 # 💡 Chiedza AI
 
-**A reasoning AI that solves problems step by step and builds complete websites.**
+**A reasoning AI that writes essays, compositions and projects, solves problems step by step, and builds complete websites.**
 Created with ❤️ by **Ntandomods**.
 
 Chiedza AI runs on **files, not on a paid AI**. Its brain is a folder of plain JSON and Markdown files plus a small reasoning engine. There is no API key, no database and no monthly bill. It shows its working, says "I cannot tell" when the files do not give enough, and never invents facts.
@@ -8,13 +8,14 @@ Chiedza AI runs on **files, not on a paid AI**. Its brain is a folder of plain J
 ## What it does
 
 - 🧠 **Reasons about almost anything.** A general reasoning engine reads any question, works out what kind of thinking it needs — define, explain how, explain why, weigh pros and cons, decide, plan, explore a “what if”, analyse a topic, or reason from first principles — and answers with its working shown. It draws on a broad knowledge file (science, health, money, technology, civics, language, maths and more) and applies domain lenses (money, health, learning, environment, technology, people, future, law) to weigh trade-offs. When the files do not cover a topic it does **not** guess: it builds a clear reasoning map of the sub-questions to answer.
+- ✍️ **Writes the whole thing.** Essays, compositions, projects, letters, emails, speeches, articles, stories, poems, reports, summaries, reviews, debates, blogs and notices. It reads the request for genre, topic, length, tone and audience, picks a structure that fits, drafts it paragraph by paragraph, then **measures its own craft** — word count against target, paragraphing, sentence length, sentence variety, adverb density, passive voice, repetition, whether a counter-argument is present, concrete detail, and opening length — and shows you the result as a checklist. Drafts are deterministic, so `make it shorter`, `make it longer`, `more formal`, `simpler`, `add a counter-argument`, `give me the outline`, `write the introduction` and `write the conclusion` all work as follow-ups. Names, dates, figures and quotations are **never invented** — they are left for you to fill in.
 - 🌐 **Builds full websites.** Describe the site in a sentence. Chiedza works out the purpose, name, place, offerings, colours, tone and pages, builds a real multi-page site (HTML, CSS, JS), checks its own work, shows every reasoning step, and lets you **preview**, **read the code** and **download a ZIP**.
 - ✏️ **Edits the site you built.** `make it green`, `add pricing`, `add a gallery`, `dark mode`, `make it one page`, `change the name to ...`, `phone is 0771 234 567`.
 - 🧮 **Word problems and sums** with working shown.
 - 🔗 **Logic** (who is tallest, if-then, all/some/none), **cause and effect** and **comparisons**.
 - 🛡️ **Safety rules** run first: no phishing or scam pages, no private IDs or passwords.
 
-Try: `Build a website for Mai Chido Bakery in Harare selling cakes, bread and mandazi. Make it pink with a gallery`
+Try: `Write an essay about discipline in 500 words` · `Write a composition about a day I will never forget` · `Write a project on water conservation` · `Build a website for Mai Chido Bakery in Harare selling cakes, bread and mandazi. Make it pink with a gallery`
 
 13 kinds of site are built in: business, online shop, restaurant or food, salon, school, church or charity, portfolio, farm, clinic, tech or startup, event, blog and personal.
 
@@ -33,8 +34,9 @@ It also works as a plain static site: host the `public/` folder anywhere.
 ## Checks
 
 ```bash
-npm run check:brain   # brain files + reasoning + website builder + general reasoner
+npm run check:brain   # brain files + reasoning + website builder + general reasoner + writing engine
 npm run test:general  # general reasoning engine only
+npm run test:writing  # writing engine only (16 genres, guides, edits, craft checks)
 ```
 
 ## Deploy on Render
@@ -51,10 +53,12 @@ chiedza-ai/
 │   ├── js/brain.js        # loads the brain, runs safety, calculator, routes handlers
 │   ├── js/reasoning.js    # word problems, logic, causes, comparisons
 │   ├── js/reasoning-general.js  # universal reasoner: define, decide, plan, what-if, analyse
+│   ├── js/reasoning-writing.js  # writing engine: 16 genres, structure shaping, craft checks
 │   ├── js/sitebuilder.js  # website builder
 │   └── brain/             # the AI's files (see public/brain/README.md)
 │       └── knowledge/general.json  # 60 concepts, analogies and reasoning heuristics
-├── scripts/               # check-brain, test-reasoning, test-website, test-general
+│       └── knowledge/writing.json  # 16 genres, 66 frame banks, craft checks
+├── scripts/               # check-brain, test-reasoning, test-website, test-general, test-writing
 ├── server.js              # tiny static server + /api/health
 └── render.yaml
 ```

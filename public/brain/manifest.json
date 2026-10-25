@@ -1,7 +1,7 @@
 {
   "name": "Chiedza Brain",
-  "version": "2.0.0",
-  "description": "The file-based brain of Chiedza AI. It only reasons: it follows rules in these files to solve problems, explain causes, compare things and build full websites. Edit a file, redeploy, and the AI changes.",
+  "version": "2.1.0",
+  "description": "The file-based brain of Chiedza AI. It reasons, writes and builds. It follows rules in these files to explain ideas, solve problems, weigh decisions, plan, write essays and projects, and build full websites. Edit a file, redeploy, and the AI changes.",
   "identity": "identity.md",
   "safety": "safety.json",
   "reasoning": [
@@ -17,5 +17,8 @@
   ],
   "knowledge": [
     "knowledge/general.json"
+  ],
+  "writing": [
+    "knowledge/writing.json"
   ]
 }

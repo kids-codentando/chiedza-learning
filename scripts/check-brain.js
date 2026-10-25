@@ -37,5 +37,25 @@ const kid = new Set();
   (d.heuristics || []).forEach(h => { ["id", "pattern", "text"].forEach(k => { if (!h[k]) fail(`${f}: heuristic ${h.id || "?"} missing ${k}`); }); });
   console.log(`✓ ${f}: ${cs.length} concepts, ${(d.analogies || []).length} analogies, ${(d.heuristics || []).length} heuristics`);
 });
+const gid = new Set();
+(man.writing || []).forEach(f => {
+  const d = readJSON(f); if (!d) return;
+  const gs = d.genres || [];
+  if (!gs.length) fail(`${f}: no genres`);
+  gs.forEach(g => {
+    ["id", "label", "emoji", "keywords", "structure", "rubric"].forEach(k => { if (!g[k]) fail(`${f}: genre ${g.id || "?"} missing ${k}`); });
+    if (gid.has(g.id)) fail(`duplicate genre id ${g.id}`); gid.add(g.id);
+    if (!g.keywords || !g.keywords.length) fail(`${g.id}: needs keywords`);
+    if (!g.structure || g.structure.length < 1) fail(`${g.id}: needs a structure`);
+    (g.structure || []).forEach(st => { if (!st.role || !st.label) fail(`${g.id}: structure step needs role and label`); });
+    if (!g.rubric || g.rubric.length < 3) fail(`${g.id}: needs 3+ rubric lines`);
+    if (!g.defaults || !g.defaults.words) fail(`${g.id}: needs defaults.words`);
+  });
+  const fr = (d.craft && d.craft.frames) || {};
+  gs.forEach(g => (g.structure || []).forEach(st => { if (!fr[st.role] || !fr[st.role].length) fail(`${g.id}: no frames for role ${st.role}`); }));
+  if (!d.facets || !d.facets.length) fail(`${f}: no facets`);
+  if (!d.checks || d.checks.length < 5) fail(`${f}: needs 5+ craft checks`);
+  console.log(`\u2713 ${f}: ${gs.length} genres, ${Object.keys(fr).length} frame banks, ${(d.facets || []).length} facets`);
+});
 console.log(errors ? `\n${errors} problem(s) found` : "\nBrain OK ✔");
 process.exit(errors ? 1 : 0);

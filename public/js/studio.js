@@ -60,10 +60,12 @@
 
   /* ---------------- welcome ---------------- */
   const START_CHIPS = [
+    "Write an essay about discipline in 500 words",
+    "Write a composition about a day I will never forget",
+    "Write a project on water conservation",
     "Explain photosynthesis",
     "Should I start a small business?",
     "How do I study better?",
-    "What if I exercise every day?",
     "Build a website for Mai Chido Bakery in Harare selling cakes, bread and mandazi. Make it pink with a gallery"
   ];
 
@@ -74,8 +76,9 @@
     h.innerHTML =
       `<img class="hero-logo" src="assets/icon.png" alt="" width="64" height="64">` +
       `<h1>Think it through with <em>Chiedza</em></h1>` +
-      `<p>Ask about almost anything. I break the question down, weigh the options and show every step of my reasoning — then I can build you a complete website.</p>` +
+      `<p>Ask about almost anything. I break the question down, weigh the options and show every step of my reasoning. I can also <strong>write the whole thing</strong> — essays, compositions, projects, letters, speeches and reports — then build you a complete website.</p>` +
       `<div class="cap-grid">` +
+        `<div class="cap-card"><div class="cap-ico">✍️</div><strong>Write essays & projects</strong><span>Real drafts — compositions, letters, speeches, reports — with a craft check.</span></div>` +
         `<div class="cap-card"><div class="cap-ico">💡</div><strong>Explain &amp; define</strong><span>Ideas in science, money, health, tech, law and life.</span></div>` +
         `<div class="cap-card"><div class="cap-ico">⚖️</div><strong>Decide &amp; compare</strong><span>Pros and cons, trade-offs, and what matters most.</span></div>` +
         `<div class="cap-card"><div class="cap-ico">🗺️</div><strong>Plan step by step</strong><span>Study plans, projects, businesses and habits.</span></div>` +
@@ -88,7 +91,7 @@
   }
 
   const MISS = `I could not work that one out from my files. 🤔 I do not look things up, so I only answer what I can reason through.<br><br>` +
-    `I can:<ul><li><strong>Reason about anything:</strong> <em>Explain inflation</em>, <em>Should I save or invest?</em>, <em>How do I plan a project?</em></li>` +
+    `I can:<ul><li><strong>Write it for you:</strong> <em>Write an essay about discipline in 500 words</em>, <em>Write a project on water conservation</em></li><li><strong>Reason about anything:</strong> <em>Explain inflation</em>, <em>Should I save or invest?</em>, <em>How do I plan a project?</em></li>` +
     `<li><strong>Build a website:</strong> <em>Build a website for my salon Glow Studio in Mutare</em></li>` +
     `<li><strong>Change it:</strong> <em>make it green</em>, <em>add pricing</em>, <em>make it one page</em></li>` +
     `<li><strong>Solve problems:</strong> word problems, logic, cause and effect, comparisons, and sums like <em>25% of 80</em></li></ul>`;

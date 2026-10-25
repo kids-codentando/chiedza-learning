@@ -1,0 +1,1374 @@
+{
+  "name": "Chiedza Writing Studio",
+  "version": "1.0.0",
+  "description": "Blueprints for writing: the shape of every common school and work text (essay, composition, project, letter, speech, article, story, poem, report, summary, review, debate, blog, notice), the sentence frames the writer uses to build a first draft, and the craft rules it checks itself against. Edit a frame here and the writing changes.",
+  "genres": [
+    {
+      "id": "essay",
+      "label": "Essay",
+      "emoji": "🖋️",
+      "keywords": [
+        "essay",
+        "argumentative essay",
+        "discursive essay",
+        "argument essay",
+        "opinion piece",
+        "academic essay"
+      ],
+      "defaults": {
+        "words": 450,
+        "tone": "formal",
+        "person": "third"
+      },
+      "argument": true,
+      "structure": [
+        {
+          "role": "hook",
+          "label": "Hook"
+        },
+        {
+          "role": "context",
+          "label": "Set up the question"
+        },
+        {
+          "role": "thesis",
+          "label": "Thesis"
+        },
+        {
+          "role": "point",
+          "label": "First argument"
+        },
+        {
+          "role": "explain",
+          "label": "Explain it"
+        },
+        {
+          "role": "example",
+          "label": "Make it concrete"
+        },
+        {
+          "role": "point",
+          "label": "Second argument"
+        },
+        {
+          "role": "explain",
+          "label": "Explain it"
+        },
+        {
+          "role": "counter",
+          "label": "The objection"
+        },
+        {
+          "role": "rebut",
+          "label": "Answer it"
+        },
+        {
+          "role": "consequence",
+          "label": "Why it matters"
+        },
+        {
+          "role": "conclusion",
+          "label": "Conclusion"
+        }
+      ],
+      "rubric": [
+        "A thesis in the introduction that says something arguable, not just true",
+        "One idea per paragraph, announced in its first sentence",
+        "Evidence or concrete example for every claim",
+        "The strongest objection stated fairly, then answered",
+        "A conclusion that follows from the argument, not a summary of it",
+        "Formal register: no contractions, no slang, no 'I think' padding"
+      ],
+      "required": [
+        "hook",
+        "thesis",
+        "point",
+        "counter",
+        "conclusion"
+      ]
+    },
+    {
+      "id": "composition",
+      "label": "Composition (narrative)",
+      "emoji": "📓",
+      "keywords": [
+        "composition",
+        "narrative composition",
+        "narrative essay",
+        "story composition",
+        "composition writing"
+      ],
+      "defaults": {
+        "words": 400,
+        "tone": "personal",
+        "person": "first"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "scene",
+          "label": "Open in a moment"
+        },
+        {
+          "role": "sensory",
+          "label": "Put us in the place"
+        },
+        {
+          "role": "action",
+          "label": "Something happens"
+        },
+        {
+          "role": "dialogue",
+          "label": "Let someone speak"
+        },
+        {
+          "role": "turn",
+          "label": "The turn"
+        },
+        {
+          "role": "reflection",
+          "label": "What it meant"
+        },
+        {
+          "role": "closing",
+          "label": "Close on an image"
+        }
+      ],
+      "rubric": [
+        "Begin inside the action, not with 'One day I woke up'",
+        "At least three senses used, not just sight",
+        "One clear turning point that changes something",
+        "Dialogue that sounds like a person, not a lesson",
+        "Feelings shown through detail rather than named",
+        "The last line lands on an image, not a moral"
+      ],
+      "required": [
+        "scene",
+        "action",
+        "turn",
+        "closing"
+      ]
+    },
+    {
+      "id": "descriptive",
+      "label": "Descriptive piece",
+      "emoji": "🎨",
+      "keywords": [
+        "descriptive composition",
+        "descriptive essay",
+        "descriptive piece",
+        "description of",
+        "describe a place",
+        "describe a person"
+      ],
+      "defaults": {
+        "words": 350,
+        "tone": "evocative",
+        "person": "first"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "scene",
+          "label": "Establish the view"
+        },
+        {
+          "role": "sensory",
+          "label": "Sound and smell"
+        },
+        {
+          "role": "detail",
+          "label": "Zoom in on one thing"
+        },
+        {
+          "role": "movement",
+          "label": "Something moves"
+        },
+        {
+          "role": "reflection",
+          "label": "What the place says"
+        },
+        {
+          "role": "closing",
+          "label": "Final image"
+        }
+      ],
+      "rubric": [
+        "A dominant impression held from first line to last",
+        "Specific nouns and verbs instead of adjectives stacked up",
+        "The five senses, at least three of them",
+        "One close-up detail that carries the whole scene",
+        "No travel-brochure cliches"
+      ],
+      "required": [
+        "scene",
+        "sensory",
+        "detail",
+        "closing"
+      ]
+    },
+    {
+      "id": "project",
+      "label": "Project write-up",
+      "emoji": "📊",
+      "keywords": [
+        "project",
+        "project report",
+        "research project",
+        "project write up",
+        "school project",
+        "project proposal"
+      ],
+      "defaults": {
+        "words": 900,
+        "tone": "formal",
+        "person": "third"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "aim",
+          "label": "Aim"
+        },
+        {
+          "role": "background",
+          "label": "Background"
+        },
+        {
+          "role": "objectives",
+          "label": "Objectives"
+        },
+        {
+          "role": "method",
+          "label": "Method"
+        },
+        {
+          "role": "findings",
+          "label": "Findings"
+        },
+        {
+          "role": "discussion",
+          "label": "Discussion"
+        },
+        {
+          "role": "recommendation",
+          "label": "Recommendations"
+        },
+        {
+          "role": "conclusion",
+          "label": "Conclusion"
+        }
+      ],
+      "rubric": [
+        "Aim stated in one sentence, with a measurable outcome",
+        "Objectives numbered and each one answered later",
+        "Method described well enough for someone else to repeat it",
+        "Findings separated from opinion",
+        "Recommendations that follow from the findings",
+        "Sources listed, and every borrowed idea credited"
+      ],
+      "required": [
+        "aim",
+        "method",
+        "findings",
+        "conclusion"
+      ]
+    },
+    {
+      "id": "letter",
+      "label": "Formal letter",
+      "emoji": "✉️",
+      "keywords": [
+        "formal letter",
+        "business letter",
+        "application letter",
+        "letter of application",
+        "official letter",
+        "letter to the editor",
+        "complaint letter"
+      ],
+      "defaults": {
+        "words": 240,
+        "tone": "formal",
+        "person": "first"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "address",
+          "label": "Your address"
+        },
+        {
+          "role": "date",
+          "label": "Date"
+        },
+        {
+          "role": "salutation",
+          "label": "Salutation"
+        },
+        {
+          "role": "opening",
+          "label": "Why you are writing"
+        },
+        {
+          "role": "body",
+          "label": "The substance"
+        },
+        {
+          "role": "request",
+          "label": "What you want"
+        },
+        {
+          "role": "letterclose",
+          "label": "Close"
+        },
+        {
+          "role": "signoff",
+          "label": "Sign-off"
+        }
+      ],
+      "rubric": [
+        "Address, date and salutation in the right places",
+        "Purpose stated in the first two sentences",
+        "One paragraph per point, no wandering",
+        "Polite even when complaining",
+        "A clear, specific request with a deadline if needed",
+        "'Yours faithfully' with Dear Sir/Madam, 'Yours sincerely' with a named person"
+      ],
+      "required": [
+        "address",
+        "salutation",
+        "opening",
+        "request",
+        "letterclose"
+      ]
+    },
+    {
+      "id": "email",
+      "label": "Email",
+      "emoji": "📧",
+      "keywords": [
+        "email",
+        "e mail",
+        "mail to",
+        "message to my teacher",
+        "message to a company"
+      ],
+      "defaults": {
+        "words": 160,
+        "tone": "professional",
+        "person": "first"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "subject",
+          "label": "Subject line"
+        },
+        {
+          "role": "salutation",
+          "label": "Greeting"
+        },
+        {
+          "role": "opening",
+          "label": "Purpose"
+        },
+        {
+          "role": "body",
+          "label": "Detail"
+        },
+        {
+          "role": "request",
+          "label": "Ask"
+        },
+        {
+          "role": "signoff",
+          "label": "Sign-off"
+        }
+      ],
+      "rubric": [
+        "A subject line that says what the email is about in six words",
+        "Purpose in the first line, not the third paragraph",
+        "Short paragraphs, one idea each",
+        "One clear ask, with a date",
+        "No 'I hope this email finds you well' padding"
+      ],
+      "required": [
+        "subject",
+        "opening",
+        "request",
+        "signoff"
+      ]
+    },
+    {
+      "id": "speech",
+      "label": "Speech",
+      "emoji": "🎤",
+      "keywords": [
+        "speech",
+        "talk",
+        "address to",
+        "presentation script",
+        "speech for",
+        "keynote"
+      ],
+      "defaults": {
+        "words": 500,
+        "tone": "persuasive",
+        "person": "first"
+      },
+      "argument": true,
+      "structure": [
+        {
+          "role": "greeting",
+          "label": "Greeting"
+        },
+        {
+          "role": "hook",
+          "label": "Hook"
+        },
+        {
+          "role": "thesis",
+          "label": "Your position"
+        },
+        {
+          "role": "point",
+          "label": "Main point"
+        },
+        {
+          "role": "example",
+          "label": "Story or example"
+        },
+        {
+          "role": "counter",
+          "label": "Meet the doubt"
+        },
+        {
+          "role": "call",
+          "label": "Call to action"
+        },
+        {
+          "role": "closing",
+          "label": "Last line"
+        }
+      ],
+      "rubric": [
+        "Opens with something a room can hear, not a definition",
+        "Short sentences where the voice should rise",
+        "One story, told properly, rather than five mentioned",
+        "The audience addressed directly at least twice",
+        "A specific ask at the end, not 'let us all try harder'",
+        "Read aloud in under four minutes"
+      ],
+      "required": [
+        "greeting",
+        "hook",
+        "thesis",
+        "point",
+        "call",
+        "closing"
+      ]
+    },
+    {
+      "id": "article",
+      "label": "Article",
+      "emoji": "📰",
+      "keywords": [
+        "article",
+        "newspaper article",
+        "magazine article",
+        "feature article",
+        "opinion column"
+      ],
+      "defaults": {
+        "words": 450,
+        "tone": "journalistic",
+        "person": "third"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "hook",
+          "label": "Opening that earns the second line"
+        },
+        {
+          "role": "context",
+          "label": "The wider picture"
+        },
+        {
+          "role": "point",
+          "label": "The core of the story"
+        },
+        {
+          "role": "quote",
+          "label": "A voice"
+        },
+        {
+          "role": "counter",
+          "label": "The other side"
+        },
+        {
+          "role": "closing",
+          "label": "Landing"
+        }
+      ],
+      "rubric": [
+        "The most important fact in the first paragraph",
+        "Short paragraphs, two to three sentences",
+        "A named human voice, even if it is a composite",
+        "Both sides heard before judgement",
+        "No adjective doing a fact's job"
+      ],
+      "required": [
+        "hook",
+        "point",
+        "quote",
+        "closing"
+      ]
+    },
+    {
+      "id": "story",
+      "label": "Short story",
+      "emoji": "📖",
+      "keywords": [
+        "short story",
+        "story about",
+        "write a story",
+        "fiction",
+        "tale"
+      ],
+      "defaults": {
+        "words": 600,
+        "tone": "literary",
+        "person": "third"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "setup",
+          "label": "Ordinary world"
+        },
+        {
+          "role": "inciting",
+          "label": "The disturbance"
+        },
+        {
+          "role": "rising",
+          "label": "Pressure builds"
+        },
+        {
+          "role": "climax",
+          "label": "The moment"
+        },
+        {
+          "role": "falling",
+          "label": "Aftermath"
+        },
+        {
+          "role": "resolution",
+          "label": "What is left"
+        }
+      ],
+      "rubric": [
+        "A character who wants something specific in the first page",
+        "Conflict that costs the character something",
+        "Scene, not summary, at the climax",
+        "Details that do work rather than decorate",
+        "An ending that changes the meaning of the opening"
+      ],
+      "required": [
+        "setup",
+        "inciting",
+        "climax",
+        "resolution"
+      ]
+    },
+    {
+      "id": "poem",
+      "label": "Poem",
+      "emoji": "🎼",
+      "keywords": [
+        "poem",
+        "poetry",
+        "verse",
+        "sonnet",
+        "write a poem"
+      ],
+      "defaults": {
+        "words": 120,
+        "tone": "lyrical",
+        "person": "first"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "verse",
+          "label": "Stanzas"
+        }
+      ],
+      "rubric": [
+        "One image carried all the way through, not five half-images",
+        "Line breaks that make the reader pause in the right place",
+        "Sound doing some of the work: assonance, repetition, rhythm",
+        "Abstractions replaced by things you can touch",
+        "The last line turns the poem, even slightly"
+      ],
+      "required": [
+        "verse"
+      ]
+    },
+    {
+      "id": "report",
+      "label": "Report",
+      "emoji": "🧾",
+      "keywords": [
+        "report",
+        "lab report",
+        "experiment report",
+        "book report",
+        "field report"
+      ],
+      "defaults": {
+        "words": 600,
+        "tone": "formal",
+        "person": "third"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "aim",
+          "label": "Aim"
+        },
+        {
+          "role": "method",
+          "label": "Method"
+        },
+        {
+          "role": "observations",
+          "label": "Observations"
+        },
+        {
+          "role": "analysis",
+          "label": "Analysis"
+        },
+        {
+          "role": "conclusion",
+          "label": "Conclusion"
+        },
+        {
+          "role": "recommendation",
+          "label": "Recommendations"
+        }
+      ],
+      "rubric": [
+        "Aim and conclusion answer the same question",
+        "Method in past tense, passive where it belongs",
+        "Observations recorded, not interpreted",
+        "Analysis explains the gap between what was expected and what happened",
+        "Recommendations are actionable, not vague"
+      ],
+      "required": [
+        "aim",
+        "method",
+        "observations",
+        "conclusion"
+      ]
+    },
+    {
+      "id": "summary",
+      "label": "Summary / precis",
+      "emoji": "🗂️",
+      "keywords": [
+        "summary",
+        "summarise",
+        "summarize",
+        "precis",
+        "shorten this",
+        "abstract of"
+      ],
+      "defaults": {
+        "words": 120,
+        "tone": "neutral",
+        "person": "third"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "mainidea",
+          "label": "The one idea"
+        },
+        {
+          "role": "points",
+          "label": "The supporting points"
+        },
+        {
+          "role": "closing",
+          "label": "What it comes to"
+        }
+      ],
+      "rubric": [
+        "Roughly a quarter of the original length",
+        "Own words, no borrowed phrasing",
+        "No examples, no quotations, no opinion",
+        "The author's emphasis kept, not yours",
+        "Reads as prose, not a list of points"
+      ],
+      "required": [
+        "mainidea",
+        "points"
+      ]
+    },
+    {
+      "id": "review",
+      "label": "Review",
+      "emoji": "⭐",
+      "keywords": [
+        "review",
+        "book review",
+        "film review",
+        "movie review",
+        "album review"
+      ],
+      "defaults": {
+        "words": 400,
+        "tone": "critical",
+        "person": "first"
+      },
+      "argument": true,
+      "structure": [
+        {
+          "role": "intro",
+          "label": "What it is and who made it"
+        },
+        {
+          "role": "whatitis",
+          "label": "What happens"
+        },
+        {
+          "role": "strengths",
+          "label": "What works"
+        },
+        {
+          "role": "weaknesses",
+          "label": "What does not"
+        },
+        {
+          "role": "verdict",
+          "label": "Verdict"
+        }
+      ],
+      "rubric": [
+        "Title, author or director, and year named early",
+        "A judgement, not a plot retelling",
+        "At least one specific moment used as evidence",
+        "Praise and criticism both earned",
+        "Spoilers flagged or avoided",
+        "A verdict a reader can act on"
+      ],
+      "required": [
+        "intro",
+        "strengths",
+        "weaknesses",
+        "verdict"
+      ]
+    },
+    {
+      "id": "debate",
+      "label": "Debate speech",
+      "emoji": "⚖️",
+      "keywords": [
+        "debate",
+        "debate speech",
+        "motion",
+        "argue for",
+        "argue against",
+        "opposition speech",
+        "proposition speech"
+      ],
+      "defaults": {
+        "words": 400,
+        "tone": "persuasive",
+        "person": "first"
+      },
+      "argument": true,
+      "structure": [
+        {
+          "role": "motion",
+          "label": "State the motion"
+        },
+        {
+          "role": "proposition",
+          "label": "Your case in three points"
+        },
+        {
+          "role": "evidence",
+          "label": "Support"
+        },
+        {
+          "role": "opposition",
+          "label": "Their case, stated fairly"
+        },
+        {
+          "role": "rebuttal",
+          "label": "Rebuttal"
+        },
+        {
+          "role": "verdict",
+          "label": "Close"
+        }
+      ],
+      "rubric": [
+        "Motion restated exactly as given",
+        "Case signposted: 'three reasons'",
+        "Each reason in one sentence before the support",
+        "Opposition's best point named, not a straw man",
+        "Rebuttal answers the point, not the person",
+        "Closing line repeats the motion"
+      ],
+      "required": [
+        "motion",
+        "proposition",
+        "opposition",
+        "verdict"
+      ]
+    },
+    {
+      "id": "blog",
+      "label": "Blog post",
+      "emoji": "🌐",
+      "keywords": [
+        "blog",
+        "blog post",
+        "online article",
+        "post about"
+      ],
+      "defaults": {
+        "words": 500,
+        "tone": "conversational",
+        "person": "first"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "hook",
+          "label": "Hook"
+        },
+        {
+          "role": "promise",
+          "label": "What you will get"
+        },
+        {
+          "role": "point",
+          "label": "The idea"
+        },
+        {
+          "role": "example",
+          "label": "In practice"
+        },
+        {
+          "role": "takeaway",
+          "label": "The takeaway"
+        },
+        {
+          "role": "cta",
+          "label": "What to do next"
+        }
+      ],
+      "rubric": [
+        "A first line that works on a phone screen",
+        "Short paragraphs, white space, subheadings",
+        "Written to one person, not to 'everyone'",
+        "One idea, argued properly",
+        "Something the reader can do today"
+      ],
+      "required": [
+        "hook",
+        "point",
+        "takeaway",
+        "cta"
+      ]
+    },
+    {
+      "id": "notice",
+      "label": "Notice / announcement",
+      "emoji": "📌",
+      "keywords": [
+        "notice",
+        "announcement",
+        "invitation",
+        "poster text",
+        "flyer text",
+        "memo"
+      ],
+      "defaults": {
+        "words": 100,
+        "tone": "plain",
+        "person": "third"
+      },
+      "argument": false,
+      "structure": [
+        {
+          "role": "heading",
+          "label": "Heading"
+        },
+        {
+          "role": "body",
+          "label": "What is happening"
+        },
+        {
+          "role": "details",
+          "label": "When, where, who"
+        },
+        {
+          "role": "contact",
+          "label": "Who to ask"
+        },
+        {
+          "role": "noticeclose",
+          "label": "Sign-off"
+        }
+      ],
+      "rubric": [
+        "Who, what, when, where in the first three lines",
+        "Biggest text for the most important fact",
+        "No sentences longer than fifteen words",
+        "A named contact, not 'the office'",
+        "Nothing that only makes sense if you already know"
+      ],
+      "required": [
+        "heading",
+        "body",
+        "details",
+        "contact",
+        "noticeclose"
+      ]
+    }
+  ],
+  "facets": [
+    "the small decision that repeats",
+    "the gap between intention and action",
+    "the person it reaches first",
+    "the cost of getting it wrong",
+    "the habit that holds it up",
+    "the difference between talking and doing",
+    "the pressure it puts on time and money",
+    "the patience it demands",
+    "the trade-off nobody mentions",
+    "the moment just before the choice",
+    "the ordinary day it is built out of",
+    "the silence after the announcement"
+  ],
+  "craft": {
+    "transitions": {
+      "point": [
+        "First,",
+        "To begin with,",
+        "The clearest place to start is this:",
+        "Consider, first,"
+      ],
+      "explain": [
+        "The reason is not complicated.",
+        "In practice,",
+        "Put plainly,",
+        "What this means is simple."
+      ],
+      "example": [
+        "A small example makes it concrete.",
+        "You can see the pattern in ordinary life.",
+        "Take a familiar case.",
+        "Watch what happens in practice."
+      ],
+      "counter": [
+        "The strongest objection is worth stating properly.",
+        "A fair critic would push back here.",
+        "None of this goes unchallenged.",
+        "It would be dishonest to leave out the objection."
+      ],
+      "rebut": [
+        "That objection has force, but it proves less than it seems.",
+        "The answer is not to choose between the two.",
+        "Granting the point sharpens the argument rather than weakening it.",
+        "This is where the argument has to be careful."
+      ],
+      "consequence": [
+        "If this is right, the consequences are practical.",
+        "Taken seriously, this changes what counts as progress.",
+        "The implication is uncomfortable.",
+        "Follow the logic one step further."
+      ],
+      "conclusion": [
+        "In the end,",
+        "The conclusion is narrower than the slogan.",
+        "None of this is a reason for despair.",
+        "What remains, once the noise settles, is this."
+      ]
+    },
+    "frames": {
+      "hook": [
+        "Few subjects divide a room as quickly as {T}.",
+        "Ask ten people what {T} means and you will get ten answers, most of them confident and several of them wrong.",
+        "There is a comfortable version of {T} that everybody repeats, and a harder version that very few people live by.",
+        "Sooner or later, {T} stops being an idea and becomes a decision.",
+        "It is easy to talk about {T} in the abstract. It is much harder to do it on a Tuesday morning when nobody is watching."
+      ],
+      "context": [
+        "On the surface the question looks settled: {T} is generally agreed to be a good thing, and the argument usually ends there.",
+        "Much of the confusion around {T} comes from mixing up two different questions: what it is, and what it costs.",
+        "To think about {T} clearly, it helps to separate what it actually asks of people from what we like to say about it.",
+        "The word gets used so often that it has almost stopped meaning anything, which is a pity, because the thing itself matters."
+      ],
+      "thesis": [
+        "This essay argues that {T} matters less as a slogan and more as a set of small, repeatable choices, and that the cost of ignoring it is paid slowly, by ordinary people.",
+        "The argument here is simple: {T} deserves to be taken seriously because of {F}, and because the alternative is more expensive than it looks.",
+        "My position is that {T} earns our attention not for its drama but for its arithmetic: it is built out of ordinary days, and it collapses in the same way."
+      ],
+      "point": [
+        "The first thing to notice about {T} is how much of it depends on {F} rather than on dramatic gestures.",
+        "Start with {F}. This is where {T} is actually won or lost.",
+        "Consider {F}, which is usually left out of the conversation about {T}.",
+        "There is a practical side to {T} that rarely makes it into the speeches: {F}."
+      ],
+      "explain": [
+        "The reason is not mysterious. Most of us are better at the promise than at the repetition, and {T} lives or dies on the repetition.",
+        "In practice this means progress is rarely a single decision; it is a hundred unglamorous ones, most of them invisible to anybody else.",
+        "Put differently, the distance between intention and outcome is almost always made of {F}.",
+        "What makes this hard is that the reward arrives late and the effort arrives immediately."
+      ],
+      "example": [
+        "Think of the pattern in ordinary life: the student who revises for twenty minutes a day usually beats the one who plans a heroic weekend and never starts.",
+        "The same shape appears wherever people try to change something: the plan is ambitious, the first week is enthusiastic, and the fourth week is silent.",
+        "You can see it in any household, any classroom, any workplace: the thing that is measured gets done, and the thing that is merely admired does not.",
+        "A simple test makes the point. Ask whether the effort can survive a bad day. If it cannot, it is a mood rather than a method."
+      ],
+      "counter": [
+        "The strongest objection to this view is not that it is wrong but that it is inconvenient: it puts the burden on individuals and lets larger forces off the hook.",
+        "A fair critic would say that {T} is a luxury for people who already have room to choose, and that talk of it can slide into blaming the poor for being poor.",
+        "There is a real risk of overstatement here. Not everything can be fixed by effort, and pretending otherwise is its own kind of dishonesty."
+      ],
+      "rebut": [
+        "That objection has force, but it proves less than it seems to. Structure sets the size of the room; it does not decide what we do inside it.",
+        "The answer is not to choose between personal effort and better systems. It is to notice that systems are made of people, and people are made of habits.",
+        "Granting the point does not weaken the argument; it sharpens it. {Tt} is not a substitute for justice, it is what justice looks like at close range."
+      ],
+      "consequence": [
+        "If this is right, then the cost of neglecting {T} is not paid all at once. It is paid in small instalments, by the people with the least room to absorb them.",
+        "The consequence is uncomfortable: the longer the problem is treated as somebody else's, the more expensive it becomes for everybody.",
+        "Taken seriously, this changes what counts as progress. We stop asking whether the announcement was made and start asking whether anything changed on the ground."
+      ],
+      "conclusion": [
+        "None of this is a reason for despair. It is a reason for precision. {Tt} will not be settled by a slogan, but it can be moved by people willing to be boring about it.",
+        "The conclusion, then, is not that {T} is everything, but that it is the part we control. That is either a small comfort or a large responsibility, depending on what happens next.",
+        "In the end the question is not whether {T} is important, since almost everyone agrees it is, but whether we are prepared to pay for it in the only currency that counts, which is ordinary time."
+      ],
+      "scene": [
+        "The morning began quietly, the way the important ones usually do.",
+        "Nobody had warned us that the day would turn out the way it did.",
+        "It started with something small. It almost always does.",
+        "By the time the sun came over the roofs, everything was already in place."
+      ],
+      "sensory": [
+        "There was dust in the air and the smell of paraffin and rain, and somewhere a radio was playing too loudly.",
+        "The room was hot, the kind of heat that makes the walls feel closer than they are.",
+        "I remember the sound more than anything: a low murmur that stopped whenever an adult walked past.",
+        "Everything looked ordinary, the chipped paint and the plastic chairs and the light coming in sideways, and that is exactly why I remember it."
+      ],
+      "action": [
+        "Then it happened, and it happened faster than any of us could follow.",
+        "I stood there for a moment that lasted far longer than a moment.",
+        "There was a shout, a scramble, and then the noise of people deciding what to do.",
+        "My hands were shaking, which annoyed me more than the fear did."
+      ],
+      "dialogue": [
+        "\"You are going to have to decide,\" she said, and she said it quietly, which made it worse.",
+        "\"It is not the end of the world,\" my mother said. She was wrong, and she was right.",
+        "\"Tell me the truth,\" I said. He looked at the ground for a long time before he did."
+      ],
+      "turn": [
+        "And then, just when it seemed settled, the whole thing turned.",
+        "What happened next is the part I have replayed the most.",
+        "It was not the ending I had imagined, and that turned out to be the point."
+      ],
+      "reflection": [
+        "Looking back, I understand that the day did not change what happened so much as what I noticed.",
+        "I have told this story a few times now, and each time I notice a different detail.",
+        "What I learned came later, quietly, the way most lessons do."
+      ],
+      "closing": [
+        "I still think about it, especially on mornings that begin quietly.",
+        "That is why I remember it: not because it was loud, but because it was mine.",
+        "Some days pass. A few stay, and this one stayed."
+      ],
+      "detail": [
+        "Look closer at one thing: the crack that runs the length of the wall, the way the paint has been painted over so many times that it has lost its edges.",
+        "There is a chair in the corner that nobody sits on, and a calendar two months out of date.",
+        "The floor is worn pale in a path from the door to the counter, which tells you everything about how the room is used."
+      ],
+      "movement": [
+        "Then the wind moved through and everything shifted at once, the dust, the light, the sound.",
+        "A woman crossed the yard carrying a bucket on her head, and the whole scene reorganised itself around her.",
+        "The light changed the way it does at four o'clock, and the place became a different place."
+      ],
+      "setup": [
+        "The shop had been open for eleven years and nothing about it suggested that this Tuesday would be different.",
+        "She had a list of things she intended to do that day, and not one of them was on it by evening.",
+        "He had learned to keep his head down, which is a skill, and a cost."
+      ],
+      "inciting": [
+        "Then the letter arrived, and the letter changed the arithmetic of everything.",
+        "It began with a small thing going missing, and nobody thought much of it at first.",
+        "The stranger asked a question that nobody in the family had ever been asked before."
+      ],
+      "rising": [
+        "For three days nothing happened, which was worse than if something had.",
+        "Each conversation made the next one harder, and they all knew it.",
+        "The pressure did not arrive all at once. It accumulated, the way water does behind a wall."
+      ],
+      "climax": [
+        "And then there was no more room to postpone it, and the room went quiet.",
+        "The moment arrived the way the important ones do, without announcement.",
+        "Everything narrowed to one decision, and the decision had to be made in the next ten seconds."
+      ],
+      "falling": [
+        "Afterwards there was the ordinary business of tidying up, which felt obscene and necessary.",
+        "Nobody said much on the way home. The silence was not hostile; it was tired.",
+        "The next morning the world continued, which is either a comfort or an insult."
+      ],
+      "resolution": [
+        "The shop is still there. The sign is faded now, and somebody has painted the door a different colour.",
+        "She keeps the letter in a drawer and does not read it, which is its own kind of answer.",
+        "He still keeps his head down, but he looks up first now, briefly, before he does."
+      ],
+      "verse": [
+        "There is a light that does not ask permission,",
+        "it arrives on the wall at four o'clock",
+        "and stays until the room agrees to be seen."
+      ],
+      "aim": [
+        "The aim of this project is to establish, in measurable terms, what {T} actually involves and where it breaks down.",
+        "This project set out to answer one question about {T}: what would have to change for the situation to improve, and who would have to change it."
+      ],
+      "background": [
+        "Background: {T} is usually discussed in general terms, which makes it difficult to act on. This project narrows the question to something that can be observed.",
+        "The starting point for this work was a simple observation about {T} that did not match the way it is usually described."
+      ],
+      "objectives": [
+        "The objectives were: to describe the current situation accurately; to identify the factors that most affect it; and to recommend one practical change.",
+        "Three objectives guided the work. First, to record what happens now. Second, to explain why. Third, to say what should be done differently."
+      ],
+      "method": [
+        "The method was deliberately simple. Data was collected over two weeks using a short questionnaire and direct observation, and the results were recorded in a table before any interpretation was attempted.",
+        "Information was gathered in three ways: a structured observation sheet, ten short interviews, and a review of existing records. Each source was recorded separately so that the findings could be compared."
+      ],
+      "findings": [
+        "The findings were consistent across all three sources. The pattern was clear, and it was not the pattern that had been expected at the start.",
+        "Three findings stand out. The first concerns frequency, the second concerns cost, and the third concerns who carries the burden when something fails."
+      ],
+      "discussion": [
+        "These findings matter because they contradict the common assumption that the problem is one of knowledge. In every case observed, the people involved knew what to do; what they lacked was time and room to do it.",
+        "The results should be read with care. The sample was small, and a longer study would be needed before the pattern could be treated as general."
+      ],
+      "recommendation": [
+        "Two recommendations follow. The first is immediate and costs nothing: publish the schedule where everyone can see it. The second requires a small budget and a named person responsible for it.",
+        "It is recommended that the current arrangement be trialled for one term, with a simple record kept of what changes, before any permanent decision is made."
+      ],
+      "address": [
+        "14 Samora Machel Avenue\nHarare\nZimbabwe",
+        "P.O. Box 218\nBulawayo"
+      ],
+      "date": [
+        "[date]"
+      ],
+      "salutation": [
+        "Dear Sir/Madam,",
+        "Dear Mr Chikafu,",
+        "Dear Madam,"
+      ],
+      "opening": [
+        "I am writing to apply for the position advertised in {T}, and I would be grateful for the opportunity to be considered.",
+        "I am writing in connection with {T}, which I read about last week.",
+        "I am writing to bring a matter to your attention that has caused considerable difficulty for residents in this area."
+      ],
+      "body": [
+        "I believe I am suited to this role for three reasons. I have the relevant experience, I work well without supervision, and I am willing to learn what I do not yet know.",
+        "The situation is as follows. The service was suspended without notice, and no alternative arrangement was communicated to the people who depend on it.",
+        "I have attached my curriculum vitae, which sets out my qualifications and the work I have done in this field."
+      ],
+      "request": [
+        "I would be grateful for the chance to discuss this at an interview, at whatever time suits you. I can be reached on the number below.",
+        "I would appreciate a written reply within fourteen days so that I can make alternative arrangements if necessary.",
+        "I would be grateful if you would consider this request and let me know your decision."
+      ],
+      "signoff": [
+        "Yours faithfully,\n[your name]",
+        "Yours sincerely,\n[your name]",
+        "Kind regards,\n[your name]"
+      ],
+      "subject": [
+        "Subject: {Tt}",
+        "Subject: Request regarding {T}",
+        "Subject: Follow-up on {T}"
+      ],
+      "greeting": [
+        "Good morning, everyone.",
+        "Mr Chairman, teachers, fellow students: good morning.",
+        "Thank you for being here. I know what it cost some of you to come."
+      ],
+      "call": [
+        "So here is what I am asking for, and it is small. Not a promise, not a pledge, just one thing done differently by Monday.",
+        "I am not asking anyone to change their whole life. I am asking for one decision, repeated, starting this week.",
+        "If you take one thing from this room, take the smallest version of it, and do that one."
+      ],
+      "quote": [
+        "\"We did not plan for it,\" one resident said. \"We planned for the usual thing, and the usual thing stopped happening.\"",
+        "\"It is not the money,\" a teacher explained. \"It is the time. Nobody has the time to do it properly.\""
+      ],
+      "whatitis": [
+        "What follows is a careful, patient account of {T}, and it earns its patience.",
+        "The story itself is simple, and the telling of it is not, which is the point."
+      ],
+      "strengths": [
+        "What works best is the restraint. Nothing is explained twice, and the reader is trusted to keep up.",
+        "The strength of the piece is its specificity: the small details are chosen with care and they carry the weight."
+      ],
+      "weaknesses": [
+        "What does not work is the middle third, where the pace slackens and the point is made three times in three ways.",
+        "The weakness is a familiar one: the argument is stronger than the evidence offered for it."
+      ],
+      "verdict": [
+        "It is worth your time, with one reservation, and the reservation is worth more than the recommendation.",
+        "On balance this is a serious piece of work that asks a little more of its audience than it gives back, and is still worth the trade."
+      ],
+      "intro": [
+        "{Tt} is the kind of work that divides people quickly, which is usually a sign that there is something in it.",
+        "There are two ways to read {T}: as entertainment, and as an argument about how people treat each other. It works better as the second."
+      ],
+      "motion": [
+        "The motion before this house is that {T}.",
+        "We are debating the motion that {T}, and I stand to propose it."
+      ],
+      "proposition": [
+        "I will make three points, and each one stands on its own.",
+        "My case rests on three claims, and I will take them in order."
+      ],
+      "evidence": [
+        "The evidence for this is not exotic. It is the everyday experience of everyone in this room.",
+        "This is not a theory. It is what happens when the policy meets a real week with real bills in it."
+      ],
+      "opposition": [
+        "The opposition will say that this is too expensive, and they will be partly right.",
+        "Our opponents will argue that the timing is wrong. It is worth taking that seriously for a moment."
+      ],
+      "rebuttal": [
+        "But cost is not the same as expense. The question is not what it costs to act, but what it costs to keep not acting.",
+        "Their strongest point is about timing, and it fails on its own terms: there is no better time, and there never was."
+      ],
+      "promise": [
+        "In the next few minutes I want to give you one idea and one way to use it, and nothing else.",
+        "By the end of this you will have a method you can try tomorrow morning, and a reason to bother."
+      ],
+      "takeaway": [
+        "The takeaway is smaller than the title suggests, and more useful: pick the version you can repeat on a bad day.",
+        "If you remember one thing, remember this: the plan you will actually follow beats the plan that looks impressive."
+      ],
+      "cta": [
+        "Try it for seven days and tell me what happened. If it fails, I want to know why.",
+        "Pick one item from this list and do it before Friday. That is the whole assignment."
+      ],
+      "heading": [
+        "NOTICE: {Tt}",
+        "ANNOUNCEMENT: {Tt}",
+        "INVITATION: {Tt}"
+      ],
+      "details": [
+        "Date: [date]\nTime: [time]\nVenue: [place]",
+        "All members are asked to attend. Bring a pen and a notebook.",
+        "Entry is free. Doors open thirty minutes before the start."
+      ],
+      "contact": [
+        "For more information, contact [name] on [number].",
+        "Queries may be directed to the secretary during break.",
+        "Speak to [name] in the office if anything is unclear."
+      ],
+      "mainidea": [
+        "The passage argues that {T} is widely misunderstood, and that the misunderstanding has practical costs.",
+        "The writer's central claim is that {T} matters less for what it promises than for what it quietly requires."
+      ],
+      "points": [
+        "Three points support this. First, the problem is described in general terms that make it hard to act on. Second, the people closest to it are rarely asked. Third, the solutions proposed tend to treat symptoms.",
+        "The writer supports the claim in two ways: by describing the ordinary experience of the people involved, and by showing where the usual explanations fail."
+      ],
+      "observations": [
+        "The observations were recorded as they occurred, before any interpretation was attempted. Three patterns appeared consistently across the period.",
+        "What was observed did not match the expected result. The readings were repeated to rule out error, and the same pattern returned.",
+        "The observations are set out in the table below. Each reading was taken under the same conditions, and any deviation is noted rather than smoothed over."
+      ],
+      "analysis": [
+        "The results can be explained in two ways, and only one of them survives scrutiny. The simpler explanation accounts for the pattern without requiring an additional assumption.",
+        "What this suggests is that the variable under test is not acting alone. A second factor, present in every case, is doing part of the work.",
+        "The gap between the expected and the observed result is the most useful part of the data. It points to something the method did not control for."
+      ],
+      "letterclose": [
+        "Thank you for your time and for considering this request.",
+        "I appreciate your attention to this matter and look forward to your reply.",
+        "Thank you in advance for your assistance with this matter."
+      ],
+      "noticeclose": [
+        "Signed: [name], [position]",
+        "Issued by the office of [name].",
+        "[name]\nSecretary"
+      ]
+    }
+  },
+  "checks": [
+    {
+      "id": "length",
+      "label": "Length",
+      "hint": "Within 15% of the target word count."
+    },
+    {
+      "id": "paragraphs",
+      "label": "Paragraphing",
+      "hint": "One idea per paragraph, 3 to 8 sentences each."
+    },
+    {
+      "id": "sentlen",
+      "label": "Sentence length",
+      "hint": "Average 12 to 22 words. Anything over 40 should be split."
+    },
+    {
+      "id": "variety",
+      "label": "Sentence variety",
+      "hint": "Mix short and long. A run of same-length sentences goes flat."
+    },
+    {
+      "id": "adverbs",
+      "label": "Adverb discipline",
+      "hint": "Fewer than 3% -ly words. Strong verbs do the work."
+    },
+    {
+      "id": "passive",
+      "label": "Active voice",
+      "hint": "Most sentences should have a person doing the action."
+    },
+    {
+      "id": "repeat",
+      "label": "Repetition",
+      "hint": "No content word repeated more than six times."
+    },
+    {
+      "id": "counter",
+      "label": "Counter-argument",
+      "hint": "Argument pieces need the other side, stated fairly."
+    },
+    {
+      "id": "concrete",
+      "label": "Concrete detail",
+      "hint": "Numbers, names and things you can touch, not just abstractions."
+    },
+    {
+      "id": "opening",
+      "label": "Opening line",
+      "hint": "Under 25 words, and it should make the second line necessary."
+    }
+  ]
+}

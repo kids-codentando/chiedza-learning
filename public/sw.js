@@ -1,8 +1,9 @@
 /* Chiedza AI service worker: network first, so brain edits show up at once; cached copy when offline. */
-const CACHE = "chiedza-ai-v3";
-const CORE = ["/", "/index.html", "/css/studio.css", "/js/brain.js", "/js/reasoning.js", "/js/reasoning-general.js", "/js/sitebuilder.js", "/js/studio.js",
+const CACHE = "chiedza-ai-v4";
+const CORE = ["/", "/index.html", "/css/studio.css", "/js/brain.js", "/js/reasoning.js", "/js/reasoning-general.js", "/js/reasoning-writing.js", "/js/sitebuilder.js", "/js/studio.js",
   "/brain/manifest.json", "/brain/identity.md", "/brain/safety.json",
   "/brain/knowledge/general.json",
+  "/brain/knowledge/writing.json",
   "/brain/reasoning/reasoning.json", "/brain/reasoning/logic.json", "/brain/reasoning/causes.json", "/brain/reasoning/compare.json",
   "/brain/reasoning/site-rules.json", "/brain/reasoning/website.json", "/brain/reasoning/website-more.json",
   "/assets/icon.png", "/assets/favicon.png"];
